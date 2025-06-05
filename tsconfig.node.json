@@ -7,7 +7,11 @@
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": "src",
+    "paths": {
+      "@travelia/*": ["./src/*"]
+    }
   },
   "include": ["vite.config.ts"]
 }
