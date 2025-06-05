@@ -52,7 +52,21 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 9999,
+          border: "1px solid",
           padding: "13px 23px",
+          boxShadow: "none",
+          textTransform: "none",
+          borderColor: "#E4E6E8",
+          "&:hover": {
+            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+          },
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
         },
       },
     },

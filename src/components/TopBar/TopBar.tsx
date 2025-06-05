@@ -14,6 +14,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import logo from "@travelia/assets/images/logo.svg";
 import { Button } from "@mui/material";
+import theme from "@travelia/theme";
 
 const drawerWidth = 240;
 const navItems = ["Home", "About", "Contact"];
@@ -76,7 +77,14 @@ export default function TopBar() {
             <Box
               sx={{ display: { xs: "none", sm: "flex" }, alignItems: "center" }}
             >
-              <Button>Signin</Button>
+              <Button
+                sx={{
+                  backgroundColor: "transparent",
+                  color: theme.palette.primary.main,
+                }}
+              >
+                Signin
+              </Button>
             </Box>
           </Box>
         </Toolbar>
