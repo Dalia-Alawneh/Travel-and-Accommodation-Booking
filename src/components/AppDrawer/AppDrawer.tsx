@@ -14,7 +14,7 @@ import logo from "@travelia/assets/images/logo.svg";
 interface IAppDrawerProps {
   drawerWidth: number;
   menuItems: Menu;
-  mobileOpen: boolean;
+  isOpen: boolean;
   handleDrawerToggle: () => void;
 }
 
@@ -22,12 +22,12 @@ const AppDrawer = ({
   drawerWidth,
   menuItems,
   handleDrawerToggle,
-  mobileOpen,
+  isOpen,
 }: IAppDrawerProps) => {
   return (
     <Drawer
       variant="temporary"
-      open={mobileOpen}
+      open={isOpen}
       onClose={handleDrawerToggle}
       ModalProps={{
         keepMounted: true,

@@ -12,10 +12,10 @@ import { DRAWER_WIDTH, menuItems } from "@travelia/fixtures";
 import AppDrawer from "../AppDrawer/AppDrawer";
 
 export default function TopBar() {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState);
+    setIsDrawerOpen((prevState) => !prevState);
   };
 
   return (
@@ -67,7 +67,7 @@ export default function TopBar() {
         <AppDrawer
           drawerWidth={DRAWER_WIDTH}
           handleDrawerToggle={handleDrawerToggle}
-          mobileOpen={mobileOpen}
+          isOpen={isDrawerOpen}
           menuItems={menuItems}
         />
       </nav>
