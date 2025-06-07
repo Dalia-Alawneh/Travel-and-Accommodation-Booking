@@ -35,7 +35,10 @@ export default function TopBar() {
             >
               <MenuIcon />
             </IconButton>
-            <Box width="100%" sx={{ my: 2 }}>
+            <Box
+              width="100%"
+              sx={{ my: 2, textAlign: { xs: "end", sm: "start" } }}
+            >
               <img src={logo} alt="travilia" />
             </Box>
             <Box
