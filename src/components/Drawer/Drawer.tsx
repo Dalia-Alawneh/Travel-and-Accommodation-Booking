@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { Menu } from "@travelia/types";
 import logo from "@travelia/assets/images/logo.svg";
+import AppButton from "../Button/Button";
 
 interface IAppDrawerProps {
   drawerWidth: number;
@@ -55,6 +56,10 @@ const AppDrawer = ({
             </ListItem>
           ))}
         </List>
+        <AppButton
+          title="Signin"
+          sx={{ px: "3rem", bgcolor: "#000", color: "#fff" }}
+        />
       </Box>
     </Drawer>
   );

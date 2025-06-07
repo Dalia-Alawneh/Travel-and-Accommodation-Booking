@@ -70,6 +70,13 @@ const theme = createTheme({
         },
       },
     },
+    MuiListItemText: {
+      styleOverrides: {
+        primary: {
+          fontSize: "1rem",
+        },
+      },
+    },
   },
 });
 

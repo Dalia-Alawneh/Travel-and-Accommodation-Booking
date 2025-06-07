@@ -6,10 +6,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import logo from "@travelia/assets/images/logo.svg";
-import { Button } from "@mui/material";
-import theme from "@travelia/theme";
 import { DRAWER_WIDTH, menuItems } from "@travelia/fixtures";
-import AppDrawer from "../AppDrawer/AppDrawer";
+import AppDrawer from "../Drawer/Drawer";
+import AppButton from "../Button/Button";
 
 export default function TopBar() {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
@@ -54,14 +53,7 @@ export default function TopBar() {
             <Box
               sx={{ display: { xs: "none", sm: "flex" }, alignItems: "center" }}
             >
-              <Button
-                sx={{
-                  backgroundColor: "transparent",
-                  color: theme.palette.primary.main,
-                }}
-              >
-                Signin
-              </Button>
+              <AppButton title="Signin" />
             </Box>
           </Box>
         </Toolbar>
