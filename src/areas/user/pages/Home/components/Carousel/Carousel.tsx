@@ -6,6 +6,7 @@ import { carouselItems, thumbnails } from "@travelia/fixtures";
 import { useRef, useState } from "react";
 import { ArrowLeftRounded, ArrowRightRounded } from "@mui/icons-material";
 import AppButton from "@travelia/components/Button";
+import CarouselThumbnails from "../CarouselThumbnails/CarouselThumbnails";
 
 const arrowBtnStyle = {
   bgcolor: "#fff",
@@ -17,15 +18,6 @@ const arrowBtnStyle = {
   justifyContent: "center",
   minWidth: 0,
   boxShadow: 2,
-};
-
-const thumbnailStyle = {
-  borderRadius: "9px",
-  overflow: "hidden",
-  width: 190,
-  height: 110,
-  cursor: "pointer",
-  transition: "all 0.3s ease-in-out",
 };
 
 const ImageCarousel = () => {
@@ -80,36 +72,11 @@ const ImageCarousel = () => {
           label={<ArrowRightRounded fontSize="large" />}
         />
       </Box>
-      <Box
-        position="absolute"
-        right={"10%"}
-        top="50%"
-        sx={{
-          transform: "translateY(-50%)",
-          display: { xs: "none", lg: "flex" },
-          flexDirection: "column",
-          gap: 2,
-        }}
-      >
-        {thumbnails.slice(0, 3).map((src, index) => (
-          <Box
-            key={index}
-            sx={{
-              ...thumbnailStyle,
-              border: `2px solid ${currentSlide === index ? "yellow" : "#ccc"}`,
-              boxShadow: currentSlide === index ? 4 : 1,
-            }}
-            onClick={() => sliderRef.current?.slickGoTo(index)}
-          >
-            <CardMedia
-              component="img"
-              image={src}
-              alt={`thumb-${index}`}
-              sx={{ width: "100%", height: "100%", objectFit: "cover" }}
-            />
-          </Box>
-        ))}
-      </Box>
+      <CarouselThumbnails
+        thumbnails={thumbnails}
+        sliderRef={sliderRef}
+        currentSlide={currentSlide}
+      />
     </Box>
   );
 };
