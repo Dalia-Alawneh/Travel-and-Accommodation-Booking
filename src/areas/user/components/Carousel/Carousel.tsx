@@ -1,7 +1,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Box, CardMedia, Container, Typography } from "@mui/material";
+import { Box, CardMedia } from "@mui/material";
 import { carouselItems, thumbnails } from "@travelia/fixtures";
 import { useRef, useState } from "react";
 import { ArrowLeftRounded, ArrowRightRounded } from "@mui/icons-material";
@@ -80,10 +80,9 @@ const ImageCarousel = () => {
           label={<ArrowRightRounded fontSize="large" />}
         />
       </Box>
-
       <Box
         position="absolute"
-        right={26}
+        right={"10%"}
         top="50%"
         sx={{
           transform: "translateY(-50%)",
