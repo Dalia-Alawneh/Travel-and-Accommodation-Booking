@@ -1,3 +1,4 @@
+import { hero1, hero2, hero3 } from "@travelia/assets";
 import { Menu } from "@travelia/types";
 
 export const menuItems: Menu = [
@@ -16,3 +17,5 @@ export const menuItems: Menu = [
 ];
 
 export const DRAWER_WIDTH = 240;
+
+export const carouselImages = [hero1, hero2, hero3];

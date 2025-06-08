@@ -53,7 +53,7 @@ export default function TopBar() {
             <Box
               sx={{ display: { xs: "none", sm: "flex" }, alignItems: "center" }}
             >
-              <AppButton title="Signin" />
+              <AppButton label="Signin" />
             </Box>
           </Box>
         </Toolbar>
