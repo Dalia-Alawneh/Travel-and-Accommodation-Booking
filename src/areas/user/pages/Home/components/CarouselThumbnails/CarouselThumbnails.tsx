@@ -1,4 +1,5 @@
 import { Box, CardMedia } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { MutableRefObject } from "react";
 import Slider from "react-slick";
 
@@ -9,7 +10,7 @@ interface ICarouselThumbnailsProps {
 }
 
 const thumbnailStyle = {
-  borderRadius: "9px",
+  borderRadius: "12px",
   overflow: "hidden",
   width: 190,
   height: 110,
@@ -22,6 +23,8 @@ const CarouselThumbnails = ({
   currentSlide,
   sliderRef,
 }: ICarouselThumbnailsProps) => {
+  const theme = useTheme();
+
   return (
     <Box
       position="absolute"
@@ -39,7 +42,7 @@ const CarouselThumbnails = ({
           key={index}
           sx={{
             ...thumbnailStyle,
-            border: `2px solid ${currentSlide === index ? "yellow" : "#ccc"}`,
+            border: `2px solid ${currentSlide === index ? theme.palette.secondary.main : "#fff"}`,
             boxShadow: currentSlide === index ? 4 : 1,
           }}
           onClick={() => sliderRef.current?.slickGoTo(index)}
