@@ -1,8 +1,8 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Box, CardMedia } from "@mui/material";
-import { carouselImages } from "@travelia/fixtures";
+import { Box, CardMedia, Container, Typography } from "@mui/material";
+import { carouselItems, thumbnails } from "@travelia/fixtures";
 import { useRef, useState } from "react";
 import { ArrowLeftRounded, ArrowRightRounded } from "@mui/icons-material";
 import AppButton from "@travelia/components/Button";
@@ -48,26 +48,44 @@ const ImageCarousel = () => {
   };
 
   return (
-    <Box position="relative" sx={{ height: "90vh", overflow: "hidden" }}>
+    <Box position="relative" sx={{ height: "100vh", overflow: "hidden" }}>
       <Slider ref={sliderRef} {...settings}>
-        {carouselImages.map((src, index) => (
-          <Box key={index} sx={{ height: "100%" }}>
+        {carouselItems.map(({ image: src, text }, index) => (
+          <Box key={index} sx={{ position: "relative", height: "100%" }}>
             <CardMedia
               component="img"
               image={src}
               alt={`image-${index}`}
-              sx={{ height: "100%", objectFit: "cover" }}
+              sx={{ height: "100%", width: "100%", objectFit: "cover" }}
             />
+            <Box
+              sx={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "start",
+                color: "#fff",
+                bgcolor: "rgba(0,0,0,0.3)",
+              }}
+            >
+              <Container maxWidth="lg">
+                <Typography variant="h1">{text}</Typography>
+              </Container>
+            </Box>
           </Box>
         ))}
       </Slider>
 
       <Box
-        sx={{ display: { sm: "none", lg: "flex" } }}
+        sx={{ display: { xs: "none", lg: "flex" } }}
         gap={1}
         position="absolute"
         bottom="18%"
-        left="14%"
+        left="13%"
       >
         <AppButton
           sx={arrowBtnStyle}
@@ -87,12 +105,12 @@ const ImageCarousel = () => {
         top="50%"
         sx={{
           transform: "translateY(-50%)",
-          display: { sm: "none", lg: "flex" },
+          display: { xs: "none", lg: "flex" },
           flexDirection: "column",
           gap: 2,
         }}
       >
-        {carouselImages.slice(0, 3).map((src, index) => (
+        {thumbnails.slice(0, 3).map((src, index) => (
           <Box
             key={index}
             sx={{
