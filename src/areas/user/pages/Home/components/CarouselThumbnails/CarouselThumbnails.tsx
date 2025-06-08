@@ -42,7 +42,7 @@ const CarouselThumbnails = ({
           key={index}
           sx={{
             ...thumbnailStyle,
-            border: `2px solid ${currentSlide === index ? theme.palette.secondary.main : "#fff"}`,
+            border: `3px solid ${currentSlide === index ? theme.palette.secondary.main : "#fff"}`,
             boxShadow: currentSlide === index ? 4 : 1,
           }}
           onClick={() => sliderRef.current?.slickGoTo(index)}
