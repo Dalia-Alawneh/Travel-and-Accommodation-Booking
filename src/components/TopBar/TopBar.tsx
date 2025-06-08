@@ -9,6 +9,7 @@ import logo from "@travelia/assets/images/logo.svg";
 import { DRAWER_WIDTH, menuItems } from "@travelia/fixtures";
 import AppDrawer from "../Drawer/Drawer";
 import AppButton from "../Button/Button";
+import { Container } from "@mui/material";
 
 export default function TopBar() {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
@@ -24,38 +25,47 @@ export default function TopBar() {
         sx={{ backgroundColor: "#ffffff", color: "#000" }}
       >
         <Toolbar>
-          <Box width="100%" display="flex" alignItems="center">
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: "none" } }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Box
-              width="100%"
-              sx={{ my: 2, textAlign: { xs: "end", sm: "start" } }}
-            >
-              <img src={logo} alt="travilia" />
+          <Container maxWidth="xl">
+            <Box width="100%" display="flex" alignItems="center">
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2, display: { sm: "none" } }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Box sx={{ my: 2, textAlign: { xs: "end", sm: "start" } }}>
+                <img src={logo} alt="travilia" />
+              </Box>
+              <Box
+                width="100%"
+                sx={{
+                  display: {
+                    xs: "none",
+                    sm: "flex",
+                    gap: "1rem",
+                    justifyContent: "center",
+                  },
+                }}
+              >
+                {menuItems.map((item) => (
+                  <Typography variant="body2" key={item.title}>
+                    {item.title}
+                  </Typography>
+                ))}
+              </Box>
+              <Box
+                sx={{
+                  display: { xs: "none", sm: "flex" },
+                  alignItems: "center",
+                }}
+              >
+                <AppButton label="Signin" />
+              </Box>
             </Box>
-            <Box
-              width="100%"
-              sx={{ display: { xs: "none", sm: "flex", gap: "1rem" } }}
-            >
-              {menuItems.map((item) => (
-                <Typography variant="body2" key={item.title}>
-                  {item.title}
-                </Typography>
-              ))}
-            </Box>
-            <Box
-              sx={{ display: { xs: "none", sm: "flex" }, alignItems: "center" }}
-            >
-              <AppButton label="Signin" />
-            </Box>
-          </Box>
+          </Container>
         </Toolbar>
       </AppBar>
       <nav>
