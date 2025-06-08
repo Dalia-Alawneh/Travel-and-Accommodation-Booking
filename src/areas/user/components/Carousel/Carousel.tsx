@@ -50,7 +50,7 @@ const ImageCarousel = () => {
   return (
     <Box position="relative" sx={{ height: "100vh", overflow: "hidden" }}>
       <Slider ref={sliderRef} {...settings}>
-        {carouselItems.map(({ image: src, text }, index) => (
+        {carouselItems.map((src, index) => (
           <Box key={index} sx={{ position: "relative", height: "100%" }}>
             <CardMedia
               component="img"
@@ -58,24 +58,6 @@ const ImageCarousel = () => {
               alt={`image-${index}`}
               sx={{ height: "100%", width: "100%", objectFit: "cover" }}
             />
-            <Box
-              sx={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "start",
-                color: "#fff",
-                bgcolor: "rgba(0,0,0,0.3)",
-              }}
-            >
-              <Container maxWidth="lg">
-                <Typography variant="h1">{text}</Typography>
-              </Container>
-            </Box>
           </Box>
         ))}
       </Slider>
