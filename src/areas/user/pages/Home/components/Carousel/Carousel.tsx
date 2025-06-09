@@ -48,7 +48,7 @@ const ImageCarousel = () => {
               component="img"
               image={src}
               alt={`image-${index}`}
-              sx={{ height: "100%", width: "100%", objectFit: "cover" }}
+              sx={{ height: "100vh", width: "100%", objectFit: "cover" }}
             />
           </Box>
         ))}
