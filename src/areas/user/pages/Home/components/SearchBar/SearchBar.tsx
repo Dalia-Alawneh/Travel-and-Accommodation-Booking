@@ -1,4 +1,4 @@
-import { Box, Divider, Paper, SelectChangeEvent } from "@mui/material";
+import { Box, Paper, SelectChangeEvent } from "@mui/material";
 import AppSelect from "@travelia/components/Inputs/Select/Select";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { adults, children, cities } from "@travelia/fixtures";
@@ -14,6 +14,7 @@ import {
 } from "@mui/icons-material";
 import PopoverSelect from "@travelia/components/Inputs/PopoverSelect";
 import AppButton from "@travelia/components/Button";
+import AppDivider from "@travelia/components/Divider/Divider";
 
 const paperStyle = {
   bgcolor: "#fff",
@@ -76,33 +77,21 @@ const SearchBar = () => {
             onChange={handleSelectCityChange}
             icon={<LocationOnIcon sx={{ fontSize: 18, color: "#ddd" }} />}
           />
-          <Divider
-            orientation="vertical"
-            flexItem
-            sx={{ height: "50px", width: "1px" }}
-          />
+          <AppDivider />
           <AppDateInput
             value={checkIn}
             label="Check In"
             onChange={handleCheckInDateChange}
             icon={<CalendarMonth sx={{ fontSize: 18, color: "#ddd" }} />}
           />
-          <Divider
-            orientation="vertical"
-            flexItem
-            sx={{ height: "50px", width: "1px" }}
-          />
+          <AppDivider />
           <AppDateInput
             value={checkOut}
             label="Check Out"
             onChange={handleCheckOutDateChange}
             icon={<CalendarMonth sx={{ fontSize: 18, color: "#ddd" }} />}
           />
-          <Divider
-            orientation="vertical"
-            flexItem
-            sx={{ height: "50px", width: "1px" }}
-          />
+          <AppDivider />
           <PopoverSelect
             label="Guest"
             icon={<People sx={{ fontSize: 18, color: "#ddd" }} />}
@@ -116,7 +105,7 @@ const SearchBar = () => {
                 onChange={handleAdultsChange}
                 icon={<Person sx={{ fontSize: 18, color: "#ddd" }} />}
               />
-              <Divider orientation="horizontal" flexItem />
+              <AppDivider />
               <AppSelect
                 items={children}
                 label=""
