@@ -62,7 +62,7 @@ export default function TopBar() {
                   alignItems: "center",
                 }}
               >
-                <AppButton label="Signin" />
+                <AppButton>Signin</AppButton>
               </Box>
             </Box>
           </Container>

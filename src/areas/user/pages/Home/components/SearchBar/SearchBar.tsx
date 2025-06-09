@@ -12,6 +12,7 @@ import {
   Person,
 } from "@mui/icons-material";
 import PopoverSelect from "@travelia/components/Inputs/PopoverSelect";
+import AppButton from "@travelia/components/Button";
 
 const paperStyle = {
   bgcolor: "#fff",
@@ -65,65 +66,68 @@ const SearchBar = () => {
 
   return (
     <Paper sx={paperStyle}>
-      <Box display="flex" alignItems="center" gap="20px">
-        <AppSelect
-          items={cities}
-          label="Location"
-          item={city}
-          onChange={handleSelectCityChange}
-          icon={<LocationOnIcon sx={{ fontSize: 18, color: "#ddd" }} />}
-        />
-        <Divider
-          orientation="vertical"
-          flexItem
-          sx={{ height: "50px", width: "1px" }}
-        />
-        <AppDateInput
-          value={checkIn}
-          label="Check In"
-          onChange={handleCheckInDateChange}
-          icon={<CalendarMonth sx={{ fontSize: 18, color: "#ddd" }} />}
-        />
-        <Divider
-          orientation="vertical"
-          flexItem
-          sx={{ height: "50px", width: "1px" }}
-        />
-        <AppDateInput
-          value={checkOut}
-          label="Check Out"
-          onChange={handleCheckOutDateChange}
-          icon={<CalendarMonth sx={{ fontSize: 18, color: "#ddd" }} />}
-        />
-        <Divider
-          orientation="vertical"
-          flexItem
-          sx={{ height: "50px", width: "1px" }}
-        />
-        <PopoverSelect
-          label="Guest"
-          icon={<People sx={{ fontSize: 18, color: "#ddd" }} />}
-          displayValue={`${selectedAdults.value} Adults, ${selectedChild.value} Children`}
-        >
-          <Box px={3}>
-            <AppSelect
-              items={adults}
-              label=""
-              item={selectedAdults}
-              onChange={handleAdultsChange}
-              icon={<Person sx={{ fontSize: 18, color: "#ddd" }} />}
-            />
-            <Divider orientation="horizontal" flexItem />
-            <AppSelect
-              items={children}
-              label=""
-              item={selectedChild}
-              onChange={handleChildrenChange}
-              icon={<ChildFriendly sx={{ fontSize: 18, color: "#ddd" }} />}
-            />
-          </Box>
-        </PopoverSelect>
-      </Box>
+      <form>
+        <Box display="flex" alignItems="center" gap="20px">
+          <AppSelect
+            items={cities}
+            label="Location"
+            item={city}
+            onChange={handleSelectCityChange}
+            icon={<LocationOnIcon sx={{ fontSize: 18, color: "#ddd" }} />}
+          />
+          <Divider
+            orientation="vertical"
+            flexItem
+            sx={{ height: "50px", width: "1px" }}
+          />
+          <AppDateInput
+            value={checkIn}
+            label="Check In"
+            onChange={handleCheckInDateChange}
+            icon={<CalendarMonth sx={{ fontSize: 18, color: "#ddd" }} />}
+          />
+          <Divider
+            orientation="vertical"
+            flexItem
+            sx={{ height: "50px", width: "1px" }}
+          />
+          <AppDateInput
+            value={checkOut}
+            label="Check Out"
+            onChange={handleCheckOutDateChange}
+            icon={<CalendarMonth sx={{ fontSize: 18, color: "#ddd" }} />}
+          />
+          <Divider
+            orientation="vertical"
+            flexItem
+            sx={{ height: "50px", width: "1px" }}
+          />
+          <PopoverSelect
+            label="Guest"
+            icon={<People sx={{ fontSize: 18, color: "#ddd" }} />}
+            displayValue={`${selectedAdults.value} Adults, ${selectedChild.value} Children`}
+          >
+            <Box px={3}>
+              <AppSelect
+                items={adults}
+                label=""
+                item={selectedAdults}
+                onChange={handleAdultsChange}
+                icon={<Person sx={{ fontSize: 18, color: "#ddd" }} />}
+              />
+              <Divider orientation="horizontal" flexItem />
+              <AppSelect
+                items={children}
+                label=""
+                item={selectedChild}
+                onChange={handleChildrenChange}
+                icon={<ChildFriendly sx={{ fontSize: 18, color: "#ddd" }} />}
+              />
+            </Box>
+          </PopoverSelect>
+          <AppButton />
+        </Box>
+      </form>
     </Paper>
   );
 };

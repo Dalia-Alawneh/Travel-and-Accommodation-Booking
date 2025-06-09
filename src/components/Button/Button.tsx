@@ -2,10 +2,10 @@ import { Button, ButtonProps } from "@mui/material";
 import { ReactNode } from "react";
 
 interface IAppButtonProps extends ButtonProps {
-  label: ReactNode;
+  children: ReactNode;
 }
 
-const AppButton = ({ label, sx, ...rest }: IAppButtonProps) => {
+const AppButton = ({ children, sx, ...rest }: IAppButtonProps) => {
   return (
     <Button
       sx={{
@@ -15,7 +15,7 @@ const AppButton = ({ label, sx, ...rest }: IAppButtonProps) => {
       }}
       {...rest}
     >
-      {label}
+      {children}
     </Button>
   );
 };

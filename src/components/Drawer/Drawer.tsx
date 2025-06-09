@@ -56,10 +56,9 @@ const AppDrawer = ({
             </ListItem>
           ))}
         </List>
-        <AppButton
-          label="Signin"
-          sx={{ px: "3rem", bgcolor: "#000", color: "#fff" }}
-        />
+        <AppButton sx={{ px: "3rem", bgcolor: "#000", color: "#fff" }}>
+          Signin
+        </AppButton>
       </Box>
     </Drawer>
   );
