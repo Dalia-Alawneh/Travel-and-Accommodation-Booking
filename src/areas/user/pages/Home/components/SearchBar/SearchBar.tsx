@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Divider,
-  Paper,
-  Popover,
-  SelectChangeEvent,
-} from "@mui/material";
+import { Box, Divider, Paper, SelectChangeEvent } from "@mui/material";
 import AppSelect from "@travelia/components/Inputs/Select/Select";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { adults, children, cities } from "@travelia/fixtures";
@@ -18,7 +11,6 @@ import {
   People,
   Person,
 } from "@mui/icons-material";
-import AppButton from "@travelia/components/Button";
 import PopoverSelect from "@travelia/components/Inputs/PopoverSelect";
 
 const paperStyle = {
@@ -39,9 +31,6 @@ const SearchBar = () => {
   const [checkOut, setCheckOut] = useState<string>("");
   const [selectedAdults, setSelectedAdults] = useState<SelectItem>(adults[0]);
   const [selectedChild, setSelectedChild] = useState<SelectItem>(children[0]);
-  const [popoverAnchorEl, setPopoverAnchorEl] = useState<null | HTMLElement>(
-    null,
-  );
 
   const handleSelectCityChange = (event: SelectChangeEvent) => {
     const selected = cities.find((c) => c.value === event.target.value);
