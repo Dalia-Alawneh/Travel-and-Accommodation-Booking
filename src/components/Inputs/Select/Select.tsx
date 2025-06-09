@@ -31,7 +31,7 @@ const AppSelect = ({
       variant="standard"
       sx={{ minWidth: 200, position: "relative" }}
     >
-      <InputLabel sx={{ fontSize: 12, color: "#777" }}>{label}</InputLabel>
+      <InputLabel sx={{ fontSize: 14, color: "#777" }}>{label}</InputLabel>
       <Box display="flex" alignItems="center" mt={2}>
         {icon && (
           <Box
@@ -52,6 +52,7 @@ const AppSelect = ({
           sx={{
             pl: 1,
             fontSize: 14,
+            width: "100%",
             fontWeight: 600,
           }}
         >
