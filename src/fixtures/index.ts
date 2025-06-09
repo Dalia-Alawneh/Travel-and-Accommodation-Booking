@@ -28,3 +28,20 @@ export const cities: SelectItem[] = [
   { value: "cairo", text: "Cairo" },
   { value: "dubai", text: "Dubai" },
 ];
+
+export const adults: SelectItem[] = [
+  { value: 1, text: "1 Adult" },
+  { value: 2, text: "2 Adults" },
+  { value: 3, text: "3 Adults" },
+  { value: 4, text: "4 Adults" },
+  { value: 5, text: "5 Adults" },
+];
+
+export const children: SelectItem[] = [
+  { value: 0, text: "0 Children" },
+  { value: 1, text: "1 Child" },
+  { value: 2, text: "2 Children" },
+  { value: 3, text: "3 Children" },
+  { value: 4, text: "4 Children" },
+  { value: 5, text: "5 Children" },
+];

@@ -1,11 +1,25 @@
-import { Box, Divider, Paper, SelectChangeEvent } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  Paper,
+  Popover,
+  SelectChangeEvent,
+} from "@mui/material";
 import AppSelect from "@travelia/components/Inputs/Select/Select";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { cities } from "@travelia/fixtures";
+import { adults, children, cities } from "@travelia/fixtures";
 import { useState } from "react";
 import { SelectItem } from "@travelia/types";
 import AppDateInput from "@travelia/components/Inputs/DatePicker";
-import { CalendarMonth } from "@mui/icons-material";
+import {
+  CalendarMonth,
+  ChildFriendly,
+  People,
+  Person,
+} from "@mui/icons-material";
+import AppButton from "@travelia/components/Button";
+import PopoverSelect from "@travelia/components/Inputs/PopoverSelect";
 
 const paperStyle = {
   bgcolor: "#fff",
@@ -23,6 +37,11 @@ const SearchBar = () => {
   const [city, setCity] = useState<SelectItem>(cities[0]);
   const [checkIn, setCheckIn] = useState<string>("");
   const [checkOut, setCheckOut] = useState<string>("");
+  const [selectedAdults, setSelectedAdults] = useState<SelectItem>(adults[0]);
+  const [selectedChild, setSelectedChild] = useState<SelectItem>(children[0]);
+  const [popoverAnchorEl, setPopoverAnchorEl] = useState<null | HTMLElement>(
+    null,
+  );
 
   const handleSelectCityChange = (event: SelectChangeEvent) => {
     const selected = cities.find((c) => c.value === event.target.value);
@@ -37,6 +56,22 @@ const SearchBar = () => {
 
   const handleCheckOutDateChange = (date: string) => {
     setCheckOut(date);
+  };
+
+  const handleAdultsChange = (event: SelectChangeEvent) => {
+    const selected = adults.find((adult) => adult.value === event.target.value);
+    if (selected) {
+      setSelectedAdults(selected);
+    }
+  };
+
+  const handleChildrenChange = (event: SelectChangeEvent) => {
+    const selected = children.find(
+      (child) => child.value === event.target.value,
+    );
+    if (selected) {
+      setSelectedChild(selected);
+    }
   };
 
   return (
@@ -76,6 +111,29 @@ const SearchBar = () => {
           flexItem
           sx={{ height: "50px", width: "1px" }}
         />
+        <PopoverSelect
+          label="Guest"
+          icon={<People sx={{ fontSize: 18, color: "#ddd" }} />}
+          displayValue={`${selectedAdults.value} Adults, ${selectedChild.value} Children`}
+        >
+          <Box px={3}>
+            <AppSelect
+              items={adults}
+              label=""
+              item={selectedAdults}
+              onChange={handleAdultsChange}
+              icon={<Person sx={{ fontSize: 18, color: "#ddd" }} />}
+            />
+            <Divider orientation="horizontal" flexItem />
+            <AppSelect
+              items={children}
+              label=""
+              item={selectedChild}
+              onChange={handleChildrenChange}
+              icon={<ChildFriendly sx={{ fontSize: 18, color: "#ddd" }} />}
+            />
+          </Box>
+        </PopoverSelect>
       </Box>
     </Paper>
   );
