@@ -126,7 +126,10 @@ const SearchBar = () => {
               />
             </Box>
           </PopoverSelect>
-          <AppButton sx={{ bgcolor: "#000", color: "#fff" }} type="submit">
+          <AppButton
+            sx={{ bgcolor: "#000", color: "#fff", px: "30px" }}
+            type="submit"
+          >
             <Search sx={{ fontSize: 20, color: "#ddd" }} /> Search
           </AppButton>
         </Box>
