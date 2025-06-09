@@ -4,6 +4,9 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { cities } from "@travelia/fixtures";
 import { useState } from "react";
 import { SelectItem } from "@travelia/types";
+import AppDateInput from "@travelia/components/Inputs/DatePicker";
+import { CalendarMonth } from "@mui/icons-material";
+
 const paperStyle = {
   bgcolor: "#fff",
   position: "absolute",
@@ -18,12 +21,22 @@ const paperStyle = {
 
 const SearchBar = () => {
   const [city, setCity] = useState<SelectItem>(cities[0]);
+  const [checkIn, setCheckIn] = useState<string>("");
+  const [checkOut, setCheckOut] = useState<string>("");
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleSelectCityChange = (event: SelectChangeEvent) => {
     const selected = cities.find((c) => c.value === event.target.value);
     if (selected) {
       setCity(selected);
     }
+  };
+
+  const handleCheckInDateChange = (date: string) => {
+    setCheckIn(date);
+  };
+
+  const handleCheckOutDateChange = (date: string) => {
+    setCheckOut(date);
   };
 
   return (
@@ -33,7 +46,7 @@ const SearchBar = () => {
           items={cities}
           label="Location"
           item={city}
-          onChange={handleChange}
+          onChange={handleSelectCityChange}
           icon={<LocationOnIcon sx={{ fontSize: 18, color: "#ddd" }} />}
         />
         <Divider
@@ -41,12 +54,22 @@ const SearchBar = () => {
           flexItem
           sx={{ height: "50px", width: "1px" }}
         />
-        <AppSelect
-          items={cities}
+        <AppDateInput
+          value={checkIn}
           label="Check In"
-          item={city}
-          onChange={handleChange}
-          icon={<LocationOnIcon sx={{ fontSize: 18, color: "#ddd" }} />}
+          onChange={handleCheckInDateChange}
+          icon={<CalendarMonth sx={{ fontSize: 18, color: "#ddd" }} />}
+        />
+        <Divider
+          orientation="vertical"
+          flexItem
+          sx={{ height: "50px", width: "1px" }}
+        />
+        <AppDateInput
+          value={checkOut}
+          label="Check Out"
+          onChange={handleCheckOutDateChange}
+          icon={<CalendarMonth sx={{ fontSize: 18, color: "#ddd" }} />}
         />
         <Divider
           orientation="vertical"
