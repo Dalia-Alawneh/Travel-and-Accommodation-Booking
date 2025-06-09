@@ -5,11 +5,12 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
+  SelectProps,
 } from "@mui/material";
 import { ReactNode } from "react";
 import { SelectItem } from "@travelia/types";
 
-type AppSelectProps = {
+type AppSelectProps = Omit<SelectProps, "value" | "onChange"> & {
   items: SelectItem[];
   label: string;
   icon?: ReactNode;
@@ -17,7 +18,14 @@ type AppSelectProps = {
   onChange: (event: SelectChangeEvent) => void;
 };
 
-const AppSelect = ({ items, icon, label, item, onChange }: AppSelectProps) => {
+const AppSelect = ({
+  items,
+  icon,
+  label,
+  item,
+  onChange,
+  ...rest
+}: AppSelectProps) => {
   return (
     <FormControl
       variant="standard"
@@ -40,6 +48,7 @@ const AppSelect = ({ items, icon, label, item, onChange }: AppSelectProps) => {
           onChange={(event) => onChange(event as SelectChangeEvent)}
           disableUnderline
           value={item.value}
+          {...rest}
           sx={{
             pl: 1,
             fontSize: 14,
