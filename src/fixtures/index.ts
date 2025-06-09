@@ -1,5 +1,5 @@
 import { hero1, hero2, hero3, thumb1, thumb2, thumb3 } from "@travelia/assets";
-import { Menu } from "@travelia/types";
+import { Menu, SelectItem } from "@travelia/types";
 
 export const menuItems: Menu = [
   {
@@ -21,3 +21,10 @@ export const DRAWER_WIDTH = 240;
 export const carouselItems = [hero1, hero2, hero3];
 
 export const thumbnails = [thumb1, thumb2, thumb3];
+
+export const cities: SelectItem[] = [
+  { value: "jenin", text: "Jenin, Palestine" },
+  { value: "jerusalem", text: "Jerusalem" },
+  { value: "cairo", text: "Cairo" },
+  { value: "dubai", text: "Dubai" },
+];

@@ -46,8 +46,8 @@ export default function TopBar() {
                     xs: "none",
                     sm: "flex",
                     gap: "1rem",
-                    justifyContent: "center",
                   },
+                  justifyContent: "center",
                 }}
               >
                 {menuItems.map((item) => (

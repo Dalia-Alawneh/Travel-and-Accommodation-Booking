@@ -1,6 +1,6 @@
-import { createTheme, responsiveFontSizes } from "@mui/material";
+import { createTheme } from "@mui/material";
 
-let theme = createTheme({
+const theme = createTheme({
   palette: {
     mode: "light",
     primary: {
@@ -77,9 +77,21 @@ let theme = createTheme({
         },
       },
     },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          fontSize: "12px",
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          fontSize: "12px",
+        },
+      },
+    },
   },
 });
-
-theme = responsiveFontSizes(theme);
 
 export default theme;

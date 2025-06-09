@@ -7,3 +7,8 @@ type MenuItem = {
 };
 
 export type Menu = MenuItem[];
+
+export type SelectItem = {
+  text: string;
+  value: string | number;
+};
