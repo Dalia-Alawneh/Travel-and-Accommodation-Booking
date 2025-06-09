@@ -10,6 +10,7 @@ import {
   ChildFriendly,
   People,
   Person,
+  Search,
 } from "@mui/icons-material";
 import PopoverSelect from "@travelia/components/Inputs/PopoverSelect";
 import AppButton from "@travelia/components/Button";
@@ -125,7 +126,9 @@ const SearchBar = () => {
               />
             </Box>
           </PopoverSelect>
-          <AppButton />
+          <AppButton sx={{ bgcolor: "#000", color: "#fff" }} type="submit">
+            <Search sx={{ fontSize: 20, color: "#ddd" }} /> Search
+          </AppButton>
         </Box>
       </form>
     </Paper>
