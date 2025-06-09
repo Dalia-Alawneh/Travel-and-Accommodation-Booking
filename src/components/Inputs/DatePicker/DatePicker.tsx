@@ -31,7 +31,7 @@ const AppDateInput = ({ label, value, onChange, icon }: AppDateInputProps) => {
   return (
     <FormControl
       variant="standard"
-      sx={{ minWidth: 200, position: "relative" }}
+      sx={{ minWidth: { xs: "100%", md: 150 }, position: "relative" }}
     >
       <InputLabel
         shrink

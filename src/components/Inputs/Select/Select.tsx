@@ -29,7 +29,7 @@ const AppSelect = ({
   return (
     <FormControl
       variant="standard"
-      sx={{ minWidth: 150, position: "relative" }}
+      sx={{ minWidth: { xs: "100%", md: 150 }, position: "relative" }}
     >
       <InputLabel sx={{ fontSize: 14, color: "#777" }}>{label}</InputLabel>
       <Box display="flex" alignItems="center" mt={2}>

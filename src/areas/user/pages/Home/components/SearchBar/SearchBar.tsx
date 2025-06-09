@@ -19,12 +19,12 @@ const paperStyle = {
   bgcolor: "#fff",
   position: "absolute",
   left: "50%",
-  bottom: -50,
-  boxShadow: "0px 0px 5px -1px rgba(0, 0, 0, 0.2)",
+  bottom: { xs: -20, sm: -50, md: -20, xl: -60 },
   transform: "translateX(-50%)",
-  width: { xs: "95%", md: "90%", lg: "75%" },
+  width: { xs: "95%", sm: "90%", md: "80%", lg: "70%" },
   borderRadius: "12px",
-  p: 5,
+  p: { xs: 2, sm: 3, md: 4, lg: 5 },
+  boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
 };
 
 const SearchBar = () => {
@@ -68,7 +68,7 @@ const SearchBar = () => {
   return (
     <Paper sx={paperStyle}>
       <form>
-        <Box display="flex" alignItems="center" gap="20px">
+        <Box flexWrap="wrap" display="flex" alignItems="center" gap="20px">
           <AppSelect
             items={cities}
             label="Location"
