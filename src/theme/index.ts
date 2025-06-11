@@ -15,7 +15,14 @@ const theme = createTheme({
     },
     text: {
       primary: "#111111",
-      secondary: "#555555",
+      secondary: "#bbb",
+      disabled: "#aaa",
+    },
+    custom: {
+      gold: "#FFC700",
+      orange: "#F09814",
+      salver: "#F2F4F6",
+      beige: "#FFECD0",
     },
   },
   typography: {
@@ -88,6 +95,17 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           fontSize: "12px",
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: 32,
+          p: 0,
+          backgroundColor: "#fff",
+          border: "1px solid inside #E4E6E8",
+          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
         },
       },
     },
