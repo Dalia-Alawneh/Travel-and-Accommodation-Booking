@@ -1,5 +1,5 @@
 import { Container, Typography } from "@mui/material";
-import RoomCard from "@travelia/areas/user/components/RoomCard/RoomCard";
+import RoomCard from "@travelia/areas/user/components/RoomCard";
 
 const room = {
   hotelId: 1,

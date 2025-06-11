@@ -3,8 +3,10 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
-import { Hotel, HotelClass, LocationOn } from "@mui/icons-material";
+import { Hotel, LocationOn } from "@mui/icons-material";
 import AppButton from "@travelia/components/Button";
+import DiscountBadge from "../Badges/DiscountBadge";
+import RatingBadge from "../Badges/RatingBadge";
 
 interface IRoomCardProps {
   title: string;
@@ -16,18 +18,6 @@ interface IRoomCardProps {
   hotelName: string;
   hotelStarRating: number;
 }
-
-const badgeStyle = {
-  px: "10px",
-  py: "5px",
-  fontSize: 12,
-  bgcolor: "#fff",
-  position: "absolute",
-  top: 25,
-  left: 25,
-  borderRadius: "9999px",
-  boxShadow: "0px 0px 5px 0px rgba(0,0,0,0.2)",
-};
 
 const cardContentStyle = {
   position: "relative",
@@ -60,16 +50,7 @@ export default function RoomCard({
 }: IRoomCardProps) {
   return (
     <Card sx={{ maxWidth: 345, position: "relative" }}>
-      <Box
-        sx={{
-          ...badgeStyle,
-          color: "custom.orange",
-          fontSize: 12,
-          fontWeight: 700,
-        }}
-      >
-        {discount * 100} % Off
-      </Box>
+      <DiscountBadge discount={discount} />
       <CardMedia
         component="img"
         height="194"
@@ -77,23 +58,7 @@ export default function RoomCard({
         alt="Paella dish"
       />
       <CardContent sx={cardContentStyle}>
-        <Box
-          sx={{
-            ...badgeStyle,
-            left: "initial",
-            px: 2,
-            right: 20,
-            top: -20,
-          }}
-          display="flex"
-          alignItems="center"
-          gap="3px"
-        >
-          <HotelClass sx={{ color: "custom.gold", fontSize: 18 }} />
-          <Typography variant="body2" fontWeight={700}>
-            {hotelStarRating}
-          </Typography>
-        </Box>
+        <RatingBadge hotelStarRating={hotelStarRating} />
         <Typography variant="h3">{title}</Typography>
         <Box mt={2}>
           <Box display="flex" alignItems="center" gap={1}>
