@@ -7,6 +7,7 @@ import { Hotel, LocationOn } from "@mui/icons-material";
 import AppButton from "@travelia/components/Button";
 import DiscountBadge from "../Badges/DiscountBadge";
 import RatingBadge from "../Badges/RatingBadge";
+import RoomPriceWithDiscount from "../RoomPriceWithDiscount";
 
 interface IRoomCardProps {
   title: string;
@@ -81,30 +82,10 @@ export default function RoomCard({
           alignItems="center"
           mt={2}
         >
-          <Box display="flex" alignItems="baseline" gap={1}>
-            <Typography
-              sx={{
-                fontSize: 14,
-                color: "text.disabled",
-                textDecoration: "line-through",
-              }}
-            >
-              ${originalRoomPrice}
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: 18,
-                color: "custom.orange",
-                fontWeight: 700,
-              }}
-            >
-              ${finalPrice}
-            </Typography>
-            <Typography sx={{ color: "text.secondary", fontSize: 12 }}>
-              / Person
-            </Typography>
-          </Box>
-
+          <RoomPriceWithDiscount
+            finalPrice={finalPrice}
+            originalRoomPrice={originalRoomPrice}
+          />
           <AppButton sx={bookButtonStyle}>Book Now</AppButton>
         </Box>
       </CardContent>
