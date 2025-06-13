@@ -5,3 +5,4 @@ export { default as thumb1 } from "./images/header/thumb1.png";
 export { default as thumb2 } from "./images/header/thumb2.png";
 export { default as thumb3 } from "./images/header/thumb3.jpg";
 export { default as logo } from "./images/logo.svg";
+export { default as fallbackImage } from "./images/fallbackImage.jpg";

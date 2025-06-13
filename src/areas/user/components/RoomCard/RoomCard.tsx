@@ -8,6 +8,7 @@ import AppButton from "@travelia/components/Button";
 import DiscountBadge from "../Badges/DiscountBadge";
 import RatingBadge from "../Badges/RatingBadge";
 import RoomPriceWithDiscount from "../RoomPriceWithDiscount";
+import useValidateImage from "@travelia/hooks/useValidateImage";
 
 interface IRoomCardProps {
   title: string;
@@ -50,13 +51,15 @@ export default function RoomCard({
   roomPhotoUrl,
   cityName,
 }: IRoomCardProps) {
+  const imageUrl = useValidateImage(roomPhotoUrl);
+
   return (
     <Card sx={{ position: "relative" }}>
       <DiscountBadge discount={discount} />
       <CardMedia
         component="img"
         height="194"
-        image={roomPhotoUrl}
+        image={imageUrl}
         alt="Paella dish"
       />
       <CardContent sx={cardContentStyle}>

@@ -1,5 +1,6 @@
 import { LocationOn } from "@mui/icons-material";
 import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
+import useValidateImage from "@travelia/hooks/useValidateImage";
 
 interface IDestinationCardProps {
   cityName: string;
@@ -14,6 +15,8 @@ const DestinationCard = ({
   description,
   thumbnailUrl,
 }: IDestinationCardProps) => {
+  const imageUrl = useValidateImage(thumbnailUrl);
+
   return (
     <Card
       sx={{
@@ -29,7 +32,7 @@ const DestinationCard = ({
           height="100%"
           width="100%"
           sx={{ objectFit: "cover" }}
-          image={thumbnailUrl}
+          image={imageUrl}
           alt="Paella dish"
         />
       </Box>
