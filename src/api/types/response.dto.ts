@@ -10,3 +10,11 @@ export interface IFeaturedDealsResponse {
   roomPhotoUrl: string;
   title: string;
 }
+
+export interface ITrendingDestinationsResponse {
+  cityId: number;
+  cityName: string;
+  countryName: string;
+  description: string;
+  thumbnailUrl: string;
+}

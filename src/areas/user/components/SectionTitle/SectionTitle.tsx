@@ -11,7 +11,7 @@ const SectionTitle = ({ title, subTitle }: ISectionTitle) => {
       <Typography variant="h2" mb={{ xs: 1, md: 2 }}>
         {title}
       </Typography>
-      <Typography variant="body2" color="custom.salver" mb={5}>
+      <Typography variant="body2" color="custom.darkSalver" mb={5}>
         {subTitle}
       </Typography>
     </>

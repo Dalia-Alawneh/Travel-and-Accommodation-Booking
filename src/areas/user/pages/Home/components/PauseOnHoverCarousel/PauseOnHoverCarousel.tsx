@@ -1,45 +1,27 @@
 import { Box } from "@mui/material";
 import { ReactNode } from "react";
-import Slider from "react-slick";
+import Slider, { Settings } from "react-slick";
 
 interface IPauseOnHoverCarouselProps {
   render: () => ReactNode;
+  responsiveBreakpoints: Settings["responsive"];
+  slidesToShow: number;
 }
 
-function PauseOnHoverCarousel({ render }: IPauseOnHoverCarouselProps) {
+function PauseOnHoverCarousel({
+  render,
+  responsiveBreakpoints,
+  slidesToShow,
+}: IPauseOnHoverCarouselProps) {
   const settings = {
     dots: true,
     infinite: true,
-    slidesToShow: 3,
+    slidesToShow,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
     pauseOnHover: true,
-    responsive: [
-      {
-        breakpoint: 1400,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 730,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
+    responsive: responsiveBreakpoints,
   };
   return (
     <Box

@@ -1,49 +1,42 @@
 import { Box } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
-import { getFeaturedDeals } from "@travelia/api/endpoints/home";
-import RoomCard from "@travelia/areas/user/components/RoomCard";
-import PauseOnHoverCarousel from "../PauseOnHoverCarousel/PauseOnHoverCarousel";
 import RoomCardSkeleton from "@travelia/areas/user/components/RoomCard/RoomCardSkeleton";
 import SectionTitle from "@travelia/areas/user/components/SectionTitle/SectionTitle";
 import withContainer from "@travelia/HOC/withContainer";
+import PauseOnHoverCarousel from "../PauseOnHoverCarousel/PauseOnHoverCarousel";
+import { useQuery } from "@tanstack/react-query";
+import { getTrendingDestinations } from "@travelia/api/endpoints/home";
+import DestinationCard from "@travelia/areas/user/components/DestinationCard/DestinationCard";
 
 const carouselResponsive = [
   {
     breakpoint: 1400,
     settings: {
-      slidesToShow: 3,
-      slidesToScroll: 3,
+      slidesToShow: 2,
+      slidesToScroll: 1,
       dots: true,
     },
   },
   {
-    breakpoint: 1024,
-    settings: {
-      slidesToShow: 2,
-      slidesToScroll: 2,
-      initialSlide: 2,
-    },
-  },
-  {
-    breakpoint: 730,
+    breakpoint: 1100,
     settings: {
       slidesToShow: 1,
       slidesToScroll: 1,
+      initialSlide: 1,
     },
   },
 ];
 
-const FeaturedDeals = () => {
-  const { isLoading, data: featureDeals } = useQuery({
-    queryKey: ["featuredDeals"],
-    queryFn: getFeaturedDeals,
+const TrendingDestinations = () => {
+  const { isLoading, data: trendingDestinations } = useQuery({
+    queryKey: ["trendingDestinations"],
+    queryFn: getTrendingDestinations,
   });
 
   return (
     <>
       <SectionTitle
-        title="Featured Deals"
-        subTitle="Deals you don’t want to miss"
+        title="Trending Destinations"
+        subTitle="Favorite destinations based on customer reviews"
       />
       {isLoading ? (
         <Box
@@ -58,18 +51,18 @@ const FeaturedDeals = () => {
             <RoomCardSkeleton key={index} />
           ))}
         </Box>
-      ) : featureDeals?.length === 0 ? (
+      ) : trendingDestinations?.length === 0 ? (
         <Box textAlign="center" color="text.secondary">
           No data found
         </Box>
       ) : (
         <PauseOnHoverCarousel
-          slidesToShow={3}
+          slidesToShow={2}
           responsiveBreakpoints={carouselResponsive}
           render={() =>
-            featureDeals?.map((item) => (
-              <Box key={item.hotelId} px={{ xs: 1, sm: 2 }}>
-                <RoomCard {...item} />
+            trendingDestinations?.map((item) => (
+              <Box key={item.cityId} px={{ xs: 1, sm: 2 }} height="100%">
+                <DestinationCard {...item} />
               </Box>
             ))
           }
@@ -79,5 +72,5 @@ const FeaturedDeals = () => {
   );
 };
 
-const WrappedFeaturedDeals = withContainer(FeaturedDeals);
-export default WrappedFeaturedDeals;
+const WrappedTrendingDestinations = withContainer(TrendingDestinations);
+export default WrappedTrendingDestinations;
