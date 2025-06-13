@@ -19,7 +19,7 @@ const FeaturedDeals = () => {
       <PauseOnHoverCarousel
         render={() =>
           data?.map((item) => (
-            <Box key={item.hotelId} px={2}>
+            <Box key={item.hotelId} px={{ xs: 1, sm: 2 }}>
               <RoomCard {...item} />
             </Box>
           ))
