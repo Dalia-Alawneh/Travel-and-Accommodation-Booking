@@ -56,12 +56,7 @@ export default function RoomCard({
   return (
     <Card sx={{ position: "relative" }}>
       <DiscountBadge discount={discount} />
-      <CardMedia
-        component="img"
-        height="194"
-        image={imageUrl}
-        alt="Paella dish"
-      />
+      <CardMedia component="img" height="194" image={imageUrl} alt={title} />
       <CardContent sx={cardContentStyle}>
         <RatingBadge hotelStarRating={hotelStarRating} />
         <Typography variant="h3">{title}</Typography>

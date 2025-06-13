@@ -1,11 +1,11 @@
 import { Box } from "@mui/material";
-import RoomCardSkeleton from "@travelia/areas/user/components/RoomCard/RoomCardSkeleton";
 import SectionTitle from "@travelia/areas/user/components/SectionTitle/SectionTitle";
 import withContainer from "@travelia/HOC/withContainer";
 import PauseOnHoverCarousel from "../PauseOnHoverCarousel/PauseOnHoverCarousel";
 import { useQuery } from "@tanstack/react-query";
 import { getTrendingDestinations } from "@travelia/api/endpoints/home";
 import DestinationCard from "@travelia/areas/user/components/DestinationCard/DestinationCard";
+import DestinationCardSkeleton from "@travelia/areas/user/components/DestinationCard/DestinationCardSkeleton";
 
 const carouselResponsive = [
   {
@@ -47,8 +47,8 @@ const TrendingDestinations = () => {
             px: { xs: 1, sm: 2 },
           }}
         >
-          {Array.from({ length: 3 }, (_, index) => (
-            <RoomCardSkeleton key={index} />
+          {Array.from({ length: 2 }, (_, index) => (
+            <DestinationCardSkeleton key={index} />
           ))}
         </Box>
       ) : trendingDestinations?.length === 0 ? (
