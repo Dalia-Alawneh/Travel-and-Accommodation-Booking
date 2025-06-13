@@ -26,7 +26,14 @@ export default function TopBar() {
       >
         <Toolbar>
           <Container maxWidth="xl">
-            <Box width="100%" display="flex" alignItems="center">
+            <Box
+              width="100%"
+              display="flex"
+              alignItems="center"
+              sx={{
+                justifyContent: { xs: "space-between", md: "flex-start" },
+              }}
+            >
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
@@ -36,7 +43,7 @@ export default function TopBar() {
               >
                 <MenuIcon />
               </IconButton>
-              <Box sx={{ my: 2, textAlign: { xs: "end", sm: "start" } }}>
+              <Box sx={{ my: 2 }}>
                 <img src={logo} alt="travilia" />
               </Box>
               <Box
