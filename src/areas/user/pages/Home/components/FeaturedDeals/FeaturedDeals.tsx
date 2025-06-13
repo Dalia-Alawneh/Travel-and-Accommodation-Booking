@@ -5,26 +5,31 @@ import RoomCard from "@travelia/areas/user/components/RoomCard";
 import PauseOnHoverCarousel from "../PauseOnHoverCarousel/PauseOnHoverCarousel";
 
 const FeaturedDeals = () => {
-  const { data } = useQuery({
+  const { isLoading, data: featureDeals } = useQuery({
     queryKey: ["featuredDeals"],
     queryFn: getFeaturedDeals,
   });
-  console.log(data);
 
   return (
     <Container maxWidth="lg" sx={{ my: 10 }}>
       <Typography variant="h2" mb={5}>
         Featured Deals
       </Typography>
-      <PauseOnHoverCarousel
-        render={() =>
-          data?.map((item) => (
-            <Box key={item.hotelId} px={{ xs: 1, sm: 2 }}>
-              <RoomCard {...item} />
-            </Box>
-          ))
-        }
-      />
+      {!isLoading && featureDeals?.length === 0 ? (
+        <Box textAlign="center" color="text.secondary">
+          No data found
+        </Box>
+      ) : (
+        <PauseOnHoverCarousel
+          render={() =>
+            featureDeals?.map((item) => (
+              <Box key={item.hotelId} px={{ xs: 1, sm: 2 }}>
+                <RoomCard {...item} />
+              </Box>
+            ))
+          }
+        />
+      )}
     </Container>
   );
 };
