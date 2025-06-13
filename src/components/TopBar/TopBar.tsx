@@ -10,8 +10,13 @@ import { DRAWER_WIDTH, menuItems } from "@travelia/fixtures";
 import AppDrawer from "../Drawer/Drawer";
 import AppButton from "../Button/Button";
 import { Container } from "@mui/material";
+import { Menu } from "@travelia/types";
 
-export default function TopBar() {
+interface ITopBarProps {
+  menuLinks: Menu;
+}
+
+export default function TopBar({ menuLinks }: ITopBarProps) {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -57,7 +62,7 @@ export default function TopBar() {
                   justifyContent: "center",
                 }}
               >
-                {menuItems.map((item) => (
+                {menuLinks.map((item) => (
                   <Typography variant="body2" key={item.title}>
                     {item.title}
                   </Typography>
