@@ -3,7 +3,7 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
-import { Hotel, LocationOn } from "@mui/icons-material";
+import { Hotel, LocationOn, WidthFull } from "@mui/icons-material";
 import AppButton from "@travelia/components/Button";
 import DiscountBadge from "../Badges/DiscountBadge";
 import RatingBadge from "../Badges/RatingBadge";
@@ -32,6 +32,7 @@ const cardContentStyle = {
 const bookButtonStyle = {
   fontWeight: 600,
   py: 1,
+  width: { xs: "100%", sm: "initial" },
   bgcolor: "custom.salver",
   "&:hover": {
     bgcolor: "custom.orange",
@@ -78,9 +79,11 @@ export default function RoomCard({
         </Box>
         <Box
           display="flex"
+          flexWrap="wrap"
           justifyContent="space-between"
           alignItems="center"
           mt={2}
+          gap={{ xs: 2, sm: 0 }}
         >
           <RoomPriceWithDiscount
             finalPrice={finalPrice}
