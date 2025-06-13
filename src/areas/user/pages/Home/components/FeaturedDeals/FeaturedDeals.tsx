@@ -1,5 +1,8 @@
-import { Container, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
+import { getFeaturedDeals } from "@travelia/api/endpoints/home";
 import RoomCard from "@travelia/areas/user/components/RoomCard";
+import PauseOnHoverCarousel from "../PauseOnHoverCarousel/PauseOnHoverCarousel";
 
 const room = {
   hotelId: 1,
@@ -14,6 +17,12 @@ const room = {
     "https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
 };
 const FeaturedDeals = () => {
+  const { data } = useQuery({
+    queryKey: ["featuredDeals"],
+    queryFn: getFeaturedDeals,
+  });
+  console.log(data);
+
   return (
     <Container maxWidth="lg" sx={{ my: 10 }}>
       <Typography variant="h2" mb={5}>
