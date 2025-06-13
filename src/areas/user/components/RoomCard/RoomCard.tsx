@@ -50,7 +50,7 @@ export default function RoomCard({
   cityName,
 }: IRoomCardProps) {
   return (
-    <Card sx={{ maxWidth: 345, position: "relative" }}>
+    <Card sx={{ position: "relative" }}>
       <DiscountBadge discount={discount} />
       <CardMedia
         component="img"
