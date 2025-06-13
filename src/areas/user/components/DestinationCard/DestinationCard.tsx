@@ -1,6 +1,14 @@
 import { LocationOn } from "@mui/icons-material";
-import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  Box,
+  Skeleton,
+} from "@mui/material";
 import useValidateImage from "@travelia/hooks/useValidateImage";
+import AppSkeleton from "../Skeleton/Skeleton";
 
 interface IDestinationCardProps {
   cityName: string;
@@ -15,7 +23,7 @@ const DestinationCard = ({
   description,
   thumbnailUrl,
 }: IDestinationCardProps) => {
-  const imageUrl = useValidateImage(thumbnailUrl);
+  const { isLoading, src: imageUrl } = useValidateImage(thumbnailUrl);
 
   return (
     <Card
@@ -27,14 +35,19 @@ const DestinationCard = ({
       }}
     >
       <Box sx={{ width: "100%" }}>
-        <CardMedia
-          component="img"
-          height="100%"
-          width="100%"
-          sx={{ objectFit: "cover" }}
-          image={imageUrl}
-          alt="Paella dish"
-        />
+        {isLoading ? (
+          <AppSkeleton />
+        ) : (
+          <CardMedia
+            component="img"
+            loading="lazy"
+            height="100%"
+            width="100%"
+            sx={{ objectFit: "cover" }}
+            image={imageUrl}
+            alt="Paella dish"
+          />
+        )}
       </Box>
       <CardContent
         sx={{ height: "100%", display: "flex", flexDirection: "column" }}

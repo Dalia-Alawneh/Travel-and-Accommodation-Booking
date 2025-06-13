@@ -9,6 +9,7 @@ import DiscountBadge from "../Badges/DiscountBadge";
 import RatingBadge from "../Badges/RatingBadge";
 import RoomPriceWithDiscount from "../RoomPriceWithDiscount";
 import useValidateImage from "@travelia/hooks/useValidateImage";
+import AppSkeleton from "../Skeleton/Skeleton";
 
 interface IRoomCardProps {
   title: string;
@@ -51,12 +52,22 @@ export default function RoomCard({
   roomPhotoUrl,
   cityName,
 }: IRoomCardProps) {
-  const imageUrl = useValidateImage(roomPhotoUrl);
+  const { isLoading, src: imageUrl } = useValidateImage(roomPhotoUrl);
 
   return (
     <Card sx={{ position: "relative" }}>
       <DiscountBadge discount={discount} />
-      <CardMedia component="img" height="194" image={imageUrl} alt={title} />
+      {isLoading ? (
+        <AppSkeleton />
+      ) : (
+        <CardMedia
+          component="img"
+          height="194"
+          loading="lazy"
+          image={imageUrl}
+          alt={title}
+        />
+      )}
       <CardContent sx={cardContentStyle}>
         <RatingBadge hotelStarRating={hotelStarRating} />
         <Typography variant="h3">{title}</Typography>
