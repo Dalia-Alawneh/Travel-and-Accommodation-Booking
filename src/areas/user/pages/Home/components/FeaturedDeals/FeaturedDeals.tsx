@@ -1,9 +1,10 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { getFeaturedDeals } from "@travelia/api/endpoints/home";
 import RoomCard from "@travelia/areas/user/components/RoomCard";
 import PauseOnHoverCarousel from "../PauseOnHoverCarousel/PauseOnHoverCarousel";
 import RoomCardSkeleton from "@travelia/areas/user/components/RoomCard/RoomCardSkeleton";
+import SectionTitle from "@travelia/areas/user/components/SectionTitle/SectionTitle";
 
 const FeaturedDeals = () => {
   const { isLoading, data: featureDeals } = useQuery({
@@ -13,9 +14,10 @@ const FeaturedDeals = () => {
 
   return (
     <Container maxWidth="lg" sx={{ my: 10 }}>
-      <Typography variant="h2" mb={5}>
-        Featured Deals
-      </Typography>
+      <SectionTitle
+        title="Featured Deals"
+        subTitle="Favorite destinations based on customer reviews"
+      />
       {isLoading ? (
         <Box
           sx={{

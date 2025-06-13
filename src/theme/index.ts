@@ -23,6 +23,7 @@ const theme = createTheme({
       orange: "#F09814",
       salver: "#F2F4F6",
       beige: "#FFECD0",
+      darkSalver: "#b6b6b6",
     },
   },
   typography: {

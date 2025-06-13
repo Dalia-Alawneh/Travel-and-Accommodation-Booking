@@ -7,6 +7,7 @@ declare module "@mui/material/styles" {
       orange: string;
       salver: string;
       beige: string;
+      darkSalver: string;
     };
   }
 }
