@@ -12,3 +12,8 @@ export type SelectItem = {
   text: string;
   value: string | number;
 };
+
+export type LoginFormValues = {
+  username: string;
+  password: string;
+};

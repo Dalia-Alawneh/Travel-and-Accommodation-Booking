@@ -24,6 +24,7 @@ const theme = createTheme({
       salver: "#F2F4F6",
       beige: "#FFECD0",
       darkSalver: "#b6b6b6",
+      skyBlue: "#4196d7",
     },
   },
   typography: {
@@ -114,6 +115,21 @@ const theme = createTheme({
           backgroundColor: "#fff",
           border: "1px solid inside #E4E6E8",
           boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          borderRadius: "9999px",
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+            borderColor: "#4196d7",
+          },
+        },
+        input: {
+          fontSize: 15,
+          padding: "12px 20px",
         },
       },
     },
