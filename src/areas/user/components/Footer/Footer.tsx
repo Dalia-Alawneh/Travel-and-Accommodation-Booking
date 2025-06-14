@@ -1,7 +1,6 @@
 import { EmailRounded, LocationOn, AccessTime } from "@mui/icons-material";
-import { Box, Container, Grid, TextField, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import { footerBg, footerLogo } from "@travelia/assets";
-import AppButton from "@travelia/components/Button";
 import { menuItems } from "@travelia/fixtures";
 
 const Footer = () => {
@@ -81,19 +80,6 @@ const Footer = () => {
                   {item.title}
                 </Typography>
               ))}
-            </Grid>
-            <Grid size={{ sm: 12, md: 6, lg: 3 }}>
-              <TextField
-                type="text"
-                size="small"
-                placeholder="Enter your email"
-                variant="outlined"
-                sx={{ borderRadius: 9999 }}
-                color="secondary"
-              />
-              <AppButton sx={{ backgroundColor: "secondary" }}>
-                Subscribe
-              </AppButton>
             </Grid>
           </Grid>
           <Box
