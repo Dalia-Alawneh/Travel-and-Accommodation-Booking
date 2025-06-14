@@ -37,7 +37,7 @@ const Footer = () => {
         </Box>
         <Container maxWidth="lg">
           <Grid container spacing={4}>
-            <Grid size={{ sm: 12, md: 6, lg: 5 }}>
+            <Grid size={{ sm: 12, md: 6 }}>
               <img
                 src={footerLogo}
                 alt="Travila Logo"
@@ -65,7 +65,7 @@ const Footer = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid size={{ sm: 12, md: 6, lg: 3 }}>
+            <Grid size={{ sm: 12, md: 6 }}>
               <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
                 Quick Links
               </Typography>

@@ -38,7 +38,7 @@ const DestinationCard = ({
             width="100%"
             sx={{ objectFit: "cover" }}
             image={imageUrl}
-            alt="Paella dish"
+            alt={cityName}
           />
         )}
       </Box>

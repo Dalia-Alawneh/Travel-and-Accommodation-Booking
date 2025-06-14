@@ -61,7 +61,7 @@ const TrendingDestinations = () => {
           responsiveBreakpoints={carouselResponsive}
           render={() =>
             trendingDestinations?.map((item) => (
-              <Box key={item.cityId} px={{ xs: 1, sm: 2 }} height="100%">
+              <Box key={item.cityId} px={{ xs: 1, sm: 2 }} maxHeight={"400px"}>
                 <DestinationCard {...item} />
               </Box>
             ))
