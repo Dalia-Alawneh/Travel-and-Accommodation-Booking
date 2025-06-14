@@ -8,3 +8,4 @@ export { default as logo } from "./images/logo.svg";
 export { default as fallbackImage } from "./images/fallbackImage.jpg";
 export { default as footerBg } from "./images/footer/bg.png";
 export { default as footerLogo } from "./images/footer/logo.svg";
+export { default as loginBg } from "./images/login/loginBg.png";
