@@ -51,6 +51,10 @@ const theme = createTheme({
       fontSize: "1rem",
       fontWeight: 500,
     },
+    h5: {
+      fontSize: "1rem",
+      fontWeight: 500,
+    },
   },
   shape: {
     borderRadius: 16,

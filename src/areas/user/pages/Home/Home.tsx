@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import FeaturedDeals from "./components/FeaturedDeals/FeaturedDeals";
 import { menuItems } from "@travelia/fixtures";
 import TrendingDestinations from "./components/TrendingDestinations/TrendingDestinations";
+import Footer from "../../components/Footer";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Box py={3}></Box>
       <FeaturedDeals />
       <TrendingDestinations />
+      <Footer />
     </div>
   );
 };

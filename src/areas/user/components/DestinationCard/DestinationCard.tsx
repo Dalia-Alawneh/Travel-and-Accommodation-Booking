@@ -1,12 +1,5 @@
 import { LocationOn } from "@mui/icons-material";
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  Typography,
-  Box,
-  Skeleton,
-} from "@mui/material";
+import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
 import useValidateImage from "@travelia/hooks/useValidateImage";
 import AppSkeleton from "../Skeleton/Skeleton";
 
