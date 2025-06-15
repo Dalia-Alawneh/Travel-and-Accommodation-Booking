@@ -37,12 +37,14 @@ const Login = () => {
       }}
     >
       <Grid container sx={{ height: "100%" }}>
-        <Grid size={{ lg: 8 }}></Grid>
-        <Grid size={{ sm: 4 }}>
+        <Grid
+          size={{ lg: 8 }}
+          sx={{ display: { xs: "none", md: "block" } }}
+        ></Grid>
+        <Grid size={{ xs: 12, md: 8, lg: 4 }}>
           <Box
             sx={{
-              py: 5,
-              px: 5,
+              p: 5,
               backgroundColor: "rgba(255,255,255.1)",
               backdropFilter: "blur(10px)",
               height: "100%",
