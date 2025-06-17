@@ -8,6 +8,11 @@ const ToasterContainer = () => {
       toastOptions={{
         duration: 5000,
         removeDelay: 1000,
+        style: {
+          fontSize: "14px",
+          padding: "8px 16px",
+          maxWidth: "300px",
+        },
       }}
     />
   );
