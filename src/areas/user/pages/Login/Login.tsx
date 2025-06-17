@@ -25,11 +25,7 @@ const initialValues: LoginFormValues = {
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const {
-    mutate: loginMutate,
-    isPending,
-    error,
-  } = useMutation({
+  const { mutate: loginMutate, isPending } = useMutation({
     mutationFn: login,
     onSuccess: (res) => {
       saveToLocalStorage(TOKEN_KEY, res.data.authentication);
@@ -120,7 +116,7 @@ const Login = () => {
                           bgcolor: "custom.skyBlue",
                           color: "white",
                           px: 4,
-                          mt: 5,
+                          mt: 4,
                         }}
                         loading={isPending}
                       >
