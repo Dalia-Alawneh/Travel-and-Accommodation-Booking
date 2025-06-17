@@ -17,3 +17,8 @@ export type LoginFormValues = {
   username: string;
   password: string;
 };
+
+export enum UserType {
+  User = "User",
+  Admin = "Admin",
+}

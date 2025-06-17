@@ -1,10 +1,8 @@
 import {
   Box,
-  Container,
   Grid,
   IconButton,
   InputAdornment,
-  InputLabel,
   Typography,
 } from "@mui/material";
 import AppForm from "@travelia/components/Form";
@@ -15,6 +13,8 @@ import AppButton from "@travelia/components/Button";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 import { loginBg, logo } from "@travelia/assets";
+import { login } from "@travelia/api/endpoints/auth";
+import { useMutation } from "@tanstack/react-query";
 
 const initialValues: LoginFormValues = {
   username: "",
@@ -23,9 +23,28 @@ const initialValues: LoginFormValues = {
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const {
+    mutate: loginMutate,
+    isLoading,
+    error,
+  } = useMutation({
+    mutationFn: login,
+    onSuccess: (res) => {
+      localStorage.setItem("token", res.data.authentication);
+    },
+    onError: (err) => {
+      console.error("Login failed", err);
+    },
+  });
+
   const toggleShowPassword = () => {
     setShowPassword((prev) => !prev);
   };
+
+  const handleLoginSubmit = async (data: LoginFormValues) => {
+    loginMutate(data);
+  };
+
   return (
     <Box
       bgcolor="white"
@@ -56,7 +75,7 @@ const Login = () => {
             </Typography>
             <AppForm
               initialValues={initialValues}
-              onSubmit={() => {}}
+              onSubmit={handleLoginSubmit}
               validationSchema={loginSchema}
               render={(formik) => (
                 <Box mt={4} height={"100&"}>
@@ -97,12 +116,14 @@ const Login = () => {
                         }}
                       />
                       <AppButton
+                        type="submit"
                         sx={{
                           bgcolor: "custom.skyBlue",
                           color: "white",
                           px: 4,
                           mt: 5,
                         }}
+                        loading={isLoading}
                       >
                         Login
                       </AppButton>
