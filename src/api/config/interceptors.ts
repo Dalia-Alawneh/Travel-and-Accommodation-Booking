@@ -1,21 +1,22 @@
 import toast from "react-hot-toast";
-import Axios from ".";
-import { AxiosError } from "axios";
+import { AxiosError, InternalAxiosRequestConfig } from "axios";
+import { getFromLocalStorage } from "@travelia/utils/localstorage";
+import { TOKEN_KEY } from "@travelia/fixtures";
+import { ErrorResponse } from "./types";
 
-Axios.interceptors.request.use(
-  function (config) {
-    // Do something before request is sent
-    return config;
-  },
-  function (error) {
-    // Do something with request error
-    return Promise.reject(error);
-  },
-);
+export const attachTokenToRequest = (
+  config: InternalAxiosRequestConfig,
+): InternalAxiosRequestConfig => {
+  const token = getFromLocalStorage<string>(TOKEN_KEY);
 
-type ErrorResponse = {
-  message?: string;
+  if (token) {
+    config.headers?.set("Authorization", `Bearer ${token}`);
+  }
+
+  return config;
 };
+
+export const onRequestError = (error: AxiosError) => Promise.reject(error);
 
 export const handleResponseError = (error: AxiosError) => {
   const status = error.response?.status;
