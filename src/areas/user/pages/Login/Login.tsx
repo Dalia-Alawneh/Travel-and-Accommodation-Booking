@@ -16,6 +16,7 @@ import { loginBg, logo } from "@travelia/assets";
 import { login } from "@travelia/api/endpoints/auth";
 import { useMutation } from "@tanstack/react-query";
 import { saveToLocalStorage } from "@travelia/utils/localstorage";
+import { TOKEN_KEY } from "@travelia/fixtures";
 
 const initialValues: LoginFormValues = {
   username: "",
@@ -31,10 +32,7 @@ const Login = () => {
   } = useMutation({
     mutationFn: login,
     onSuccess: (res) => {
-      saveToLocalStorage("token", res.data.authentication);
-    },
-    onError: (err) => {
-      console.error("Login failed", err);
+      saveToLocalStorage(TOKEN_KEY, res.data.authentication);
     },
   });
 
