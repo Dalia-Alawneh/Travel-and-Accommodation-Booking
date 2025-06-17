@@ -15,6 +15,7 @@ import { useState } from "react";
 import { loginBg, logo } from "@travelia/assets";
 import { login } from "@travelia/api/endpoints/auth";
 import { useMutation } from "@tanstack/react-query";
+import { saveToLocalStorage } from "@travelia/utils/localstorage";
 
 const initialValues: LoginFormValues = {
   username: "",
@@ -25,12 +26,12 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const {
     mutate: loginMutate,
-    isLoading,
+    isPending,
     error,
   } = useMutation({
     mutationFn: login,
     onSuccess: (res) => {
-      localStorage.setItem("token", res.data.authentication);
+      saveToLocalStorage("token", res.data.authentication);
     },
     onError: (err) => {
       console.error("Login failed", err);
@@ -123,7 +124,7 @@ const Login = () => {
                           px: 4,
                           mt: 5,
                         }}
-                        loading={isLoading}
+                        loading={isPending}
                       >
                         Login
                       </AppButton>
