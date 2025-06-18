@@ -11,6 +11,7 @@ import {
 import { Menu } from "@travelia/types";
 import logo from "@travelia/assets/images/logo.svg";
 import AppButton from "../Button/Button";
+import AppLink from "../Link/Link";
 
 interface IAppDrawerProps {
   drawerWidth: number;
@@ -48,12 +49,14 @@ const AppDrawer = ({
         <Divider />
         <List>
           {menuItems.map((item, index) => (
-            <ListItem key={index} disablePadding>
-              <ListItemButton sx={{ textAlign: "center" }}>
-                {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
-                <ListItemText primary={item.title} />
-              </ListItemButton>
-            </ListItem>
+            <AppLink path={item.path}>
+              <ListItem key={index} disablePadding>
+                <ListItemButton sx={{ textAlign: "center" }}>
+                  {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
+                  <ListItemText primary={item.title} />
+                </ListItemButton>
+              </ListItem>
+            </AppLink>
           ))}
         </List>
         <AppButton sx={{ px: "3rem", bgcolor: "#000", color: "#fff" }}>

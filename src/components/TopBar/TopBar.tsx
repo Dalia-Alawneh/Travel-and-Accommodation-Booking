@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import logo from "@travelia/assets/images/logo.svg";
 import { DRAWER_WIDTH, menuItems } from "@travelia/fixtures";
 import AppDrawer from "../Drawer/Drawer";
@@ -65,9 +64,9 @@ export default function TopBar({ menuLinks }: ITopBarProps) {
                 }}
               >
                 {menuLinks.map((item) => (
-                  <Typography variant="body2" key={item.title}>
-                    <AppLink path={item.path}>{item.title}</AppLink>
-                  </Typography>
+                  <AppLink path={item.path} key={item.title}>
+                    {item.title}
+                  </AppLink>
                 ))}
               </Box>
               <Box
