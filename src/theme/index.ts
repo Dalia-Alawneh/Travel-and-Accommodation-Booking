@@ -133,6 +133,23 @@ const theme = createTheme({
         },
       },
     },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          fontSize: "0.875rem",
+          color: "#1976d2",
+          textDecoration: "none",
+          transition: "all 0.2s ease-in-out",
+          fontWeight: 600,
+          "&:hover": {
+            color: "#4196d7",
+          },
+          "&:visited": {
+            color: "#4196d7",
+          },
+        },
+      },
+    },
   },
 });
 

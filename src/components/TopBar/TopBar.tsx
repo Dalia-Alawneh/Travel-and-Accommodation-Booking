@@ -11,7 +11,7 @@ import AppDrawer from "../Drawer/Drawer";
 import AppButton from "../Button/Button";
 import { Container } from "@mui/material";
 import { Menu } from "@travelia/types";
-
+import AppLink from "../Link/Link";
 interface ITopBarProps {
   menuLinks: Menu;
 }
@@ -49,7 +49,9 @@ export default function TopBar({ menuLinks }: ITopBarProps) {
                 <MenuIcon />
               </IconButton>
               <Box sx={{ my: 2 }}>
-                <img src={logo} alt="travilia" />
+                <AppLink path="">
+                  <img src={logo} alt="travilia" />
+                </AppLink>
               </Box>
               <Box
                 width="100%"
@@ -64,7 +66,7 @@ export default function TopBar({ menuLinks }: ITopBarProps) {
               >
                 {menuLinks.map((item) => (
                   <Typography variant="body2" key={item.title}>
-                    {item.title}
+                    <AppLink path={item.path}>{item.title}</AppLink>
                   </Typography>
                 ))}
               </Box>
@@ -74,7 +76,9 @@ export default function TopBar({ menuLinks }: ITopBarProps) {
                   alignItems: "center",
                 }}
               >
-                <AppButton>Signin</AppButton>
+                <AppLink path="login">
+                  <AppButton>Signin</AppButton>
+                </AppLink>
               </Box>
             </Box>
           </Container>
