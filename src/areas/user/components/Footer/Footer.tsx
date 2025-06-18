@@ -1,6 +1,7 @@
 import { EmailRounded, LocationOn, AccessTime } from "@mui/icons-material";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import { footerBg, footerLogo } from "@travelia/assets";
+import AppLink from "@travelia/components/Link/Link";
 import { menuItems } from "@travelia/fixtures";
 
 const Footer = () => {
@@ -70,15 +71,16 @@ const Footer = () => {
                 Quick Links
               </Typography>
               {menuItems.map((item) => (
-                //TODO: make links
-                <Typography
-                  key={item.title}
-                  variant="body2"
-                  color="custom.salver"
-                  sx={{ mb: 0.5 }}
-                >
-                  {item.title}
-                </Typography>
+                <AppLink path={item.path}>
+                  <Typography
+                    key={item.title}
+                    variant="body2"
+                    color="custom.salver"
+                    sx={{ mb: 0.5 }}
+                  >
+                    {item.title}
+                  </Typography>
+                </AppLink>
               ))}
             </Grid>
           </Grid>
