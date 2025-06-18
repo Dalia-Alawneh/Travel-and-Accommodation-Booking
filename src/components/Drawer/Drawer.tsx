@@ -59,9 +59,11 @@ const AppDrawer = ({
             </AppLink>
           ))}
         </List>
-        <AppButton sx={{ px: "3rem", bgcolor: "#000", color: "#fff" }}>
-          Signin
-        </AppButton>
+        <AppLink path="login">
+          <AppButton sx={{ px: "3rem", bgcolor: "#000", color: "#fff" }}>
+            Signin
+          </AppButton>
+        </AppLink>
       </Box>
     </Drawer>
   );
