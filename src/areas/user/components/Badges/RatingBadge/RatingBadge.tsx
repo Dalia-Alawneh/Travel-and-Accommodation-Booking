@@ -3,10 +3,10 @@ import { Box, Typography } from "@mui/material";
 import { badgeStyle } from "../badgeStyle";
 
 interface IRatingBadgeProps {
-  hotelStarRating: number;
+  starRating: number;
 }
 
-const RatingBadge = ({ hotelStarRating }: IRatingBadgeProps) => {
+const RatingBadge = ({ starRating }: IRatingBadgeProps) => {
   return (
     <Box
       sx={{
@@ -22,7 +22,7 @@ const RatingBadge = ({ hotelStarRating }: IRatingBadgeProps) => {
     >
       <HotelClass sx={{ color: "custom.gold", fontSize: 18 }} />
       <Typography variant="body2" fontWeight={700}>
-        {hotelStarRating}
+        {starRating}
       </Typography>
     </Box>
   );
