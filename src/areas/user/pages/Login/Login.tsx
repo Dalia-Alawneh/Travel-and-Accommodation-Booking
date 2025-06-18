@@ -17,6 +17,8 @@ import { login } from "@travelia/api/endpoints/auth";
 import { useMutation } from "@tanstack/react-query";
 import { saveToLocalStorage } from "@travelia/utils/localstorage";
 import { TOKEN_KEY } from "@travelia/fixtures";
+import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
 const initialValues: LoginFormValues = {
   username: "",
@@ -25,10 +27,13 @@ const initialValues: LoginFormValues = {
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
   const { mutate: loginMutate, isPending } = useMutation({
     mutationFn: login,
     onSuccess: (res) => {
-      saveToLocalStorage(TOKEN_KEY, res.data.authentication);
+      saveToLocalStorage(TOKEN_KEY, res.authentication);
+      toast.success("Login succeed, Navigating to Home page...");
+      setTimeout(() => navigate("/"), 1000);
     },
   });
 
