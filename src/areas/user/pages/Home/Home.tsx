@@ -5,6 +5,7 @@ import FeaturedDeals from "./components/FeaturedDeals/FeaturedDeals";
 import { menuItems } from "@travelia/fixtures";
 import TrendingDestinations from "./components/TrendingDestinations/TrendingDestinations";
 import Footer from "../../components/Footer";
+import WrappedRecentlyVisited from "./components/RecentlyVisited";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Header />
       <Box py={3}></Box>
       <FeaturedDeals />
+      <WrappedRecentlyVisited />
       <TrendingDestinations />
       <Footer />
     </div>

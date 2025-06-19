@@ -25,3 +25,14 @@ export interface IAuthenticateResponse {
   userType: UserType;
   authentication: string;
 }
+
+export interface IRecentlyVisitedHotelResponse {
+  hotelId: number;
+  hotelName: string;
+  starRating: number;
+  visitDate: string;
+  cityName: string;
+  thumbnailUrl: string;
+  priceLowerBound: number;
+  priceUpperBound: number;
+}

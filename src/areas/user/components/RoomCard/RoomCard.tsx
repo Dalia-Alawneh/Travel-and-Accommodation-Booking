@@ -69,7 +69,7 @@ export default function RoomCard({
         />
       )}
       <CardContent sx={cardContentStyle}>
-        <RatingBadge hotelStarRating={hotelStarRating} />
+        <RatingBadge starRating={hotelStarRating} />
         <Typography variant="h3">{title}</Typography>
         <Box mt={2}>
           <Box display="flex" alignItems="center" gap={1}>

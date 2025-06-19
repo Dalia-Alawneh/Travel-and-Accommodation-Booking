@@ -22,3 +22,14 @@ export enum UserType {
   User = "User",
   Admin = "Admin",
 }
+
+export type RecentlyVisitedHotel = {
+  hotelId: number;
+  hotelName: string;
+  starRating: number;
+  visitDate: string;
+  cityName: string;
+  thumbnailUrl: string;
+  priceLowerBound: number;
+  priceUpperBound: number;
+};
