@@ -17,7 +17,7 @@ interface IRecentlyVisitedProps {
   priceUpperBound: number;
 }
 
-const cardStyleSx = {
+const cardContainerSx = {
   position: "relative",
   height: 350,
   borderRadius: 2,
@@ -28,7 +28,7 @@ const cardStyleSx = {
   },
 };
 
-const cardContentStyleSx = {
+const cardOverlayContentSx = {
   position: "absolute",
   inset: 0,
   backdropFilter: "blur(10px)",
@@ -55,8 +55,9 @@ const RecentlyVisitedCard = ({
   const theme = useTheme();
   const overlayColor = theme.palette.custom.overlay;
   const textColorSx = { color: getContrastTextColor(theme, overlayColor) };
+
   return (
-    <Card sx={cardStyleSx}>
+    <Card sx={cardContainerSx}>
       {isLoading ? (
         <AppSkeleton />
       ) : (
@@ -76,7 +77,7 @@ const RecentlyVisitedCard = ({
       <Box
         className="content"
         sx={{
-          ...cardContentStyleSx,
+          ...cardOverlayContentSx,
           bgcolor: overlayColor,
         }}
       >
