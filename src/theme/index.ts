@@ -25,6 +25,7 @@ const theme = createTheme({
       beige: "#FFECD0",
       darkSalver: "#b6b6b6",
       skyBlue: "#4196d7",
+      overlay: "#ffffff1a",
     },
   },
   typography: {

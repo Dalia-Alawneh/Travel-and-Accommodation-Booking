@@ -9,6 +9,7 @@ declare module "@mui/material/styles" {
       beige: string;
       darkSalver: string;
       skyBlue: string;
+      overlay: string;
     };
   }
   interface PaletteOptions {
@@ -19,6 +20,7 @@ declare module "@mui/material/styles" {
       beige: string;
       darkSalver: string;
       skyBlue: string;
+      overlay: string;
     };
   }
 }

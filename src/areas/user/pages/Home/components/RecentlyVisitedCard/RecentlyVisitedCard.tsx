@@ -1,17 +1,10 @@
-import { CalendarMonthRounded, Hotel, LocationOn } from "@mui/icons-material";
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { CalendarMonthRounded, LocationOn } from "@mui/icons-material";
+import { Box, Card, CardMedia, Typography, useTheme } from "@mui/material";
 import RatingBadge from "@travelia/areas/user/components/Badges/RatingBadge";
 import AppSkeleton from "@travelia/areas/user/components/Skeleton";
 import useValidateImage from "@travelia/hooks/useValidateImage";
 import formatDateTime from "@travelia/utils/formatDateTime";
-import { formatWithOptions } from "util";
+import getContrastTextColor from "@travelia/utils/getContrastTextColor";
 
 interface IRecentlyVisitedProps {
   hotelId: number;
@@ -24,8 +17,31 @@ interface IRecentlyVisitedProps {
   priceUpperBound: number;
 }
 
+const cardStyleSx = {
+  position: "relative",
+  height: 350,
+  borderRadius: 2,
+  overflow: "hidden",
+  cursor: "pointer",
+  "&:hover .content": {
+    opacity: 1,
+  },
+};
+
+const cardContentStyleSx = {
+  position: "absolute",
+  inset: 0,
+  backdropFilter: "blur(10px)",
+  opacity: 0,
+  transition: "all 0.4s ease",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  textAlign: "center",
+};
+
 const RecentlyVisitedCard = ({
-  hotelId,
   cityName,
   hotelName,
   priceLowerBound,
@@ -36,19 +52,11 @@ const RecentlyVisitedCard = ({
 }: IRecentlyVisitedProps) => {
   const { isLoading, src: imageUrl } = useValidateImage(thumbnailUrl);
   const date = formatDateTime(visitDate);
+  const theme = useTheme();
+  const overlayColor = theme.palette.custom.overlay;
+  const textColorSx = { color: getContrastTextColor(theme, overlayColor) };
   return (
-    <Card
-      sx={{
-        position: "relative",
-        height: 350,
-        borderRadius: 3,
-        overflow: "hidden",
-        cursor: "pointer",
-        "&:hover .content": {
-          opacity: 1,
-        },
-      }}
-    >
+    <Card sx={cardStyleSx}>
       {isLoading ? (
         <AppSkeleton />
       ) : (
@@ -68,20 +76,8 @@ const RecentlyVisitedCard = ({
       <Box
         className="content"
         sx={{
-          position: "absolute",
-          inset: 0,
-          bgcolor: "rgb(255 255 255 / 10%)",
-          backdropFilter: "blur(10px)",
-          opacity: 0,
-          transform: "scale(1)",
-          transition: "all 0.4s ease",
-          px: 3,
-          py: 2,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
+          ...cardContentStyleSx,
+          bgcolor: overlayColor,
         }}
       >
         <Typography variant="h6" fontWeight={700} mb={2}>
@@ -89,36 +85,31 @@ const RecentlyVisitedCard = ({
         </Typography>
 
         <Box display="flex" alignItems="center" gap={1}>
-          <LocationOn sx={{ color: "text.primary" }} />
-          <Typography variant="body2" fontWeight={600} color="text.primary">
+          <LocationOn sx={textColorSx} />
+          <Typography variant="body2" fontWeight={600} sx={textColorSx}>
             {cityName}
           </Typography>
         </Box>
 
         <Box display="flex" alignItems="center" gap={1} mt={1}>
-          <CalendarMonthRounded sx={{ color: "text.primary" }} />
-          <Typography variant="body2" fontWeight={600} color="text.primary">
+          <CalendarMonthRounded sx={textColorSx} />
+          <Typography variant="body2" fontWeight={600} sx={textColorSx}>
             {date}
           </Typography>
         </Box>
 
-        <Typography mt={2} fontSize={16} color="custom.orange" fontWeight={600}>
-          {priceLowerBound} - {priceUpperBound} $
+        <Typography mt={2} fontSize={16} color="custom.orange" fontWeight={700}>
+          {priceLowerBound} $ - {priceUpperBound} $
         </Typography>
       </Box>
 
       <RatingBadge
         starRating={starRating}
         sx={{
-          position: "absolute",
           top: 15,
           right: 15,
           zIndex: 2,
-          bgcolor: "white",
-          borderRadius: "20px",
-          px: 2,
-          py: 0.5,
-          boxShadow: 2,
+          boxShadow: 4,
         }}
       />
     </Card>
