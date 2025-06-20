@@ -36,3 +36,9 @@ export interface IRecentlyVisitedHotelResponse {
   priceLowerBound: number;
   priceUpperBound: number;
 }
+
+export interface ICitiesResponse {
+  id: number;
+  name: string;
+  description: string;
+}
