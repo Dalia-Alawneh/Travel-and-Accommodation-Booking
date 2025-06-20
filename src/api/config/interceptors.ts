@@ -1,6 +1,9 @@
 import toast from "react-hot-toast";
 import { AxiosError, InternalAxiosRequestConfig } from "axios";
-import { getFromLocalStorage } from "@travelia/utils/localstorage";
+import {
+  getFromLocalStorage,
+  removeFromLocalStorage,
+} from "@travelia/utils/localstorage";
 import { TOKEN_KEY } from "@travelia/fixtures";
 import { ErrorResponse } from "./types";
 
@@ -18,6 +21,14 @@ export const attachTokenToRequest = (
 
 export const onRequestError = (error: AxiosError) => Promise.reject(error);
 
+const handleUnAuthResponse = () => {
+  removeFromLocalStorage(TOKEN_KEY);
+  toast.error("Unauthorized - redirect to login...", { duration: 5000 });
+  setTimeout(() => {
+    window.location.href = "/login";
+  }, 1500);
+};
+
 export const handleResponseError = (error: AxiosError) => {
   const status = error.response?.status;
   const serverMessage = (error.response?.data as ErrorResponse)?.message;
@@ -27,7 +38,7 @@ export const handleResponseError = (error: AxiosError) => {
       break;
 
     case 401:
-      toast.error("Unauthorized - redirect to login...");
+      handleUnAuthResponse();
       break;
 
     case 403:
