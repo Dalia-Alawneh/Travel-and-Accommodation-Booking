@@ -10,3 +10,5 @@ export { default as footerBg } from "./images/footer/bg.png";
 export { default as whiteLogo } from "./images/footer/logo.svg";
 export { default as loginBg } from "./images/login/loginBg.png";
 export { default as welcome } from "./images/welcome.webp";
+export { default as notFound } from "./images/error/404.svg";
+export { default as serverError } from "./images/error/500.svg";
