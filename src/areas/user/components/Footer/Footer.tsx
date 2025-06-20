@@ -1,6 +1,6 @@
 import { EmailRounded, LocationOn, AccessTime } from "@mui/icons-material";
 import { Box, Container, Grid, Typography } from "@mui/material";
-import { footerBg, footerLogo } from "@travelia/assets";
+import { footerBg, whiteLogo } from "@travelia/assets";
 import AppLink from "@travelia/components/Link/Link";
 import { menuItems } from "@travelia/fixtures";
 
@@ -40,7 +40,7 @@ const Footer = () => {
           <Grid container spacing={4}>
             <Grid size={{ sm: 12, md: 6 }}>
               <img
-                src={footerLogo}
+                src={whiteLogo}
                 alt="Travila Logo"
                 style={{ marginBottom: 16 }}
               />

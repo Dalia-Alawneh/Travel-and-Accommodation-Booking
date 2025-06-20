@@ -7,5 +7,6 @@ export { default as thumb3 } from "./images/header/thumb3.jpg";
 export { default as logo } from "./images/logo.svg";
 export { default as fallbackImage } from "./images/fallbackImage.jpg";
 export { default as footerBg } from "./images/footer/bg.png";
-export { default as footerLogo } from "./images/footer/logo.svg";
+export { default as whiteLogo } from "./images/footer/logo.svg";
 export { default as loginBg } from "./images/login/loginBg.png";
+export { default as welcome } from "./images/welcome.webp";
