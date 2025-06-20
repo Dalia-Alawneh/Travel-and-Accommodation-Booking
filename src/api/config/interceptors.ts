@@ -4,7 +4,7 @@ import {
   getFromLocalStorage,
   removeFromLocalStorage,
 } from "@travelia/utils/localstorage";
-import { TOKEN_KEY } from "@travelia/fixtures";
+import { TOKEN_KEY, USER } from "@travelia/fixtures";
 import { ErrorResponse } from "./types";
 
 export const attachTokenToRequest = (
@@ -21,8 +21,13 @@ export const attachTokenToRequest = (
 
 export const onRequestError = (error: AxiosError) => Promise.reject(error);
 
-const handleUnAuthResponse = () => {
+const clearCredentials = () => {
   removeFromLocalStorage(TOKEN_KEY);
+  removeFromLocalStorage(USER);
+};
+
+const handleUnAuthResponse = () => {
+  clearCredentials();
   toast.error("Unauthorized - redirect to login...", { duration: 5000 });
   setTimeout(() => {
     window.location.href = "/login";
