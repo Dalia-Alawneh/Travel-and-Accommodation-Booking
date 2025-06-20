@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import AppForm from "@travelia/components/Form";
 import AppTextField from "@travelia/components/Inputs/TextField/TextField";
-import { LoginFormValues } from "@travelia/types";
+import { LoginFormValues, UserType } from "@travelia/types";
 import { loginSchema } from "../../areas/user/schemas/login";
 import AppButton from "@travelia/components/Button";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -39,7 +39,10 @@ const Login = () => {
       saveToLocalStorage(TOKEN_KEY, res.authentication);
       saveToLocalStorage(USER, user);
       toast.success("Login succeed, Navigating to Home page...");
-      setTimeout(() => navigate("/"), 1000);
+      if (user.userType === UserType.User)
+        setTimeout(() => navigate("/user"), 1000);
+      else if (user.userType === UserType.Admin)
+        setTimeout(() => navigate("/admin"), 1000);
     },
   });
 
