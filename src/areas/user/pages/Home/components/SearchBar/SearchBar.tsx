@@ -17,6 +17,7 @@ import AppButton from "@travelia/components/Button";
 import AppDivider from "@travelia/components/Divider/Divider";
 import { useQuery } from "@tanstack/react-query";
 import { getCities } from "@travelia/api/endpoints/cities";
+import SearchGridItem from "../SearchGridItem";
 
 const paperStyle = {
   bgcolor: "#fff",
@@ -35,6 +36,7 @@ const SearchBar = () => {
   const [checkOut, setCheckOut] = useState<string>("");
   const [selectedAdults, setSelectedAdults] = useState<SelectItem>(adults[0]);
   const [selectedChild, setSelectedChild] = useState<SelectItem>(children[0]);
+  const [city, setCity] = useState<SelectItem>();
 
   const { data: citiesData } = useQuery({
     queryKey: ["cities"],
@@ -45,8 +47,6 @@ const SearchBar = () => {
       text: city.name,
       value: city.id,
     })) || [];
-
-  const [city, setCity] = useState<SelectItem>(mappedCities[0]);
 
   const handleSelectCityChange = (event: SelectChangeEvent) => {
     const selected = mappedCities.find((c) => c.value === event.target.value);
@@ -83,17 +83,17 @@ const SearchBar = () => {
     <Paper sx={paperStyle}>
       <form>
         <Grid container spacing={2} alignItems="center" justifyContent="center">
-          <Grid size={{ xs: 12, sm: 6, lg: 2.4 }} sx={{ display: "flex" }}>
+          <SearchGridItem>
             <AppSelect
               items={mappedCities}
               label="Location"
-              item={city ?? mappedCities[0]}
+              item={city ?? mappedCities[0] ?? { value: "", text: "" }}
               onChange={handleSelectCityChange}
               icon={<LocationOnIcon sx={{ fontSize: 18, color: "#ddd" }} />}
             />
             <AppDivider />
-          </Grid>
-          <Grid size={{ xs: 12, sm: 6, lg: 2.4 }} sx={{ display: "flex" }}>
+          </SearchGridItem>
+          <SearchGridItem>
             <AppDateInput
               value={checkIn}
               label="Check In"
@@ -101,8 +101,8 @@ const SearchBar = () => {
               icon={<CalendarMonth sx={{ fontSize: 18, color: "#ddd" }} />}
             />
             <AppDivider />
-          </Grid>
-          <Grid size={{ xs: 12, sm: 6, lg: 2.4 }} sx={{ display: "flex" }}>
+          </SearchGridItem>
+          <SearchGridItem>
             <AppDateInput
               value={checkOut}
               label="Check Out"
@@ -110,8 +110,8 @@ const SearchBar = () => {
               icon={<CalendarMonth sx={{ fontSize: 18, color: "#ddd" }} />}
             />
             <AppDivider />
-          </Grid>
-          <Grid size={{ xs: 12, sm: 6, lg: 2.4 }}>
+          </SearchGridItem>
+          <SearchGridItem>
             <PopoverSelect
               label="Guest"
               icon={<People sx={{ fontSize: 18, color: "#ddd" }} />}
@@ -135,15 +135,15 @@ const SearchBar = () => {
                 />
               </Box>
             </PopoverSelect>
-          </Grid>
-          <Grid size={{ xs: 12, sm: 6, lg: 2.4 }}>
+          </SearchGridItem>
+          <SearchGridItem>
             <AppButton
               sx={{ bgcolor: "#000", color: "#fff", px: "30px" }}
               type="submit"
             >
               <Search sx={{ fontSize: 20, color: "#ddd" }} /> Search
             </AppButton>
-          </Grid>
+          </SearchGridItem>
         </Grid>
       </form>
     </Paper>
