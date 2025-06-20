@@ -8,7 +8,12 @@ interface IUser {
   userType: UserType;
 }
 
-const UserContext = createContext<IUser | null>(null);
+interface IUserContext {
+  user: IUser | null;
+  setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
+}
+
+const UserContext = createContext<IUserContext | null>(null);
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<IUser | null>(null);
@@ -18,7 +23,9 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     if (storedUser) setUser(storedUser);
   }, []);
 
-  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
+  const value = useMemo(() => ({ user, setUser }), [user]);
+
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
 export const useUser = () => {
