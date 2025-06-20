@@ -48,9 +48,9 @@ const AppDrawer = ({
         </Box>
         <Divider />
         <List>
-          {menuItems.map((item, index) => (
-            <AppLink path={item.path}>
-              <ListItem key={index} disablePadding>
+          {menuItems.map((item) => (
+            <AppLink path={item.path} key={item.title}>
+              <ListItem disablePadding>
                 <ListItemButton sx={{ textAlign: "center" }}>
                   {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
                   <ListItemText primary={item.title} />
@@ -61,7 +61,7 @@ const AppDrawer = ({
         </List>
         <AppLink path="login">
           <AppButton sx={{ px: "3rem", bgcolor: "#000", color: "#fff" }}>
-            Signin
+            Logout
           </AppButton>
         </AppLink>
       </Box>

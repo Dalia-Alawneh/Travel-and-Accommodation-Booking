@@ -71,7 +71,7 @@ const Footer = () => {
                 Quick Links
               </Typography>
               {menuItems.map((item) => (
-                <AppLink path={item.path}>
+                <AppLink key={item.title} path={item.path}>
                   <Typography
                     key={item.title}
                     variant="body2"
