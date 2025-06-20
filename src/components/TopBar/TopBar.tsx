@@ -12,6 +12,7 @@ import { Container } from "@mui/material";
 import { Menu } from "@travelia/types";
 import AppLink from "../Link/Link";
 import useLogout from "@travelia/hooks/useLogout";
+import { Logout } from "@mui/icons-material";
 interface ITopBarProps {
   menuLinks: Menu;
 }
@@ -70,16 +71,18 @@ export default function TopBar({ menuLinks }: ITopBarProps) {
                   </AppLink>
                 ))}
               </Box>
-              <Box
-                sx={{
-                  display: { xs: "none", sm: "flex" },
-                  alignItems: "center",
-                }}
-              >
-                <AppButton onClick={handleLogout} loading={loading}>
-                  Logout
-                </AppButton>
-              </Box>
+              <AppButton onClick={handleLogout} loading={loading}>
+                <Box
+                  sx={{
+                    display: { xs: "none", sm: "flex" },
+                    alignItems: "center",
+                    gap: 1,
+                  }}
+                >
+                  <span>Logout</span>{" "}
+                  <Logout color="error" sx={{ fontSize: 20 }} />
+                </Box>
+              </AppButton>
             </Box>
           </Container>
         </Toolbar>

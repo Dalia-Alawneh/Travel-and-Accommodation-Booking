@@ -13,6 +13,7 @@ import logo from "@travelia/assets/images/logo.svg";
 import AppButton from "../Button/Button";
 import AppLink from "../Link/Link";
 import useLogout from "@travelia/hooks/useLogout";
+import { Logout } from "@mui/icons-material";
 
 interface IAppDrawerProps {
   drawerWidth: number;
@@ -67,7 +68,15 @@ const AppDrawer = ({
           loading={loading}
           sx={{ px: "3rem", bgcolor: "#000", color: "#fff" }}
         >
-          Logout
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            <span>Logout</span> <Logout color="error" sx={{ fontSize: 20 }} />
+          </Box>
         </AppButton>
       </Box>
     </Drawer>
