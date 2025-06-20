@@ -11,13 +11,14 @@ import AppButton from "../Button/Button";
 import { Container } from "@mui/material";
 import { Menu } from "@travelia/types";
 import AppLink from "../Link/Link";
+import useLogout from "@travelia/hooks/useLogout";
 interface ITopBarProps {
   menuLinks: Menu;
 }
 
 export default function TopBar({ menuLinks }: ITopBarProps) {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
-
+  const { handleLogout, loading } = useLogout();
   const handleDrawerToggle = () => {
     setIsDrawerOpen((prevState) => !prevState);
   };
@@ -75,9 +76,9 @@ export default function TopBar({ menuLinks }: ITopBarProps) {
                   alignItems: "center",
                 }}
               >
-                <AppLink path="login">
-                  <AppButton>Logout</AppButton>
-                </AppLink>
+                <AppButton onClick={handleLogout} loading={loading}>
+                  Logout
+                </AppButton>
               </Box>
             </Box>
           </Container>

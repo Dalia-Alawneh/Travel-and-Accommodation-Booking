@@ -8,16 +8,11 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { Menu, UserActions } from "@travelia/types";
+import { Menu } from "@travelia/types";
 import logo from "@travelia/assets/images/logo.svg";
 import AppButton from "../Button/Button";
 import AppLink from "../Link/Link";
-import useUser from "@travelia/context/user/useContext";
-import { USER, TOKEN_KEY } from "@travelia/fixtures";
-import { removeFromLocalStorage } from "@travelia/utils";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router";
+import useLogout from "@travelia/hooks/useLogout";
 
 interface IAppDrawerProps {
   drawerWidth: number;
@@ -32,25 +27,8 @@ const AppDrawer = ({
   handleDrawerToggle,
   isOpen,
 }: IAppDrawerProps) => {
-  const { dispatch } = useUser();
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  const { handleLogout, loading } = useLogout();
 
-  const handleLogout = async () => {
-    try {
-      setLoading(true);
-
-      dispatch({ type: UserActions.CLEAR_USER });
-      removeFromLocalStorage(USER);
-      removeFromLocalStorage(TOKEN_KEY);
-
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      toast.success("Logged out successfully");
-      navigate("/login");
-    } finally {
-      setLoading(false);
-    }
-  };
   return (
     <Drawer
       variant="temporary"
