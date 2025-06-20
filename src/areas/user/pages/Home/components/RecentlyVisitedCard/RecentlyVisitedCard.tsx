@@ -7,7 +7,6 @@ import formatDateTime from "@travelia/utils/formatDateTime";
 import getContrastTextColor from "@travelia/utils/getContrastTextColor";
 
 interface IRecentlyVisitedProps {
-  hotelId: number;
   hotelName: string;
   starRating: number;
   visitDate: string;

@@ -18,9 +18,8 @@ export const getTrendingDestinations = async (): Promise<
   return response.data;
 };
 
-export const getVisitedHotels = async (
-  userId: number,
-): Promise<IRecentlyVisitedHotelResponse[]> => {
+export const getVisitedHotels = async () // userId: number,
+: Promise<IRecentlyVisitedHotelResponse[]> => {
   const response = await Axios.get(`${endpoint}/users/${1}/recent-hotels`);
   return response.data;
 };
