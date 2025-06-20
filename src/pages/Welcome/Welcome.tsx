@@ -1,46 +1,47 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, SxProps, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { whiteLogo, welcome } from "@travelia/assets"; // adjust as needed
+import { whiteLogo, welcome } from "@travelia/assets";
 import AppButton from "@travelia/components/Button";
+
+const overlaySx: SxProps = {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  height: "100%",
+  width: "100%",
+  bgcolor: "rgba(0, 0, 0, 0.5)",
+  backdropFilter: "blur(3px)",
+};
+
+const heroSx = {
+  height: "100vh",
+  backgroundImage: `url(${welcome})`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  position: "relative",
+  color: "white",
+};
+
+const contentSx = {
+  position: "relative",
+  zIndex: 1,
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  textAlign: "center",
+  px: 3,
+};
 
 const Welcome = () => {
   const navigate = useNavigate();
 
   return (
-    <Box
-      sx={{
-        height: "100vh",
-        backgroundImage: `url(${welcome})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        position: "relative",
-        color: "white",
-      }}
-    >
-      <Box
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          height: "100%",
-          width: "100%",
-          bgcolor: "rgba(0, 0, 0, 0.5)",
-        }}
-      />
+    <Box sx={heroSx}>
+      <Box sx={overlaySx} />
 
-      <Box
-        sx={{
-          position: "relative",
-          zIndex: 1,
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          px: 3,
-        }}
-      >
+      <Box sx={contentSx}>
         <Box sx={{ width: 180, mb: 4 }}>
           <img src={whiteLogo} alt="Travelia Logo" width="100%" />
         </Box>
