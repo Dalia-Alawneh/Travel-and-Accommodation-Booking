@@ -1,8 +1,12 @@
 import Home from "@travelia/areas/user/pages/Home";
-import Login from "@travelia/areas/user/pages/Login";
+import Login from "@travelia/pages/Login";
+import { TOKEN_KEY } from "@travelia/fixtures";
+import { getFromLocalStorage } from "@travelia/utils";
 import { Route, Routes } from "react-router";
 
 const AppRouter = () => {
+  const isAuthenticated: string | null = getFromLocalStorage(TOKEN_KEY);
+
   return (
     <Routes>
       <Route path="/">

@@ -8,7 +8,7 @@ import {
 import AppForm from "@travelia/components/Form";
 import AppTextField from "@travelia/components/Inputs/TextField/TextField";
 import { LoginFormValues } from "@travelia/types";
-import { loginSchema } from "../../schemas/login";
+import { loginSchema } from "../../areas/user/schemas/login";
 import AppButton from "@travelia/components/Button";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
@@ -16,7 +16,7 @@ import { loginBg, logo } from "@travelia/assets";
 import { login } from "@travelia/api/endpoints/auth";
 import { useMutation } from "@tanstack/react-query";
 import { saveToLocalStorage } from "@travelia/utils/localstorage";
-import { TOKEN_KEY } from "@travelia/fixtures";
+import { TOKEN_KEY, USER } from "@travelia/fixtures";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 
@@ -31,7 +31,13 @@ const Login = () => {
   const { mutate: loginMutate, isPending } = useMutation({
     mutationFn: login,
     onSuccess: (res) => {
+      const user = {
+        authentication: res.authentication,
+        userType: res.userType,
+      };
+
       saveToLocalStorage(TOKEN_KEY, res.authentication);
+      saveToLocalStorage(USER, user);
       toast.success("Login succeed, Navigating to Home page...");
       setTimeout(() => navigate("/"), 1000);
     },

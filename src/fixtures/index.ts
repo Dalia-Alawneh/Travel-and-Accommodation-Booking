@@ -47,3 +47,4 @@ export const children: SelectItem[] = [
 ];
 
 export const TOKEN_KEY = "authentication";
+export const USER = "user";
