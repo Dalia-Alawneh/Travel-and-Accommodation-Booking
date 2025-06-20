@@ -67,6 +67,7 @@ export const handleResponseError = (error: AxiosError) => {
         serverMessage || "An error occurred on the server.",
       );
       toast.error("Server error. Please try again later.");
+      window.location.href = "/500";
       break;
 
     default:
