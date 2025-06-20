@@ -40,11 +40,11 @@ const Login = () => {
       dispatch({ type: UserActions.SET_USER, payload: user });
       saveToLocalStorage(TOKEN_KEY, res.authentication);
       saveToLocalStorage(USER, user);
+      setTimeout(() => {
+        if (user.userType === UserType.User) navigate("/user");
+        else if (user.userType === UserType.Admin) navigate("/admin");
+      }, 800);
       toast.success("Login succeed, Navigating to Home page...");
-      if (user.userType === UserType.User)
-        setTimeout(() => navigate("/user"), 1000);
-      else if (user.userType === UserType.Admin)
-        setTimeout(() => navigate("/admin"), 1000);
     },
   });
 
@@ -135,6 +135,7 @@ const Login = () => {
                           mt: 4,
                         }}
                         loading={isPending}
+                        disabled={isPending}
                       >
                         Login
                       </AppButton>
