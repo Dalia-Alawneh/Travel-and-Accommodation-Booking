@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import AppForm from "@travelia/components/Form";
 import AppTextField from "@travelia/components/Inputs/TextField/TextField";
-import { LoginFormValues, UserType } from "@travelia/types";
+import { LoginFormValues, UserActions, UserType } from "@travelia/types";
 import { loginSchema } from "../../areas/user/schemas/login";
 import AppButton from "@travelia/components/Button";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -19,7 +19,7 @@ import { saveToLocalStorage } from "@travelia/utils/localstorage";
 import { TOKEN_KEY, USER } from "@travelia/fixtures";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
-import { useUser } from "@travelia/context";
+import useUser from "@travelia/context/user/useContext";
 
 const initialValues: LoginFormValues = {
   username: "",
@@ -29,7 +29,7 @@ const initialValues: LoginFormValues = {
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const { setUser } = useUser();
+  const { dispatch } = useUser();
   const { mutate: loginMutate, isPending } = useMutation({
     mutationFn: login,
     onSuccess: (res) => {
@@ -37,7 +37,7 @@ const Login = () => {
         authentication: res.authentication,
         userType: res.userType,
       };
-      setUser(user);
+      dispatch({ type: UserActions.SET_USER, payload: user });
       saveToLocalStorage(TOKEN_KEY, res.authentication);
       saveToLocalStorage(USER, user);
       toast.success("Login succeed, Navigating to Home page...");

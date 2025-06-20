@@ -18,10 +18,24 @@ export type LoginFormValues = {
   password: string;
 };
 
+export type User = {
+  authentication: string;
+  userType: UserType;
+};
+
 export enum UserType {
   User = "User",
   Admin = "Admin",
 }
+
+export enum UserActions {
+  SET_USER = "SET_USER",
+  CLEAR_USER = "CLEAR_USER",
+}
+
+export type UserAction =
+  | { type: UserActions.SET_USER; payload: User }
+  | { type: UserActions.CLEAR_USER };
 
 export type RecentlyVisitedHotel = {
   hotelId: number;

@@ -3,7 +3,7 @@ import theme from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import ToasterContainer from "./components/Toaster";
 import AppRouter from "./router";
-import { UserProvider } from "./context";
+import { UserProvider } from "./context/user";
 
 const queryClient = new QueryClient();
 
