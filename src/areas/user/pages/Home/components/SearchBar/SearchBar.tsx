@@ -1,4 +1,4 @@
-import { Box, Grid, Paper, SelectChangeEvent } from "@mui/material";
+import { Box, Grid, SelectChangeEvent } from "@mui/material";
 import AppSelect from "@travelia/components/Inputs/Select/Select";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { adults, children } from "@travelia/fixtures";
@@ -18,18 +18,6 @@ import AppDivider from "@travelia/components/Divider/Divider";
 import { useQuery } from "@tanstack/react-query";
 import { getCities } from "@travelia/api/endpoints/cities";
 import SearchGridItem from "../SearchGridItem";
-
-const paperStyle = {
-  bgcolor: "#fff",
-  position: "absolute",
-  left: "50%",
-  bottom: { xs: -20, sm: -50, md: -20, xl: -60 },
-  transform: "translateX(-50%)",
-  width: { xs: "95%", sm: "90%", md: "80%", lg: "70%" },
-  borderRadius: "12px",
-  p: { xs: 2, sm: 3, md: 4, lg: 5 },
-  boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
-};
 
 const SearchBar = () => {
   const [checkIn, setCheckIn] = useState<string>("");
@@ -80,73 +68,68 @@ const SearchBar = () => {
   };
 
   return (
-    <Paper sx={paperStyle}>
-      <form>
-        <Grid container spacing={3} alignItems="center" justifyContent="center">
-          <SearchGridItem>
-            <AppSelect
-              items={mappedCities}
-              label="Location"
-              item={city ?? mappedCities[0] ?? { value: "", text: "" }}
-              onChange={handleSelectCityChange}
-              icon={<LocationOnIcon sx={{ fontSize: 18, color: "#ddd" }} />}
-            />
-            <AppDivider />
-          </SearchGridItem>
-          <SearchGridItem>
-            <AppDateInput
-              value={checkIn}
-              label="Check In"
-              onChange={handleCheckInDateChange}
-              icon={<CalendarMonth sx={{ fontSize: 18, color: "#ddd" }} />}
-            />
-            <AppDivider />
-          </SearchGridItem>
-          <SearchGridItem>
-            <AppDateInput
-              value={checkOut}
-              label="Check Out"
-              onChange={handleCheckOutDateChange}
-              icon={<CalendarMonth sx={{ fontSize: 18, color: "#ddd" }} />}
-            />
-            <AppDivider />
-          </SearchGridItem>
-          <SearchGridItem showDivider={false}>
-            <PopoverSelect
-              label="Guest"
-              icon={<People sx={{ fontSize: 18, color: "#ddd" }} />}
-              displayValue={`${selectedAdults.value} Adults, ${selectedChild.value} Children`}
-            >
-              <Box px={3}>
-                <AppSelect
-                  items={adults}
-                  label=""
-                  item={selectedAdults}
-                  onChange={handleAdultsChange}
-                  icon={<Person sx={{ fontSize: 18, color: "#ddd" }} />}
-                />
-                <AppDivider orientation="horizontal" />
-                <AppSelect
-                  items={children}
-                  label=""
-                  item={selectedChild}
-                  onChange={handleChildrenChange}
-                  icon={<ChildFriendly sx={{ fontSize: 18, color: "#ddd" }} />}
-                />
-              </Box>
-            </PopoverSelect>
-          </SearchGridItem>
-          <SearchGridItem showDivider={false}>
-            <AppButton
-              sx={{ bgcolor: "#000", color: "#fff", px: "30px", width: "100%" }}
-              type="submit"
-            >
-              <Search sx={{ fontSize: 20, color: "#ddd" }} /> Search
-            </AppButton>
-          </SearchGridItem>
-        </Grid>
-      </form>
-    </Paper>
+    <form>
+      <Grid container spacing={3} alignItems="center" justifyContent="center">
+        <SearchGridItem>
+          <AppSelect
+            items={mappedCities}
+            label="Location"
+            item={city ?? mappedCities[0] ?? { value: "", text: "" }}
+            onChange={handleSelectCityChange}
+            icon={<LocationOnIcon sx={{ fontSize: 18, color: "#ddd" }} />}
+          />
+        </SearchGridItem>
+        <SearchGridItem>
+          <AppDateInput
+            value={checkIn}
+            label="Check In"
+            onChange={handleCheckInDateChange}
+            icon={<CalendarMonth sx={{ fontSize: 18, color: "#ddd" }} />}
+          />
+        </SearchGridItem>
+        <SearchGridItem>
+          <AppDateInput
+            value={checkOut}
+            label="Check Out"
+            onChange={handleCheckOutDateChange}
+            icon={<CalendarMonth sx={{ fontSize: 18, color: "#ddd" }} />}
+          />
+        </SearchGridItem>
+        <SearchGridItem showDivider={false}>
+          <PopoverSelect
+            label="Guest"
+            icon={<People sx={{ fontSize: 18, color: "#ddd" }} />}
+            displayValue={`${selectedAdults.value} Adults, ${selectedChild.value} Children`}
+          >
+            <Box px={3}>
+              <AppSelect
+                items={adults}
+                label=""
+                item={selectedAdults}
+                onChange={handleAdultsChange}
+                icon={<Person sx={{ fontSize: 18, color: "#ddd" }} />}
+              />
+              <AppDivider orientation="horizontal" />
+              <AppSelect
+                items={children}
+                label=""
+                item={selectedChild}
+                onChange={handleChildrenChange}
+                icon={<ChildFriendly sx={{ fontSize: 18, color: "#ddd" }} />}
+              />
+            </Box>
+          </PopoverSelect>
+        </SearchGridItem>
+        <SearchGridItem showDivider={false}>
+          <AppButton
+            sx={{ bgcolor: "#000", color: "#fff", px: "30px", width: "100%" }}
+            type="submit"
+          >
+            <Search sx={{ fontSize: 20, color: "#ddd" }} /> Search
+          </AppButton>
+        </SearchGridItem>
+      </Grid>
+    </form>
   );
 };
 
