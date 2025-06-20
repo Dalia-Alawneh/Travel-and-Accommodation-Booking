@@ -12,7 +12,6 @@ const Home = () => {
     <div>
       <TopBar menuLinks={menuItems} />
       <Header />
-      <Box py={3}></Box>
       <FeaturedDeals />
       <WrappedRecentlyVisited />
       <TrendingDestinations />
