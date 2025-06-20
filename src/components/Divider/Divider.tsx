@@ -1,17 +1,21 @@
 import { Divider } from "@mui/material";
+
 interface IAppDividerProps {
   orientation?: "vertical" | "horizontal";
 }
 
 const AppDivider = ({ orientation = "vertical" }: IAppDividerProps) => {
+  const isVertical = orientation === "vertical";
+
   return (
     <Divider
       orientation={orientation}
       flexItem
       sx={{
         display: { xs: "none", md: "block" },
-        height: "50px",
-        width: "1px",
+        height: isVertical ? "50px" : "1px",
+        width: isVertical ? "1px" : "100%",
+        my: isVertical ? 0 : 1,
       }}
     />
   );

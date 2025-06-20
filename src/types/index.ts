@@ -47,3 +47,8 @@ export type RecentlyVisitedHotel = {
   priceLowerBound: number;
   priceUpperBound: number;
 };
+
+export type City = {
+  id: number;
+  name: string;
+};
