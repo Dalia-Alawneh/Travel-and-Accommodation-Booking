@@ -12,7 +12,7 @@ const AppDivider = ({ orientation = "vertical" }: IAppDividerProps) => {
       orientation={orientation}
       flexItem
       sx={{
-        display: { xs: "none", md: "block" },
+        display: { xs: "none", lg: "block" },
         height: isVertical ? "50px" : "1px",
         width: isVertical ? "1px" : "100%",
         my: isVertical ? 0 : 1,

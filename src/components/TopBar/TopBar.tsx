@@ -71,10 +71,14 @@ export default function TopBar({ menuLinks }: ITopBarProps) {
                   </AppLink>
                 ))}
               </Box>
-              <AppButton onClick={handleLogout} loading={loading}>
+              <AppButton
+                sx={{ display: { xs: "none", sm: "flex" } }}
+                onClick={handleLogout}
+                loading={loading}
+              >
                 <Box
                   sx={{
-                    display: { xs: "none", sm: "flex" },
+                    display: "flex",
                     alignItems: "center",
                     gap: 1,
                   }}

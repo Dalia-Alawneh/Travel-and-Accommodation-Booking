@@ -82,7 +82,7 @@ const SearchBar = () => {
   return (
     <Paper sx={paperStyle}>
       <form>
-        <Grid container spacing={2} alignItems="center" justifyContent="center">
+        <Grid container spacing={3} alignItems="center" justifyContent="center">
           <SearchGridItem>
             <AppSelect
               items={mappedCities}
@@ -111,7 +111,7 @@ const SearchBar = () => {
             />
             <AppDivider />
           </SearchGridItem>
-          <SearchGridItem>
+          <SearchGridItem showDivider={false}>
             <PopoverSelect
               label="Guest"
               icon={<People sx={{ fontSize: 18, color: "#ddd" }} />}
@@ -136,9 +136,9 @@ const SearchBar = () => {
               </Box>
             </PopoverSelect>
           </SearchGridItem>
-          <SearchGridItem>
+          <SearchGridItem showDivider={false}>
             <AppButton
-              sx={{ bgcolor: "#000", color: "#fff", px: "30px" }}
+              sx={{ bgcolor: "#000", color: "#fff", px: "30px", width: "100%" }}
               type="submit"
             >
               <Search sx={{ fontSize: 20, color: "#ddd" }} /> Search
