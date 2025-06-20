@@ -11,18 +11,15 @@ import { LoginFormValues, UserType } from "@travelia/types";
 import { loginSchema } from "../../areas/user/schemas/login";
 import AppButton from "@travelia/components/Button";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { loginBg, logo } from "@travelia/assets";
 import { login } from "@travelia/api/endpoints/auth";
 import { useMutation } from "@tanstack/react-query";
-import {
-  getFromLocalStorage,
-  saveToLocalStorage,
-} from "@travelia/utils/localstorage";
+import { saveToLocalStorage } from "@travelia/utils/localstorage";
 import { TOKEN_KEY, USER } from "@travelia/fixtures";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
-import { IAuthenticateResponse } from "@travelia/api/types/response.dto";
+import { useUser } from "@travelia/context";
 
 const initialValues: LoginFormValues = {
   username: "",
@@ -32,7 +29,7 @@ const initialValues: LoginFormValues = {
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const user = getFromLocalStorage<IAuthenticateResponse>(USER);
+  const { setUser } = useUser();
   const { mutate: loginMutate, isPending } = useMutation({
     mutationFn: login,
     onSuccess: (res) => {
@@ -40,7 +37,7 @@ const Login = () => {
         authentication: res.authentication,
         userType: res.userType,
       };
-
+      setUser(user);
       saveToLocalStorage(TOKEN_KEY, res.authentication);
       saveToLocalStorage(USER, user);
       toast.success("Login succeed, Navigating to Home page...");
@@ -58,20 +55,6 @@ const Login = () => {
   const handleLoginSubmit = async (data: LoginFormValues) => {
     loginMutate(data);
   };
-
-  useEffect(() => {
-    if (user?.authentication) {
-      toast("Already logged in Redirecting...", {
-        icon: "🔐",
-        duration: 3000,
-      });
-      setTimeout(() => {
-        if (user.userType === UserType.Admin) navigate("/admin");
-        else if (user.userType === UserType.User) navigate("/user");
-        else navigate("/unauthorized");
-      }, 3000);
-    }
-  }, [user, navigate]);
 
   return (
     <Box

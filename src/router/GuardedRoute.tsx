@@ -2,6 +2,7 @@ import { Navigate, Outlet } from "react-router";
 interface GuardedRouteProps {
   allowedRoles: string[];
 }
+
 const GuardedRoute = ({ allowedRoles }: GuardedRouteProps) => {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   const isAuthenticated = !!user?.authentication;

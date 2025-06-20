@@ -76,7 +76,7 @@ export default function TopBar({ menuLinks }: ITopBarProps) {
                 }}
               >
                 <AppLink path="login">
-                  <AppButton>Signin</AppButton>
+                  <AppButton>Logout</AppButton>
                 </AppLink>
               </Box>
             </Box>
