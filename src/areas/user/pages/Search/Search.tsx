@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router";
 import PageHero from "../../components/PageHero";
 import SearchBar from "../../components/SearchBar";
 import withContainer from "@travelia/HOC/withContainer";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import {
   Box,
   FormGroup,
@@ -15,20 +15,24 @@ import {
 } from "@mui/material";
 import AppForm from "@travelia/components/Form";
 import { useQuery } from "@tanstack/react-query";
-import { getAmenities } from "@travelia/api/endpoints/search";
+import { getAmenities } from "@travelia/api/endpoints/amenities";
 import AppCheckbox from "@travelia/components/Inputs/Checbox";
+import { getFilteredHotels } from "@travelia/api/endpoints/search";
 
 const SearchPage = () => {
   const [params] = useSearchParams();
-  const theme = useTheme();
-  const searchValues = {
-    checkIn: params.get("checkIn") ?? "",
-    checkOut: params.get("checkOut") ?? "",
+  const [searchValues, setSearchValues] = useState({
+    checkInDate: params.get("checkIn") ?? "",
+    checkOutDate: params.get("checkOut") ?? "",
     city: params.get("city") ?? "",
     adults: Number(params.get("adults") ?? "1"),
     children: Number(params.get("children") ?? "0"),
-    rooms: Number(params.get("rooms") ?? "1"),
-  };
+    numberOfRooms: Number(params.get("rooms") ?? "1"),
+    budget: 50,
+    starRate: 2,
+    amenities: [],
+  });
+  const theme = useTheme();
 
   const handleSearch = (values) => {
     console.log("Send search request with:", values);
@@ -38,6 +42,13 @@ const SearchPage = () => {
     queryKey: ["amenities"],
     queryFn: getAmenities,
   });
+  const { data: filteredHotels = [] } = useQuery({
+    queryKey: ["filteredHotels"],
+    queryFn: () => getFilteredHotels(searchValues),
+  });
+
+  console.log({ filteredHotels });
+
   const Main = withContainer(({ children }: { children: ReactNode }) => {
     return <main>{children}</main>;
   });
@@ -57,7 +68,7 @@ const SearchPage = () => {
                 <AppForm
                   initialValues={{
                     budget: 50,
-                    starRate: 0,
+                    starRate: 2,
                     amenities: [],
                   }}
                   onSubmit={() => {}}
@@ -110,7 +121,12 @@ const SearchPage = () => {
                         >
                           Star rating
                         </InputLabel>
-                        <Rating />
+                        <Rating
+                          value={formik.values.starRate}
+                          onChange={(_, value) =>
+                            formik.setFieldValue("starRate", value)
+                          }
+                        />
                       </Box>
                     </Box>
                   )}

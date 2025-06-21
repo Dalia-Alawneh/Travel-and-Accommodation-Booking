@@ -1,9 +1,13 @@
 import Axios from "@travelia/api/config";
-import { IAmenitiesResponse } from "@travelia/api/types/response.dto";
+import { IRequestSearchParams } from "@travelia/api/types/request.dto";
+import { ISearchHotelsResponse } from "@travelia/api/types/response.dto";
 
-const endpoint = "search-results/amenities";
+const endpoint = "/home/search";
 
-export const getAmenities = async (): Promise<IAmenitiesResponse[]> => {
-  const response = await Axios.get(`${endpoint}`);
+export const getFilteredHotels = async (
+  params: IRequestSearchParams,
+): Promise<ISearchHotelsResponse[]> => {
+  const config = { params };
+  const response = await Axios.get(`${endpoint}`, config);
   return response.data;
 };
