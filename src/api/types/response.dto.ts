@@ -46,6 +46,11 @@ export interface IAmenitiesResponse {
   name: string;
   description: string;
 }
+export interface IAmenitySearchResponse {
+  id: number;
+  name: string;
+  description: string;
+}
 
 export interface ISearchAmenitiesResponse extends IAmenitiesResponse {
   id: number;
@@ -61,5 +66,5 @@ export interface ISearchHotelsResponse {
   cityName: string;
   roomPhotoUrl: string;
   discount: number;
-  amenities: IAmenitiesResponse[];
+  amenities: IAmenitySearchResponse[];
 }

@@ -21,16 +21,6 @@ import { getAmenities } from "@travelia/api/endpoints/amenities";
 import AppCheckbox from "@travelia/components/Inputs/Checbox";
 import { getFilteredHotels } from "@travelia/api/endpoints/search";
 import { SearchValues } from "@travelia/types";
-import AppDivider from "@travelia/components/Divider/Divider";
-import {
-  Bed,
-  LocationCity,
-  LocationOn,
-  Room,
-  RoomOutlined,
-} from "@mui/icons-material";
-import AppButton from "@travelia/components/Button";
-import { bookButtonStyle } from "@travelia/styles";
 import HotelCard from "./components/HotelCard";
 
 const SearchPage = () => {
