@@ -42,3 +42,7 @@ export interface ICitiesResponse {
   name: string;
   description: string;
 }
+export interface IAmenitiesResponse {
+  name: string;
+  description: string;
+}
