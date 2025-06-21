@@ -55,25 +55,42 @@ const SearchPage = () => {
             <Box sx={{ p: 3, boxShadow: theme.customShadows.light }}>
               <aside>
                 <AppForm
-                  initialValues={{}}
+                  initialValues={{
+                    budget: 50,
+                    starRate: 0,
+                    amenities: [],
+                  }}
                   onSubmit={() => {}}
                   render={(formik) => (
                     <Box display="flex" flexDirection="column" gap={2}>
                       <Box>
-                        <InputLabel
-                          sx={{ fontWeight: 600, fontSize: 14, mb: 1 }}
+                        <Box
+                          display={"flex"}
+                          justifyContent="space-between"
+                          alignItems="center"
                         >
-                          Budget per night
-                        </InputLabel>
+                          <InputLabel sx={{ fontWeight: 600, fontSize: 14 }}>
+                            Budget per night
+                          </InputLabel>
+                          <Typography
+                            variant="body2"
+                            mt={1}
+                            fontWeight={700}
+                            color="custom.orange"
+                          >
+                            {formik.values.budget}$
+                          </Typography>
+                        </Box>
                         <Slider
                           getAriaLabel={() => "Budget"}
-                          value={4}
-                          onChange={() => {}}
+                          value={formik.values.budget}
+                          onChange={(_, value) =>
+                            formik.setFieldValue("budget", value)
+                          }
                           valueLabelDisplay="auto"
+                          min={0}
+                          max={500}
                         />
-                        <Typography variant="body2" mt={1}>
-                          {4}$
-                        </Typography>
                       </Box>
                       <Box>
                         <InputLabel
