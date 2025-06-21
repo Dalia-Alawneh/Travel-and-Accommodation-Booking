@@ -1,5 +1,5 @@
 import { Paper } from "@mui/material";
-import SearchBar from "../SearchBar";
+import SearchBar from "../../../../components/SearchBar";
 
 const paperStyle = {
   bgcolor: "#fff",
