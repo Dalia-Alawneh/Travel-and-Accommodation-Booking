@@ -1,7 +1,7 @@
 import { Box, Grid, SelectChangeEvent } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { useState } from "react";
-import { City, SelectItem } from "@travelia/types";
+import { City, SelectItem, UrlSearchParams } from "@travelia/types";
 import AppDateInput from "@travelia/components/Inputs/DatePicker";
 import { CalendarMonth, People, Search } from "@mui/icons-material";
 import AppButton from "@travelia/components/Button";
@@ -12,7 +12,10 @@ import PopoverSelect from "@travelia/components/Inputs/PopoverSelect";
 import AppSelect from "@travelia/components/Inputs/Select/Select";
 import Counter from "../Counter/Counter";
 
-const SearchBar = () => {
+interface ISearchBarProps {
+  onSearch: (params: UrlSearchParams) => void;
+}
+const SearchBar = ({ onSearch }: ISearchBarProps) => {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [city, setCity] = useState<SelectItem>();
@@ -34,6 +37,17 @@ const SearchBar = () => {
   const handleSelectCityChange = (e: SelectChangeEvent) => {
     const selected = mappedCities.find((c) => c.value === e.target.value);
     if (selected) setCity(selected);
+  };
+
+  const handleOnSearch = () => {
+    onSearch({
+      checkIn,
+      checkOut,
+      adults,
+      children,
+      city: city?.text || "",
+      rooms,
+    });
   };
 
   return (
@@ -92,7 +106,7 @@ const SearchBar = () => {
         >
           <AppButton
             sx={{ bgcolor: "#000", color: "#fff", px: "30px", width: "100%" }}
-            type="submit"
+            onClick={handleOnSearch}
           >
             <Search sx={{ fontSize: 20, color: "#ddd" }} /> Search
           </AppButton>

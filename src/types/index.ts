@@ -52,3 +52,12 @@ export type City = {
   id: number;
   name: string;
 };
+
+export interface UrlSearchParams {
+  checkIn: string;
+  checkOut: string;
+  city: string;
+  adults: number;
+  children: number;
+  rooms: number;
+}
