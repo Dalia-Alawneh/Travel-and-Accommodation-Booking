@@ -7,6 +7,7 @@ import { bookButtonStyle } from "@travelia/styles";
 interface IHotelCard {
   hotel: ISearchedHotel;
 }
+
 const discountBadgeSx = {
   position: "absolute",
   color: "white",
@@ -18,6 +19,7 @@ const discountBadgeSx = {
   transform: "rotate(-45deg)",
   boxShadow: "customShadows.light",
 };
+
 const HotelCard = ({ hotel }: IHotelCard) => {
   const theme = useTheme();
 
@@ -90,6 +92,28 @@ const HotelCard = ({ hotel }: IHotelCard) => {
               <Typography variant="body1" color="primary" fontWeight={700}>
                 ${hotel.roomPrice.toFixed(2)} / Night
               </Typography>
+
+              {hotel.amenities.length > 0 && (
+                <Box mt={2}>
+                  <Typography variant="subtitle2" fontWeight={600} mb={1}>
+                    Amenities
+                  </Typography>
+                  <Box sx={{ display: "flex", gap: 2 }}>
+                    {hotel.amenities.map((amenity) => (
+                      <Box
+                        key={amenity.id}
+                        bgcolor="success.light"
+                        color="white"
+                        px={1}
+                        py={0.2}
+                        sx={{ fontSize: 12, borderRadius: 999 }}
+                      >
+                        {amenity.name}
+                      </Box>
+                    ))}
+                  </Box>
+                </Box>
+              )}
             </Box>
             <AppButton
               sx={{
@@ -111,40 +135,3 @@ const HotelCard = ({ hotel }: IHotelCard) => {
 };
 
 export default HotelCard;
-
-/**
- 
- <Box
-                    sx={{
-                      p: 5,
-                      boxShadow: theme.customShadows.light,
-                      borderRadius: 1
-                    }}
-                  >
-                    <Grid container spacing={2} justifyContent="space-between">
-                      <Grid size={{ xs: 12, md: 8 }} borderRight={1} borderColor="custom.darkSalver">
-                        <Typography variant="h3" mb={4}>
-                          {hotel.hotelName}
-                          {hotel.discount}
-                          {hotel.roomPrice}
-                          {hotel.starRating}
-                           {hotel.amenities} 
-                        </Typography>
-                        <img src={hotel.roomPhotoUrl} height={400} width={400} style={{ objectFit: 'cover' }} />
-                      </Grid>
-                      <Grid size={{ xs: 12, md: 4 }} mt={2}>
-                        <Typography variant="h5" display="flex" alignItems="center" gap={1}>
-                          <LocationOn sx={{ color: "custom.orange", fontSize: 18 }} /> {hotel.cityName}
-                        </Typography>
-                        <Typography variant="h5" display="flex" alignItems="center" gap={1} mb={4}>
-                          <Bed sx={{ color: "custom.orange", fontSize: 18 }} /> {hotel.roomType}
-                        </Typography>
-                        <AppButton
-                          sx={{ ...bookButtonStyle, width: '100%', bgcolor: 'custom.beige', py: 2 }}
-                        >Book Now
-                        </AppButton>
-                      </Grid>
-                    </Grid>
-                  </Box>
-                
- */
