@@ -4,7 +4,8 @@ const theme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#000000",
+      main: "#4196d7",
+      dark: "#444444",
     },
     secondary: {
       main: "#FEFA17",
@@ -26,8 +27,15 @@ const theme = createTheme({
       darkSalver: "#b6b6b6",
       skyBlue: "#4196d7",
       overlay: "#ffffff1a",
+      lightBlue: "#a6dbfc4a",
     },
   },
+
+  customShadows: {
+    light: "0 0 8px 2px #eee",
+    heavy: "0px 8px 20px rgba(0,0,0,0.2)",
+  },
+
   typography: {
     fontFamily: '"Manrope", sans-serif',
     h1: {

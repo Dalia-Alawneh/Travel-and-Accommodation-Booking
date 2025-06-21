@@ -10,6 +10,7 @@ declare module "@mui/material/styles" {
       darkSalver: string;
       skyBlue: string;
       overlay: string;
+      lightBlue: string;
     };
   }
   interface PaletteOptions {
@@ -21,6 +22,19 @@ declare module "@mui/material/styles" {
       darkSalver: string;
       skyBlue: string;
       overlay: string;
+      lightBlue: string;
+    };
+  }
+  interface Theme {
+    customShadows: {
+      light: string;
+      heavy: string;
+    };
+  }
+  interface ThemeOptions {
+    customShadows?: {
+      light?: string;
+      heavy?: string;
     };
   }
 }

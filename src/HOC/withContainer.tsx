@@ -1,12 +1,14 @@
 import { Container } from "@mui/material";
-import { ComponentType, FC } from "react";
+import { ComponentType } from "react";
 
-const withContainer =
-  <P extends JSX.IntrinsicAttributes>(Component: ComponentType<P>): FC<P> =>
-  (props) => (
+const withContainer = <P extends object>(
+  Component: ComponentType<P>,
+): ComponentType<P> => {
+  return (props: P) => (
     <Container maxWidth="lg" sx={{ my: 10 }}>
       <Component {...props} />
     </Container>
   );
+};
 
 export default withContainer;
