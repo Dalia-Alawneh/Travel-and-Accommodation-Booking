@@ -1,6 +1,6 @@
 import { Box, Grid, SelectChangeEvent } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { City, SelectItem, UrlSearchParams } from "@travelia/types";
 import AppDateInput from "@travelia/components/Inputs/DatePicker";
 import { CalendarMonth, People, Search } from "@mui/icons-material";
@@ -14,25 +14,36 @@ import Counter from "../Counter/Counter";
 
 interface ISearchBarProps {
   onSearch: (params: UrlSearchParams) => void;
+  initialValues?: UrlSearchParams;
 }
-const SearchBar = ({ onSearch }: ISearchBarProps) => {
-  const [checkIn, setCheckIn] = useState("");
-  const [checkOut, setCheckOut] = useState("");
+const SearchBar = ({ onSearch, initialValues }: ISearchBarProps) => {
+  const [checkIn, setCheckIn] = useState(initialValues?.checkIn ?? "");
+  const [checkOut, setCheckOut] = useState(initialValues?.checkOut ?? "");
   const [city, setCity] = useState<SelectItem>();
-  const [adults, setAdults] = useState(1);
-  const [children, setChildren] = useState(0);
-  const [rooms, setRooms] = useState(1);
+  const [adults, setAdults] = useState(initialValues?.adults ?? 1);
+  const [children, setChildren] = useState(initialValues?.children ?? 0);
+  const [rooms, setRooms] = useState(initialValues?.rooms ?? 1);
 
   const { data: citiesData } = useQuery({
     queryKey: ["cities"],
     queryFn: getCities,
   });
 
-  const mappedCities: SelectItem[] =
-    citiesData?.map((city: City) => ({
-      text: city.name,
-      value: city.id,
-    })) || [];
+  const mappedCities: SelectItem[] = useMemo(() => {
+    return (
+      citiesData?.map((city: City) => ({
+        text: city.name,
+        value: city.id,
+      })) || []
+    );
+  }, [citiesData]);
+
+  useEffect(() => {
+    if (initialValues?.city && mappedCities.length > 0) {
+      const foundCity = mappedCities.find((c) => c.text === initialValues.city);
+      if (foundCity) setCity(foundCity);
+    }
+  }, [initialValues?.city, mappedCities]);
 
   const handleSelectCityChange = (e: SelectChangeEvent) => {
     const selected = mappedCities.find((c) => c.value === e.target.value);
