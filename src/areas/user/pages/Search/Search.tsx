@@ -5,19 +5,18 @@ import withContainer from "@travelia/HOC/withContainer";
 import { ReactNode } from "react";
 import {
   Box,
-  Checkbox,
-  FormControlLabel,
   FormGroup,
   Grid,
-  IconButton,
   InputLabel,
   Rating,
   Slider,
-  Tooltip,
   Typography,
   useTheme,
 } from "@mui/material";
 import AppForm from "@travelia/components/Form";
+import { useQuery } from "@tanstack/react-query";
+import { getAmenities } from "@travelia/api/endpoints/search";
+import AppCheckbox from "@travelia/components/Inputs/Checbox";
 
 const SearchPage = () => {
   const [params] = useSearchParams();
@@ -35,6 +34,10 @@ const SearchPage = () => {
     console.log("Send search request with:", values);
   };
 
+  const { data: amenities = [] } = useQuery({
+    queryKey: ["amenities"],
+    queryFn: getAmenities,
+  });
   const Main = withContainer(({ children }: { children: ReactNode }) => {
     return <main>{children}</main>;
   });
@@ -72,7 +75,18 @@ const SearchPage = () => {
                           {4}$
                         </Typography>
                       </Box>
-
+                      <Box>
+                        <InputLabel
+                          sx={{ fontWeight: 600, fontSize: 14, mb: 1 }}
+                        >
+                          Amenities
+                        </InputLabel>
+                        <FormGroup>
+                          {amenities.map((amenity) => (
+                            <AppCheckbox hasToolTip={true} option={amenity} />
+                          ))}
+                        </FormGroup>
+                      </Box>
                       <Box>
                         <InputLabel
                           sx={{ fontWeight: 600, fontSize: 14, mb: 1 }}

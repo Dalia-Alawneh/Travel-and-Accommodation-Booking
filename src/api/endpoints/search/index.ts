@@ -4,6 +4,6 @@ import { IAmenitiesResponse } from "@travelia/api/types/response.dto";
 const endpoint = "search-results/amenities";
 
 export const getAmenities = async (): Promise<IAmenitiesResponse[]> => {
-  const response = await Axios.get(`${endpoint}/destinations/trending`);
+  const response = await Axios.get(`${endpoint}`);
   return response.data;
 };
