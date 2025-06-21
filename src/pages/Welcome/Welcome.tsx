@@ -1,17 +1,8 @@
-import { Box, SxProps, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { whiteLogo, welcome } from "@travelia/assets";
 import AppButton from "@travelia/components/Button";
-
-const overlaySx: SxProps = {
-  position: "absolute",
-  top: 0,
-  left: 0,
-  height: "100%",
-  width: "100%",
-  bgcolor: "rgba(0, 0, 0, 0.5)",
-  backdropFilter: "blur(3px)",
-};
+import { overlaySx } from "@travelia/styles";
 
 const heroSx = {
   height: "100vh",
