@@ -53,16 +53,20 @@ export type City = {
   name: string;
 };
 
-export interface UrlSearchParams {
-  checkIn: string;
-  checkOut: string;
-  city: string;
-  adults: number;
-  children: number;
-  rooms: number;
-}
-
 export type CheckboxItem = {
   name: string;
   description: string;
 };
+
+export interface SearchValues {
+  checkInDate: string;
+  checkOutDate: string;
+  city: string;
+  adults: number;
+  children: number;
+  numberOfRooms: number;
+  starRate: number;
+  sort: string;
+  budget: number;
+  amenities: string[];
+}

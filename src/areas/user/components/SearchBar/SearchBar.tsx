@@ -1,7 +1,7 @@
 import { Box, Grid, SelectChangeEvent } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { useEffect, useMemo, useState } from "react";
-import { City, SelectItem, UrlSearchParams } from "@travelia/types";
+import { City, SearchValues, SelectItem } from "@travelia/types";
 import AppDateInput from "@travelia/components/Inputs/DatePicker";
 import { CalendarMonth, People, Search } from "@mui/icons-material";
 import AppButton from "@travelia/components/Button";
@@ -13,16 +13,16 @@ import AppSelect from "@travelia/components/Inputs/Select/Select";
 import Counter from "../Counter/Counter";
 
 interface ISearchBarProps {
-  onSearch: (params: UrlSearchParams) => void;
-  initialValues?: UrlSearchParams;
+  onSearch: (params: Partial<SearchValues>) => void;
+  initialValues?: Partial<SearchValues>;
 }
 const SearchBar = ({ onSearch, initialValues }: ISearchBarProps) => {
-  const [checkIn, setCheckIn] = useState(initialValues?.checkIn ?? "");
-  const [checkOut, setCheckOut] = useState(initialValues?.checkOut ?? "");
+  const [checkIn, setCheckIn] = useState(initialValues?.checkInDate ?? "");
+  const [checkOut, setCheckOut] = useState(initialValues?.checkOutDate ?? "");
   const [city, setCity] = useState<SelectItem>();
   const [adults, setAdults] = useState(initialValues?.adults ?? 1);
   const [children, setChildren] = useState(initialValues?.children ?? 0);
-  const [rooms, setRooms] = useState(initialValues?.rooms ?? 1);
+  const [rooms, setRooms] = useState(initialValues?.numberOfRooms ?? 1);
 
   const { data: citiesData } = useQuery({
     queryKey: ["cities"],
@@ -52,12 +52,12 @@ const SearchBar = ({ onSearch, initialValues }: ISearchBarProps) => {
 
   const handleOnSearch = () => {
     onSearch({
-      checkIn,
-      checkOut,
+      checkInDate: checkIn,
+      checkOutDate: checkOut,
       adults,
       children,
       city: city?.text || "",
-      rooms,
+      numberOfRooms: rooms,
     });
   };
 

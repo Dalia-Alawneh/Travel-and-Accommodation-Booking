@@ -18,10 +18,11 @@ import { useQuery } from "@tanstack/react-query";
 import { getAmenities } from "@travelia/api/endpoints/amenities";
 import AppCheckbox from "@travelia/components/Inputs/Checbox";
 import { getFilteredHotels } from "@travelia/api/endpoints/search";
+import { SearchValues } from "@travelia/types";
 
 const SearchPage = () => {
   const [params] = useSearchParams();
-  const [searchValues, setSearchValues] = useState({
+  const [searchValues, setSearchValues] = useState<SearchValues>({
     checkInDate: params.get("checkIn") ?? "",
     checkOutDate: params.get("checkOut") ?? "",
     city: params.get("city") ?? "",
@@ -31,6 +32,7 @@ const SearchPage = () => {
     budget: 50,
     starRate: 2,
     amenities: [],
+    sort: "",
   });
   const theme = useTheme();
 
