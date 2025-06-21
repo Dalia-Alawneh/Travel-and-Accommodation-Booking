@@ -1,7 +1,12 @@
 import { Box, Grid, SelectChangeEvent } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { useEffect, useMemo, useState } from "react";
-import { City, SearchValues, SelectItem } from "@travelia/types";
+import {
+  City,
+  SearchValues,
+  SelectItem,
+  UrlSearchParams,
+} from "@travelia/types";
 import AppDateInput from "@travelia/components/Inputs/DatePicker";
 import { CalendarMonth, People, Search } from "@mui/icons-material";
 import AppButton from "@travelia/components/Button";
@@ -13,10 +18,15 @@ import AppSelect from "@travelia/components/Inputs/Select/Select";
 import Counter from "../Counter/Counter";
 
 interface ISearchBarProps {
-  onSearch: (params: Partial<SearchValues>) => void;
+  onSearch: (params: UrlSearchParams) => void;
   initialValues?: Partial<SearchValues>;
+  hasSearchBtn?: boolean;
 }
-const SearchBar = ({ onSearch, initialValues }: ISearchBarProps) => {
+const SearchBar = ({
+  onSearch,
+  initialValues,
+  hasSearchBtn = true,
+}: ISearchBarProps) => {
   const [checkIn, setCheckIn] = useState(initialValues?.checkInDate ?? "");
   const [checkOut, setCheckOut] = useState(initialValues?.checkOutDate ?? "");
   const [city, setCity] = useState<SelectItem>();
@@ -111,17 +121,19 @@ const SearchBar = ({ onSearch, initialValues }: ISearchBarProps) => {
             </Box>
           </PopoverSelect>
         </Grid>
-        <Grid
-          size={{ xs: 12, sm: 6, lg: 1.8 }}
-          sx={{ display: "flex", gap: 1 }}
-        >
-          <AppButton
-            sx={{ bgcolor: "#000", color: "#fff", px: "30px", width: "100%" }}
-            onClick={handleOnSearch}
+        {hasSearchBtn && (
+          <Grid
+            size={{ xs: 12, sm: 6, lg: 1.8 }}
+            sx={{ display: "flex", gap: 1 }}
           >
-            <Search sx={{ fontSize: 20, color: "#ddd" }} /> Search
-          </AppButton>
-        </Grid>
+            <AppButton
+              sx={{ bgcolor: "#000", color: "#fff", px: "30px", width: "100%" }}
+              onClick={handleOnSearch}
+            >
+              <Search sx={{ fontSize: 20, color: "#ddd" }} /> Search
+            </AppButton>
+          </Grid>
+        )}
       </Grid>
     </form>
   );

@@ -1,24 +1,42 @@
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import { useFormikContext } from "formik";
 import {
-  Box,
-  FormControlLabel,
-  Typography,
-  Tooltip,
-  IconButton,
   Checkbox,
+  FormControlLabel,
+  Tooltip,
+  Typography,
+  Box,
+  IconButton,
 } from "@mui/material";
-import { CheckboxItem } from "@travelia/types";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import { IAmenity } from "@travelia/types";
 
 interface ICheckboxItem {
-  option: CheckboxItem;
-  hasToolTip: boolean;
+  option: IAmenity;
+  hasToolTip?: boolean;
 }
 
 const AppCheckbox = ({ option, hasToolTip }: ICheckboxItem) => {
+  const { setFieldValue, values } = useFormikContext<{ amenities: string[] }>();
+
+  const handleChange = () => {
+    const currentValues = values.amenities || [];
+    const alreadyChecked = currentValues.includes(option.name);
+
+    const updatedValues = alreadyChecked
+      ? currentValues.filter((val) => val !== option.name)
+      : [...currentValues, option.name];
+
+    setFieldValue("amenities", updatedValues);
+  };
+
   return (
     <FormControlLabel
-      key={option.name}
-      control={<Checkbox value={option.name} />}
+      control={
+        <Checkbox
+          checked={values.amenities.includes(option.name)}
+          onChange={handleChange}
+        />
+      }
       label={
         <Box display="flex" alignItems="center">
           <Typography fontSize={14}>{option.name}</Typography>

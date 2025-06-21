@@ -2,57 +2,83 @@ import { useSearchParams } from "react-router";
 import PageHero from "../../components/PageHero";
 import SearchBar from "../../components/SearchBar";
 import withContainer from "@travelia/HOC/withContainer";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import {
   Box,
-  CardMedia,
-  Divider,
-  FormGroup,
+  FormControl,
   Grid,
   InputLabel,
-  Rating,
-  Slider,
-  Typography,
+  MenuItem,
+  Select,
+  Skeleton,
   useTheme,
 } from "@mui/material";
-import AppForm from "@travelia/components/Form";
 import { useQuery } from "@tanstack/react-query";
 import { getAmenities } from "@travelia/api/endpoints/amenities";
-import AppCheckbox from "@travelia/components/Inputs/Checbox";
 import { getFilteredHotels } from "@travelia/api/endpoints/search";
-import { SearchValues } from "@travelia/types";
+import { HotelFilterValues, IAmenity, SearchValues } from "@travelia/types";
 import HotelCard from "./components/HotelCard";
+import { useSearchNavigation } from "@travelia/hooks/useSearchNavigation";
+import HotelFilterForm from "./components/HotelFilterForm/HotelFilterForm";
 
 const SearchPage = () => {
   const [params] = useSearchParams();
+  const { onSearch } = useSearchNavigation("");
+
   const [searchValues, setSearchValues] = useState<SearchValues>({
-    checkInDate: params.get("checkIn") ?? "",
-    checkOutDate: params.get("checkOut") ?? "",
+    checkInDate: params.get("checkInDate") ?? "",
+    checkOutDate: params.get("checkOutDate") ?? "",
     city: params.get("city") ?? "",
     adults: Number(params.get("adults") ?? "1"),
     children: Number(params.get("children") ?? "0"),
-    numberOfRooms: Number(params.get("rooms") ?? "1"),
-    budget: 50,
+    numberOfRooms: Number(params.get("numberOfRooms") ?? "1"),
+    budget: 100,
     starRate: 2,
     amenities: [],
     sort: "",
   });
   const theme = useTheme();
 
-  const handleSearch = (values) => {
-    console.log("Send search request with:", values);
-  };
-
-  const { data: amenities = [] } = useQuery({
+  const { data: amenitiesData = [] } = useQuery({
     queryKey: ["amenities"],
     queryFn: getAmenities,
   });
-  const { data: filteredHotels = [] } = useQuery({
-    queryKey: ["filteredHotels"],
+
+  const { data: filteredHotels = [], isLoading: isSearchLoading } = useQuery({
+    queryKey: ["filteredHotels", searchValues],
     queryFn: () => getFilteredHotels(searchValues),
   });
 
-  console.log({ filteredHotels });
+  useEffect(() => {
+    const updatedValues: SearchValues = {
+      checkInDate: params.get("checkInDate") ?? "",
+      checkOutDate: params.get("checkOutDate") ?? "",
+      city: params.get("city") ?? "",
+      adults: Number(params.get("adults") ?? "1"),
+      children: Number(params.get("children") ?? "0"),
+      numberOfRooms: Number(params.get("numberOfRooms") ?? "1"),
+      budget: searchValues.budget,
+      starRate: searchValues.starRate,
+      amenities: searchValues.amenities,
+      sort: searchValues.sort,
+    };
+    setSearchValues(updatedValues);
+  }, [params]);
+
+  const onFormSubmit = (values: HotelFilterValues) => {
+    const amenitiesAsStrings = values.amenities.map((a) => a.name);
+
+    setSearchValues((prev) => ({
+      ...prev,
+      ...values,
+      amenities: amenitiesAsStrings,
+    }));
+  };
+  const amenities: IAmenity[] = amenitiesData.map((a, index) => ({
+    id: index,
+    name: a.name,
+    description: a.description,
+  }));
 
   const Main = withContainer(({ children }: { children: ReactNode }) => {
     return <main>{children}</main>;
@@ -62,7 +88,7 @@ const SearchPage = () => {
       <PageHero title="Search" />
       <Box sx={{ p: 3, mb: 5, boxShadow: theme.customShadows.light }}>
         <Box maxWidth="85%" m="auto">
-          <SearchBar onSearch={handleSearch} initialValues={searchValues} />
+          <SearchBar onSearch={onSearch} initialValues={searchValues} />
         </Box>
       </Box>
       <Main>
@@ -77,83 +103,41 @@ const SearchPage = () => {
               }}
             >
               <aside>
-                <AppForm
+                <HotelFilterForm
+                  amenities={amenities}
                   initialValues={{
-                    budget: 50,
-                    starRate: 2,
-                    amenities: [],
+                    amenities: amenities.filter((a) =>
+                      searchValues.amenities.includes(a.name),
+                    ),
+                    budget: searchValues.budget,
+                    starRate: searchValues.starRate,
                   }}
-                  onSubmit={() => {}}
-                  render={(formik) => (
-                    <Box display="flex" flexDirection="column" gap={2}>
-                      <Box>
-                        <Box
-                          display={"flex"}
-                          justifyContent="space-between"
-                          alignItems="center"
-                        >
-                          <InputLabel sx={{ fontWeight: 600, fontSize: 14 }}>
-                            Budget per night
-                          </InputLabel>
-                          <Typography
-                            variant="body2"
-                            mt={1}
-                            fontWeight={700}
-                            color="custom.orange"
-                          >
-                            {formik.values.budget}$
-                          </Typography>
-                        </Box>
-                        <Slider
-                          getAriaLabel={() => "Budget"}
-                          value={formik.values.budget}
-                          onChange={(_, value) =>
-                            formik.setFieldValue("budget", value)
-                          }
-                          valueLabelDisplay="auto"
-                          min={0}
-                          max={500}
-                        />
-                      </Box>
-                      <Box>
-                        <InputLabel
-                          sx={{ fontWeight: 600, fontSize: 14, mb: 1 }}
-                        >
-                          Amenities
-                        </InputLabel>
-                        <FormGroup>
-                          {amenities.map((amenity) => (
-                            <AppCheckbox hasToolTip={true} option={amenity} />
-                          ))}
-                        </FormGroup>
-                      </Box>
-                      <Box>
-                        <InputLabel
-                          sx={{ fontWeight: 600, fontSize: 14, mb: 1 }}
-                        >
-                          Star rating
-                        </InputLabel>
-                        <Rating
-                          value={formik.values.starRate}
-                          onChange={(_, value) =>
-                            formik.setFieldValue("starRate", value)
-                          }
-                        />
-                      </Box>
-                    </Box>
-                  )}
+                  onSubmit={onFormSubmit}
                 />
               </aside>
             </Box>
           </Grid>
           <Grid size={{ xs: 12, md: 6, lg: 8 }}>
-            <Box>
-              {filteredHotels.length !== 0 ? (
-                filteredHotels.map((hotel) => <HotelCard hotel={hotel} />)
-              ) : (
-                <Box>No Data Found</Box>
-              )}
-            </Box>
+            {isSearchLoading ? (
+              <Box display="grid" gap={2}>
+                {[...Array(3)].map((_, i) => (
+                  <Skeleton
+                    key={i}
+                    variant="rectangular"
+                    sx={{ borderRadius: 1 }}
+                    height={500}
+                  />
+                ))}
+              </Box>
+            ) : (
+              <Box>
+                {filteredHotels.length !== 0 ? (
+                  filteredHotels.map((hotel) => <HotelCard hotel={hotel} />)
+                ) : (
+                  <Box>No Data Found</Box>
+                )}
+              </Box>
+            )}
           </Grid>
         </Grid>
       </Main>

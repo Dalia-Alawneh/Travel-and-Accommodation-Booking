@@ -57,6 +57,14 @@ export type CheckboxItem = {
   name: string;
   description: string;
 };
+export interface UrlSearchParams {
+  checkInDate: string;
+  checkOutDate: string;
+  city: string;
+  adults: number;
+  children: number;
+  numberOfRooms: number;
+}
 
 export interface SearchValues {
   checkInDate: string;
@@ -71,7 +79,7 @@ export interface SearchValues {
   amenities: string[];
 }
 
-export interface Amenity {
+export interface IAmenity {
   id: number;
   name: string;
   description: string;
@@ -87,5 +95,11 @@ export interface ISearchedHotel {
   cityName: string;
   roomPhotoUrl: string;
   discount: number;
-  amenities: Amenity[];
+  amenities: IAmenity[];
 }
+
+export type HotelFilterValues = {
+  budget: number;
+  starRate: number;
+  amenities: IAmenity[];
+};

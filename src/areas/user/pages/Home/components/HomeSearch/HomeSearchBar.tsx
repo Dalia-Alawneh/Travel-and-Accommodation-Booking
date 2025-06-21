@@ -1,7 +1,6 @@
 import { Paper } from "@mui/material";
 import SearchBar from "../../../../components/SearchBar";
-import { useNavigate } from "react-router";
-import { UrlSearchParams } from "@travelia/types";
+import { useSearchNavigation } from "@travelia/hooks/useSearchNavigation";
 
 const paperStyle = {
   bgcolor: "#fff",
@@ -16,20 +15,7 @@ const paperStyle = {
 };
 
 const HomeSearchBar = () => {
-  const navigate = useNavigate();
-  const onSearch = (params: UrlSearchParams) => {
-    const queryParams = new URLSearchParams({
-      checkIn: params.checkIn,
-      checkOut: params.checkOut,
-      city: params.city || "",
-      adults: String(params.adults),
-      children: String(params.children),
-      rooms: String(params.rooms),
-    });
-    console.log(params);
-
-    navigate(`search?${queryParams.toString()}`);
-  };
+  const { onSearch } = useSearchNavigation("search");
   return (
     <Paper sx={paperStyle}>
       <SearchBar onSearch={onSearch} />
