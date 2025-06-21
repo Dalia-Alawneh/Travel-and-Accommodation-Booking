@@ -65,6 +65,7 @@ const AppDateInput = ({ label, value, onChange, icon }: AppDateInputProps) => {
         <Box
           component="input"
           type="date"
+          min={new Date().toISOString().split("T")[0]}
           value={value}
           onChange={(e) => onChange(e.target.value)}
           sx={dateInputStyle}
