@@ -10,6 +10,7 @@ import RatingBadge from "../Badges/RatingBadge";
 import RoomPriceWithDiscount from "../RoomPriceWithDiscount";
 import useValidateImage from "@travelia/hooks/useValidateImage";
 import AppSkeleton from "../Skeleton/Skeleton";
+import { bookButtonStyle } from "@travelia/styles";
 
 interface IRoomCardProps {
   title: string;
@@ -29,17 +30,6 @@ const cardContentStyle = {
   borderTopLeftRadius: 32,
   borderTopRightRadius: 32,
   p: 3,
-};
-
-const bookButtonStyle = {
-  fontWeight: 600,
-  py: 1,
-  width: { xs: "100%", sm: "initial" },
-  bgcolor: "custom.salver",
-  "&:hover": {
-    bgcolor: "custom.orange",
-    color: "custom.beige",
-  },
 };
 
 export default function RoomCard({

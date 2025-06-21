@@ -5,6 +5,8 @@ import withContainer from "@travelia/HOC/withContainer";
 import { ReactNode, useState } from "react";
 import {
   Box,
+  CardMedia,
+  Divider,
   FormGroup,
   Grid,
   InputLabel,
@@ -19,6 +21,17 @@ import { getAmenities } from "@travelia/api/endpoints/amenities";
 import AppCheckbox from "@travelia/components/Inputs/Checbox";
 import { getFilteredHotels } from "@travelia/api/endpoints/search";
 import { SearchValues } from "@travelia/types";
+import AppDivider from "@travelia/components/Divider/Divider";
+import {
+  Bed,
+  LocationCity,
+  LocationOn,
+  Room,
+  RoomOutlined,
+} from "@mui/icons-material";
+import AppButton from "@travelia/components/Button";
+import { bookButtonStyle } from "@travelia/styles";
+import HotelCard from "./components/HotelCard";
 
 const SearchPage = () => {
   const [params] = useSearchParams();
@@ -63,9 +76,16 @@ const SearchPage = () => {
         </Box>
       </Box>
       <Main>
-        <Grid container spacing={5}>
-          <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-            <Box sx={{ p: 3, boxShadow: theme.customShadows.light }}>
+        <Grid container spacing={5} alignItems="stretch">
+          <Grid size={{ xs: 12, md: 6, lg: 4 }} height="100%">
+            <Box
+              sx={{
+                p: 3,
+                boxShadow: theme.customShadows.light,
+                borderRadius: 1,
+                height: "100%",
+              }}
+            >
               <aside>
                 <AppForm
                   initialValues={{
@@ -137,12 +157,13 @@ const SearchPage = () => {
             </Box>
           </Grid>
           <Grid size={{ xs: 12, md: 6, lg: 8 }}>
-            <Box
-              sx={{
-                p: 3,
-                boxShadow: theme.customShadows.light,
-              }}
-            ></Box>
+            <Box>
+              {filteredHotels.length !== 0 ? (
+                filteredHotels.map((hotel) => <HotelCard hotel={hotel} />)
+              ) : (
+                <Box>No Data Found</Box>
+              )}
+            </Box>
           </Grid>
         </Grid>
       </Main>

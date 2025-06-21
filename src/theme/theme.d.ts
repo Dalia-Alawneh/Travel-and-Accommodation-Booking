@@ -11,6 +11,7 @@ declare module "@mui/material/styles" {
       skyBlue: string;
       overlay: string;
       lightBlue: string;
+      danger: string;
     };
   }
   interface PaletteOptions {
@@ -23,6 +24,7 @@ declare module "@mui/material/styles" {
       skyBlue: string;
       overlay: string;
       lightBlue: string;
+      danger: string;
     };
   }
   interface Theme {

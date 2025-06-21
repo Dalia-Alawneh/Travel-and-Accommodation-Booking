@@ -28,6 +28,7 @@ const theme = createTheme({
       skyBlue: "#4196d7",
       overlay: "#ffffff1a",
       lightBlue: "#a6dbfc4a",
+      danger: "#d32f2f",
     },
   },
 
