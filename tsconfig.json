@@ -1,11 +1,5 @@
 {
   "files": [],
-  "compilerOptions": {
-    "baseUrl": "./src",
-    "paths": {
-      "@travelia/*": ["*"]
-    }
-  },
   "references": [
     {
       "path": "./tsconfig.app.json"
