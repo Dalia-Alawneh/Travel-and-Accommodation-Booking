@@ -61,3 +61,8 @@ export interface UrlSearchParams {
   children: number;
   rooms: number;
 }
+
+export type CheckboxItem = {
+  name: string;
+  description: string;
+};
