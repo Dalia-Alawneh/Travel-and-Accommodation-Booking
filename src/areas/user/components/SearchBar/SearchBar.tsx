@@ -38,7 +38,7 @@ const SearchBar = () => {
 
   return (
     <form>
-      <Grid container spacing={3} alignItems="center" justifyContent="center">
+      <Grid container spacing={2} alignItems="center" justifyContent="center">
         <SearchGridItem>
           <AppSelect
             items={mappedCities}
@@ -67,10 +67,12 @@ const SearchBar = () => {
           />
         </SearchGridItem>
 
-        <SearchGridItem showDivider={false}>
+        <Grid size={{ xs: 12, sm: 6, lg: 3 }} sx={{ display: "flex", gap: 1 }}>
           <PopoverSelect
             label="Guest"
-            icon={<People sx={{ fontSize: 18, color: "#ddd" }} />}
+            icon={
+              <People sx={{ fontSize: 18, color: "#ddd", width: "100%" }} />
+            }
             displayValue={`${adults} Adults, ${children} Children, ${rooms} Rooms`}
           >
             <Box px={2} py={1}>
@@ -83,16 +85,18 @@ const SearchBar = () => {
               <Counter label="Rooms" value={rooms} onClick={setRooms} />
             </Box>
           </PopoverSelect>
-        </SearchGridItem>
-
-        <SearchGridItem showDivider={false}>
+        </Grid>
+        <Grid
+          size={{ xs: 12, sm: 6, lg: 1.8 }}
+          sx={{ display: "flex", gap: 1 }}
+        >
           <AppButton
             sx={{ bgcolor: "#000", color: "#fff", px: "30px", width: "100%" }}
             type="submit"
           >
             <Search sx={{ fontSize: 20, color: "#ddd" }} /> Search
           </AppButton>
-        </SearchGridItem>
+        </Grid>
       </Grid>
     </form>
   );
