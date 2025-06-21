@@ -45,3 +45,6 @@ export const children: SelectItem[] = [
   { value: 4, text: "4 Children" },
   { value: 5, text: "5 Children" },
 ];
+
+export const TOKEN_KEY = "authentication";
+export const USER = "user";

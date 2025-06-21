@@ -1,3 +1,5 @@
+import { UserType } from "@travelia/types";
+
 export interface IFeaturedDealsResponse {
   cityName: string;
   description: string;
@@ -17,4 +19,26 @@ export interface ITrendingDestinationsResponse {
   countryName: string;
   description: string;
   thumbnailUrl: string;
+}
+
+export interface IAuthenticateResponse {
+  userType: UserType;
+  authentication: string;
+}
+
+export interface IRecentlyVisitedHotelResponse {
+  hotelId: number;
+  hotelName: string;
+  starRating: number;
+  visitDate: string;
+  cityName: string;
+  thumbnailUrl: string;
+  priceLowerBound: number;
+  priceUpperBound: number;
+}
+
+export interface ICitiesResponse {
+  id: number;
+  name: string;
+  description: string;
 }

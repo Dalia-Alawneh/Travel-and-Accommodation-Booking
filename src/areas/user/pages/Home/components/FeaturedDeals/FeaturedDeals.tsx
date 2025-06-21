@@ -40,7 +40,7 @@ const FeaturedDeals = () => {
   });
 
   return (
-    <>
+    <Box pt={{ xs: 1, md: 5 }}>
       <SectionTitle
         title="Featured Deals"
         subTitle="Deals you don’t want to miss"
@@ -75,7 +75,7 @@ const FeaturedDeals = () => {
           }
         />
       )}
-    </>
+    </Box>
   );
 };
 

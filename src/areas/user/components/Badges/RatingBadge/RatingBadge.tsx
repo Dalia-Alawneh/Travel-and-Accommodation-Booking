@@ -1,12 +1,13 @@
 import { HotelClass } from "@mui/icons-material";
-import { Box, Typography } from "@mui/material";
+import { Box, SxProps, Theme, Typography } from "@mui/material";
 import { badgeStyle } from "../badgeStyle";
 
 interface IRatingBadgeProps {
-  hotelStarRating: number;
+  starRating: number;
+  sx?: SxProps<Theme>;
 }
 
-const RatingBadge = ({ hotelStarRating }: IRatingBadgeProps) => {
+const RatingBadge = ({ starRating, sx }: IRatingBadgeProps) => {
   return (
     <Box
       sx={{
@@ -15,6 +16,7 @@ const RatingBadge = ({ hotelStarRating }: IRatingBadgeProps) => {
         px: 2,
         right: 20,
         top: -20,
+        ...sx,
       }}
       display="flex"
       alignItems="center"
@@ -22,7 +24,7 @@ const RatingBadge = ({ hotelStarRating }: IRatingBadgeProps) => {
     >
       <HotelClass sx={{ color: "custom.gold", fontSize: 18 }} />
       <Typography variant="body2" fontWeight={700}>
-        {hotelStarRating}
+        {starRating}
       </Typography>
     </Box>
   );

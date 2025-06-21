@@ -31,7 +31,7 @@ const AppDateInput = ({ label, value, onChange, icon }: AppDateInputProps) => {
   return (
     <FormControl
       variant="standard"
-      sx={{ minWidth: { xs: "100%", md: 150 }, position: "relative" }}
+      sx={{ minWidth: { xs: "100%" }, position: "relative" }}
     >
       <InputLabel
         shrink
@@ -73,7 +73,7 @@ const AppDateInput = ({ label, value, onChange, icon }: AppDateInputProps) => {
         <ArrowDropDownIcon
           sx={{
             position: "absolute",
-            right: 8,
+            right: 0,
             pointerEvents: "none",
             color: "#999",
           }}

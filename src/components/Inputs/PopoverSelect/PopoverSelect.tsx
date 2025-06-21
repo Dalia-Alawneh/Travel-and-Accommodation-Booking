@@ -23,7 +23,7 @@ const PopoverSelect = ({ label, icon, displayValue, children }: Props) => {
 
   return (
     <>
-      <FormControl variant="standard" sx={{ width: { xs: "100%", md: 200 } }}>
+      <FormControl variant="standard" sx={{ width: "100%" }}>
         <Typography sx={{ fontSize: 12, color: "#777", border: "none" }}>
           {label}
         </Typography>

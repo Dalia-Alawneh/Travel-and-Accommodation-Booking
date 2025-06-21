@@ -11,6 +11,9 @@ import {
 import { Menu } from "@travelia/types";
 import logo from "@travelia/assets/images/logo.svg";
 import AppButton from "../Button/Button";
+import AppLink from "../Link/Link";
+import useLogout from "@travelia/hooks/useLogout";
+import { Logout } from "@mui/icons-material";
 
 interface IAppDrawerProps {
   drawerWidth: number;
@@ -25,6 +28,8 @@ const AppDrawer = ({
   handleDrawerToggle,
   isOpen,
 }: IAppDrawerProps) => {
+  const { handleLogout, loading } = useLogout();
+
   return (
     <Drawer
       variant="temporary"
@@ -47,17 +52,31 @@ const AppDrawer = ({
         </Box>
         <Divider />
         <List>
-          {menuItems.map((item, index) => (
-            <ListItem key={index} disablePadding>
-              <ListItemButton sx={{ textAlign: "center" }}>
-                {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
-                <ListItemText primary={item.title} />
-              </ListItemButton>
-            </ListItem>
+          {menuItems.map((item) => (
+            <AppLink path={item.path} key={item.title}>
+              <ListItem disablePadding>
+                <ListItemButton sx={{ textAlign: "center" }}>
+                  {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
+                  <ListItemText primary={item.title} />
+                </ListItemButton>
+              </ListItem>
+            </AppLink>
           ))}
         </List>
-        <AppButton sx={{ px: "3rem", bgcolor: "#000", color: "#fff" }}>
-          Signin
+        <AppButton
+          onClick={handleLogout}
+          loading={loading}
+          sx={{ px: "3rem", bgcolor: "#000", color: "#fff" }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            <span>Logout</span> <Logout color="error" sx={{ fontSize: 20 }} />
+          </Box>
         </AppButton>
       </Box>
     </Drawer>
