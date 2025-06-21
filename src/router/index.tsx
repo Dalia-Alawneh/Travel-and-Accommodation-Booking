@@ -8,6 +8,7 @@ import GuestRoute from "./GuestRoute";
 import SearchPage from "@travelia/areas/user/pages/Search";
 import NotFound from "@travelia/pages/NotFound/NotFound";
 import ServerError from "@travelia/pages/ServerError";
+import RootLayout from "@travelia/layouts/user/RootLayout";
 
 const AppRouter = () => {
   return (
@@ -23,8 +24,10 @@ const AppRouter = () => {
         path="/user"
         element={<GuardedRoute allowedRoles={[UserType.User]} />}
       >
-        <Route index element={<Home />} />
-        <Route path="search" element={<SearchPage />} />
+        <Route element={<RootLayout />}>
+          <Route index element={<Home />} />
+          <Route path="search" element={<SearchPage />} />
+        </Route>
       </Route>
       <Route
         path="/admin"
