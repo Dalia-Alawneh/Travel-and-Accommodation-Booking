@@ -2,34 +2,26 @@ import { useSearchParams } from "react-router";
 import PageHero from "../../components/PageHero";
 import SearchBar from "../../components/SearchBar";
 import withContainer from "@travelia/HOC/withContainer";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 import { Box, Grid, Skeleton, useTheme } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { getAmenities } from "@travelia/api/endpoints/amenities";
 import { getFilteredHotels } from "@travelia/api/endpoints/search";
-import { HotelFilterValues, IAmenity, SearchValues } from "@travelia/types";
+import { HotelFilterValues, SearchValues } from "@travelia/types";
 import HotelCard from "./components/HotelCard";
 import { useSearchNavigation } from "@travelia/hooks/useSearchNavigation";
 import HotelFilterForm from "./components/HotelFilterForm/HotelFilterForm";
 import SortMenu from "@travelia/components/Inputs/Sort/Sort";
 import { sortOptions } from "@travelia/fixtures";
+import mapSearchParams from "@travelia/utils/mapSearchParams";
 
 const SearchPage = () => {
   const [params] = useSearchParams();
   const { onSearch } = useSearchNavigation("");
 
-  const [searchValues, setSearchValues] = useState<SearchValues>({
-    checkInDate: params.get("checkInDate") ?? "",
-    checkOutDate: params.get("checkOutDate") ?? "",
-    city: params.get("city") ?? "",
-    adults: Number(params.get("adults") ?? "1"),
-    children: Number(params.get("children") ?? "0"),
-    numberOfRooms: Number(params.get("numberOfRooms") ?? "1"),
-    budget: 100,
-    starRate: 2,
-    amenities: [],
-    sort: "",
-  });
+  const [searchValues, setSearchValues] = useState<SearchValues>(() =>
+    mapSearchParams(params),
+  );
   const theme = useTheme();
 
   const { data: amenitiesData = [] } = useQuery({
@@ -43,19 +35,13 @@ const SearchPage = () => {
   });
 
   useEffect(() => {
-    const updatedValues: SearchValues = {
-      checkInDate: params.get("checkInDate") ?? "",
-      checkOutDate: params.get("checkOutDate") ?? "",
-      city: params.get("city") ?? "",
-      adults: Number(params.get("adults") ?? "1"),
-      children: Number(params.get("children") ?? "0"),
-      numberOfRooms: Number(params.get("numberOfRooms") ?? "1"),
-      budget: searchValues.budget,
-      starRate: searchValues.starRate,
-      amenities: searchValues.amenities,
-      sort: searchValues.sort,
-    };
-    setSearchValues(updatedValues);
+    setSearchValues((prev) => ({
+      ...mapSearchParams(params),
+      budget: prev.budget,
+      starRate: prev.starRate,
+      amenities: prev.amenities,
+      sort: prev.sort,
+    }));
   }, [params]);
 
   const onFilterFormSubmit = (values: HotelFilterValues) => {
@@ -65,12 +51,16 @@ const SearchPage = () => {
       amenities: values.amenities,
     }));
   };
-  const amenities: IAmenity[] = amenitiesData.map((a, index) => ({
-    id: index,
-    name: a.name,
-    description: a.description,
-  }));
 
+  const amenities = useMemo(
+    () =>
+      amenitiesData.map((a, index) => ({
+        id: index,
+        name: a.name,
+        description: a.description,
+      })),
+    [amenitiesData],
+  );
   const Main = withContainer(({ children }: { children: ReactNode }) => {
     return <main>{children}</main>;
   });
@@ -130,12 +120,14 @@ const SearchPage = () => {
               </Box>
             ) : (
               <Box>
-                {filteredHotels.length !== 0 ? (
+                {filteredHotels.length == 0 ? (
                   filteredHotels.map((hotel) => (
                     <HotelCard key={hotel.hotelId} hotel={hotel} />
                   ))
                 ) : (
-                  <Box>No Data Found</Box>
+                  <Box py={8} display="flex" justifyContent={"center"}>
+                    No Data Found
+                  </Box>
                 )}
               </Box>
             )}
