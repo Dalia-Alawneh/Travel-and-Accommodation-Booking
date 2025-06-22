@@ -3,16 +3,7 @@ import PageHero from "../../components/PageHero";
 import SearchBar from "../../components/SearchBar";
 import withContainer from "@travelia/HOC/withContainer";
 import { ReactNode, useEffect, useState } from "react";
-import {
-  Box,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  Skeleton,
-  useTheme,
-} from "@mui/material";
+import { Box, Grid, Skeleton, useTheme } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { getAmenities } from "@travelia/api/endpoints/amenities";
 import { getFilteredHotels } from "@travelia/api/endpoints/search";
@@ -66,13 +57,11 @@ const SearchPage = () => {
     setSearchValues(updatedValues);
   }, [params]);
 
-  const onFormSubmit = (values: HotelFilterValues) => {
-    const amenitiesAsStrings = values.amenities.map((a) => a.name);
-
+  const onFilterFormSubmit = (values: HotelFilterValues) => {
     setSearchValues((prev) => ({
       ...prev,
       ...values,
-      amenities: amenitiesAsStrings,
+      amenities: values.amenities,
     }));
   };
   const amenities: IAmenity[] = amenitiesData.map((a, index) => ({
@@ -84,6 +73,7 @@ const SearchPage = () => {
   const Main = withContainer(({ children }: { children: ReactNode }) => {
     return <main>{children}</main>;
   });
+
   return (
     <>
       <PageHero title="Search" />
@@ -119,7 +109,7 @@ const SearchPage = () => {
                     budget: searchValues.budget,
                     starRate: searchValues.starRate,
                   }}
-                  onSubmit={onFormSubmit}
+                  onSubmit={onFilterFormSubmit}
                 />
               </aside>
             </Box>
@@ -139,7 +129,9 @@ const SearchPage = () => {
             ) : (
               <Box>
                 {filteredHotels.length !== 0 ? (
-                  filteredHotels.map((hotel) => <HotelCard hotel={hotel} />)
+                  filteredHotels.map((hotel) => (
+                    <HotelCard key={hotel.hotelId} hotel={hotel} />
+                  ))
                 ) : (
                   <Box>No Data Found</Box>
                 )}

@@ -48,3 +48,13 @@ export const children: SelectItem[] = [
 
 export const TOKEN_KEY = "authentication";
 export const USER = "user";
+
+export const sortOptions = [
+  { value: "", label: "None" },
+  { value: "priceAsc", label: "Price: Low to High" },
+  { value: "priceDesc", label: "Price: High to Low" },
+  { value: "ratingDesc", label: "Rating: High to Low" },
+  { value: "ratingAsc", label: "Rating: Low to High" },
+  { value: "nameAsc", label: "Name: A to Z" },
+  { value: "nameDesc", label: "Name: Z to A" },
+];

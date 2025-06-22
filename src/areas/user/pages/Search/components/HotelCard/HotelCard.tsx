@@ -101,7 +101,7 @@ const HotelCard = ({ hotel }: IHotelCard) => {
                   <Box sx={{ display: "flex", gap: 2 }}>
                     {hotel.amenities.map((amenity) => (
                       <Box
-                        key={amenity.id}
+                        key={amenity.name}
                         bgcolor="success.light"
                         color="white"
                         px={1}

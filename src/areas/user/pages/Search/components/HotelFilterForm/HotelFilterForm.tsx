@@ -26,8 +26,8 @@ const HotelFilterForm = ({
       initialValues={initialValues}
       onSubmit={onSubmit}
       render={(formik) => (
-        <Box display="flex" flexDirection="column" gap={2}>
-          <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
+          <Box display="flex" flexDirection="column" gap={3}>
             <Box>
               <Box
                 display={"flex"}
@@ -61,7 +61,11 @@ const HotelFilterForm = ({
               </InputLabel>
               <FormGroup>
                 {amenities.map((amenity) => (
-                  <AppCheckbox hasToolTip={true} option={amenity} />
+                  <AppCheckbox
+                    key={amenity.name}
+                    hasToolTip={true}
+                    option={amenity}
+                  />
                 ))}
               </FormGroup>
             </Box>
@@ -75,13 +79,19 @@ const HotelFilterForm = ({
               />
             </Box>
             <AppButton
-              sx={{ bgcolor: "#000", color: "#fff", px: "30px", width: "100%" }}
+              sx={{
+                bgcolor: "#000",
+                color: "#fff",
+                mt: 4,
+                px: "30px",
+                width: "100%",
+              }}
               type="submit"
             >
               <Search sx={{ fontSize: 20, color: "#ddd" }} /> Search
             </AppButton>
-          </form>
-        </Box>
+          </Box>
+        </form>
       )}
     />
   );

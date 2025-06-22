@@ -101,5 +101,5 @@ export interface ISearchedHotel {
 export type HotelFilterValues = {
   budget: number;
   starRate: number;
-  amenities: IAmenity[];
+  amenities: string[];
 };
