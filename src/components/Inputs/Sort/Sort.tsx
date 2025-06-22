@@ -12,20 +12,11 @@ import { SelectItem } from "@travelia/types";
 
 interface SortMenuProps {
   value: string;
+  sortOptions: SelectItem[];
   onChange: (value: string) => void;
 }
 
-const sortOptions: SelectItem[] = [
-  { text: "None", value: "" },
-  { text: "Price: Low to High", value: "priceAsc" },
-  { text: "Price: High to Low", value: "priceDesc" },
-  { text: "Rating: High to Low", value: "ratingDesc" },
-  { text: "Rating: Low to High", value: "ratingAsc" },
-  { text: "Name: A to Z", value: "nameAsc" },
-  { text: "Name: Z to A", value: "nameDesc" },
-];
-
-const SortMenu = ({ value, onChange }: SortMenuProps) => {
+const SortMenu = ({ value, sortOptions, onChange }: SortMenuProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 

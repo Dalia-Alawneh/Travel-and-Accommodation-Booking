@@ -103,3 +103,12 @@ export type HotelFilterValues = {
   starRate: number;
   amenities: string[];
 };
+
+export enum SortOptions {
+  PriceAsc = "priceAsc",
+  PriceDesc = "priceDesc",
+  RatingDesc = "ratingDesc",
+  RatingAsc = "ratingAsc",
+  NameAsc = "nameAsc",
+  NameDesc = "nameDesc",
+}

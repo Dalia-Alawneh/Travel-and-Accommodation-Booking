@@ -12,6 +12,7 @@ import HotelCard from "./components/HotelCard";
 import { useSearchNavigation } from "@travelia/hooks/useSearchNavigation";
 import HotelFilterForm from "./components/HotelFilterForm/HotelFilterForm";
 import SortMenu from "@travelia/components/Inputs/Sort/Sort";
+import { sortOptions } from "@travelia/fixtures";
 
 const SearchPage = () => {
   const [params] = useSearchParams();
@@ -86,6 +87,7 @@ const SearchPage = () => {
         <Box display="flex" justifyContent="end" mb={3} maxWidth="100%">
           <SortMenu
             value={searchValues.sort}
+            sortOptions={sortOptions}
             onChange={(newSort) =>
               setSearchValues((prev) => ({ ...prev, sort: newSort }))
             }
