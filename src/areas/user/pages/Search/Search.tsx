@@ -120,7 +120,7 @@ const SearchPage = () => {
               </Box>
             ) : (
               <Box>
-                {filteredHotels.length == 0 ? (
+                {filteredHotels.length !== 0 ? (
                   filteredHotels.map((hotel) => (
                     <HotelCard key={hotel.hotelId} hotel={hotel} />
                   ))
