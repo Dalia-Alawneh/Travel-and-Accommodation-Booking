@@ -20,6 +20,7 @@ import { HotelFilterValues, IAmenity, SearchValues } from "@travelia/types";
 import HotelCard from "./components/HotelCard";
 import { useSearchNavigation } from "@travelia/hooks/useSearchNavigation";
 import HotelFilterForm from "./components/HotelFilterForm/HotelFilterForm";
+import SortMenu from "@travelia/components/Inputs/Sort/Sort";
 
 const SearchPage = () => {
   const [params] = useSearchParams();
@@ -92,6 +93,14 @@ const SearchPage = () => {
         </Box>
       </Box>
       <Main>
+        <Box display="flex" justifyContent="end" mb={3} maxWidth="100%">
+          <SortMenu
+            value={searchValues.sort}
+            onChange={(newSort) =>
+              setSearchValues((prev) => ({ ...prev, sort: newSort }))
+            }
+          />
+        </Box>
         <Grid container spacing={5} alignItems="stretch">
           <Grid size={{ xs: 12, md: 6, lg: 4 }} height="100%">
             <Box
@@ -106,9 +115,7 @@ const SearchPage = () => {
                 <HotelFilterForm
                   amenities={amenities}
                   initialValues={{
-                    amenities: amenities.filter((a) =>
-                      searchValues.amenities.includes(a.name),
-                    ),
+                    amenities: searchValues.amenities,
                     budget: searchValues.budget,
                     starRate: searchValues.starRate,
                   }}
