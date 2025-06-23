@@ -97,3 +97,10 @@ export interface IRoomResponse {
   price: number;
   availability: boolean;
 }
+
+export interface IReviewResponse {
+  reviewId: number;
+  customerName: string;
+  rating: number;
+  description: string;
+}

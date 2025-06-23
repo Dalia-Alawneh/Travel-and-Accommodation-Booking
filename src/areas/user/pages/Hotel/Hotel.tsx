@@ -3,6 +3,7 @@ import {
   getHotel,
   getHotelAvailableRooms,
   getHotelGallery,
+  getHotelReviews,
 } from "@travelia/api/endpoints/hotel";
 import { useParams } from "react-router";
 import PageHero from "../../components/PageHero";
@@ -21,6 +22,7 @@ import Amenities from "../../components/Amenities";
 import Gallery from "./components/Gallery";
 import { hotelBoxSx } from "@travelia/styles";
 import AvailableRoomCard from "./components/AvailableRoomCard";
+import Review from "./components/Review/Review";
 // import Map from "../../components/Map/Map";
 
 const HotelPage = () => {
@@ -35,6 +37,11 @@ const HotelPage = () => {
   const { data: gallery, isLoading: isGalleryLoading } = useQuery({
     queryKey: ["gallery", id],
     queryFn: () => getHotelGallery(Number(id)),
+  });
+
+  const { data: reviews, isLoading: isReviewsLoading } = useQuery({
+    queryKey: ["reviews", id],
+    queryFn: () => getHotelReviews(Number(id)),
   });
 
   const today = new Date();
@@ -111,6 +118,14 @@ const HotelPage = () => {
                   )}
                 </>
               )}
+              <Box>
+                <Typography variant="subtitle2" fontWeight={600} my={2}>
+                  Reviews
+                </Typography>{" "}
+                {reviews?.map((review) => (
+                  <Review review={review} key={review.reviewId} />
+                ))}
+              </Box>
             </Box>
           </Grid>
 

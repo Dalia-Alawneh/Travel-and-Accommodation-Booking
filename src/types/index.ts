@@ -129,3 +129,10 @@ export interface IAvailableRoom {
   price: number;
   availability: boolean;
 }
+
+export interface IReview {
+  reviewId: number;
+  customerName: string;
+  rating: number;
+  description: string;
+}
