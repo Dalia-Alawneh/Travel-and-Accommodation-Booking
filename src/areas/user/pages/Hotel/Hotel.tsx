@@ -102,7 +102,6 @@ const HotelPage = () => {
                       }
                     />
                   )}
-
                   <Typography variant="caption">
                     {hotelInfo?.description}
                   </Typography>
@@ -121,27 +120,30 @@ const HotelPage = () => {
             </Grid>
           )}
         </Grid>
-        <Grid container spacing={5} alignItems="stretch">
-          <Grid size={{ xs: 12, md: 6, lg: 5 }}>
-            {/* {hotelInfo?.latitude && hotelInfo?.longitude && (
-                    <Map lat={hotelInfo.latitude} lng={hotelInfo.longitude} />
-                  )} */}
-          </Grid>
-
-          {availableRooms?.length && (
-            <Grid size={{ xs: 12, md: 6, lg: 7 }}>
+        <Grid container spacing={4} mt={4}>
+          <Grid size={{ xs: 12, md: 6, lg: 5 }}></Grid>
+          <Grid size={{ xs: 12, md: 6, lg: 7 }}>
+            {availableRooms?.length && (
               <Box
                 sx={{
                   ...hotelBoxSx,
                   boxShadow: theme.customShadows.light,
                 }}
               >
-                {availableRooms.map((room) => (
-                  <AvailableRoomCard room={room} key={room.roomId} />
-                ))}
+                <Typography variant="h3" mb={3}>
+                  Available Rooms
+                </Typography>
+
+                <Grid container spacing={3}>
+                  {availableRooms.map((room) => (
+                    <Grid size={{ xs: 12, lg: 6 }} key={room.roomId}>
+                      <AvailableRoomCard room={room} />
+                    </Grid>
+                  ))}
+                </Grid>
               </Box>
-            </Grid>
-          )}
+            )}
+          </Grid>
         </Grid>
       </Main>
     </>
