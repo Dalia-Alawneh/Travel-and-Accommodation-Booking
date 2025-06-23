@@ -1,8 +1,7 @@
 import { useSearchParams } from "react-router";
 import PageHero from "../../components/PageHero";
 import SearchBar from "../../components/SearchBar";
-import withContainer from "@travelia/HOC/withContainer";
-import { ReactNode, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Box, Grid, Skeleton, useTheme } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { getAmenities } from "@travelia/api/endpoints/amenities";
@@ -14,6 +13,7 @@ import HotelFilterForm from "./components/HotelFilterForm/HotelFilterForm";
 import SortMenu from "@travelia/components/Inputs/Sort/Sort";
 import { sortOptions } from "@travelia/fixtures";
 import mapSearchParams from "@travelia/utils/mapSearchParams";
+import Main from "../../components/MainSection";
 
 const SearchPage = () => {
   const [params] = useSearchParams();
@@ -61,9 +61,6 @@ const SearchPage = () => {
       })),
     [amenitiesData],
   );
-  const Main = withContainer(({ children }: { children: ReactNode }) => {
-    return <main>{children}</main>;
-  });
 
   return (
     <>
