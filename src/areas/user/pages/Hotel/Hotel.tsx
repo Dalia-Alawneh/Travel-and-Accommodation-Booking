@@ -17,12 +17,7 @@ import {
   useTheme,
 } from "@mui/material";
 import IconWithText from "../../components/IconWithText";
-import {
-  LocationOn,
-  Reviews,
-  StarBorderOutlined,
-  Stars,
-} from "@mui/icons-material";
+import { LocationOn, Reviews, Stars } from "@mui/icons-material";
 import Amenities from "../../components/Amenities";
 import Gallery from "./components/Gallery";
 import { hotelBoxSx } from "@travelia/styles";
