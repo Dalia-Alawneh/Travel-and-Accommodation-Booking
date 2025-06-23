@@ -8,7 +8,7 @@ interface IAmenitiesProps {
 const Amenities = ({ amenities }: IAmenitiesProps) => {
   return (
     <Box>
-      <Box sx={{ display: "flex", gap: 1, my: 1, flexWrap: "wrap" }}>
+      <Box sx={{ display: "flex", gap: 2, my: 1, flexWrap: "wrap" }}>
         {amenities.map((amenity) => (
           <Box
             key={amenity.name}

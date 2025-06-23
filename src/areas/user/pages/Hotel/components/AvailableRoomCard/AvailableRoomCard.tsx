@@ -25,6 +25,7 @@ const AvailableRoomCard = ({ room }: IAvailableRoomCardProps) => {
     <Box
       sx={{
         mb: 3,
+        height: "100%",
         borderRadius: 1,
         overflow: "hidden",
         boxShadow: theme.customShadows.light,

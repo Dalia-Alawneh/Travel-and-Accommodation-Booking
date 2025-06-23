@@ -162,7 +162,7 @@ const HotelPage = () => {
                     Available Rooms
                   </Typography>
 
-                  <Grid container spacing={3}>
+                  <Grid container spacing={3} alignItems="stretch">
                     {availableRooms.map((room) => (
                       <Grid size={{ xs: 12, lg: 6 }} key={room.roomId}>
                         <AvailableRoomCard room={room} />
