@@ -23,11 +23,13 @@ import Gallery from "./components/Gallery";
 import { hotelBoxSx } from "@travelia/styles";
 import AvailableRoomCard from "./components/AvailableRoomCard";
 import Review from "./components/Review/Review";
+import { useState } from "react";
 // import Map from "../../components/Map/Map";
 
 const HotelPage = () => {
   const { id } = useParams();
   const theme = useTheme();
+  const [showAllReviews, setShowAllReviews] = useState(false);
 
   const { data: hotelInfo, isLoading: isHotelLoading } = useQuery({
     queryKey: ["hotel", id],
@@ -135,9 +137,53 @@ const HotelPage = () => {
                     <Reviews sx={{ color: "custom.orange", fontSize: 18 }} />
                   }
                 />
-                {reviews?.map((review) => (
-                  <Review review={review} key={review.reviewId} />
-                ))}
+                <Box>
+                  <Typography variant="subtitle2" fontWeight={600} my={2}>
+                    Reviews
+                  </Typography>
+                  {isReviewsLoading ? (
+                    <>
+                      <Skeleton
+                        variant="rectangular"
+                        height={50}
+                        sx={{ mb: 1 }}
+                      />
+                      <Skeleton
+                        variant="rectangular"
+                        height={50}
+                        sx={{ mb: 1 }}
+                      />
+                      <Skeleton variant="rectangular" height={50} />
+                    </>
+                  ) : reviews?.length ? (
+                    <>
+                      {reviews
+                        .slice(0, showAllReviews ? reviews.length : 3)
+                        .map((review) => (
+                          <Review review={review} key={review.reviewId} />
+                        ))}
+
+                      {reviews.length > 3 && !showAllReviews && (
+                        <Typography
+                          sx={{
+                            mt: 1,
+                            color: "primary.main",
+                            cursor: "pointer",
+                            textDecoration: "underline",
+                            fontSize: 14,
+                          }}
+                          onClick={() => setShowAllReviews(true)}
+                        >
+                          View All Reviews
+                        </Typography>
+                      )}
+                    </>
+                  ) : (
+                    <Typography variant="body2">
+                      No reviews available.
+                    </Typography>
+                  )}
+                </Box>
               </Box>
             </Box>
           </Grid>
