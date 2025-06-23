@@ -10,7 +10,7 @@ const Review = ({ review }: IReviewCardProps) => {
     <Box
       sx={{
         p: 3,
-        mb: 3,
+        my: 3,
         borderRadius: 1,
         height: 140,
         backgroundColor: "background.paper",

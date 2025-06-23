@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { IAmenity } from "@travelia/types";
 
 interface IAmenitiesProps {
@@ -7,11 +7,8 @@ interface IAmenitiesProps {
 
 const Amenities = ({ amenities }: IAmenitiesProps) => {
   return (
-    <Box mt={2}>
-      <Typography variant="subtitle2" fontWeight={600} mb={1}>
-        Amenities
-      </Typography>
-      <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
+    <Box>
+      <Box sx={{ display: "flex", gap: 1, my: 1, flexWrap: "wrap" }}>
         {amenities.map((amenity) => (
           <Box
             key={amenity.name}

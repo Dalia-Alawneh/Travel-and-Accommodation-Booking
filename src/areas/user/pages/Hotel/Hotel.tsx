@@ -17,7 +17,12 @@ import {
   useTheme,
 } from "@mui/material";
 import IconWithText from "../../components/IconWithText";
-import { LocationOn } from "@mui/icons-material";
+import {
+  LocationOn,
+  Reviews,
+  StarBorderOutlined,
+  Stars,
+} from "@mui/icons-material";
 import Amenities from "../../components/Amenities";
 import Gallery from "./components/Gallery";
 import { hotelBoxSx } from "@travelia/styles";
@@ -81,7 +86,7 @@ const HotelPage = () => {
                   <Skeleton variant="text" width="70%" />
                 </>
               ) : (
-                <>
+                <Box sx={{ display: "flex", gap: 2, flexDirection: "column" }}>
                   <Box
                     sx={{
                       display: "flex",
@@ -114,14 +119,27 @@ const HotelPage = () => {
                   </Typography>
 
                   {hotelInfo?.amenities && (
-                    <Amenities amenities={hotelInfo?.amenities || []} />
+                    <>
+                      <IconWithText
+                        text="Amenities"
+                        icon={
+                          <Stars
+                            sx={{ color: "custom.orange", fontSize: 18 }}
+                          />
+                        }
+                      />
+                      <Amenities amenities={hotelInfo?.amenities || []} />
+                    </>
                   )}
-                </>
+                </Box>
               )}
               <Box>
-                <Typography variant="subtitle2" fontWeight={600} my={2}>
-                  Reviews
-                </Typography>{" "}
+                <IconWithText
+                  text="Reviews"
+                  icon={
+                    <Reviews sx={{ color: "custom.orange", fontSize: 18 }} />
+                  }
+                />
                 {reviews?.map((review) => (
                   <Review review={review} key={review.reviewId} />
                 ))}
