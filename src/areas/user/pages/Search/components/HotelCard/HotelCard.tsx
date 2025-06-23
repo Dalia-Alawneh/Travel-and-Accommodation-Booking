@@ -3,6 +3,8 @@ import { LocationOn, Bed } from "@mui/icons-material";
 import AppButton from "@travelia/components/Button";
 import { ISearchedHotel } from "@travelia/types";
 import { bookButtonStyle } from "@travelia/styles";
+import { useNavigate } from "react-router";
+import Amenities from "@travelia/areas/user/components/Amenities";
 
 interface IHotelCard {
   hotel: ISearchedHotel;
@@ -22,9 +24,14 @@ const discountBadgeSx = {
 
 const HotelCard = ({ hotel }: IHotelCard) => {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const handleNavigateToHotel = () => {
+    navigate(`/user/hotel/${hotel.hotelId}`);
+  };
 
   return (
     <Box
+      onClick={handleNavigateToHotel}
       sx={{
         mb: 5,
         borderRadius: 1,
@@ -94,25 +101,7 @@ const HotelCard = ({ hotel }: IHotelCard) => {
               </Typography>
 
               {hotel.amenities.length > 0 && (
-                <Box mt={2}>
-                  <Typography variant="subtitle2" fontWeight={600} mb={1}>
-                    Amenities
-                  </Typography>
-                  <Box sx={{ display: "flex", gap: 2 }}>
-                    {hotel.amenities.map((amenity) => (
-                      <Box
-                        key={amenity.name}
-                        bgcolor="success.light"
-                        color="white"
-                        px={1}
-                        py={0.2}
-                        sx={{ fontSize: 12, borderRadius: 999 }}
-                      >
-                        {amenity.name}
-                      </Box>
-                    ))}
-                  </Box>
-                </Box>
+                <Amenities amenities={hotel.amenities} />
               )}
             </Box>
             <AppButton
