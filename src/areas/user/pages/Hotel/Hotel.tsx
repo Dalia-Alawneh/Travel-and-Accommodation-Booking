@@ -132,33 +132,29 @@ const HotelPage = () => {
           {gallery?.length && (
             <Grid size={{ xs: 12, md: 6, lg: 7 }}>
               <Gallery gallery={gallery} isGalleryLoading={isGalleryLoading} />
+              {availableRooms?.length && (
+                <Box
+                  sx={{
+                    ...hotelBoxSx,
+                    mt: 4,
+                    boxShadow: theme.customShadows.light,
+                  }}
+                >
+                  <Typography variant="h3" mb={3}>
+                    Available Rooms
+                  </Typography>
+
+                  <Grid container spacing={3}>
+                    {availableRooms.map((room) => (
+                      <Grid size={{ xs: 12, lg: 6 }} key={room.roomId}>
+                        <AvailableRoomCard room={room} />
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Box>
+              )}
             </Grid>
           )}
-        </Grid>
-        <Grid container spacing={4} mt={4}>
-          <Grid size={{ xs: 12, md: 6, lg: 5 }}></Grid>
-          <Grid size={{ xs: 12, md: 6, lg: 7 }}>
-            {availableRooms?.length && (
-              <Box
-                sx={{
-                  ...hotelBoxSx,
-                  boxShadow: theme.customShadows.light,
-                }}
-              >
-                <Typography variant="h3" mb={3}>
-                  Available Rooms
-                </Typography>
-
-                <Grid container spacing={3}>
-                  {availableRooms.map((room) => (
-                    <Grid size={{ xs: 12, lg: 6 }} key={room.roomId}>
-                      <AvailableRoomCard room={room} />
-                    </Grid>
-                  ))}
-                </Grid>
-              </Box>
-            )}
-          </Grid>
         </Grid>
       </Main>
     </>
