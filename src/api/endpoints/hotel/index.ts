@@ -3,6 +3,7 @@ import { galleryMockData } from "@travelia/api/data";
 import {
   IGalleryResponse,
   IHotelResponse,
+  IRoomResponse,
 } from "@travelia/api/types/response.dto";
 
 const endpoint = "/hotels";
@@ -20,4 +21,20 @@ export const getHotelGallery = async (
       resolve(galleryMockData);
     }, 300);
   });
+};
+
+export const getHotelAvailableRooms = async (
+  id: number,
+  checkInDate?: string,
+  checkOutDate?: string,
+): Promise<IRoomResponse[]> => {
+  const config = {
+    params: {
+      checkInDate: checkInDate,
+      CheckOutDate: checkOutDate,
+    },
+  };
+
+  const response = await Axios.get(`${endpoint}/${id}/available-rooms`, config);
+  return response.data;
 };

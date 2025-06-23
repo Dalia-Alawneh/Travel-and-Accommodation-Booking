@@ -112,3 +112,20 @@ export enum SortOptions {
   NameAsc = "nameAsc",
   NameDesc = "nameDesc",
 }
+
+export interface IGalleryItem {
+  id: number;
+  url: string;
+}
+
+export interface IAvailableRoom {
+  roomId: number;
+  roomNumber: number;
+  roomPhotoUrl: string;
+  roomType: string;
+  capacityOfAdults: number;
+  capacityOfChildren: number;
+  roomAmenities: Omit<IAmenity, "id">[];
+  price: number;
+  availability: boolean;
+}

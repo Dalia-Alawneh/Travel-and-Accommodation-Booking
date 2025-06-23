@@ -85,3 +85,15 @@ export interface IGalleryResponse {
   id: number;
   url: string;
 }
+
+export interface IRoomResponse {
+  roomId: number;
+  roomNumber: number;
+  roomPhotoUrl: string;
+  roomType: string;
+  capacityOfAdults: number;
+  capacityOfChildren: number;
+  roomAmenities: IAmenitiesResponse[];
+  price: number;
+  availability: boolean;
+}

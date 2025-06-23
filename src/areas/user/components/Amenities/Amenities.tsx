@@ -19,7 +19,7 @@ const Amenities = ({ amenities }: IAmenitiesProps) => {
             color="white"
             px={1}
             py={0.2}
-            sx={{ fontSize: 12, borderRadius: 999 }}
+            sx={{ fontSize: 11, borderRadius: 999 }}
           >
             {amenity.name}
           </Box>

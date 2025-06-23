@@ -20,3 +20,11 @@ export const bookButtonStyle = {
     color: "custom.beige",
   },
 };
+
+export const hotelBoxSx = {
+  p: 3,
+  borderRadius: 1,
+  display: "flex",
+  flexDirection: "column",
+  gap: 1,
+};

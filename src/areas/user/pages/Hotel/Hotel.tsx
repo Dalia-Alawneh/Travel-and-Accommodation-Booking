@@ -1,5 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { getHotel, getHotelGallery } from "@travelia/api/endpoints/hotel";
+import {
+  getHotel,
+  getHotelAvailableRooms,
+  getHotelGallery,
+} from "@travelia/api/endpoints/hotel";
 import { useParams } from "react-router";
 import PageHero from "../../components/PageHero";
 import Main from "../../components/MainSection";
@@ -10,21 +14,14 @@ import {
   Skeleton,
   Typography,
   useTheme,
-  ImageList,
-  ImageListItem,
 } from "@mui/material";
 import IconWithText from "../../components/IconWithText";
 import { LocationOn } from "@mui/icons-material";
 import Amenities from "../../components/Amenities";
+import Gallery from "./components/Gallery";
+import { hotelBoxSx } from "@travelia/styles";
+import AvailableRoomCard from "./components/AvailableRoomCard";
 // import Map from "../../components/Map/Map";
-
-const hotelBoxSx = {
-  p: 3,
-  borderRadius: 1,
-  display: "flex",
-  flexDirection: "column",
-  gap: 1,
-};
 
 const HotelPage = () => {
   const { id } = useParams();
@@ -39,6 +36,22 @@ const HotelPage = () => {
     queryKey: ["gallery", id],
     queryFn: () => getHotelGallery(Number(id)),
   });
+
+  const today = new Date();
+  const nextWeek = new Date();
+  nextWeek.setDate(today.getDate() + 7);
+
+  const { data: availableRooms, isLoading: isAvailableRoomsLoading } = useQuery(
+    {
+      queryKey: ["availableRooms", id],
+      queryFn: () =>
+        getHotelAvailableRooms(
+          Number(id),
+          today.toISOString(),
+          nextWeek.toISOString(),
+        ),
+    },
+  );
 
   return (
     <>
@@ -97,45 +110,38 @@ const HotelPage = () => {
                   {hotelInfo?.amenities && (
                     <Amenities amenities={hotelInfo?.amenities || []} />
                   )}
-
-                  {/* {hotelInfo?.latitude && hotelInfo?.longitude && (
-                    <Map lat={hotelInfo.latitude} lng={hotelInfo.longitude} />
-                  )} */}
                 </>
               )}
             </Box>
           </Grid>
 
-          <Grid size={{ xs: 12, md: 6, lg: 7 }}>
-            <Box
-              sx={{
-                ...hotelBoxSx,
-                boxShadow: theme.customShadows.light,
-              }}
-            >
-              <Typography variant="h5" fontWeight={600} mb={2}>
-                Gallery
-              </Typography>
-
-              {isGalleryLoading ? (
-                <Skeleton variant="rectangular" height={300} />
-              ) : gallery?.length ? (
-                <ImageList cols={3} gap={8}>
-                  {gallery.map((image) => (
-                    <ImageListItem key={image.id}>
-                      <img
-                        src={image.url}
-                        alt={`Gallery image ${image.id}`}
-                        style={{ width: "100%", borderRadius: 8 }}
-                      />
-                    </ImageListItem>
-                  ))}
-                </ImageList>
-              ) : (
-                <Typography variant="body2">No images available.</Typography>
-              )}
-            </Box>
+          {gallery?.length && (
+            <Grid size={{ xs: 12, md: 6, lg: 7 }}>
+              <Gallery gallery={gallery} isGalleryLoading={isGalleryLoading} />
+            </Grid>
+          )}
+        </Grid>
+        <Grid container spacing={5} alignItems="stretch">
+          <Grid size={{ xs: 12, md: 6, lg: 5 }}>
+            {/* {hotelInfo?.latitude && hotelInfo?.longitude && (
+                    <Map lat={hotelInfo.latitude} lng={hotelInfo.longitude} />
+                  )} */}
           </Grid>
+
+          {availableRooms?.length && (
+            <Grid size={{ xs: 12, md: 6, lg: 7 }}>
+              <Box
+                sx={{
+                  ...hotelBoxSx,
+                  boxShadow: theme.customShadows.light,
+                }}
+              >
+                {availableRooms.map((room) => (
+                  <AvailableRoomCard room={room} key={room.roomId} />
+                ))}
+              </Box>
+            </Grid>
+          )}
         </Grid>
       </Main>
     </>
