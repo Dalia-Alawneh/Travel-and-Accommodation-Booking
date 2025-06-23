@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getHotel } from "@travelia/api/endpoints/hotel";
+import { getHotel, getHotelGallery } from "@travelia/api/endpoints/hotel";
 import { useParams } from "react-router";
 import PageHero from "../../components/PageHero";
 import Main from "../../components/MainSection";
@@ -10,10 +10,13 @@ import {
   Skeleton,
   Typography,
   useTheme,
+  ImageList,
+  ImageListItem,
 } from "@mui/material";
 import IconWithText from "../../components/IconWithText";
 import { LocationOn } from "@mui/icons-material";
 import Amenities from "../../components/Amenities";
+// import Map from "../../components/Map/Map";
 
 const hotelBoxSx = {
   p: 3,
@@ -27,9 +30,14 @@ const HotelPage = () => {
   const { id } = useParams();
   const theme = useTheme();
 
-  const { data: hotelInfo, isLoading } = useQuery({
-    queryKey: ["hotel"],
+  const { data: hotelInfo, isLoading: isHotelLoading } = useQuery({
+    queryKey: ["hotel", id],
     queryFn: () => getHotel(Number(id)),
+  });
+
+  const { data: gallery, isLoading: isGalleryLoading } = useQuery({
+    queryKey: ["gallery", id],
+    queryFn: () => getHotelGallery(Number(id)),
   });
 
   return (
@@ -44,7 +52,7 @@ const HotelPage = () => {
                 boxShadow: theme.customShadows.light,
               }}
             >
-              {isLoading ? (
+              {isHotelLoading ? (
                 <>
                   <Skeleton variant="text" width="60%" height={40} />
                   <Skeleton variant="text" width="30%" height={20} />
@@ -89,7 +97,42 @@ const HotelPage = () => {
                   {hotelInfo?.amenities && (
                     <Amenities amenities={hotelInfo?.amenities || []} />
                   )}
+
+                  {/* {hotelInfo?.latitude && hotelInfo?.longitude && (
+                    <Map lat={hotelInfo.latitude} lng={hotelInfo.longitude} />
+                  )} */}
                 </>
+              )}
+            </Box>
+          </Grid>
+
+          <Grid size={{ xs: 12, md: 6, lg: 7 }}>
+            <Box
+              sx={{
+                ...hotelBoxSx,
+                boxShadow: theme.customShadows.light,
+              }}
+            >
+              <Typography variant="h5" fontWeight={600} mb={2}>
+                Gallery
+              </Typography>
+
+              {isGalleryLoading ? (
+                <Skeleton variant="rectangular" height={300} />
+              ) : gallery?.length ? (
+                <ImageList cols={3} gap={8}>
+                  {gallery.map((image) => (
+                    <ImageListItem key={image.id}>
+                      <img
+                        src={image.url}
+                        alt={`Gallery image ${image.id}`}
+                        style={{ width: "100%", borderRadius: 8 }}
+                      />
+                    </ImageListItem>
+                  ))}
+                </ImageList>
+              ) : (
+                <Typography variant="body2">No images available.</Typography>
               )}
             </Box>
           </Grid>

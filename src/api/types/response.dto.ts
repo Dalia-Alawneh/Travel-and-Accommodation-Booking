@@ -80,3 +80,8 @@ export interface IHotelResponse {
   cityId: number;
   amenities: IAmenitiesResponse[];
 }
+
+export interface IGalleryResponse {
+  id: number;
+  url: string;
+}
