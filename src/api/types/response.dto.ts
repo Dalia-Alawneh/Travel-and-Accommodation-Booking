@@ -68,3 +68,15 @@ export interface ISearchHotelsResponse {
   discount: number;
   amenities: IAmenitySearchResponse[];
 }
+export interface IHotelResponse {
+  hotelName: string;
+  location: string;
+  description: string;
+  starRating: number;
+  latitude: number;
+  longitude: number;
+  availableRooms: number;
+  imageUrl: string;
+  cityId: number;
+  amenities: IAmenitiesResponse[];
+}
