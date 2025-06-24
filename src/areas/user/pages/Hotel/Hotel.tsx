@@ -190,26 +190,37 @@ const HotelPage = () => {
           {gallery?.length && (
             <Grid size={{ xs: 12, md: 6, lg: 7 }}>
               <Gallery gallery={gallery} isGalleryLoading={isGalleryLoading} />
-              {availableRooms?.length && (
-                <Box
-                  sx={{
-                    ...hotelBoxSx,
-                    mt: 4,
-                    boxShadow: theme.customShadows.light,
-                  }}
-                >
-                  <Typography variant="h3" mb={3}>
-                    Available Rooms
-                  </Typography>
-
-                  <Grid container spacing={3} alignItems="stretch">
-                    {availableRooms.map((room) => (
-                      <Grid size={{ xs: 12, lg: 6 }} key={room.roomId}>
-                        <AvailableRoomCard room={room} />
-                      </Grid>
-                    ))}
+              {isAvailableRoomsLoading ? (
+                <Grid container spacing={2}>
+                  <Grid size={{ xs: 12, lg: 6 }}>
+                    <Skeleton height={500} />
                   </Grid>
-                </Box>
+                  <Grid size={{ xs: 12, lg: 6 }}>
+                    <Skeleton height={500} />
+                  </Grid>
+                </Grid>
+              ) : (
+                availableRooms?.length && (
+                  <Box
+                    sx={{
+                      ...hotelBoxSx,
+                      mt: 4,
+                      boxShadow: theme.customShadows.light,
+                    }}
+                  >
+                    <Typography variant="h3" mb={3}>
+                      Available Rooms
+                    </Typography>
+
+                    <Grid container spacing={3} alignItems="stretch">
+                      {availableRooms.map((room) => (
+                        <Grid size={{ xs: 12, lg: 6 }} key={room.roomId}>
+                          <AvailableRoomCard room={room} />
+                        </Grid>
+                      ))}
+                    </Grid>
+                  </Box>
+                )
               )}
             </Grid>
           )}
