@@ -1,4 +1,3 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -13,12 +12,14 @@ import { Menu } from "@travelia/types";
 import AppLink from "../Link/Link";
 import useLogout from "@travelia/hooks/useLogout";
 import { Logout } from "@mui/icons-material";
+import { ReactNode, useState } from "react";
 interface ITopBarProps {
   menuLinks: Menu;
+  renderMenu: (menuLinks: Menu) => ReactNode;
 }
 
-export default function TopBar({ menuLinks }: ITopBarProps) {
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+export default function TopBar({ menuLinks, renderMenu }: ITopBarProps) {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { handleLogout, loading } = useLogout();
   const handleDrawerToggle = () => {
     setIsDrawerOpen((prevState) => !prevState);
@@ -54,25 +55,9 @@ export default function TopBar({ menuLinks }: ITopBarProps) {
                   <img src={logo} alt="travilia" />
                 </AppLink>
               </Box>
-              <Box
-                width="100%"
-                sx={{
-                  display: {
-                    xs: "none",
-                    sm: "flex",
-                    gap: "1rem",
-                  },
-                  justifyContent: "center",
-                }}
-              >
-                {menuLinks.map((item) => (
-                  <AppLink path={item.path} key={item.title}>
-                    {item.title}
-                  </AppLink>
-                ))}
-              </Box>
+              {renderMenu(menuLinks)}
               <AppButton
-                sx={{ display: { xs: "none", sm: "flex" } }}
+                sx={{ display: { xs: "none", sm: "flex" }, py: 1, ml: 2 }}
                 onClick={handleLogout}
                 loading={loading}
               >
