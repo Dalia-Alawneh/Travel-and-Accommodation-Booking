@@ -61,6 +61,7 @@ const AvailableRoomCard = ({ room }: IAvailableRoomCardProps) => {
       toast.error("Room already in cart!");
     } else {
       dispatch(addToCart(room));
+      toast.success("Room added to cart successfully!");
     }
   };
 
