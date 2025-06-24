@@ -131,16 +131,7 @@ const HotelPage = () => {
                 </Box>
               )}
               <Box>
-                <IconWithText
-                  text="Reviews"
-                  icon={
-                    <Reviews sx={{ color: "custom.orange", fontSize: 18 }} />
-                  }
-                />
                 <Box>
-                  <Typography variant="subtitle2" fontWeight={600} my={2}>
-                    Reviews
-                  </Typography>
                   {isReviewsLoading ? (
                     <>
                       <Skeleton
@@ -157,6 +148,14 @@ const HotelPage = () => {
                     </>
                   ) : reviews?.length ? (
                     <>
+                      <IconWithText
+                        text="Reviews"
+                        icon={
+                          <Reviews
+                            sx={{ color: "custom.orange", fontSize: 18 }}
+                          />
+                        }
+                      />
                       {reviews
                         .slice(0, showAllReviews ? reviews.length : 3)
                         .map((review) => (
