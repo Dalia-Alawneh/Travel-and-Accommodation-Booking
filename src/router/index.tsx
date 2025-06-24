@@ -9,6 +9,7 @@ import SearchPage from "@travelia/areas/user/pages/Search";
 import NotFound from "@travelia/pages/NotFound/NotFound";
 import ServerError from "@travelia/pages/ServerError";
 import RootLayout from "@travelia/layouts/user/RootLayout";
+import HotelPage from "@travelia/areas/user/pages/Hotel";
 
 const AppRouter = () => {
   return (
@@ -27,6 +28,7 @@ const AppRouter = () => {
         <Route element={<RootLayout />}>
           <Route index element={<Home />} />
           <Route path="search" element={<SearchPage />} />
+          <Route path="hotel/:id" element={<HotelPage />} />
         </Route>
       </Route>
       <Route

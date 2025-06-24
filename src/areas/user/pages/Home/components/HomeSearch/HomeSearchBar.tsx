@@ -1,5 +1,6 @@
 import { Paper } from "@mui/material";
 import SearchBar from "../../../../components/SearchBar";
+import { useSearchNavigation } from "@travelia/hooks/useSearchNavigation";
 
 const paperStyle = {
   bgcolor: "#fff",
@@ -14,9 +15,10 @@ const paperStyle = {
 };
 
 const HomeSearchBar = () => {
+  const { onSearch } = useSearchNavigation("search");
   return (
     <Paper sx={paperStyle}>
-      <SearchBar />
+      <SearchBar onSearch={onSearch} />
     </Paper>
   );
 };

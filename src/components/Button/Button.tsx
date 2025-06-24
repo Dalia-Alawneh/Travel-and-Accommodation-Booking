@@ -10,7 +10,7 @@ const AppButton = ({ children, sx, ...rest }: IAppButtonProps) => {
     <Button
       sx={{
         bgcolor: "transparent",
-        color: "primary.main",
+        color: "primary.dark",
         ...sx,
       }}
       {...rest}

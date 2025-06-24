@@ -13,6 +13,7 @@ const headerSx = {
   backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
   position: "relative",
+  mt: 7,
 };
 
 const PageHero = ({ title }: IPageHeroProps) => {

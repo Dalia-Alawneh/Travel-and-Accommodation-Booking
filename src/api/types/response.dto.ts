@@ -42,3 +42,65 @@ export interface ICitiesResponse {
   name: string;
   description: string;
 }
+export interface IAmenitiesResponse {
+  name: string;
+  description: string;
+}
+export interface IAmenitySearchResponse {
+  id: number;
+  name: string;
+  description: string;
+}
+
+export interface ISearchAmenitiesResponse extends IAmenitiesResponse {
+  id: number;
+}
+export interface ISearchHotelsResponse {
+  hotelId: number;
+  hotelName: string;
+  starRating: number;
+  latitude: number;
+  longitude: number;
+  roomPrice: number;
+  roomType: string;
+  cityName: string;
+  roomPhotoUrl: string;
+  discount: number;
+  amenities: IAmenitySearchResponse[];
+}
+export interface IHotelResponse {
+  hotelName: string;
+  location: string;
+  description: string;
+  starRating: number;
+  latitude: number;
+  longitude: number;
+  availableRooms: number;
+  imageUrl: string;
+  cityId: number;
+  amenities: IAmenitiesResponse[];
+}
+
+export interface IGalleryResponse {
+  id: number;
+  url: string;
+}
+
+export interface IRoomResponse {
+  roomId: number;
+  roomNumber: number;
+  roomPhotoUrl: string;
+  roomType: string;
+  capacityOfAdults: number;
+  capacityOfChildren: number;
+  roomAmenities: IAmenitiesResponse[];
+  price: number;
+  availability: boolean;
+}
+
+export interface IReviewResponse {
+  reviewId: number;
+  customerName: string;
+  rating: number;
+  description: string;
+}

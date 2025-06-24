@@ -9,3 +9,22 @@ export const overlaySx: SxProps = {
   bgcolor: "rgba(0, 0, 0, 0.5)",
   backdropFilter: "blur(3px)",
 };
+
+export const bookButtonStyle = {
+  fontWeight: 600,
+  py: 1,
+  width: { xs: "100%", sm: "initial" },
+  bgcolor: "custom.salver",
+  "&:hover": {
+    bgcolor: "custom.orange",
+    color: "custom.beige",
+  },
+};
+
+export const hotelBoxSx = {
+  p: 3,
+  borderRadius: 1,
+  display: "flex",
+  flexDirection: "column",
+  gap: 1,
+};

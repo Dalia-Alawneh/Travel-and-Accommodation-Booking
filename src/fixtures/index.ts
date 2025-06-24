@@ -1,5 +1,5 @@
 import { hero1, hero2, hero3, thumb1, thumb2, thumb3 } from "@travelia/assets";
-import { Menu, SelectItem } from "@travelia/types";
+import { Menu, SelectItem, SortOptions } from "@travelia/types";
 
 export const menuItems: Menu = [
   {
@@ -48,3 +48,13 @@ export const children: SelectItem[] = [
 
 export const TOKEN_KEY = "authentication";
 export const USER = "user";
+
+export const sortOptions: SelectItem[] = [
+  { text: "None", value: "" },
+  { text: "Price: Low to High", value: SortOptions.PriceAsc },
+  { text: "Price: High to Low", value: SortOptions.PriceDesc },
+  { text: "Rating: High to Low", value: SortOptions.RatingDesc },
+  { text: "Rating: Low to High", value: SortOptions.RatingAsc },
+  { text: "Name: A to Z", value: SortOptions.NameAsc },
+  { text: "Name: Z to A", value: SortOptions.NameDesc },
+];

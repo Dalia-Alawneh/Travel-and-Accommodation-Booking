@@ -1,7 +1,12 @@
 import { Box, Grid, SelectChangeEvent } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { useState } from "react";
-import { City, SelectItem } from "@travelia/types";
+import { useEffect, useMemo, useState } from "react";
+import {
+  City,
+  SearchValues,
+  SelectItem,
+  UrlSearchParams,
+} from "@travelia/types";
 import AppDateInput from "@travelia/components/Inputs/DatePicker";
 import { CalendarMonth, People, Search } from "@mui/icons-material";
 import AppButton from "@travelia/components/Button";
@@ -12,28 +17,58 @@ import PopoverSelect from "@travelia/components/Inputs/PopoverSelect";
 import AppSelect from "@travelia/components/Inputs/Select/Select";
 import Counter from "../Counter/Counter";
 
-const SearchBar = () => {
-  const [checkIn, setCheckIn] = useState("");
-  const [checkOut, setCheckOut] = useState("");
+interface ISearchBarProps {
+  onSearch: (params: UrlSearchParams) => void;
+  initialValues?: Partial<SearchValues>;
+  hasSearchBtn?: boolean;
+}
+const SearchBar = ({
+  onSearch,
+  initialValues,
+  hasSearchBtn = true,
+}: ISearchBarProps) => {
+  const [checkIn, setCheckIn] = useState(initialValues?.checkInDate ?? "");
+  const [checkOut, setCheckOut] = useState(initialValues?.checkOutDate ?? "");
   const [city, setCity] = useState<SelectItem>();
-  const [adults, setAdults] = useState(1);
-  const [children, setChildren] = useState(0);
-  const [rooms, setRooms] = useState(1);
+  const [adults, setAdults] = useState(initialValues?.adults ?? 1);
+  const [children, setChildren] = useState(initialValues?.children ?? 0);
+  const [rooms, setRooms] = useState(initialValues?.numberOfRooms ?? 1);
 
   const { data: citiesData } = useQuery({
     queryKey: ["cities"],
     queryFn: getCities,
   });
 
-  const mappedCities: SelectItem[] =
-    citiesData?.map((city: City) => ({
-      text: city.name,
-      value: city.id,
-    })) || [];
+  const mappedCities: SelectItem[] = useMemo(() => {
+    return (
+      citiesData?.map((city: City) => ({
+        text: city.name,
+        value: city.id,
+      })) || []
+    );
+  }, [citiesData]);
+
+  useEffect(() => {
+    if (initialValues?.city && mappedCities.length > 0) {
+      const foundCity = mappedCities.find((c) => c.text === initialValues.city);
+      if (foundCity) setCity(foundCity);
+    }
+  }, [initialValues?.city, mappedCities]);
 
   const handleSelectCityChange = (e: SelectChangeEvent) => {
     const selected = mappedCities.find((c) => c.value === e.target.value);
     if (selected) setCity(selected);
+  };
+
+  const handleOnSearch = () => {
+    onSearch({
+      checkInDate: checkIn,
+      checkOutDate: checkOut,
+      adults,
+      children,
+      city: city?.text || "",
+      numberOfRooms: rooms,
+    });
   };
 
   return (
@@ -86,17 +121,19 @@ const SearchBar = () => {
             </Box>
           </PopoverSelect>
         </Grid>
-        <Grid
-          size={{ xs: 12, sm: 6, lg: 1.8 }}
-          sx={{ display: "flex", gap: 1 }}
-        >
-          <AppButton
-            sx={{ bgcolor: "#000", color: "#fff", px: "30px", width: "100%" }}
-            type="submit"
+        {hasSearchBtn && (
+          <Grid
+            size={{ xs: 12, sm: 6, lg: 1.8 }}
+            sx={{ display: "flex", gap: 1 }}
           >
-            <Search sx={{ fontSize: 20, color: "#ddd" }} /> Search
-          </AppButton>
-        </Grid>
+            <AppButton
+              sx={{ bgcolor: "#000", color: "#fff", px: "30px", width: "100%" }}
+              onClick={handleOnSearch}
+            >
+              <Search sx={{ fontSize: 20, color: "#ddd" }} /> Search
+            </AppButton>
+          </Grid>
+        )}
       </Grid>
     </form>
   );

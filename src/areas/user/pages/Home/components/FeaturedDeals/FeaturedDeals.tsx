@@ -1,9 +1,9 @@
 import { Box } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { getFeaturedDeals } from "@travelia/api/endpoints/home";
-import RoomCard from "@travelia/areas/user/components/RoomCard";
+import RoomCard from "@travelia/areas/user/pages/Home/components/RoomCard";
 import PauseOnHoverCarousel from "../PauseOnHoverCarousel/PauseOnHoverCarousel";
-import RoomCardSkeleton from "@travelia/areas/user/components/RoomCard/RoomCardSkeleton";
+import RoomCardSkeleton from "@travelia/areas/user/pages/Home/components/RoomCard/RoomCardSkeleton";
 import SectionTitle from "@travelia/areas/user/components/SectionTitle/SectionTitle";
 import withContainer from "@travelia/HOC/withContainer";
 

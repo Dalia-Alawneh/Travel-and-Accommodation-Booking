@@ -9,7 +9,7 @@ import * as Yup from "yup";
 
 interface AppFormProps<T extends Yup.Maybe<Yup.AnyObject>> {
   initialValues: T;
-  validationSchema: Yup.ObjectSchema<T>;
+  validationSchema?: Yup.ObjectSchema<T>;
   onSubmit: FormikConfig<T>["onSubmit"];
   render: (formik: FormikProps<T>) => ReactNode;
 }
@@ -23,7 +23,11 @@ const AppForm = <T extends object>({
   const formik = useFormik<T>({
     initialValues,
     validationSchema,
-    onSubmit,
+    onSubmit: async (values, formikHelpers) => {
+      await onSubmit(values, formikHelpers);
+      formikHelpers.setSubmitting(false);
+    },
+    enableReinitialize: false,
   });
 
   return <FormikProvider value={formik}>{render(formik)}</FormikProvider>;

@@ -5,11 +5,13 @@ import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 import { Hotel, LocationOn } from "@mui/icons-material";
 import AppButton from "@travelia/components/Button";
-import DiscountBadge from "../Badges/DiscountBadge";
-import RatingBadge from "../Badges/RatingBadge";
-import RoomPriceWithDiscount from "../RoomPriceWithDiscount";
+import DiscountBadge from "../../../../components/Badges/DiscountBadge";
+import RatingBadge from "../../../../components/Badges/RatingBadge";
+import RoomPriceWithDiscount from "../../../../components/RoomPriceWithDiscount";
 import useValidateImage from "@travelia/hooks/useValidateImage";
-import AppSkeleton from "../Skeleton/Skeleton";
+import AppSkeleton from "../../../../components/Skeleton/Skeleton";
+import { bookButtonStyle } from "@travelia/styles";
+import { useNavigate } from "react-router";
 
 interface IRoomCardProps {
   title: string;
@@ -20,6 +22,7 @@ interface IRoomCardProps {
   cityName: string;
   hotelName: string;
   hotelStarRating: number;
+  hotelId: number;
 }
 
 const cardContentStyle = {
@@ -31,17 +34,6 @@ const cardContentStyle = {
   p: 3,
 };
 
-const bookButtonStyle = {
-  fontWeight: 600,
-  py: 1,
-  width: { xs: "100%", sm: "initial" },
-  bgcolor: "custom.salver",
-  "&:hover": {
-    bgcolor: "custom.orange",
-    color: "custom.beige",
-  },
-};
-
 export default function RoomCard({
   title,
   discount,
@@ -51,8 +43,13 @@ export default function RoomCard({
   originalRoomPrice,
   roomPhotoUrl,
   cityName,
+  hotelId,
 }: IRoomCardProps) {
   const { isLoading, src: imageUrl } = useValidateImage(roomPhotoUrl);
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/user/hotel/${hotelId}`);
+  };
 
   return (
     <Card sx={{ position: "relative" }}>
@@ -98,7 +95,9 @@ export default function RoomCard({
             finalPrice={finalPrice}
             originalRoomPrice={originalRoomPrice}
           />
-          <AppButton sx={bookButtonStyle}>Book Now</AppButton>
+          <AppButton onClick={handleClick} sx={bookButtonStyle}>
+            Book Now
+          </AppButton>
         </Box>
       </CardContent>
     </Card>
