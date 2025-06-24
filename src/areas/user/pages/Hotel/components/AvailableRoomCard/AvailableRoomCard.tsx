@@ -6,8 +6,10 @@ import { bookButtonStyle } from "@travelia/styles";
 import theme from "@travelia/theme";
 import { IAvailableRoom } from "@travelia/types";
 import { styled } from "@mui/material/styles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@travelia/Ducks/reducers";
+import { selectCartItems } from "@travelia/Ducks/selectors/cart";
+import toast from "react-hot-toast";
 
 interface IAvailableRoomCardProps {
   room: IAvailableRoom;
@@ -50,10 +52,16 @@ const cardSx = {
 
 const AvailableRoomCard = ({ room }: IAvailableRoomCardProps) => {
   const [expanded, setExpanded] = useState(false);
+  const cart = useSelector(selectCartItems);
   const dispatch = useDispatch();
+  const exists = cart.some((item) => item.roomId === room.roomId);
 
   const handleAddToCart = () => {
-    dispatch(addToCart(room));
+    if (exists) {
+      toast.error("Room already in cart!");
+    } else {
+      dispatch(addToCart(room));
+    }
   };
 
   return (
