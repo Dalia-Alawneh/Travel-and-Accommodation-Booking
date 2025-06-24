@@ -5,6 +5,7 @@ import AppSkeleton from "@travelia/areas/user/components/Skeleton";
 import useValidateImage from "@travelia/hooks/useValidateImage";
 import formatDateTime from "@travelia/utils/formatDateTime";
 import getContrastTextColor from "@travelia/utils/getContrastTextColor";
+import { useNavigate } from "react-router";
 
 interface IRecentlyVisitedProps {
   hotelName: string;
@@ -14,6 +15,7 @@ interface IRecentlyVisitedProps {
   thumbnailUrl: string;
   priceLowerBound: number;
   priceUpperBound: number;
+  hotelId: number;
 }
 
 const cardContainerSx = {
@@ -48,15 +50,20 @@ const RecentlyVisitedCard = ({
   starRating,
   thumbnailUrl,
   visitDate,
+  hotelId,
 }: IRecentlyVisitedProps) => {
   const { isLoading, src: imageUrl } = useValidateImage(thumbnailUrl);
   const date = formatDateTime(visitDate);
   const theme = useTheme();
+  const navigate = useNavigate();
   const overlayColor = theme.palette.custom.overlay;
   const textColorSx = { color: getContrastTextColor(theme, overlayColor) };
+  const handleClick = () => {
+    navigate(`/user/hotel/${hotelId}`);
+  };
 
   return (
-    <Card sx={cardContainerSx}>
+    <Card onClick={handleClick} sx={cardContainerSx}>
       {isLoading ? (
         <AppSkeleton />
       ) : (
