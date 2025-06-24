@@ -69,7 +69,7 @@ const SearchPage = () => {
       const windowHeight = window.innerHeight;
       const fullHeight = document.body.offsetHeight;
 
-      if (scrollTop + windowHeight >= fullHeight - 200) {
+      if (scrollTop + windowHeight >= fullHeight - 300) {
         setVisibleCount((prev) => prev + 1);
       }
     };
