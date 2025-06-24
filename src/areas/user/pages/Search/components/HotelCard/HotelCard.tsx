@@ -22,6 +22,13 @@ const discountBadgeSx = {
   boxShadow: "customShadows.light",
 };
 
+const cardSx = {
+  mb: 5,
+  cursor: "pointer",
+  borderRadius: 1,
+  p: 4,
+};
+
 const HotelCard = ({ hotel }: IHotelCard) => {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -32,12 +39,7 @@ const HotelCard = ({ hotel }: IHotelCard) => {
   return (
     <Box
       onClick={handleNavigateToHotel}
-      sx={{
-        mb: 5,
-        borderRadius: 1,
-        p: 4,
-        boxShadow: theme.customShadows.light,
-      }}
+      sx={{ ...cardSx, boxShadow: theme.customShadows.light }}
     >
       <Grid container>
         <Grid
