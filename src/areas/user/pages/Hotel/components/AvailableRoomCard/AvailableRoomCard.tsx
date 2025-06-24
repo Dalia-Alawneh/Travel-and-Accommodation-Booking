@@ -1,15 +1,6 @@
 import { useState } from "react";
-import { Collapse, Box, Typography, IconButton } from "@mui/material";
-import {
-  Bed,
-  People,
-  ExpandMore,
-  Check,
-  CheckOutlined,
-  CheckCircle,
-  CheckCircleOutline,
-} from "@mui/icons-material";
-import Amenities from "@travelia/areas/user/components/Amenities";
+import { Collapse, Box, Typography } from "@mui/material";
+import { Bed, People, ExpandMore, CheckCircle } from "@mui/icons-material";
 import AppButton from "@travelia/components/Button";
 import { bookButtonStyle } from "@travelia/styles";
 import theme from "@travelia/theme";
@@ -20,19 +11,20 @@ interface IAvailableRoomCardProps {
   room: IAvailableRoom;
 }
 
-const ExpandIcon = styled(ExpandMore)(
-  ({ theme, expand }: { theme?: any; expand: boolean }) => ({
-    transform: expand ? "rotate(180deg)" : "rotate(0deg)",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-    marginLeft: "auto",
+interface ExpandIconProps {
+  expand: boolean;
+}
+
+const ExpandIcon = styled(ExpandMore)<ExpandIconProps>(({ theme, expand }) => ({
+  transform: expand ? "rotate(180deg)" : "rotate(0deg)",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
   }),
-);
+  marginLeft: "auto",
+}));
 
 const AvailableRoomCard = ({ room }: IAvailableRoomCardProps) => {
   const [expanded, setExpanded] = useState(false);
-
   return (
     <Box
       sx={{
@@ -91,35 +83,39 @@ const AvailableRoomCard = ({ room }: IAvailableRoomCardProps) => {
           flexDirection: "column",
         }}
       >
-        <Box display="flex" alignItems="center">
-          <Box>
-            <Typography variant="h4" fontWeight={700} mb={0.5}>
-              Room {room.roomNumber}
-            </Typography>
-
-            <Box display="flex" gap={1} alignItems="center" mb={0.5}>
-              <People sx={{ color: "custom.orange", fontSize: 16 }} />
-              <Typography variant="body2">
-                Adults: {room.capacityOfAdults} | Children:{" "}
-                {room.capacityOfChildren}
-              </Typography>
-            </Box>
-
-            <Box display="flex" gap={1} alignItems="center" mb={1}>
-              <Bed sx={{ color: "custom.orange", fontSize: 16 }} />
-              <Typography variant="body2">{room.roomType}</Typography>
-            </Box>
-
-            <Typography variant="body2" color="primary" fontWeight={700}>
-              ${room.price.toFixed(2)} / Night
-            </Typography>
-          </Box>
-
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          width="100%"
+          mb={1}
+        >
+          <Typography variant="h4" fontWeight={700}>
+            Room {room.roomNumber}
+          </Typography>
           <ExpandIcon
             expand={expanded}
             onClick={() => setExpanded(!expanded)}
+            sx={{ cursor: "pointer" }}
           />
         </Box>
+
+        <Box display="flex" gap={1} alignItems="center" mb={0.5}>
+          <People sx={{ color: "custom.orange", fontSize: 16 }} />
+          <Typography variant="body2">
+            Adults: {room.capacityOfAdults} | Children:{" "}
+            {room.capacityOfChildren}
+          </Typography>
+        </Box>
+
+        <Box display="flex" gap={1} alignItems="center" mb={1}>
+          <Bed sx={{ color: "custom.orange", fontSize: 16 }} />
+          <Typography variant="body2">{room.roomType}</Typography>
+        </Box>
+
+        <Typography variant="body2" color="primary" fontWeight={700}>
+          ${room.price.toFixed(2)} / Night
+        </Typography>
 
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <Box mt={2}>
