@@ -18,11 +18,12 @@ import Main from "../../components/MainSection";
 const SearchPage = () => {
   const [params] = useSearchParams();
   const { onSearch } = useSearchNavigation("");
-
+  const [visibleCount, setVisibleCount] = useState(1);
   const [searchValues, setSearchValues] = useState<SearchValues>(() =>
     mapSearchParams(params),
   );
   const theme = useTheme();
+  const [loadedIndexes, setLoadedIndexes] = useState<number[]>([]);
 
   const { data: amenitiesData = [] } = useQuery({
     queryKey: ["amenities"],
@@ -61,6 +62,36 @@ const SearchPage = () => {
       })),
     [amenitiesData],
   );
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const fullHeight = document.body.offsetHeight;
+
+      if (scrollTop + windowHeight >= fullHeight - 200) {
+        setVisibleCount((prev) => prev + 1);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const newIndexes = Array.from({ length: visibleCount }, (_, i) => i);
+    const unloaded = newIndexes.filter((i) => !loadedIndexes.includes(i));
+
+    if (unloaded.length > 0) {
+      const timer = setTimeout(() => {
+        setLoadedIndexes((prev) => [...prev, ...unloaded]);
+      }, 200);
+
+      return () => clearTimeout(timer);
+    }
+  }, [visibleCount, loadedIndexes]);
+
+  const visibleHotels = filteredHotels.slice(0, visibleCount);
 
   return (
     <>
@@ -118,8 +149,18 @@ const SearchPage = () => {
             ) : (
               <Box>
                 {filteredHotels.length !== 0 ? (
-                  filteredHotels.map((hotel) => (
-                    <HotelCard key={hotel.hotelId} hotel={hotel} />
+                  visibleHotels.map((hotel, index) => (
+                    <Box key={hotel.hotelId} mb={2}>
+                      {loadedIndexes.includes(index) ? (
+                        <HotelCard hotel={hotel} />
+                      ) : (
+                        <Skeleton
+                          variant="rectangular"
+                          sx={{ borderRadius: 1 }}
+                          height={500}
+                        />
+                      )}
+                    </Box>
                   ))
                 ) : (
                   <Box py={8} display="flex" justifyContent={"center"}>
