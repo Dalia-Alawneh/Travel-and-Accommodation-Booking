@@ -91,7 +91,10 @@ const SearchPage = () => {
     }
   }, [visibleCount, loadedIndexes]);
 
-  const visibleHotels = filteredHotels.slice(0, visibleCount);
+  const visibleHotels = useMemo(
+    () => filteredHotels.slice(0, visibleCount),
+    [filteredHotels, visibleCount],
+  );
 
   return (
     <>
