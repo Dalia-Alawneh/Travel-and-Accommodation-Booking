@@ -41,7 +41,7 @@ const HotelCard = ({ hotel }: IHotelCard) => {
     >
       <Grid container>
         <Grid
-          size={{ xs: 12, md: 7 }}
+          size={{ xs: 12, lg: 7 }}
           borderRight={1}
           borderColor="custom.salver"
           position="relative"
@@ -65,7 +65,7 @@ const HotelCard = ({ hotel }: IHotelCard) => {
           )}
         </Grid>
 
-        <Grid size={{ xs: 12, md: 5 }}>
+        <Grid size={{ xs: 12, lg: 5 }}>
           <Box
             sx={{
               p: 3,

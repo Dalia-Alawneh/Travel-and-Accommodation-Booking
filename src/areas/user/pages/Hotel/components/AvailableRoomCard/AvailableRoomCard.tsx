@@ -15,7 +15,9 @@ interface ExpandIconProps {
   expand: boolean;
 }
 
-const ExpandIcon = styled(ExpandMore)<ExpandIconProps>(({ theme, expand }) => ({
+const ExpandIcon = styled(ExpandMore, {
+  shouldForwardProp: (prop) => prop !== "expand",
+})<ExpandIconProps>(({ theme, expand }) => ({
   transform: expand ? "rotate(180deg)" : "rotate(0deg)",
   transition: theme.transitions.create("transform", {
     duration: theme.transitions.duration.shortest,

@@ -66,8 +66,8 @@ const HotelPage = () => {
     <>
       <PageHero title={hotelInfo?.hotelName || "Hotel"} />
       <Main>
-        <Grid container spacing={5} alignItems="stretch">
-          <Grid size={{ xs: 12, md: 6, lg: 5 }}>
+        <Grid container spacing={3} alignItems="stretch">
+          <Grid size={{ xs: 12, md: 6, lg: 4.5 }}>
             <Box
               sx={{
                 ...hotelBoxSx,
@@ -188,7 +188,7 @@ const HotelPage = () => {
           </Grid>
 
           {gallery?.length && (
-            <Grid size={{ xs: 12, md: 6, lg: 7 }}>
+            <Grid size={{ xs: 12, md: 6, lg: 7.5 }}>
               <Gallery gallery={gallery} isGalleryLoading={isGalleryLoading} />
               {isAvailableRoomsLoading ? (
                 <Grid container spacing={2}>
@@ -204,7 +204,7 @@ const HotelPage = () => {
                   <Box
                     sx={{
                       ...hotelBoxSx,
-                      mt: 4,
+                      mt: 3,
                       boxShadow: theme.customShadows.light,
                     }}
                   >
