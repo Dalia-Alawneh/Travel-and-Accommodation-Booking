@@ -6,6 +6,8 @@ import { bookButtonStyle } from "@travelia/styles";
 import theme from "@travelia/theme";
 import { IAvailableRoom } from "@travelia/types";
 import { styled } from "@mui/material/styles";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@travelia/Ducks/reducers";
 
 interface IAvailableRoomCardProps {
   room: IAvailableRoom;
@@ -48,6 +50,12 @@ const cardSx = {
 
 const AvailableRoomCard = ({ room }: IAvailableRoomCardProps) => {
   const [expanded, setExpanded] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(room));
+  };
+
   return (
     <Box sx={cardSx}>
       <Box
@@ -144,6 +152,7 @@ const AvailableRoomCard = ({ room }: IAvailableRoomCardProps) => {
         </Collapse>
 
         <AppButton
+          onClick={handleAddToCart}
           sx={{
             ...bookButtonStyle,
             bgcolor: "custom.beige",
