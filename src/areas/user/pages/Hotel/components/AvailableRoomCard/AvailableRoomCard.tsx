@@ -152,7 +152,7 @@ const AvailableRoomCard = ({ room }: IAvailableRoomCardProps) => {
             width: "100%",
           }}
         >
-          Book Now
+          Add to Cart
         </AppButton>
       </Box>
     </Box>
