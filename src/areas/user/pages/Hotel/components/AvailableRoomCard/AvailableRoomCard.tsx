@@ -23,20 +23,31 @@ const ExpandIcon = styled(ExpandMore)<ExpandIconProps>(({ theme, expand }) => ({
   marginLeft: "auto",
 }));
 
+const availableBadgeSx = {
+  position: "absolute",
+  top: 10,
+  left: 10,
+  px: 1.5,
+  py: 0.3,
+  fontSize: 11,
+  borderRadius: 1,
+  boxShadow: "0px 0px 8px 0px #ceffd0",
+};
+
+const cardSx = {
+  mb: 3,
+  height: "100%",
+  borderRadius: 1,
+  overflow: "hidden",
+  boxShadow: theme.customShadows.light,
+  display: "flex",
+  flexDirection: "column",
+};
+
 const AvailableRoomCard = ({ room }: IAvailableRoomCardProps) => {
   const [expanded, setExpanded] = useState(false);
   return (
-    <Box
-      sx={{
-        mb: 3,
-        height: "100%",
-        borderRadius: 1,
-        overflow: "hidden",
-        boxShadow: theme.customShadows.light,
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <Box sx={cardSx}>
       <Box
         sx={{
           flex: "0 0 220px",
@@ -58,16 +69,7 @@ const AvailableRoomCard = ({ room }: IAvailableRoomCardProps) => {
           <Box
             bgcolor="success.light"
             color="white"
-            sx={{
-              position: "absolute",
-              top: 10,
-              left: 10,
-              px: 2,
-              py: 0.5,
-              borderRadius: 2,
-              fontSize: 12,
-              boxShadow: "0px 0px 11px 1px #ceffd0",
-            }}
+            sx={availableBadgeSx}
             fontWeight={600}
           >
             Available
