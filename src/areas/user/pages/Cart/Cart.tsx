@@ -14,6 +14,7 @@ import ConfirmDeleteDialog from "@travelia/components/Dialogs/ConfirmDelete";
 import { useState } from "react";
 import AppButton from "@travelia/components/Button";
 import CheckoutForm from "./components/CheckoutForm";
+import AppDivider from "@travelia/components/Divider/Divider";
 
 const CartPage = () => {
   const cart = useSelector(selectCartItems);
@@ -98,7 +99,7 @@ const CartPage = () => {
               <Typography mt={1} fontWeight={700}>
                 Total: ${total}
               </Typography>
-
+              <AppDivider orientation="horizontal" />
               {!showCheckoutForm ? (
                 <AppButton
                   sx={{ mt: 2, bgcolor: "primary", color: "white" }}

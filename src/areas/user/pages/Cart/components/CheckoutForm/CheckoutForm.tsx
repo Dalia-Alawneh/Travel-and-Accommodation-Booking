@@ -4,6 +4,8 @@ import AppTextField from "@travelia/components/Inputs/TextField/TextField";
 import * as Yup from "yup";
 import CardTypeSelector from "../CardTypeSelector";
 import { useState } from "react";
+import CardNumberInput from "./InputCardNumber";
+import ExpiryDateInput from "./ExpiryDateInput";
 
 interface CheckoutFormValues {
   fullName: string;
@@ -25,7 +27,8 @@ const validationSchema = Yup.object({
   fullName: Yup.string().required("Full name is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
   cardNumber: Yup.string()
-    .matches(/^\d{16}$/, "Card number must be 16 digits")
+    .transform((value) => value.replace(/\s/g, ""))
+    .length(16, "Card number must be 16 digits")
     .required("Card number is required"),
   expiryDate: Yup.string().required("Expiry date is required"),
   cvv: Yup.string()
@@ -56,8 +59,8 @@ const CheckoutForm = () => {
           <AppTextField name="fullName" placeholder="Your Full Name" />
           <AppTextField name="email" placeholder="Your Email Address" />
           <CardTypeSelector value={cardType} onChange={setCardType} />
-          <AppTextField name="cardNumber" placeholder="Card Number" />
-          <AppTextField name="expiryDate" placeholder="MM/YY" />
+          <CardNumberInput name="cardNumber" />
+          <ExpiryDateInput name="expiryDate" />
           <AppTextField name="cvv" placeholder="CVV" />
 
           <Button
