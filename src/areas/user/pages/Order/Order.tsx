@@ -6,7 +6,6 @@ import {
   TableRow,
   TableCell,
   TableBody,
-  Button,
   Divider,
   useTheme,
 } from "@mui/material";
@@ -16,20 +15,20 @@ import { useLocation, useNavigate } from "react-router";
 import { useEffect } from "react";
 import AppButton from "@travelia/components/Button";
 import formatDateTime from "@travelia/utils/formatDateTime";
+import { generateOrderPDF } from "@travelia/utils";
 
 const OrderPage = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const theme = useTheme();
+
   useEffect(() => {
     if (!state?.booking) {
       navigate("/user/cart");
     }
   }, [state, navigate]);
 
-  if (!state?.booking) {
-    return null;
-  }
+  if (!state?.booking) return null;
 
   const {
     customerName,
@@ -44,6 +43,7 @@ const OrderPage = () => {
   } = state.booking;
 
   const date = formatDateTime(bookingDateTime);
+
   return (
     <Main>
       <Box py={6} display="flex" flexDirection="column" alignItems="center">
@@ -63,11 +63,11 @@ const OrderPage = () => {
             display="flex"
             justifyContent="space-between"
             alignItems="center"
+            mb={2}
           >
-            <Typography variant="h4" fontWeight={700} mb={2}>
+            <Typography variant="h4" fontWeight={700}>
               Order Details
             </Typography>
-
             <Box
               bgcolor="success.main"
               px={2}
@@ -80,12 +80,15 @@ const OrderPage = () => {
               <strong>{bookingStatus}</strong>
             </Box>
           </Box>
-          <Typography variant="h5" fontWeight={700}>
+
+          <Typography variant="h6" fontWeight={700} mb={1}>
             {customerName} Order
           </Typography>
-          <Typography variant="caption">#{confirmationNumber}</Typography>
+          <Typography variant="caption" display="block" mb={3}>
+            #{confirmationNumber}
+          </Typography>
 
-          <Table sx={{ mt: 4, bgcolor: "custom.salver" }}>
+          <Table sx={{ bgcolor: "custom.salver" }}>
             <TableHead>
               <TableRow>
                 <TableCell>Room No.</TableCell>
@@ -106,10 +109,11 @@ const OrderPage = () => {
             </TableBody>
           </Table>
 
-          <Typography mt={4} variant="body2">
+          <Divider sx={{ my: 3 }} />
+
+          <Typography variant="body2">
             Subtotal: <strong>${totalCost}</strong>
           </Typography>
-
           <Typography mt={1} variant="body2" fontWeight="bold">
             Total: ${totalCost}
           </Typography>
@@ -123,6 +127,7 @@ const OrderPage = () => {
                 width={20}
               />
             }
+            onClick={() => generateOrderPDF(state.booking)}
           >
             Download Order Details PDF
           </AppButton>
