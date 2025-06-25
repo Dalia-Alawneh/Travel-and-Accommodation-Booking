@@ -1,4 +1,3 @@
-import { Label } from "@mui/icons-material";
 import {
   InputLabel,
   SlotComponentProps,

@@ -6,12 +6,14 @@ interface IConfirmDialogProps {
   open: boolean;
   handleClose: () => void;
   onConfirmDelete: () => void;
+  description?: string;
 }
 
 const ConfirmDeleteDialog = ({
   open,
   handleClose,
   onConfirmDelete,
+  description,
 }: IConfirmDialogProps) => {
   return (
     <AppDialog open={open} handleClose={handleClose}>
@@ -22,13 +24,13 @@ const ConfirmDeleteDialog = ({
       </AppDialog.Title>
       <AppDialog.Content>
         <Box textAlign="center">
-          <Typography textAlign="center" variant="h3">
+          <Typography textAlign="center" variant="h3" mb={1}>
             Confirm Delete
           </Typography>
-          <p>
-            Are you sure you want to delete this item? This action cannot be
-            undone.
-          </p>
+          <Typography variant="caption" fontSize={15}>
+            {description ||
+              " Are you sure you want to delete this item? This action cannot be undone."}
+          </Typography>
         </Box>
       </AppDialog.Content>
       <AppDialog.Actions>

@@ -22,20 +22,26 @@ const CartPage = () => {
   const total = useSelector(selectTotalPrice);
   const dispatch = useDispatch();
   const theme = useTheme();
-  const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
+  const [openConfirmDeleteRoom, setOpenConfirmDeleteRoom] = useState(false);
+  const [openConfirmDeleteCart, setOpenConfirmDeleteCart] = useState(false);
   const [selectedRoomId, setSelectedRoomId] = useState<number | null>(null);
   const [showCheckoutForm, setShowCheckoutForm] = useState(false);
 
-  const handleDelete = (id: number) => {
+  const handleDeleteRoom = (id: number) => {
     setSelectedRoomId(id);
-    setOpenConfirmDelete(true);
+    setOpenConfirmDeleteRoom(true);
   };
 
-  const confirmDelete = () => {
+  const confirmDeleteRoom = () => {
     if (selectedRoomId !== null) {
       dispatch(removeFromCart(selectedRoomId));
     }
-    setOpenConfirmDelete(false);
+    setOpenConfirmDeleteRoom(false);
+  };
+
+  const confirmDeleteCart = () => {
+    dispatch(clearCart());
+    setOpenConfirmDeleteCart(false);
   };
 
   return (
@@ -46,7 +52,7 @@ const CartPage = () => {
           <Box display="flex" justifyContent="end" mb={2}>
             <AppButton
               sx={{ bgcolor: "custom.danger", color: "white", py: 1, px: 3 }}
-              onClick={() => dispatch(clearCart())}
+              onClick={() => setOpenConfirmDeleteCart(true)}
             >
               Clear Cart
             </AppButton>
@@ -79,7 +85,7 @@ const CartPage = () => {
                 <CartRoom
                   room={room}
                   key={room.roomId}
-                  handleDelete={() => handleDelete(room.roomId)}
+                  handleDelete={() => handleDeleteRoom(room.roomId)}
                 />
               ))}
             </Box>
@@ -118,9 +124,16 @@ const CartPage = () => {
         )}
 
         <ConfirmDeleteDialog
-          open={openConfirmDelete}
-          onConfirmDelete={confirmDelete}
-          handleClose={() => setOpenConfirmDelete(false)}
+          open={openConfirmDeleteRoom}
+          onConfirmDelete={confirmDeleteRoom}
+          handleClose={() => setOpenConfirmDeleteRoom(false)}
+        />
+        <ConfirmDeleteDialog
+          open={openConfirmDeleteCart}
+          onConfirmDelete={confirmDeleteCart}
+          handleClose={() => setOpenConfirmDeleteCart(false)}
+          description="Are you sure you want to delete all cart? This action cannot be
+            undone."
         />
       </Main>
     </>
