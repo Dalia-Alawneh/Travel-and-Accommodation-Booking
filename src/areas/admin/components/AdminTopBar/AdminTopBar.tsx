@@ -1,5 +1,4 @@
-import { Menu } from "@mui/icons-material";
-import { Box, IconButton } from "@mui/material";
+import { Box } from "@mui/material";
 import AppDrawer from "@travelia/components/Drawer";
 import AppLink from "@travelia/components/Link";
 import TopBar from "@travelia/components/TopBar";
