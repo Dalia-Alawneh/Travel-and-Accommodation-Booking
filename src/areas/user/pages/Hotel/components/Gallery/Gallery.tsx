@@ -60,9 +60,7 @@ const Gallery = ({ gallery, isGalleryLoading }: IGalleryProps) => {
           boxShadow: theme.customShadows.light,
         }}
       >
-        <Typography variant="h3" fontWeight={600} mb={2}>
-          Gallery
-        </Typography>
+        <Typography variant="h3">Gallery</Typography>
 
         {isGalleryLoading ? (
           <Skeleton variant="rectangular" height={300} />
