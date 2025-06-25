@@ -10,6 +10,9 @@ import NotFound from "@travelia/pages/NotFound/NotFound";
 import ServerError from "@travelia/pages/ServerError";
 import RootLayout from "@travelia/layouts/user/RootLayout";
 import HotelPage from "@travelia/areas/user/pages/Hotel";
+import CartPage from "@travelia/areas/user/pages/Cart";
+import OrderPage from "@travelia/areas/user/pages/Order";
+import UnAuthorize from "@travelia/pages/UnAuthorize";
 
 const AppRouter = () => {
   return (
@@ -17,6 +20,7 @@ const AppRouter = () => {
       <Route path="/" element={<Welcome />} />
       <Route path="*" element={<NotFound />} />
       <Route path="/500" element={<ServerError />} />
+      <Route path="/401" element={<UnAuthorize />} />
 
       <Route element={<GuestRoute />}>
         <Route path="/login" element={<Login />} />
@@ -29,6 +33,8 @@ const AppRouter = () => {
           <Route index element={<Home />} />
           <Route path="search" element={<SearchPage />} />
           <Route path="hotel/:id" element={<HotelPage />} />
+          <Route path="cart" element={<CartPage />} />
+          <Route path="order" element={<OrderPage />} />
         </Route>
       </Route>
       <Route

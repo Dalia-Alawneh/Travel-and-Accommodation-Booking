@@ -1,6 +1,6 @@
 import { SearchValues } from "@travelia/types";
 
-const mapSearchParams = (params: URLSearchParams): SearchValues => ({
+const mapSearchRoomParams = (params: URLSearchParams): SearchValues => ({
   checkInDate: params.get("checkInDate") ?? "",
   checkOutDate: params.get("checkOutDate") ?? "",
   city: params.get("city") ?? "",
@@ -13,4 +13,4 @@ const mapSearchParams = (params: URLSearchParams): SearchValues => ({
   sort: "",
 });
 
-export default mapSearchParams;
+export default mapSearchRoomParams;

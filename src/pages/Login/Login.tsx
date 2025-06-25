@@ -8,7 +8,7 @@ import {
 import AppForm from "@travelia/components/Form";
 import AppTextField from "@travelia/components/Inputs/TextField/TextField";
 import { LoginFormValues, UserActions, UserType } from "@travelia/types";
-import { loginSchema } from "../../areas/user/schemas/login";
+import { loginSchema } from "../../schemas/login";
 import AppButton from "@travelia/components/Button";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";

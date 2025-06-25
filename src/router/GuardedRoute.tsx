@@ -9,7 +9,7 @@ const GuardedRoute = ({ allowedRoles }: GuardedRouteProps) => {
   const role = user?.userType;
 
   if (!isAuthenticated) return <Navigate to="/login" />;
-  if (!allowedRoles.includes(role)) return <Navigate to="/unauthorized" />;
+  if (!allowedRoles.includes(role)) return <Navigate to="/401" />;
 
   return <Outlet />;
 };

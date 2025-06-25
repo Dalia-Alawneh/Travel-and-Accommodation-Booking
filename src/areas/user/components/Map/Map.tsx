@@ -1,28 +1,61 @@
+import Map, { Marker } from "react-map-gl/mapbox";
+import "mapbox-gl/dist/mapbox-gl.css";
 import { Box } from "@mui/material";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { Warning } from "@mui/icons-material";
+import { useState } from "react";
+
 interface IMapProps {
   lat: number;
   lng: number;
 }
-const Map = ({ lat, lng }: IMapProps) => {
-  const position: [number, number] = [lat, lng];
+
+const mapFallbackSx = {
+  width: "100%",
+  height: "100%",
+  borderRadius: 12,
+  backgroundColor: "#eee",
+  display: "flex",
+  gap: 4,
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: 16,
+};
+
+const MAP_TOKEN = import.meta.env.VITE_MAP_TOKEN;
+
+const AppMap = ({ lat, lng }: IMapProps) => {
+  const [mapError, setMapError] = useState(false);
 
   return (
-    <MapContainer
-      center={position}
-      zoom={13}
-      scrollWheelZoom={false}
-      style={{ height: "300px", width: "100%" }}
+    <div
+      style={{
+        width: "100%",
+        height: 320,
+        borderRadius: 12,
+        position: "relative",
+      }}
     >
-      <TileLayer
-        attribution="&copy; OpenStreetMap contributors"
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <Marker position={position}>
-        <Popup>Exact Location</Popup>
-      </Marker>
-    </MapContainer>
+      {!mapError ? (
+        <Map
+          mapboxAccessToken={MAP_TOKEN}
+          initialViewState={{
+            longitude: lng,
+            latitude: lat,
+            zoom: 14,
+          }}
+          style={{ width: "100%", height: "100%", borderRadius: 12 }}
+          mapStyle="mapbox://styles/mapbox/streets-v9"
+          onError={() => setMapError(true)}
+        >
+          <Marker latitude={lat} longitude={lng} />
+        </Map>
+      ) : (
+        <Box style={mapFallbackSx}>
+          <Warning fontSize="small" color="warning" /> Error loading map
+        </Box>
+      )}
+    </div>
   );
 };
 
-export default Map;
+export default AppMap;

@@ -49,7 +49,7 @@ const AppTextField = ({ name, slotProps, ...rest }: AppTextFieldProps) => {
           textTransform: "capitalize",
         }}
       >
-        {name}
+        {rest.label ?? name}
       </InputLabel>
       <TextField
         {...field}

@@ -1,4 +1,4 @@
-import { LoginFormValues } from "@travelia/types";
+import { IAvailableRoom, LoginFormValues } from "@travelia/types";
 
 export interface ILoginPayload extends LoginFormValues {}
 
@@ -11,4 +11,12 @@ export interface IRequestSearchParams {
   numberOfRooms: number;
   starRate: number;
   sort: string;
+}
+
+export interface IBookingPayload {
+  customerName: string;
+  rooms: Partial<IAvailableRoom>[];
+  bookingDateTime: string;
+  totalCost: number;
+  paymentMethod: string;
 }

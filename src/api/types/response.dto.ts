@@ -104,3 +104,15 @@ export interface IReviewResponse {
   rating: number;
   description: string;
 }
+
+export interface IBookingResponse {
+  customerName: string;
+  hotelName: string;
+  roomNumber: string;
+  roomType: string;
+  bookingDateTime: string;
+  totalCost: number;
+  paymentMethod: string;
+  bookingStatus: string;
+  confirmationNumber: string;
+}

@@ -1,12 +1,11 @@
 import Footer from "@travelia/areas/user/components/Footer";
-import TopBar from "@travelia/components/TopBar";
-import { menuItems } from "@travelia/fixtures";
+import UserTopBar from "@travelia/areas/user/components/UserTopBar";
 import { Outlet } from "react-router";
 
 const RootLayout = () => {
   return (
     <>
-      <TopBar menuLinks={menuItems} />
+      <UserTopBar />
       <Outlet />
       <Footer />
     </>
