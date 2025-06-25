@@ -1,6 +1,6 @@
 import { Box, Button } from "@mui/material";
 import AppForm from "@travelia/components/Form";
-import AppTextField from "@travelia/components/Inputs/TextField/TextField";
+import AppTextFieldFormik from "@travelia/components/Inputs/TextField/TextField";
 import CardTypeSelector from "../CardTypeSelector";
 import { useState } from "react";
 import CardNumberInput from "./InputCardNumber";
@@ -84,16 +84,16 @@ const CheckoutForm = () => {
           gap={2}
           mt={2}
         >
-          <AppTextField
+          <AppTextFieldFormik
             name="fullName"
             label="Full Name"
             placeholder="Your Full Name"
           />
-          <AppTextField name="email" placeholder="Your Email Address" />
+          <AppTextFieldFormik name="email" placeholder="Your Email Address" />
           <CardTypeSelector value={cardType} onChange={setCardType} />
           <CardNumberInput name="cardNumber" />
           <ExpiryDateInput name="expiryDate" />
-          <AppTextField name="cvv" placeholder="CVV" />
+          <AppTextFieldFormik name="cvv" placeholder="CVV" />
 
           <Button
             type="submit"

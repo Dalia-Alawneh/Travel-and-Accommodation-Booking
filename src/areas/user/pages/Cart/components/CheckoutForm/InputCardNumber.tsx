@@ -1,5 +1,5 @@
 import { useField } from "formik";
-import AppTextField from "@travelia/components/Inputs/TextField/TextField";
+import AppTextFieldFormik from "@travelia/components/Inputs/TextField/TextField";
 
 interface CardNumberInputProps {
   name: string;
@@ -22,7 +22,7 @@ const CardNumberInput = ({ name }: CardNumberInputProps) => {
   };
 
   return (
-    <AppTextField
+    <AppTextFieldFormik
       {...field}
       value={field.value}
       onChange={handleChange}
