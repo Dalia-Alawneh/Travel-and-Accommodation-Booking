@@ -1,28 +1,28 @@
-import { Box } from "@mui/material";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import * as React from "react";
+import Map, { Marker } from "react-map-gl/mapbox";
+// If using with mapbox-gl v1:
+// import Map from 'react-map-gl/mapbox-legacy';
+import "mapbox-gl/dist/mapbox-gl.css";
 interface IMapProps {
   lat: number;
   lng: number;
 }
-const Map = ({ lat, lng }: IMapProps) => {
-  const position: [number, number] = [lat, lng];
 
+const AppMap = ({ lat, lng }: IMapProps) => {
   return (
-    <MapContainer
-      center={position}
-      zoom={13}
-      scrollWheelZoom={false}
-      style={{ height: "300px", width: "100%" }}
+    <Map
+      mapboxAccessToken="pk.eyJ1IjoiZGFsaWFzc3MiLCJhIjoiY21jYzg2NjZuMDQ5eTJscXp5dm9zb3VjZCJ9.NtLpIT3XqyyazbNc9tUc6g"
+      initialViewState={{
+        longitude: lng,
+        latitude: lat,
+        zoom: 14,
+      }}
+      style={{ width: "100%", height: 320, borderRadius: 12 }}
+      mapStyle="mapbox://styles/mapbox/streets-v9"
     >
-      <TileLayer
-        attribution="&copy; OpenStreetMap contributors"
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <Marker position={position}>
-        <Popup>Exact Location</Popup>
-      </Marker>
-    </MapContainer>
+      <Marker latitude={lat} longitude={lng} />
+    </Map>
   );
 };
 
-export default Map;
+export default AppMap;

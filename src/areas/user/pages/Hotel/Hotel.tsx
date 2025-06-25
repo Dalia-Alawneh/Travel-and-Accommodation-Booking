@@ -24,7 +24,7 @@ import { hotelBoxSx } from "@travelia/styles";
 import AvailableRoomCard from "./components/AvailableRoomCard";
 import Review from "./components/Review/Review";
 import { useState } from "react";
-// import Map from "../../components/Map/Map";
+import AppMap from "../../components/Map/Map";
 
 const HotelPage = () => {
   const { id } = useParams();
@@ -130,6 +130,12 @@ const HotelPage = () => {
                   )}
                 </Box>
               )}
+              <Box width={{ xs: 290, md: 350 }} my={3} borderRadius={1}>
+                <AppMap
+                  lat={hotelInfo?.latitude ?? 0}
+                  lng={hotelInfo?.longitude ?? 0}
+                />
+              </Box>
               <Box>
                 <Box>
                   {isReviewsLoading ? (
