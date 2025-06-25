@@ -130,12 +130,16 @@ const HotelPage = () => {
                   )}
                 </Box>
               )}
-              <Box width={{ xs: 290, md: 350 }} my={3} borderRadius={1}>
-                <AppMap
-                  lat={hotelInfo?.latitude ?? 0}
-                  lng={hotelInfo?.longitude ?? 0}
-                />
-              </Box>
+              {hotelInfo?.latitude && hotelInfo?.longitude ? (
+                <Box width={{ xs: 290, md: 350 }} my={3} borderRadius={1}>
+                  <AppMap
+                    lat={hotelInfo?.latitude}
+                    lng={hotelInfo?.longitude}
+                  />
+                </Box>
+              ) : (
+                <Skeleton variant="rectangular" height={320} />
+              )}
               <Box>
                 <Box>
                   {isReviewsLoading ? (
