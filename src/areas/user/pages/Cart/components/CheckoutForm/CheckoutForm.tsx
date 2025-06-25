@@ -1,7 +1,6 @@
 import { Box, Button } from "@mui/material";
 import AppForm from "@travelia/components/Form";
 import AppTextField from "@travelia/components/Inputs/TextField/TextField";
-import * as Yup from "yup";
 import CardTypeSelector from "../CardTypeSelector";
 import { useState } from "react";
 import CardNumberInput from "./InputCardNumber";
@@ -16,6 +15,7 @@ import {
   selectCartItems,
   selectTotalPrice,
 } from "@travelia/Ducks/selectors/cart";
+import { checkoutSchema } from "@travelia/schemas/checkout";
 
 interface CheckoutFormValues {
   fullName: string;
@@ -32,19 +32,6 @@ const initialValues: CheckoutFormValues = {
   expiryDate: "",
   cvv: "",
 };
-
-const validationSchema = Yup.object({
-  fullName: Yup.string().required("Full name is required"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  cardNumber: Yup.string()
-    .transform((value) => value.replace(/\s/g, ""))
-    .length(16, "Card number must be 16 digits")
-    .required("Card number is required"),
-  expiryDate: Yup.string().required("Expiry date is required"),
-  cvv: Yup.string()
-    .matches(/^\d{3,4}$/, "CVV must be 3 or 4 digits")
-    .required("CVV is required"),
-});
 
 const CheckoutForm = () => {
   const [cardType, setCardType] = useState<string>("visa");
@@ -67,7 +54,7 @@ const CheckoutForm = () => {
   return (
     <AppForm<CheckoutFormValues>
       initialValues={initialValues}
-      validationSchema={validationSchema}
+      validationSchema={checkoutSchema}
       onSubmit={(values) => {
         if (cart.length === 0) {
           toast.error("Your cart is empty!");
