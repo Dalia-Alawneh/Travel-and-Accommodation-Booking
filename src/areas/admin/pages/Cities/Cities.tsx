@@ -1,12 +1,7 @@
 import { Grid } from "@mui/material";
-import AdminTopBar from "../../components/AdminTopBar/AdminTopBar";
 
 const Cities = () => {
-  return (
-    <Grid container>
-      <AdminTopBar />
-    </Grid>
-  );
+  return <Grid container>ss</Grid>;
 };
 
 export default Cities;

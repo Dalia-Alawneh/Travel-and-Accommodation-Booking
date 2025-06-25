@@ -7,7 +7,7 @@ import {
 } from "@travelia/api/endpoints/hotel";
 import { useParams } from "react-router";
 import PageHero from "../../components/PageHero";
-import Main from "../../components/MainSection";
+import Main from "../../../../components/MainSection";
 import {
   Box,
   Grid,

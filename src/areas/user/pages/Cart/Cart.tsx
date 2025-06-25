@@ -9,7 +9,7 @@ import { Box, Typography, useTheme } from "@mui/material";
 import { clearCart, removeFromCart } from "@travelia/Ducks/actions";
 import { emptyCart } from "@travelia/assets";
 import CartRoom from "./components/CartRoom";
-import Main from "../../components/MainSection";
+import Main from "../../../../components/MainSection";
 import ConfirmDeleteDialog from "@travelia/components/Dialogs/ConfirmDelete";
 import { useState } from "react";
 import AppButton from "@travelia/components/Button";

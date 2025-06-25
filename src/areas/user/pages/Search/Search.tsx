@@ -13,7 +13,7 @@ import HotelFilterForm from "./components/HotelFilterForm/HotelFilterForm";
 import SortMenu from "@travelia/components/Inputs/Sort/Sort";
 import { sortOptions } from "@travelia/fixtures";
 import mapSearchRoomParams from "@travelia/utils/mapSearchParams";
-import Main from "../../components/MainSection";
+import Main from "../../../../components/MainSection";
 
 const SearchPage = () => {
   const [params] = useSearchParams();

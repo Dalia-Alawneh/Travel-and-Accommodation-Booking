@@ -14,6 +14,7 @@ import CartPage from "@travelia/areas/user/pages/Cart";
 import OrderPage from "@travelia/areas/user/pages/Order";
 import UnAuthorize from "@travelia/pages/UnAuthorize";
 import Cities from "@travelia/areas/admin/pages/Cities";
+import AdminLayout from "@travelia/layouts/admin/AdminLayout";
 
 const AppRouter = () => {
   return (
@@ -42,7 +43,9 @@ const AppRouter = () => {
         path="/admin"
         element={<GuardedRoute allowedRoles={[UserType.Admin]} />}
       >
-        <Route path="cities" element={<Cities />} />
+        <Route element={<AdminLayout />}>
+          <Route path="cities" element={<Cities />} />
+        </Route>
       </Route>
     </Routes>
   );
