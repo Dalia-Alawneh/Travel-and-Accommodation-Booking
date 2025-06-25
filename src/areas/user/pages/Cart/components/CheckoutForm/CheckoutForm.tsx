@@ -10,8 +10,12 @@ import { useMutation } from "@tanstack/react-query";
 import { submitBooking } from "@travelia/api/endpoints/booking";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "@travelia/Ducks/reducers";
+import {
+  selectCartItems,
+  selectTotalPrice,
+} from "@travelia/Ducks/selectors/cart";
 
 interface CheckoutFormValues {
   fullName: string;
@@ -44,6 +48,8 @@ const validationSchema = Yup.object({
 
 const CheckoutForm = () => {
   const [cardType, setCardType] = useState<string>("visa");
+  const cart = useSelector(selectCartItems);
+  const totalCost = useSelector(selectTotalPrice);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { mutate: checkoutMutate, isPending: isCheckoutPending } = useMutation({
@@ -63,7 +69,23 @@ const CheckoutForm = () => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={(values) => {
-        checkoutMutate(values);
+        if (cart.length === 0) {
+          toast.error("Your cart is empty!");
+          return;
+        }
+
+        const payload = {
+          customerName: values.fullName,
+          paymentMethod: cardType,
+          bookingDateTime: new Date().toISOString(),
+          totalCost: totalCost,
+          rooms: cart.map((room) => ({
+            roomNumber: room.roomNumber,
+            roomType: room.roomType,
+          })),
+        };
+
+        checkoutMutate(payload);
       }}
       render={({ handleSubmit, isSubmitting }) => (
         <Box
