@@ -160,6 +160,23 @@ const theme = createTheme({
         },
       },
     },
+    MuiToggleButton: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "&.Mui-selected": {
+            backgroundColor: theme.palette.custom.salver,
+
+            "&:hover": {
+              backgroundColor: theme.palette.custom.salver,
+            },
+
+            "& svg": {
+              color: theme.palette.custom.gold,
+            },
+          },
+        }),
+      },
+    },
   },
 });
 
