@@ -12,7 +12,7 @@ import { useSearchNavigation } from "@travelia/hooks/useSearchNavigation";
 import HotelFilterForm from "./components/HotelFilterForm/HotelFilterForm";
 import SortMenu from "@travelia/components/Inputs/Sort/Sort";
 import { sortOptions } from "@travelia/fixtures";
-import mapSearchParams from "@travelia/utils/mapSearchParams";
+import mapSearchRoomParams from "@travelia/utils/mapSearchParams";
 import Main from "../../components/MainSection";
 
 const SearchPage = () => {
@@ -20,7 +20,7 @@ const SearchPage = () => {
   const { onSearch } = useSearchNavigation("");
   const [visibleCount, setVisibleCount] = useState(1);
   const [searchValues, setSearchValues] = useState<SearchValues>(() =>
-    mapSearchParams(params),
+    mapSearchRoomParams(params),
   );
   const theme = useTheme();
   const [loadedIndexes, setLoadedIndexes] = useState<number[]>([]);
@@ -37,7 +37,7 @@ const SearchPage = () => {
 
   useEffect(() => {
     setSearchValues((prev) => ({
-      ...mapSearchParams(params),
+      ...mapSearchRoomParams(params),
       budget: prev.budget,
       starRate: prev.starRate,
       amenities: prev.amenities,
