@@ -8,17 +8,14 @@ import {
   IconButton,
 } from "@mui/material";
 import Amenities from "@travelia/areas/user/components/Amenities";
-import { removeFromCart } from "@travelia/Ducks/reducers";
 import { IAvailableRoom } from "@travelia/types";
-import { useDispatch } from "react-redux";
 
 interface ICartRoomProps {
   room: Omit<IAvailableRoom, "availability">;
+  handleDelete: () => void;
 }
 
-const CartRoom = ({ room }: ICartRoomProps) => {
-  const dispatch = useDispatch();
-
+const CartRoom = ({ room, handleDelete }: ICartRoomProps) => {
   return (
     <Card
       key={room.roomId}
@@ -63,7 +60,7 @@ const CartRoom = ({ room }: ICartRoomProps) => {
 
         <IconButton
           color="error"
-          onClick={() => dispatch(removeFromCart(room.roomId))}
+          onClick={handleDelete}
           sx={{ position: "absolute", top: 10, right: 10 }}
         >
           <DeleteRounded />

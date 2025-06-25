@@ -5,15 +5,30 @@ import {
 import PageHero from "../../components/PageHero";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Typography, Button } from "@mui/material";
-import { clearCart } from "@travelia/Ducks/actions";
+import { clearCart, removeFromCart } from "@travelia/Ducks/actions";
 import { emptyCart } from "@travelia/assets";
 import CartRoom from "./components/CartRoom";
 import Main from "../../components/MainSection";
+import ConfirmDeleteDialog from "@travelia/components/Dialogs/ConfirmDelete";
+import { useState } from "react";
 
 const CartPage = () => {
   const cart = useSelector(selectCartItems);
   const total = useSelector(selectTotalPrice);
   const dispatch = useDispatch();
+  const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
+  const [selectedRoomId, setSelectedRoomId] = useState<number | null>(null);
+
+  const handleDelete = (id: number) => {
+    setSelectedRoomId(id);
+    setOpenConfirmDelete(true);
+  };
+  const confirmDelete = () => {
+    if (selectedRoomId !== null) {
+      dispatch(removeFromCart(selectedRoomId));
+    }
+    setOpenConfirmDelete(false);
+  };
 
   return (
     <>
@@ -35,7 +50,11 @@ const CartPage = () => {
           ) : (
             <>
               {cart.map((room) => (
-                <CartRoom room={room} key={room.roomId} />
+                <CartRoom
+                  room={room}
+                  key={room.roomId}
+                  handleDelete={() => handleDelete(room.roomId)}
+                />
               ))}
 
               <Box mt={4} textAlign="right">
@@ -52,6 +71,11 @@ const CartPage = () => {
             </>
           )}
         </Box>
+        <ConfirmDeleteDialog
+          open={openConfirmDelete}
+          onConfirmDelete={confirmDelete}
+          handleClose={() => setOpenConfirmDelete(false)}
+        />
       </Main>
     </>
   );
