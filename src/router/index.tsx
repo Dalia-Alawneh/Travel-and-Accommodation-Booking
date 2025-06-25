@@ -12,6 +12,7 @@ import RootLayout from "@travelia/layouts/user/RootLayout";
 import HotelPage from "@travelia/areas/user/pages/Hotel";
 import CartPage from "@travelia/areas/user/pages/Cart";
 import OrderPage from "@travelia/areas/user/pages/Order";
+import UnAuthorize from "@travelia/pages/UnAuthorize";
 
 const AppRouter = () => {
   return (
@@ -19,6 +20,7 @@ const AppRouter = () => {
       <Route path="/" element={<Welcome />} />
       <Route path="*" element={<NotFound />} />
       <Route path="/500" element={<ServerError />} />
+      <Route path="/401" element={<UnAuthorize />} />
 
       <Route element={<GuestRoute />}>
         <Route path="/login" element={<Login />} />

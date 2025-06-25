@@ -28,7 +28,7 @@ const ErrorPage = ({ title, caption, image }: IErrorPageProps) => {
         {title}
       </Typography>
       {caption && <Typography variant="body2">{caption}</Typography>}
-      <Box width={{ sm: "100%", md: "50%" }}>
+      <Box width={{ sm: "100%", md: 500 }}>
         <img src={image} alt={caption} width="100%" />
       </Box>
       <AppButton onClick={handleBackToHome}>

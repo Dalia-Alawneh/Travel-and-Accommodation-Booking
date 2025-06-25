@@ -15,3 +15,4 @@ export { default as serverError } from "./images/error/500.svg";
 export { default as pageHeader } from "./images/pageHeader.jpg";
 export { default as emptyCart } from "./images/emptyCart.svg";
 export { default as successOrder } from "./images/Check.svg";
+export { default as unAuth } from "./images/error/401.svg";
