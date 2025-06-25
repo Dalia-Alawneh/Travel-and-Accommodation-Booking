@@ -1,7 +1,7 @@
 import { hero1, hero2, hero3, thumb1, thumb2, thumb3 } from "@travelia/assets";
 import { Menu, SelectItem, SortOptions } from "@travelia/types";
 
-export const menuItems: Menu = [
+export const userMenuItems: Menu = [
   {
     title: "Home",
     path: "/",
@@ -13,6 +13,21 @@ export const menuItems: Menu = [
   {
     title: "Contact",
     path: "contact",
+  },
+];
+
+export const adminMenuItems: Menu = [
+  {
+    title: "Cities",
+    path: "cities",
+  },
+  {
+    title: "Hotels",
+    path: "hotels",
+  },
+  {
+    title: "Rooms",
+    path: "rooms",
   },
 ];
 

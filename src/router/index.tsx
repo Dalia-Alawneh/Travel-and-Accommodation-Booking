@@ -13,6 +13,7 @@ import HotelPage from "@travelia/areas/user/pages/Hotel";
 import CartPage from "@travelia/areas/user/pages/Cart";
 import OrderPage from "@travelia/areas/user/pages/Order";
 import UnAuthorize from "@travelia/pages/UnAuthorize";
+import Cities from "@travelia/areas/admin/pages/Cities";
 
 const AppRouter = () => {
   return (
@@ -41,7 +42,7 @@ const AppRouter = () => {
         path="/admin"
         element={<GuardedRoute allowedRoles={[UserType.Admin]} />}
       >
-        <Route index element={<Home />} />
+        <Route index element={<Cities />} />
       </Route>
     </Routes>
   );

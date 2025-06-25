@@ -20,6 +20,7 @@ interface IAppDrawerProps {
   menuItems: Menu;
   isOpen: boolean;
   handleDrawerToggle: () => void;
+  variant?: "permanent" | "persistent" | "temporary";
 }
 
 const AppDrawer = ({
@@ -27,19 +28,28 @@ const AppDrawer = ({
   menuItems,
   handleDrawerToggle,
   isOpen,
+  variant = "temporary",
 }: IAppDrawerProps) => {
   const { handleLogout, loading } = useLogout();
+  const display =
+    variant === "temporary"
+      ? { xs: "block", sm: "none" }
+      : { xs: "none", sm: "block" };
+
+  const drawerOpen = variant === "permanent" ? true : isOpen;
+  const drawerOnClose =
+    variant === "permanent" ? undefined : handleDrawerToggle;
 
   return (
     <Drawer
-      variant="temporary"
-      open={isOpen}
-      onClose={handleDrawerToggle}
+      variant={variant}
+      open={drawerOpen}
+      onClose={drawerOnClose}
       ModalProps={{
         keepMounted: true,
       }}
       sx={{
-        display: { xs: "block", sm: "none" },
+        display,
         "& .MuiDrawer-paper": {
           boxSizing: "border-box",
           width: drawerWidth,

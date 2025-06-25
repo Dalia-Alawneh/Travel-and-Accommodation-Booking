@@ -3,14 +3,14 @@ import { Badge, Box, IconButton } from "@mui/material";
 import AppLink from "@travelia/components/Link";
 import TopBar from "@travelia/components/TopBar";
 import { selectCartCount } from "@travelia/Ducks/selectors/cart";
-import { menuItems } from "@travelia/fixtures";
+import { userMenuItems } from "@travelia/fixtures";
 import { useSelector } from "react-redux";
 
 const UserTopBar = () => {
   const cartCount = useSelector(selectCartCount);
   return (
     <TopBar
-      menuLinks={menuItems}
+      menuLinks={userMenuItems}
       renderMenu={(menuLinks) => (
         <>
           <Box

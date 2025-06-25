@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import logo from "@travelia/assets/images/logo.svg";
-import { DRAWER_WIDTH, menuItems } from "@travelia/fixtures";
+import { DRAWER_WIDTH, userMenuItems } from "@travelia/fixtures";
 import AppDrawer from "../Drawer/Drawer";
 import AppButton from "../Button/Button";
 import { Container } from "@mui/material";
@@ -81,7 +81,7 @@ export default function TopBar({ menuLinks, renderMenu }: ITopBarProps) {
           drawerWidth={DRAWER_WIDTH}
           handleDrawerToggle={handleDrawerToggle}
           isOpen={isDrawerOpen}
-          menuItems={menuItems}
+          menuItems={userMenuItems}
         />
       </nav>
     </Box>
