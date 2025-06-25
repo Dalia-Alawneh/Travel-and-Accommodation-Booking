@@ -11,6 +11,7 @@ import ServerError from "@travelia/pages/ServerError";
 import RootLayout from "@travelia/layouts/user/RootLayout";
 import HotelPage from "@travelia/areas/user/pages/Hotel";
 import CartPage from "@travelia/areas/user/pages/Cart";
+import OrderPage from "@travelia/areas/user/pages/Order";
 
 const AppRouter = () => {
   return (
@@ -31,6 +32,7 @@ const AppRouter = () => {
           <Route path="search" element={<SearchPage />} />
           <Route path="hotel/:id" element={<HotelPage />} />
           <Route path="cart" element={<CartPage />} />
+          <Route path="order" element={<OrderPage />} />
         </Route>
       </Route>
       <Route

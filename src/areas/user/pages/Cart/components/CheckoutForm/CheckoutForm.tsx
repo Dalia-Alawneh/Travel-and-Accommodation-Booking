@@ -42,7 +42,7 @@ const CheckoutForm = () => {
   const { mutate: checkoutMutate, isPending: isCheckoutPending } = useMutation({
     mutationFn: submitBooking,
     onSuccess: (res) => {
-      navigate("/order-confirmation", { state: { booking: res } });
+      navigate("/user/order", { state: { booking: res } });
       dispatch(clearCart());
       toast.success("Order submitted successfully!");
     },
