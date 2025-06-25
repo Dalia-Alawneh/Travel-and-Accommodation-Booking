@@ -1,3 +1,4 @@
+import { Label } from "@mui/icons-material";
 import {
   InputLabel,
   SlotComponentProps,
@@ -49,7 +50,7 @@ const AppTextField = ({ name, slotProps, ...rest }: AppTextFieldProps) => {
           textTransform: "capitalize",
         }}
       >
-        {name}
+        {rest.label ?? name}
       </InputLabel>
       <TextField
         {...field}

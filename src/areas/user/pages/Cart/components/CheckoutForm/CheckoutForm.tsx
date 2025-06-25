@@ -56,7 +56,11 @@ const CheckoutForm = () => {
           gap={2}
           mt={2}
         >
-          <AppTextField name="fullName" placeholder="Your Full Name" />
+          <AppTextField
+            name="fullName"
+            label="Full Name"
+            placeholder="Your Full Name"
+          />
           <AppTextField name="email" placeholder="Your Email Address" />
           <CardTypeSelector value={cardType} onChange={setCardType} />
           <CardNumberInput name="cardNumber" />
