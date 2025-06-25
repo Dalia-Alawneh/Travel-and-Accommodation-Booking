@@ -1,8 +1,8 @@
-import * as React from "react";
 import Map, { Marker } from "react-map-gl/mapbox";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Box } from "@mui/material";
 import { Warning } from "@mui/icons-material";
+import { useState } from "react";
 
 interface IMapProps {
   lat: number;
@@ -20,8 +20,11 @@ const mapFallbackSx = {
   justifyContent: "center",
   fontSize: 16,
 };
+
+const MAP_TOKEN = import.meta.env.VITE_MAP_TOKEN;
+
 const AppMap = ({ lat, lng }: IMapProps) => {
-  const [mapError, setMapError] = React.useState(false);
+  const [mapError, setMapError] = useState(false);
 
   return (
     <div
@@ -34,7 +37,7 @@ const AppMap = ({ lat, lng }: IMapProps) => {
     >
       {!mapError ? (
         <Map
-          mapboxAccessToken="pk.eyJ1IjoiZGFsaWFzc3MiLCJhIjoiY21jYzg2NjZuMDQ5eTJscXp5dm9zb3VjZCJ9.NtLpIT3XqyyazbNc9tUc6g"
+          mapboxAccessToken={MAP_TOKEN}
           initialViewState={{
             longitude: lng,
             latitude: lat,
