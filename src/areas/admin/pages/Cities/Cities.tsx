@@ -1,17 +1,12 @@
 import { Grid } from "@mui/material";
 import AppDrawer from "@travelia/components/Drawer";
 import { adminMenuItems, DRAWER_WIDTH } from "@travelia/fixtures";
+import AdminTopBar from "../../components/AdminTopBar/AdminTopBar";
 
 const Cities = () => {
   return (
     <Grid container>
-      <AppDrawer
-        drawerWidth={DRAWER_WIDTH}
-        menuItems={adminMenuItems}
-        handleDrawerToggle={() => {}}
-        isOpen={true}
-        variant="persistent"
-      />
+      <AdminTopBar />
     </Grid>
   );
 };

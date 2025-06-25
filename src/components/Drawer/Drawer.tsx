@@ -49,6 +49,7 @@ const AppDrawer = ({
         keepMounted: true,
       }}
       sx={{
+        bgcolor: "white",
         display,
         "& .MuiDrawer-paper": {
           boxSizing: "border-box",
@@ -57,7 +58,7 @@ const AppDrawer = ({
       }}
     >
       <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-        <Box sx={{ my: 2 }}>
+        <Box sx={{ my: 1.3 }}>
           <img src={logo} alt="travilia" />
         </Box>
         <Divider />

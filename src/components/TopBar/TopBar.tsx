@@ -16,9 +16,14 @@ import { ReactNode, useState } from "react";
 interface ITopBarProps {
   menuLinks: Menu;
   renderMenu: (menuLinks: Menu) => ReactNode;
+  hideLogo?: boolean;
 }
 
-export default function TopBar({ menuLinks, renderMenu }: ITopBarProps) {
+export default function TopBar({
+  menuLinks,
+  renderMenu,
+  hideLogo = false,
+}: ITopBarProps) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { handleLogout, loading } = useLogout();
   const handleDrawerToggle = () => {
@@ -50,11 +55,13 @@ export default function TopBar({ menuLinks, renderMenu }: ITopBarProps) {
               >
                 <MenuIcon />
               </IconButton>
-              <Box sx={{ my: 2 }}>
-                <AppLink path="">
-                  <img src={logo} alt="travilia" />
-                </AppLink>
-              </Box>
+              {!hideLogo && (
+                <Box sx={{ my: 2 }}>
+                  <AppLink path="">
+                    <img src={logo} alt="travilia" />
+                  </AppLink>
+                </Box>
+              )}
               {renderMenu(menuLinks)}
               <AppButton
                 sx={{ display: { xs: "none", sm: "flex" }, py: 1, ml: 2 }}

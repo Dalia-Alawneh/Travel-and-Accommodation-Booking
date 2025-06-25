@@ -42,7 +42,7 @@ const AppRouter = () => {
         path="/admin"
         element={<GuardedRoute allowedRoles={[UserType.Admin]} />}
       >
-        <Route index element={<Cities />} />
+        <Route path="cities" element={<Cities />} />
       </Route>
     </Routes>
   );
