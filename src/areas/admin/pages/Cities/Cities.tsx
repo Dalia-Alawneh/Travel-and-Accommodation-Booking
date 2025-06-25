@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import AppTextFieldFormik from "@travelia/components/Inputs/TextField/TextField";
+import FormikTextField from "@travelia/components/Inputs/TextField/FormikTextField";
 
 const Cities = () => {
   return (
@@ -7,7 +7,7 @@ const Cities = () => {
       <Typography variant="h3" my={3}>
         Manage Cities
       </Typography>
-      <AppTextFieldFormik name="Search" placeholder="Search City" />
+      <FormikTextField name="Search" placeholder="Search City" />
     </Box>
   );
 };

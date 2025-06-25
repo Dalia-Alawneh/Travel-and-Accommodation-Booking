@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import AppForm from "@travelia/components/Form";
-import AppTextFieldFormik from "@travelia/components/Inputs/TextField/TextField";
+import FormikTextField from "@travelia/components/Inputs/TextField/FormikTextField";
 import { LoginFormValues, UserActions, UserType } from "@travelia/types";
 import { loginSchema } from "../../schemas/login";
 import AppButton from "@travelia/components/Button";
@@ -99,11 +99,11 @@ const Login = () => {
                         flexDirection: "column",
                       }}
                     >
-                      <AppTextFieldFormik
+                      <FormikTextField
                         name="username"
                         placeholder="Enter Username"
                       />
-                      <AppTextFieldFormik
+                      <FormikTextField
                         name="password"
                         placeholder="Enter Password"
                         type={showPassword ? "text" : "password"}

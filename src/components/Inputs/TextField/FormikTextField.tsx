@@ -35,11 +35,7 @@ const textFieldStyle = {
   },
 };
 
-const AppTextFieldFormik = ({
-  name,
-  slotProps,
-  ...rest
-}: AppTextFieldProps) => {
+const FormikTextField = ({ name, slotProps, ...rest }: AppTextFieldProps) => {
   const [field, meta] = useField(name);
   const isError = Boolean(meta.touched && meta.error);
 
@@ -72,4 +68,4 @@ const AppTextFieldFormik = ({
   );
 };
 
-export default AppTextFieldFormik;
+export default FormikTextField;
