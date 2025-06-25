@@ -12,3 +12,13 @@ export interface IRequestSearchParams {
   starRate: number;
   sort: string;
 }
+
+export interface IBookingPayload {
+  customerName: string;
+  hotelName: string;
+  roomNumber: string;
+  roomType: string;
+  bookingDateTime: string;
+  totalCost: number;
+  paymentMethod: string;
+}

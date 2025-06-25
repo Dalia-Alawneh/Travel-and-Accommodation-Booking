@@ -6,6 +6,12 @@ import CardTypeSelector from "../CardTypeSelector";
 import { useState } from "react";
 import CardNumberInput from "./InputCardNumber";
 import ExpiryDateInput from "./ExpiryDateInput";
+import { useMutation } from "@tanstack/react-query";
+import { submitBooking } from "@travelia/api/endpoints/booking";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { clearCart } from "@travelia/Ducks/reducers";
 
 interface CheckoutFormValues {
   fullName: string;
@@ -38,13 +44,26 @@ const validationSchema = Yup.object({
 
 const CheckoutForm = () => {
   const [cardType, setCardType] = useState<string>("visa");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { mutate: checkoutMutate, isPending: isCheckoutPending } = useMutation({
+    mutationFn: submitBooking,
+    onSuccess: (res) => {
+      navigate("/order-confirmation", { state: { booking: res } });
+      dispatch(clearCart());
+      toast.success("Order submitted successfully!");
+    },
+    onError: () => {
+      toast.error("Failed to submit your order, please try again.");
+    },
+  });
 
   return (
     <AppForm<CheckoutFormValues>
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={(values) => {
-        console.log("Form Submitted", values);
+        checkoutMutate(values);
       }}
       render={({ handleSubmit, isSubmitting }) => (
         <Box
@@ -72,6 +91,7 @@ const CheckoutForm = () => {
             variant="contained"
             color="success"
             disabled={isSubmitting}
+            loading={isCheckoutPending}
           >
             Confirm Booking
           </Button>
