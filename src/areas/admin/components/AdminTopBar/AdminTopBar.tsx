@@ -6,7 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { adminMenuItems, DRAWER_WIDTH } from "@travelia/fixtures";
 import AppDrawer from "@travelia/components/Drawer";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -43,7 +43,11 @@ const AppBar = styled(MuiAppBar, {
   ],
 }));
 
-export default function MiniDrawer() {
+export default function AdminTopBarDrawer({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const [open, setOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -76,8 +80,21 @@ export default function MiniDrawer() {
         handleDrawerToggle={handleDrawerToggle}
         menuItems={adminMenuItems}
       />
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          transition: (theme) =>
+            theme.transitions.create("margin", {
+              easing: theme.transitions.easing.sharp,
+              duration: theme.transitions.duration.leavingScreen,
+            }),
+          marginLeft: open ? `${DRAWER_WIDTH}px` : 0,
+        }}
+      >
         <DrawerHeader />
+        {children}
       </Box>
     </Box>
   );
