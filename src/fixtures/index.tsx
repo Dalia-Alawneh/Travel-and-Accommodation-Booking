@@ -79,3 +79,6 @@ export const sortOptions: SelectItem[] = [
   { text: "Name: A to Z", value: SortOptions.NameAsc },
   { text: "Name: Z to A", value: SortOptions.NameDesc },
 ];
+
+export const PAGE_OPTIONS = [5, 10, 20];
+export const PAGE_SIZE = 5;

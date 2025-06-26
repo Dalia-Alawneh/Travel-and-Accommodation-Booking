@@ -4,10 +4,11 @@ import { getCities } from "@travelia/api/endpoints/cities";
 import AppTextField from "@travelia/components/Inputs/TextField/TextField";
 import { useMemo, useState } from "react";
 import CitiesTable from "./components/CitiesTable";
+import { PAGE_OPTIONS, PAGE_SIZE } from "@travelia/fixtures";
 
 const Cities = () => {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(PAGE_SIZE);
   const [search, setSearch] = useState("");
 
   const { data } = useQuery({
@@ -48,12 +49,12 @@ const Cities = () => {
       </Box>
       <CitiesTable
         rowData={search ? (filteredData ?? []) : (paginatedData ?? [])}
-        page={page}
+        page={search ? 0 : page}
         rowsPerPage={rowsPerPage}
         totalCount={data?.length ?? 0}
         isLoading={isPaginatedLoading}
-        rowsPerPageOptions={[5, 10, 20]}
-        onPageChange={(_, newPage: number) => setPage(newPage)}
+        rowsPerPageOptions={PAGE_OPTIONS}
+        onPageChange={(_, newPage: number) => !search && setPage(newPage)}
         onRowsPerPageChange={(e) => {
           setRowsPerPage(parseInt(e.target.value, 10));
           setPage(0);
