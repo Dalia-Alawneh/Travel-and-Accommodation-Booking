@@ -35,7 +35,7 @@ const Cities = () => {
 
   return (
     <Box>
-      <Typography variant="h4" my={3}>
+      <Typography variant="h4" mb={3}>
         Manage Cities
       </Typography>
 
