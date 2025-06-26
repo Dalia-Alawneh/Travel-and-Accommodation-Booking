@@ -8,10 +8,11 @@ export const getCities = async (
 ): Promise<ICitiesResponse[]> => {
   const config = {
     params: {
-      pageNumber,
-      pageSize,
+      ...(pageNumber !== undefined && { pageNumber }),
+      ...(pageSize !== undefined && { pageSize }),
     },
   };
+
   const response = await Axios.get(`${endpoint}`, config);
   return response.data;
 };

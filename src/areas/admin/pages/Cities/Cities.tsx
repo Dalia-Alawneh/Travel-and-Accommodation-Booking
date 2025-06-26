@@ -3,39 +3,33 @@ import { useQuery } from "@tanstack/react-query";
 import { getCities } from "@travelia/api/endpoints/cities";
 import AppTextField from "@travelia/components/Inputs/TextField/TextField";
 import { useMemo, useState } from "react";
-import Table from "../../components/Table";
+import CitiesTable from "./components/CitiesTable";
 
 const Cities = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [search, setSearch] = useState("");
 
-  const { data = [], isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["cities"],
     queryFn: () => getCities(),
   });
 
+  const { data: paginatedData, isPaginatedLoading } = useQuery({
+    queryKey: ["paginatedCities", page, rowsPerPage],
+    queryFn: () => getCities(rowsPerPage, page + 1),
+  });
+
   const filteredData = useMemo(() => {
     if (!search) return data;
-    return data.filter((city) =>
+    return data?.filter((city) =>
       city.name.toLowerCase().includes(search.toLowerCase()),
     );
   }, [data, search]);
 
-  const visibleRows = useMemo(() => {
-    const start = page * rowsPerPage;
-    return filteredData.slice(start, start + rowsPerPage);
-  }, [filteredData, page, rowsPerPage]);
-
-  const columns = [
-    { id: "id", label: "ID" },
-    { id: "name", label: "City Name" },
-    { id: "description", label: "Description" },
-  ];
-
   return (
     <Box>
-      <Typography variant="h4" mb={3}>
+      <Typography variant="h3" mb={3}>
         Manage Cities
       </Typography>
 
@@ -50,15 +44,13 @@ const Cities = () => {
           }}
         />
       </Box>
-
-      <Table
-        columns={columns}
-        rows={visibleRows}
-        isLoading={isLoading}
-        rowsPerPageOptions={[5, 10, 25]}
-        rowsPerPage={rowsPerPage}
+      <CitiesTable
+        rowData={paginatedData ?? []}
         page={page}
-        totalCount={filteredData.length}
+        rowsPerPage={rowsPerPage}
+        totalCount={data?.length ?? 0}
+        isLoading={isLoading || isPaginatedLoading}
+        rowsPerPageOptions={[5, 10, 20]}
         onPageChange={(_, newPage: number) => setPage(newPage)}
         onRowsPerPageChange={(e) => {
           setRowsPerPage(parseInt(e.target.value, 10));

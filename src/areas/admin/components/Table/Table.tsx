@@ -5,18 +5,13 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
   TablePagination,
   Skeleton,
+  Box,
+  useTheme,
 } from "@mui/material";
-import { ReactNode, useState } from "react";
-
-interface Column<T> {
-  id: keyof T;
-  label: string;
-  align?: "right" | "left" | "center";
-  render?: (value: unknown, row: T) => ReactNode;
-}
+import { ReactNode } from "react";
+import { Column } from "./type";
 
 interface TableProps<T> {
   columns: Column<T>[];
@@ -24,6 +19,11 @@ interface TableProps<T> {
   isLoading?: boolean;
   rowsPerPageOptions?: number[];
   skeletonRowsCount?: number;
+  rowsPerPage: number;
+  page: number;
+  totalCount: number;
+  onPageChange: (event: unknown, newPage: number) => void;
+  onRowsPerPageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Table = <T extends { id?: string | number }>({
@@ -32,28 +32,23 @@ const Table = <T extends { id?: string | number }>({
   isLoading = false,
   rowsPerPageOptions = [5, 10, 25],
   skeletonRowsCount = 5,
+  rowsPerPage,
+  page,
+  totalCount,
+  onPageChange,
+  onRowsPerPageChange,
 }: TableProps<T>) => {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageOptions[0]);
-
-  const handleChangePage = (_: unknown, newPage: number) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  const visibleRows = rows.slice(
-    page * rowsPerPage,
-    page * rowsPerPage + rowsPerPage,
-  );
+  const theme = useTheme();
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+    <Box
+      sx={{
+        width: "100%",
+        overflow: "hidden",
+        boxShadow: theme.customShadows.light,
+        borderRadius: 1,
+      }}
+    >
       <TableContainer>
         <MuiTable sx={{ minWidth: 650 }}>
           <TableHead>
@@ -65,7 +60,6 @@ const Table = <T extends { id?: string | number }>({
               ))}
             </TableRow>
           </TableHead>
-
           <TableBody>
             {isLoading ? (
               Array.from({ length: skeletonRowsCount }).map((_, idx) => (
@@ -77,8 +71,8 @@ const Table = <T extends { id?: string | number }>({
                   ))}
                 </TableRow>
               ))
-            ) : visibleRows.length > 0 ? (
-              visibleRows.map((row, idx) => (
+            ) : rows.length > 0 ? (
+              rows.map((row, idx) => (
                 <TableRow key={(row.id ?? idx) as string | number}>
                   {columns.map((col) => (
                     <TableCell
@@ -105,14 +99,14 @@ const Table = <T extends { id?: string | number }>({
 
       <TablePagination
         component="div"
-        count={rows.length}
+        count={totalCount}
         page={page}
-        onPageChange={handleChangePage}
+        onPageChange={onPageChange}
         rowsPerPage={rowsPerPage}
         rowsPerPageOptions={rowsPerPageOptions}
-        onRowsPerPageChange={handleChangeRowsPerPage}
+        onRowsPerPageChange={onRowsPerPageChange}
       />
-    </Paper>
+    </Box>
   );
 };
 
