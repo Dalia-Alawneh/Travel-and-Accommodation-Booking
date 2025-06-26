@@ -1,5 +1,5 @@
 import useUser from "@travelia/context/user/useContext";
-import { USER, TOKEN_KEY } from "@travelia/fixtures";
+import { USER, TOKEN_KEY } from "@travelia/fixtures/index.tsx";
 import { UserActions } from "@travelia/types";
 import { removeFromLocalStorage } from "@travelia/utils";
 import { useState } from "react";

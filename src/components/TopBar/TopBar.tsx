@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import logo from "@travelia/assets/images/logo.svg";
-import { DRAWER_WIDTH, userMenuItems } from "@travelia/fixtures";
+import { DRAWER_WIDTH, userMenuItems } from "@travelia/fixtures/index.tsx";
 import AppDrawer from "../Drawer/Drawer";
 import AppButton from "../Button/Button";
 import { Container } from "@mui/material";

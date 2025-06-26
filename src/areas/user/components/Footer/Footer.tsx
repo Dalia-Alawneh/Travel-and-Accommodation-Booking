@@ -2,7 +2,7 @@ import { EmailRounded, LocationOn, AccessTime } from "@mui/icons-material";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import { footerBg, whiteLogo } from "@travelia/assets";
 import AppLink from "@travelia/components/Link/Link";
-import { userMenuItems } from "@travelia/fixtures";
+import { userMenuItems } from "@travelia/fixtures/index.tsx";
 
 const Footer = () => {
   return (

@@ -16,7 +16,7 @@ import { loginBg, logo } from "@travelia/assets";
 import { login } from "@travelia/api/endpoints/auth";
 import { useMutation } from "@tanstack/react-query";
 import { saveToLocalStorage } from "@travelia/utils/localstorage";
-import { TOKEN_KEY, USER } from "@travelia/fixtures";
+import { TOKEN_KEY, USER } from "@travelia/fixtures/index.tsx";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 import useUser from "@travelia/context/user/useContext";

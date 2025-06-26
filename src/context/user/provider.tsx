@@ -1,4 +1,4 @@
-import { USER } from "@travelia/fixtures";
+import { USER } from "@travelia/fixtures/index.tsx";
 import { User, UserActions } from "@travelia/types";
 import { getFromLocalStorage } from "@travelia/utils";
 import { useReducer, useEffect, useMemo } from "react";
