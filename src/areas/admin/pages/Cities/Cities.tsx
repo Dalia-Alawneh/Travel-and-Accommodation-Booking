@@ -5,12 +5,13 @@ import AppTextField from "@travelia/components/Inputs/TextField/TextField";
 import { useMemo, useState } from "react";
 import CitiesTable from "./components/CitiesTable";
 import { PAGE_OPTIONS, PAGE_SIZE } from "@travelia/fixtures";
+import useDebounce from "@travelia/hooks/useDebounce";
 
 const Cities = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(PAGE_SIZE);
   const [search, setSearch] = useState("");
-
+  const debouncedSearch = useDebounce(search, 500);
   const { data } = useQuery({
     queryKey: ["cities"],
     queryFn: () => getCities(),
@@ -22,13 +23,13 @@ const Cities = () => {
   });
 
   const filteredData = useMemo(() => {
-    if (!search) return data;
+    if (!debouncedSearch) return data;
     return data?.filter(
       (city) =>
-        city.name.toLowerCase().includes(search.toLowerCase()) ||
-        city.description.toLowerCase().includes(search.toLowerCase()),
+        city.name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+        city.description.toLowerCase().includes(debouncedSearch.toLowerCase()),
     );
-  }, [data, search]);
+  }, [data, debouncedSearch]);
 
   return (
     <Box>
