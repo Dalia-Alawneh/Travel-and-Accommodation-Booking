@@ -16,3 +16,8 @@ export const getCities = async (
   const response = await Axios.get(`${endpoint}`, config);
   return response.data;
 };
+
+export const deleteCity = async (id: number): Promise<ICitiesResponse[]> => {
+  const response = await Axios.delete(`${endpoint}/${id}`);
+  return response.data;
+};

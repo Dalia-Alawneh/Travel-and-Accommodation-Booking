@@ -3,6 +3,11 @@ import { Box, IconButton } from "@mui/material";
 import Table from "@travelia/areas/admin/components/Table";
 import { CityRow } from "./types";
 import { Column } from "@travelia/areas/admin/components/Table/type";
+import { useMutation } from "@tanstack/react-query";
+import { deleteCity } from "@travelia/api/endpoints/cities";
+import ConfirmDeleteDialog from "@travelia/components/Dialogs/ConfirmDelete";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 interface ICitiesTableProps {
   isLoading?: boolean;
@@ -25,6 +30,30 @@ const CitiesTable = ({
   onPageChange,
   onRowsPerPageChange,
 }: ICitiesTableProps) => {
+  const [openConfirmDelete, setOpenConfirmDelete] = useState<boolean>(false);
+  const [selectedCity, setSelectedCity] = useState<CityRow | null>();
+  const { mutate: mutateDelete } = useMutation({
+    mutationFn: (id: number) => deleteCity(id),
+    onSuccess: () => {
+      closeConfirmDeleteDialog();
+      toast.success("City Deleted Successfully ");
+    },
+  });
+
+  const handleDeleteCity = () => {
+    if (selectedCity) {
+      mutateDelete(selectedCity?.id);
+    }
+  };
+
+  const openConfirmDeleteDialog = (city: CityRow) => {
+    setSelectedCity(city);
+    setOpenConfirmDelete(true);
+  };
+  const closeConfirmDeleteDialog = () => {
+    setOpenConfirmDelete(true);
+    setSelectedCity(null);
+  };
   const columns = [
     { id: "id", label: "ID", align: "left", width: 50 },
     { id: "name", label: "Name", align: "left", minWidth: 150 },
@@ -33,10 +62,10 @@ const CitiesTable = ({
       id: "actions",
       label: "Actions",
       align: "left",
-      render: (row: CityRow) => {
+      render: (_value: unknown, row: CityRow) => {
         return (
           <Box display="flex">
-            <IconButton>
+            <IconButton onClick={() => openConfirmDeleteDialog(row)}>
               <DeleteTwoTone color="error" />
             </IconButton>
             <IconButton>
@@ -49,18 +78,25 @@ const CitiesTable = ({
   ];
 
   return (
-    <Table
-      columns={columns as Column<CityRow>[]}
-      rows={rowData}
-      isLoading={isLoading}
-      rowsPerPageOptions={rowsPerPageOptions}
-      rowsPerPage={rowsPerPage}
-      page={page}
-      totalCount={totalCount}
-      onPageChange={onPageChange}
-      onRowsPerPageChange={onRowsPerPageChange}
-      skeletonRowsCount={5}
-    />
+    <>
+      <Table
+        columns={columns as Column<CityRow>[]}
+        rows={rowData}
+        isLoading={isLoading}
+        rowsPerPageOptions={rowsPerPageOptions}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        totalCount={totalCount}
+        onPageChange={onPageChange}
+        onRowsPerPageChange={onRowsPerPageChange}
+        skeletonRowsCount={5}
+      />
+      <ConfirmDeleteDialog
+        open={openConfirmDelete}
+        handleClose={closeConfirmDeleteDialog}
+        onConfirmDelete={handleDeleteCity}
+      />
+    </>
   );
 };
 
