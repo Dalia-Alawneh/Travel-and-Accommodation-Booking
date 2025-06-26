@@ -22,8 +22,10 @@ const Cities = () => {
 
   const filteredData = useMemo(() => {
     if (!search) return data;
-    return data?.filter((city) =>
-      city.name.toLowerCase().includes(search.toLowerCase()),
+    return data?.filter(
+      (city) =>
+        city.name.toLowerCase().includes(search.toLowerCase()) ||
+        city.description.toLowerCase().includes(search.toLowerCase()),
     );
   }, [data, search]);
 
@@ -45,7 +47,7 @@ const Cities = () => {
         />
       </Box>
       <CitiesTable
-        rowData={paginatedData ?? []}
+        rowData={search ? (filteredData ?? []) : (paginatedData ?? [])}
         page={page}
         rowsPerPage={rowsPerPage}
         totalCount={data?.length ?? 0}
