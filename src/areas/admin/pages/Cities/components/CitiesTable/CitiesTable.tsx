@@ -51,9 +51,10 @@ const CitiesTable = ({
     setOpenConfirmDelete(true);
   };
   const closeConfirmDeleteDialog = () => {
-    setOpenConfirmDelete(true);
+    setOpenConfirmDelete(false);
     setSelectedCity(null);
   };
+
   const columns = [
     { id: "id", label: "ID", align: "left", width: 50 },
     { id: "name", label: "Name", align: "left", minWidth: 150 },
