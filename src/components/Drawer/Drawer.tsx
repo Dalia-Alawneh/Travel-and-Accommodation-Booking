@@ -57,8 +57,8 @@ const AppDrawer = ({
         },
       }}
     >
-      <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-        <Box sx={{ my: 1.3 }}>
+      <Box onClick={handleDrawerToggle}>
+        <Box sx={{ my: 1.3, ml: 3 }}>
           <img src={logo} alt="travilia" />
         </Box>
         <Divider />
@@ -66,18 +66,37 @@ const AppDrawer = ({
           {menuItems.map((item) => (
             <AppLink path={item.path} key={item.title}>
               <ListItem disablePadding>
-                <ListItemButton sx={{ textAlign: "center" }}>
-                  {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
+                <ListItemButton
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    m: "auto",
+                    px: 2.5,
+                  }}
+                >
+                  {item.icon && (
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        justifyContent: "center",
+                        mr: 2,
+                      }}
+                    >
+                      {item.icon}
+                    </ListItemIcon>
+                  )}
                   <ListItemText primary={item.title} />
                 </ListItemButton>
               </ListItem>
             </AppLink>
           ))}
         </List>
+        <Divider />
         <AppButton
           onClick={handleLogout}
           loading={loading}
-          sx={{ px: "3rem", bgcolor: "#000", color: "#fff" }}
+          sx={{ px: "3.6rem", my: 4, ml: 3 }}
         >
           <Box
             sx={{
