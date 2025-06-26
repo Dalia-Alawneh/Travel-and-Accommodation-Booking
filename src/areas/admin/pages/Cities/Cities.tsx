@@ -10,12 +10,12 @@ const Cities = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [search, setSearch] = useState("");
 
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ["cities"],
     queryFn: () => getCities(),
   });
 
-  const { data: paginatedData, isPaginatedLoading } = useQuery({
+  const { data: paginatedData, isLoading: isPaginatedLoading } = useQuery({
     queryKey: ["paginatedCities", page, rowsPerPage],
     queryFn: () => getCities(rowsPerPage, page + 1),
   });
@@ -49,7 +49,7 @@ const Cities = () => {
         page={page}
         rowsPerPage={rowsPerPage}
         totalCount={data?.length ?? 0}
-        isLoading={isLoading || isPaginatedLoading}
+        isLoading={isPaginatedLoading}
         rowsPerPageOptions={[5, 10, 20]}
         onPageChange={(_, newPage: number) => setPage(newPage)}
         onRowsPerPageChange={(e) => {
