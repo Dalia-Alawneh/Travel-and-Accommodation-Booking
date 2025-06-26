@@ -1,4 +1,7 @@
 import { hero1, hero2, hero3, thumb1, thumb2, thumb3 } from "@travelia/assets";
+import LocationCityIcon from "@mui/icons-material/LocationCity";
+import HotelIcon from "@mui/icons-material/Hotel";
+import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
 import { Menu, SelectItem, SortOptions } from "@travelia/types";
 
 export const userMenuItems: Menu = [
@@ -20,14 +23,17 @@ export const adminMenuItems: Menu = [
   {
     title: "Cities",
     path: "cities",
+    icon: <LocationCityIcon />,
   },
   {
     title: "Hotels",
     path: "hotels",
+    icon: <HotelIcon />,
   },
   {
     title: "Rooms",
     path: "rooms",
+    icon: <MeetingRoomIcon />,
   },
 ];
 
