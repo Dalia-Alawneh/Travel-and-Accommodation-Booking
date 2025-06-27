@@ -1,4 +1,4 @@
-import { USER } from "@travelia/fixtures/index.tsx";
+import { USER } from "@travelia/constants";
 import { User, UserAction, UserActions } from "@travelia/types";
 import { getFromLocalStorage } from "@travelia/utils";
 

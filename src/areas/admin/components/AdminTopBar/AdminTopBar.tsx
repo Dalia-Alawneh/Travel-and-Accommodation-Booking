@@ -4,9 +4,10 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { adminMenuItems, DRAWER_WIDTH } from "@travelia/fixtures";
+import { adminMenuItems } from "@travelia/fixtures";
 import AppDrawer from "@travelia/components/Drawer";
 import { ReactNode, useState } from "react";
+import { DRAWER_WIDTH } from "@travelia/constants";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",

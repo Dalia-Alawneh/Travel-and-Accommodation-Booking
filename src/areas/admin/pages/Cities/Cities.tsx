@@ -3,7 +3,7 @@ import CitiesTable from "./components/CitiesTable";
 import CityForm from "./components/CityForm";
 import { CityRow } from "./components/CitiesTable/types";
 import AdminCrudPage from "../CrudPage";
-import { PAGE_OPTIONS } from "@travelia/fixtures";
+import { PAGE_OPTIONS } from "@travelia/constants";
 
 const Cities = () => {
   return (

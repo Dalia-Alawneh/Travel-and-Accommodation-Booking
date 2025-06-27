@@ -5,7 +5,7 @@ import useDebounce from "@travelia/hooks/useDebounce";
 import { AddCircle } from "@mui/icons-material";
 import AppTextField from "@travelia/components/Inputs/TextField/TextField";
 import toast from "react-hot-toast";
-import { PAGE_SIZE } from "@travelia/fixtures";
+import { PAGE_SIZE } from "@travelia/constants";
 import AdminDrawer from "../../components/AdminDrawer";
 
 interface AdminPageProps<T, FormPayload> {

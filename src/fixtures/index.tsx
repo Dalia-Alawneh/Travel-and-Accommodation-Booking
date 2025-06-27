@@ -7,15 +7,11 @@ import { Menu, SelectItem, SortOptions } from "@travelia/types";
 export const userMenuItems: Menu = [
   {
     title: "Home",
-    path: "/",
+    path: "/user",
   },
   {
-    title: "About",
-    path: "about",
-  },
-  {
-    title: "Contact",
-    path: "contact",
+    title: "Search",
+    path: "search",
   },
 ];
 
@@ -37,38 +33,25 @@ export const adminMenuItems: Menu = [
   },
 ];
 
-export const DRAWER_WIDTH = 240;
-
-export const carouselItems = [hero1, hero2, hero3];
+export const carouselItems = [
+  {
+    src: hero1,
+    title: "Explore the World",
+    subtitle: "Let the waves carry your worries away.",
+  },
+  {
+    src: hero2,
+    title: "Luxury Hotels",
+    subtitle: "Where the ocean meets serenity.",
+  },
+  {
+    src: hero3,
+    title: "Adventure Awaits",
+    subtitle: "More than a trip—it's a story.",
+  },
+];
 
 export const thumbnails = [thumb1, thumb2, thumb3];
-
-export const cities: SelectItem[] = [
-  { value: "jenin", text: "Jenin, Palestine" },
-  { value: "jerusalem", text: "Jerusalem" },
-  { value: "cairo", text: "Cairo" },
-  { value: "dubai", text: "Dubai" },
-];
-
-export const adults: SelectItem[] = [
-  { value: 1, text: "1 Adult" },
-  { value: 2, text: "2 Adults" },
-  { value: 3, text: "3 Adults" },
-  { value: 4, text: "4 Adults" },
-  { value: 5, text: "5 Adults" },
-];
-
-export const children: SelectItem[] = [
-  { value: 0, text: "0 Children" },
-  { value: 1, text: "1 Child" },
-  { value: 2, text: "2 Children" },
-  { value: 3, text: "3 Children" },
-  { value: 4, text: "4 Children" },
-  { value: 5, text: "5 Children" },
-];
-
-export const TOKEN_KEY = "authentication";
-export const USER = "user";
 
 export const sortOptions: SelectItem[] = [
   { text: "None", value: "" },
@@ -79,6 +62,3 @@ export const sortOptions: SelectItem[] = [
   { text: "Name: A to Z", value: SortOptions.NameAsc },
   { text: "Name: Z to A", value: SortOptions.NameDesc },
 ];
-
-export const PAGE_OPTIONS = [5, 10, 20];
-export const PAGE_SIZE = 5;

@@ -1,8 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { UserType } from "@travelia/types";
+import { User, UserType } from "@travelia/types";
+import { USER } from "@travelia/constants";
+import { getFromLocalStorage } from "@travelia/utils";
 
 const GuestRoute = () => {
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const user: User | null = getFromLocalStorage(USER);
   const isAuthenticated = !!user?.authentication;
   const role = user?.userType;
   if (isAuthenticated) {

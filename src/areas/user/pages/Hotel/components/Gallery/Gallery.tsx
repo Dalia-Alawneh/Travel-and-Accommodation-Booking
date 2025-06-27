@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { hotelBoxSx, overlaySx } from "@travelia/styles";
 import theme from "@travelia/theme";
-import { IGalleryItem } from "@travelia/types";
+import type { IGalleryItem } from "@travelia/types";
 import { useState } from "react";
 
 interface IGalleryProps {
@@ -65,17 +65,30 @@ const Gallery = ({ gallery, isGalleryLoading }: IGalleryProps) => {
         {isGalleryLoading ? (
           <Skeleton variant="rectangular" height={300} />
         ) : gallery?.length ? (
-          <ImageList cols={3} gap={8}>
-            {gallery.map((image) => (
-              <ImageListItem key={image.id}>
-                <img
-                  src={image.url}
-                  alt={`Gallery image ${image.id}`}
-                  style={{ width: "100%", borderRadius: 8, cursor: "pointer" }}
-                  onClick={() => setShowImage(image.url)}
-                />
-              </ImageListItem>
-            ))}
+          <ImageList variant="quilted" cols={4} rowHeight={121}>
+            {gallery.map((image, index) => {
+              const pairIndex = Math.floor(index / 2);
+              const bigOnFirst = pairIndex % 2 === 0;
+              const isBig =
+                (index % 2 === 0 && bigOnFirst) ||
+                (index % 2 === 1 && !bigOnFirst);
+
+              const rows = isBig ? 2 : 1;
+              const cols = isBig ? 2 : 1;
+
+              return (
+                <ImageListItem key={image.id} cols={cols} rows={rows}>
+                  <img
+                    src={`${image.url}?w=${121 * cols}&h=${121 * rows}&fit=crop&auto=format`}
+                    srcSet={`${image.url}?w=${121 * cols}&h=${121 * rows}&fit=crop&auto=format&dpr=2 2x`}
+                    alt={`Gallery image ${image.id}`}
+                    loading="lazy"
+                    style={{ cursor: "pointer", borderRadius: 10 }}
+                    onClick={() => setShowImage(image.url)}
+                  />
+                </ImageListItem>
+              );
+            })}
           </ImageList>
         ) : (
           <Typography variant="body2">No images available.</Typography>

@@ -4,7 +4,7 @@ import {
   getFromLocalStorage,
   removeFromLocalStorage,
 } from "@travelia/utils/localstorage";
-import { TOKEN_KEY, USER } from "@travelia/fixtures/index.tsx";
+import { TOKEN_KEY, USER } from "@travelia/constants";
 import { ErrorResponse } from "./types";
 
 export const attachTokenToRequest = (
@@ -35,11 +35,18 @@ const handleUnAuthResponse = () => {
 };
 
 export const handleResponseError = (error: AxiosError) => {
-  const status = error.response?.status;
-  const serverMessage = (error.response?.data as ErrorResponse)?.message;
+  if (!error.response) {
+    console.error("Network or CORS error:", error);
+    toast.error("Network error. Please check your connection.");
+    return Promise.reject(error);
+  }
+
+  const status = error.response.status;
+  const serverMessage = (error.response.data as ErrorResponse)?.message;
+
   switch (status) {
     case 400:
-      console.error("Bad Request:", serverMessage || error.message);
+      toast.error(`Bad Request: ${serverMessage || error.message}`);
       break;
 
     case 401:
@@ -49,7 +56,7 @@ export const handleResponseError = (error: AxiosError) => {
     case 403:
       console.error(
         "Forbidden:",
-        serverMessage || "You don't have permission to access this resource.",
+        serverMessage || "You don't have permission.",
       );
       toast.error("Access denied");
       break;
@@ -62,16 +69,13 @@ export const handleResponseError = (error: AxiosError) => {
     case 500:
     case 502:
     case 503:
-      console.error(
-        "Server error:",
-        serverMessage || "An error occurred on the server.",
-      );
+      console.error("Server error:", serverMessage || "Server error.");
       toast.error("Server error. Please try again later.");
       window.location.href = "/500";
       break;
 
     default:
-      console.error("Unknown error:", error);
+      console.error("Unexpected error:", error);
       toast.error("An unexpected error occurred.");
   }
 

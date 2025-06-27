@@ -40,31 +40,31 @@ const theme = createTheme({
   typography: {
     fontFamily: '"Manrope", sans-serif',
     h1: {
-      fontSize: "3.5rem",
       fontWeight: 900,
+      fontSize: "clamp(2rem, 5vw, 3.78rem)",
     },
     h2: {
-      fontSize: "2.5rem",
       fontWeight: 900,
+      fontSize: "clamp(1.8rem, 4vw, 2.5rem)",
     },
     h3: {
-      fontSize: "1.5rem",
       fontWeight: 900,
+      fontSize: "clamp(1.2rem, 3vw, 1.5rem)",
     },
     h4: {
-      fontSize: "1.1rem",
+      fontSize: "clamp(1rem, 2.5vw, 1.1rem)",
     },
     body1: {
-      fontSize: "1.25rem",
       fontWeight: 500,
+      fontSize: "clamp(1rem, 2.5vw, 1.25rem)",
     },
     body2: {
-      fontSize: "1rem",
       fontWeight: 500,
+      fontSize: "clamp(0.9rem, 2vw, 1rem)",
     },
     h5: {
-      fontSize: "1rem",
       fontWeight: 500,
+      fontSize: "clamp(0.9rem, 2vw, 1rem)",
     },
   },
   shape: {
