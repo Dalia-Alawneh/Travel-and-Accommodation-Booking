@@ -5,7 +5,8 @@ import { ISearchedHotel } from "@travelia/types";
 import { bookButtonStyle } from "@travelia/styles";
 import { useNavigate } from "react-router";
 import Amenities from "@travelia/areas/user/components/Amenities";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
+import { cardVariants } from "@travelia/motion";
 
 interface IHotelCard {
   hotel: ISearchedHotel;
@@ -28,22 +29,6 @@ const cardSx = {
   cursor: "pointer",
   borderRadius: 1,
   p: 4,
-};
-
-const cardVariants: Variants = {
-  offscreen: {
-    y: 300,
-    rotate: -10,
-  },
-  onscreen: {
-    y: 0,
-    rotate: 0,
-    transition: {
-      type: "spring",
-      bounce: 0.4,
-      duration: 0.8,
-    },
-  },
 };
 
 const HotelCard = ({ hotel }: IHotelCard) => {
