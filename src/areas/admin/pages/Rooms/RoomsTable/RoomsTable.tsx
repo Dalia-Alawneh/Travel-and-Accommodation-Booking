@@ -44,7 +44,7 @@ const RoomsTable = ({
     mutationFn: (id: number) => deleteRoom(id),
     onSuccess: () => {
       closeConfirmDeleteDialog();
-      toast.success("Hotel Deleted Successfully");
+      toast.success("Room Deleted Successfully");
     },
   });
 
@@ -52,17 +52,17 @@ const RoomsTable = ({
     mutationFn: (data: IRoomRow) => updateRoom(data),
     onSuccess: () => {
       setOpenEditDrawer(false);
-      toast.success("Hotel Updated Successfully");
+      toast.success("Room Updated Successfully");
     },
   });
 
-  const handleDeleteHotel = () => {
+  const handleDeleteRoom = () => {
     if (selectedRoom) {
       mutateDelete(selectedRoom.id);
     }
   };
 
-  const openConfirmDeleteDialog = (city: IHotelRow) => {
+  const openConfirmDeleteDialog = (city: IRoomRow) => {
     setSelectedRoom(city);
     setOpenConfirmDelete(true);
   };
@@ -72,7 +72,7 @@ const RoomsTable = ({
     setSelectedRoom(null);
   };
 
-  const openEditCityDrawer = (city: IHotelRow) => {
+  const openEditCityDrawer = (city: IRoomRow) => {
     setRoomToEdit(city);
     setOpenEditDrawer(true);
   };
@@ -91,13 +91,12 @@ const RoomsTable = ({
       label: "Image",
       align: "left",
       minWidth: 150,
-      render: (_value: unknown, row: IHotelRow) => {
+      render: (_value: unknown, row: IRoomRow) => {
         const img = validateImageUrl(row.roomPhotoUrl);
         return (
           <Box
             component="img"
             src={img}
-            alt={row.hotelName}
             onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
               e.currentTarget.src = fallbackImage;
             }}
@@ -177,7 +176,7 @@ const RoomsTable = ({
       <ConfirmDeleteDialog
         open={openConfirmDelete}
         handleClose={closeConfirmDeleteDialog}
-        onConfirmDelete={handleDeleteHotel}
+        onConfirmDelete={handleDeleteRoom}
       />
 
       {/* {hotelToEdit && (
@@ -185,7 +184,7 @@ const RoomsTable = ({
           open={openEditDrawer}
           onClose={() => setOpenEditDrawer(false)}
           render={(close) => (
-            <HotelForm
+            <RoomForm
               title="Edit City"
               initialValues={{
                 ...hotelToEdit,

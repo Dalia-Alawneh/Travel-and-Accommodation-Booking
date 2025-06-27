@@ -19,7 +19,7 @@ import RoomsTable from "./RoomsTable";
 const Rooms = () => {
   return (
     <AdminCrudPage<IRoomResponse, IRoomRow>
-      title="Hotels"
+      title="Rooms"
       getAll={() => getRooms()}
       getPaginated={(limit, page) => getRoomsPaginated(limit, page)}
       addItem={(body) => addRoom(body)}
