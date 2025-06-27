@@ -153,8 +153,7 @@ const CitiesTable = ({
                   label="Description"
                   value={formik.values.description}
                   multiline
-                  rows={4}
-                  sx={{ borderRadius: 0.1 }}
+                  minRows={5}
                 />
 
                 <AppButton

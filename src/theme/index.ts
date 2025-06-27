@@ -141,6 +141,10 @@ const theme = createTheme({
           fontSize: 15,
           padding: "12px 20px",
         },
+        multiline: {
+          borderRadius: "12px",
+          padding: "6px",
+        },
       },
     },
     MuiLink: {
