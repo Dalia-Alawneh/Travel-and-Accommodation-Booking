@@ -25,3 +25,14 @@ export interface ICityPayload {
   name: string;
   description: string;
 }
+
+export interface IHotelPayload {
+  hotelName: string;
+  location: string;
+  description: string;
+  starRating: number;
+  latitude: number;
+  longitude: number;
+  availableRooms: number;
+  imageUrl: string;
+}

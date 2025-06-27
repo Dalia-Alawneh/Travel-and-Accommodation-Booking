@@ -3,11 +3,13 @@ import { Box, IconButton } from "@mui/material";
 import Table from "@travelia/areas/admin/components/Table";
 import { Column } from "@travelia/areas/admin/components/Table/type";
 import { useMutation } from "@tanstack/react-query";
-import { deleteCity, updateCity } from "@travelia/api/endpoints/cities";
 import ConfirmDeleteDialog from "@travelia/components/Dialogs/ConfirmDelete";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { IHotelRow } from "./types";
+import { deleteHotel, updateHotel } from "@travelia/api/endpoints/hotel";
+import AdminDrawer from "@travelia/areas/admin/components/AdminDrawer";
+import HotelForm from "../HotelForm";
 
 interface IHotelsTableProps {
   isLoading?: boolean;
@@ -36,23 +38,22 @@ const HotelsTable = ({
   const [hotelToEdit, setHotelToEdit] = useState<IHotelRow | null>(null);
 
   const { mutate: mutateDelete } = useMutation({
-    mutationFn: (id: number) => deleteCity(id),
+    mutationFn: (id: number) => deleteHotel(id),
     onSuccess: () => {
       closeConfirmDeleteDialog();
-      toast.success("City Deleted Successfully");
+      toast.success("Hotel Deleted Successfully");
     },
   });
 
   const { mutate: mutateUpdate, isPending: isUpdating } = useMutation({
-    mutationFn: (data: IHotelRow) =>
-      updateCity(data.id, { name: data.name, description: data.description }),
+    mutationFn: (data: IHotelRow) => updateHotel(data.id, { ...data }),
     onSuccess: () => {
       setOpenEditDrawer(false);
-      toast.success("City Updated Successfully");
+      toast.success("Hotel Updated Successfully");
     },
   });
 
-  const handleDeleteCity = () => {
+  const handleDeleteHotel = () => {
     if (selectedHotel) {
       mutateDelete(selectedHotel.id);
     }
@@ -120,29 +121,28 @@ const HotelsTable = ({
       <ConfirmDeleteDialog
         open={openConfirmDelete}
         handleClose={closeConfirmDeleteDialog}
-        onConfirmDelete={handleDeleteCity}
+        onConfirmDelete={handleDeleteHotel}
       />
 
-      {/* {cityToEdit && (
+      {hotelToEdit && (
         <AdminDrawer
           open={openEditDrawer}
           onClose={() => setOpenEditDrawer(false)}
           render={(close) => (
-            <CityForm
+            <HotelForm
               title="Edit City"
               initialValues={{
-                name: cityToEdit.name,
-                description: cityToEdit.description,
+                ...hotelToEdit,
               }}
               onSubmit={(values) => {
-                mutateUpdate({ ...cityToEdit, ...values });
+                mutateUpdate({ ...hotelToEdit, ...values });
                 close();
               }}
               isLoading={isUpdating}
             />
           )}
         />
-      )} */}
+      )}
     </>
   );
 };

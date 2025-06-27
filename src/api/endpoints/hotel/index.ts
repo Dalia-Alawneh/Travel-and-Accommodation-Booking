@@ -9,6 +9,7 @@ import {
 } from "@travelia/api/types/response.dto";
 import hotelsData from "@travelia/api/data/hotels.json";
 import { mapHotelData } from "@travelia/api/utils";
+import { IHotelPayload } from "@travelia/api/types/request.dto";
 
 const endpoint = "/hotels";
 
@@ -76,6 +77,22 @@ export const getHotelsPaginated = async (
         data: paginatedData,
         totalCount: hotelsData.length,
       });
+    }, 300);
+  });
+};
+
+export const updateHotel = async (id: number, body: IHotelPayload) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(body);
+    }, 300);
+  });
+};
+
+export const deleteHotel = async (id: number): Promise<void> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
     }, 300);
   });
 };
