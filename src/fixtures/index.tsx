@@ -1,7 +1,10 @@
 import { hero1, hero2, hero3, thumb1, thumb2, thumb3 } from "@travelia/assets";
+import LocationCityIcon from "@mui/icons-material/LocationCity";
+import HotelIcon from "@mui/icons-material/Hotel";
+import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
 import { Menu, SelectItem, SortOptions } from "@travelia/types";
 
-export const menuItems: Menu = [
+export const userMenuItems: Menu = [
   {
     title: "Home",
     path: "/",
@@ -13,6 +16,24 @@ export const menuItems: Menu = [
   {
     title: "Contact",
     path: "contact",
+  },
+];
+
+export const adminMenuItems: Menu = [
+  {
+    title: "Cities",
+    path: "cities",
+    icon: <LocationCityIcon />,
+  },
+  {
+    title: "Hotels",
+    path: "hotels",
+    icon: <HotelIcon />,
+  },
+  {
+    title: "Rooms",
+    path: "rooms",
+    icon: <MeetingRoomIcon />,
   },
 ];
 
@@ -58,3 +79,6 @@ export const sortOptions: SelectItem[] = [
   { text: "Name: A to Z", value: SortOptions.NameAsc },
   { text: "Name: Z to A", value: SortOptions.NameDesc },
 ];
+
+export const PAGE_OPTIONS = [5, 10, 20];
+export const PAGE_SIZE = 5;

@@ -11,9 +11,9 @@ import HotelCard from "./components/HotelCard";
 import { useSearchNavigation } from "@travelia/hooks/useSearchNavigation";
 import HotelFilterForm from "./components/HotelFilterForm/HotelFilterForm";
 import SortMenu from "@travelia/components/Inputs/Sort/Sort";
-import { sortOptions } from "@travelia/fixtures";
+import { sortOptions } from "@travelia/fixtures/index.tsx";
 import mapSearchRoomParams from "@travelia/utils/mapSearchParams";
-import Main from "../../components/MainSection";
+import Main from "../../../../components/MainSection";
 
 const SearchPage = () => {
   const [params] = useSearchParams();

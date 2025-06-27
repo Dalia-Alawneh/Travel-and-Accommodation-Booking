@@ -4,7 +4,7 @@ import {
   getFromLocalStorage,
   removeFromLocalStorage,
 } from "@travelia/utils/localstorage";
-import { TOKEN_KEY, USER } from "@travelia/fixtures";
+import { TOKEN_KEY, USER } from "@travelia/fixtures/index.tsx";
 import { ErrorResponse } from "./types";
 
 export const attachTokenToRequest = (

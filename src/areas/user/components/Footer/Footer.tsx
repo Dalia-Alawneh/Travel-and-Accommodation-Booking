@@ -2,7 +2,7 @@ import { EmailRounded, LocationOn, AccessTime } from "@mui/icons-material";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import { footerBg, whiteLogo } from "@travelia/assets";
 import AppLink from "@travelia/components/Link/Link";
-import { menuItems } from "@travelia/fixtures";
+import { userMenuItems } from "@travelia/fixtures/index.tsx";
 
 const Footer = () => {
   return (
@@ -70,7 +70,7 @@ const Footer = () => {
               <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
                 Quick Links
               </Typography>
-              {menuItems.map((item) => (
+              {userMenuItems.map((item) => (
                 <AppLink key={item.title} path={item.path}>
                   <Typography
                     key={item.title}

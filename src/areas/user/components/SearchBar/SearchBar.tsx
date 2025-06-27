@@ -36,7 +36,7 @@ const SearchBar = ({
 
   const { data: citiesData } = useQuery({
     queryKey: ["cities"],
-    queryFn: getCities,
+    queryFn: () => getCities(),
   });
 
   const mappedCities: SelectItem[] = useMemo(() => {

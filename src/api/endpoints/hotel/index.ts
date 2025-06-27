@@ -1,11 +1,15 @@
 import Axios from "@travelia/api/config";
-import { galleryMockData } from "@travelia/api/data";
+import { galleryMockData } from "@travelia/api/data/gallery";
 import {
   IGalleryResponse,
+  IHotelDetailedResponse,
   IHotelResponse,
   IReviewResponse,
   IRoomResponse,
 } from "@travelia/api/types/response.dto";
+import hotelsData from "@travelia/api/data/hotels.json";
+import { mapHotelData } from "@travelia/api/utils";
+import { IHotelPayload } from "@travelia/api/types/request.dto";
 
 const endpoint = "/hotels";
 
@@ -45,4 +49,68 @@ export const getHotelReviews = async (
 ): Promise<IReviewResponse[]> => {
   const response = await Axios.get(`${endpoint}/${id}/reviews`);
   return response.data;
+};
+
+export const getHotels = async (): Promise<IHotelDetailedResponse[]> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const filteredHotels = hotelsData.map(mapHotelData);
+      resolve(filteredHotels);
+    }, 300);
+  });
+};
+
+export const getHotelsPaginated = async (
+  limit: number,
+  page: number,
+): Promise<IHotelDetailedResponse[]> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const start = (page - 1) * limit;
+      const end = start + limit;
+      const paginatedData = hotelsData.slice(start, end).map(mapHotelData);
+
+      resolve(paginatedData);
+    }, 300);
+  });
+};
+
+export const updateHotel = async (id: number, body: IHotelPayload) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(body);
+    }, 300);
+  });
+};
+
+export const deleteHotel = async (id: number): Promise<void> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 300);
+  });
+};
+
+export const addHotel = async (
+  body: IHotelPayload,
+): Promise<IHotelDetailedResponse> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        id: Math.floor(Math.random() * 1000),
+        hotelName: body.hotelName,
+        location: body.location,
+        description: body.description,
+        starRating: body.starRating,
+        imageUrl: body.imageUrl,
+        hotelType: "Resort",
+        latitude: 0,
+        longitude: 0,
+        rooms: [],
+        availableRooms: 0,
+        cityId: 0,
+        amenities: [],
+      });
+    }, 300);
+  });
 };

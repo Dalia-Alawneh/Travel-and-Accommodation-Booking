@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import AppForm from "@travelia/components/Form";
-import AppTextField from "@travelia/components/Inputs/TextField/TextField";
+import FormikTextField from "@travelia/components/Inputs/TextField/FormikTextField";
 import { LoginFormValues, UserActions, UserType } from "@travelia/types";
 import { loginSchema } from "../../schemas/login";
 import AppButton from "@travelia/components/Button";
@@ -16,7 +16,7 @@ import { loginBg, logo } from "@travelia/assets";
 import { login } from "@travelia/api/endpoints/auth";
 import { useMutation } from "@tanstack/react-query";
 import { saveToLocalStorage } from "@travelia/utils/localstorage";
-import { TOKEN_KEY, USER } from "@travelia/fixtures";
+import { TOKEN_KEY, USER } from "@travelia/fixtures/index.tsx";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 import useUser from "@travelia/context/user/useContext";
@@ -99,11 +99,11 @@ const Login = () => {
                         flexDirection: "column",
                       }}
                     >
-                      <AppTextField
+                      <FormikTextField
                         name="username"
                         placeholder="Enter Username"
                       />
-                      <AppTextField
+                      <FormikTextField
                         name="password"
                         placeholder="Enter Password"
                         type={showPassword ? "text" : "password"}

@@ -2,7 +2,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Box, CardMedia } from "@mui/material";
-import { carouselItems, thumbnails } from "@travelia/fixtures";
+import { carouselItems, thumbnails } from "@travelia/fixtures/index.tsx";
 import { useRef, useState } from "react";
 import { ArrowLeftRounded, ArrowRightRounded } from "@mui/icons-material";
 import AppButton from "@travelia/components/Button";

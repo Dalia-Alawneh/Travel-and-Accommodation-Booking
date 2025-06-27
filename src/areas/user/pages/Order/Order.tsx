@@ -9,7 +9,7 @@ import {
   Divider,
   useTheme,
 } from "@mui/material";
-import Main from "../../components/MainSection";
+import Main from "../../../../components/MainSection";
 import { successOrder } from "@travelia/assets";
 import { useLocation, useNavigate } from "react-router";
 import { useEffect } from "react";

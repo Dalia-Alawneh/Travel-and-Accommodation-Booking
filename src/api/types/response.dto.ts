@@ -116,3 +116,32 @@ export interface IBookingResponse {
   bookingStatus: string;
   confirmationNumber: string;
 }
+
+export interface IRoom {
+  id: number;
+  name: string;
+  type: string;
+  price: number;
+  available: boolean;
+  maxOccupancy: number;
+}
+export interface IHotelDetailedResponse extends IHotelResponse {
+  id: number;
+  hotelType: string;
+  rooms: IRoom[];
+}
+export interface IHotelJsonData {
+  id: number;
+  hotelName?: string;
+  location?: string;
+  description?: string;
+  hotelType?: string;
+  starRating?: number;
+  latitude?: number;
+  longitude?: number;
+  rooms?: IRoom[];
+  imageUrl?: string;
+  availableRooms?: number;
+  cityId?: number;
+  amenities?: IAmenitiesResponse[];
+}

@@ -20,3 +20,17 @@ export interface IBookingPayload {
   totalCost: number;
   paymentMethod: string;
 }
+
+export interface ICityPayload {
+  name: string;
+  description: string;
+}
+
+export interface IHotelPayload {
+  hotelName: string;
+  location: string;
+  description: string;
+  starRating: number;
+  imageUrl: string;
+  availableRooms: number;
+}

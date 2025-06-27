@@ -8,11 +8,14 @@ import GuestRoute from "./GuestRoute";
 import SearchPage from "@travelia/areas/user/pages/Search";
 import NotFound from "@travelia/pages/NotFound/NotFound";
 import ServerError from "@travelia/pages/ServerError";
-import RootLayout from "@travelia/layouts/user/RootLayout";
+import UserLayout from "@travelia/layouts/user/UserLayout";
 import HotelPage from "@travelia/areas/user/pages/Hotel";
 import CartPage from "@travelia/areas/user/pages/Cart";
 import OrderPage from "@travelia/areas/user/pages/Order";
 import UnAuthorize from "@travelia/pages/UnAuthorize";
+import Cities from "@travelia/areas/admin/pages/Cities";
+import AdminLayout from "@travelia/layouts/admin/AdminLayout";
+import Hotels from "@travelia/areas/admin/pages/Hotels";
 
 const AppRouter = () => {
   return (
@@ -29,7 +32,7 @@ const AppRouter = () => {
         path="/user"
         element={<GuardedRoute allowedRoles={[UserType.User]} />}
       >
-        <Route element={<RootLayout />}>
+        <Route element={<UserLayout />}>
           <Route index element={<Home />} />
           <Route path="search" element={<SearchPage />} />
           <Route path="hotel/:id" element={<HotelPage />} />
@@ -41,7 +44,10 @@ const AppRouter = () => {
         path="/admin"
         element={<GuardedRoute allowedRoles={[UserType.Admin]} />}
       >
-        <Route index element={<Home />} />
+        <Route element={<AdminLayout />}>
+          <Route path="cities" element={<Cities />} />
+          <Route path="hotels" element={<Hotels />} />
+        </Route>
       </Route>
     </Routes>
   );
