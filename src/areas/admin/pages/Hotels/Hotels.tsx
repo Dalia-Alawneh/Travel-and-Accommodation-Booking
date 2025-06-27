@@ -1,35 +1,46 @@
-import { getHotels, getHotelsPaginated } from "@travelia/api/endpoints/hotel";
+import {
+  addHotel,
+  getHotels,
+  getHotelsPaginated,
+} from "@travelia/api/endpoints/hotel";
 import AdminCrudPage from "../CrudPage";
-// import HotelForm from "./HotelForm";
 import { IHotelDetailedResponse } from "@travelia/api/types/response.dto";
 import HotelsTable from "./HotelsTable";
 import { IHotelRow } from "./HotelsTable/types";
-
+import HotelForm from "./HotelForm";
+interface IAddHotelPayload {
+  hotelName: string;
+  location: string;
+  description: string;
+  starRating: number;
+  imageUrl: string;
+  availableRooms: number;
+}
 const Hotels = () => {
   return (
-    <AdminCrudPage<IHotelDetailedResponse, Omit<IHotelDetailedResponse, "id">>
+    <AdminCrudPage<IHotelDetailedResponse, IAddHotelPayload>
       title="Hotels"
       getAll={() => getHotels()}
       getPaginated={(limit, page) => getHotelsPaginated(limit, page)}
-      addItem={(body) => {}}
-      renderForm={() => {
-        return <></>;
-      }}
-      // renderForm={(close, mutate, isLoading) => (
-      //   <HotelForm
-      //     title="Add Hotel"
-      //     initialValues={{
-      //       hotelName: "",
-      //       location: "",
-      //       description: "",
-      //       starRating: 0,
-      //       imageUrl: ""
-      //     }}
-      //     onSubmit={(values) => {
-      //       console.log(values);
-      //     }}
-      //   />
-      // )}
+      addItem={(body) => addHotel(body)}
+      renderForm={(close, mutate, isLoading) => (
+        <HotelForm
+          isLoading={isLoading}
+          title="Add Hotel"
+          initialValues={{
+            hotelName: "",
+            location: "",
+            description: "",
+            starRating: 0,
+            imageUrl: "",
+            availableRooms: 0,
+          }}
+          onSubmit={(values) => {
+            mutate(values);
+            close();
+          }}
+        />
+      )}
       renderTable={(
         rawData: IHotelDetailedResponse[] | { data: IHotelDetailedResponse[] },
         page,

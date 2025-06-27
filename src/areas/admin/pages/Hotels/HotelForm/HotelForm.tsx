@@ -11,6 +11,7 @@ interface HotelFormProps {
     description: string;
     starRating: number;
     imageUrl: string;
+    availableRooms: number;
   };
   onSubmit: (values: HotelFormProps["initialValues"]) => void;
   isLoading?: boolean;

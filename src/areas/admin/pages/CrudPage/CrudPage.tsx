@@ -50,9 +50,6 @@ const AdminCrudPage = <T, FormPayload>({
     queryFn: getAll,
   });
 
-  console.log("====================================");
-  console.log(data);
-  console.log("====================================");
   const { data: paginatedData, isLoading } = useQuery({
     queryKey: [`paginated-${title.toLowerCase()}`, page, rowsPerPage],
     queryFn: () => getPaginated(rowsPerPage, page + 1),

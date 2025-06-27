@@ -31,8 +31,6 @@ export interface IHotelPayload {
   location: string;
   description: string;
   starRating: number;
-  latitude: number;
-  longitude: number;
-  availableRooms: number;
   imageUrl: string;
+  availableRooms: number;
 }

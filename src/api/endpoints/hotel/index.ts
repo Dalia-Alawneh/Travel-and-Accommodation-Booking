@@ -63,20 +63,14 @@ export const getHotels = async (): Promise<IHotelDetailedResponse[]> => {
 export const getHotelsPaginated = async (
   limit: number,
   page: number,
-): Promise<{
-  data: IHotelDetailedResponse[];
-  totalCount: number;
-}> => {
+): Promise<IHotelDetailedResponse[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       const start = (page - 1) * limit;
       const end = start + limit;
       const paginatedData = hotelsData.slice(start, end).map(mapHotelData);
 
-      resolve({
-        data: paginatedData,
-        totalCount: hotelsData.length,
-      });
+      resolve(paginatedData);
     }, 300);
   });
 };
@@ -93,6 +87,30 @@ export const deleteHotel = async (id: number): Promise<void> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve();
+    }, 300);
+  });
+};
+
+export const addHotel = async (
+  body: IHotelPayload,
+): Promise<IHotelDetailedResponse> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        id: Math.floor(Math.random() * 1000),
+        hotelName: body.hotelName,
+        location: body.location,
+        description: body.description,
+        starRating: body.starRating,
+        imageUrl: body.imageUrl,
+        hotelType: "Resort",
+        latitude: 0,
+        longitude: 0,
+        rooms: [],
+        availableRooms: 0,
+        cityId: 0,
+        amenities: [],
+      });
     }, 300);
   });
 };
