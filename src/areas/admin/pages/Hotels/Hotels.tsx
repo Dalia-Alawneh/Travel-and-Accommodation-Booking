@@ -5,9 +5,9 @@ import {
 } from "@travelia/api/endpoints/hotel";
 import AdminCrudPage from "../CrudPage";
 import { IHotelDetailedResponse } from "@travelia/api/types/response.dto";
-import HotelsTable from "./HotelsTable";
-import { IHotelRow } from "./HotelsTable/types";
-import HotelForm from "./HotelForm";
+import HotelsTable from "./components/HotelsTable";
+import { IHotelRow } from "./components/HotelsTable/types";
+import HotelForm from "./components/HotelForm";
 interface IAddHotelPayload {
   hotelName: string;
   location: string;

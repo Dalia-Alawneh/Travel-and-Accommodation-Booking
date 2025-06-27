@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { IHotelRow } from "./types";
 import { deleteHotel, updateHotel } from "@travelia/api/endpoints/hotel";
 import AdminDrawer from "@travelia/areas/admin/components/AdminDrawer";
-import HotelForm from "../HotelForm";
+import HotelForm from "../components/HotelForm";
 import { fallbackImage } from "@travelia/assets";
 
 interface IHotelsTableProps {

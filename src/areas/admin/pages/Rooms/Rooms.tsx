@@ -1,13 +1,13 @@
 import AdminCrudPage from "../CrudPage";
 import { IRoomResponse } from "@travelia/api/types/response.dto";
-import { IRoomRow } from "./RoomsTable/types";
+import { IRoomRow } from "./components/RoomsTable/types";
 import {
   addRoom,
   getRooms,
   getRoomsPaginated,
 } from "@travelia/api/endpoints/rooms";
-import RoomsTable from "./RoomsTable";
-import RoomForm from "./RoomForm";
+import RoomsTable from "./components/RoomsTable";
+import RoomForm from "./components/RoomForm";
 
 const Rooms = () => {
   return (
