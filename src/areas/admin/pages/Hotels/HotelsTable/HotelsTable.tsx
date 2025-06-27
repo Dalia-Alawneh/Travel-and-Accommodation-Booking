@@ -10,7 +10,6 @@ import { IHotelRow } from "./types";
 import { deleteHotel, updateHotel } from "@travelia/api/endpoints/hotel";
 import AdminDrawer from "@travelia/areas/admin/components/AdminDrawer";
 import HotelForm from "../HotelForm";
-import useValidateImage from "@travelia/hooks/useValidateImage";
 import { fallbackImage } from "@travelia/assets";
 
 interface IHotelsTableProps {
@@ -102,10 +101,10 @@ const HotelsTable = ({
               e.currentTarget.src = fallbackImage;
             }}
             sx={{
-              width: 80,
+              width: 100,
               height: 50,
               objectFit: "cover",
-              borderRadius: 1,
+              borderRadius: 0.3,
             }}
           />
         );
@@ -115,7 +114,7 @@ const HotelsTable = ({
     { id: "starRating", label: "Rating", align: "left", width: 100 },
     {
       id: "availableRooms",
-      label: "Available Rooms",
+      label: "Rooms",
       align: "left",
       width: 200,
     },

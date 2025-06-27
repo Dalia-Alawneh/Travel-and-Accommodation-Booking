@@ -76,6 +76,7 @@ const Table = <T extends { id?: string | number }>({
                 <TableRow key={(row.id ?? idx) as string | number}>
                   {columns.map((col) => (
                     <TableCell
+                      sx={{ fontSize: 14 }}
                       key={col.id as string}
                       align={col.align || "left"}
                     >
