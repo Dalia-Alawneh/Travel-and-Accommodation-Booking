@@ -144,5 +144,4 @@ export interface IHotelJsonData {
   availableRooms?: number;
   cityId?: number;
   amenities?: IAmenitiesResponse[];
-  name?: string;
 }

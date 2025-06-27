@@ -1,45 +1,68 @@
-import { getHotels } from "@travelia/api/endpoints/hotel";
+import { getHotels, getHotelsPaginated } from "@travelia/api/endpoints/hotel";
 import AdminCrudPage from "../CrudPage";
-import HotelForm from "./HotelForm";
+// import HotelForm from "./HotelForm";
+import { IHotelDetailedResponse } from "@travelia/api/types/response.dto";
+import HotelsTable from "./HotelsTable";
+import { IHotelRow } from "./HotelsTable/types";
 
 const Hotels = () => {
   return (
-    <AdminCrudPage<CityRow, Omit<CityRow, "id">>
-      title="City"
+    <AdminCrudPage<IHotelDetailedResponse, Omit<IHotelDetailedResponse, "id">>
+      title="Hotels"
       getAll={() => getHotels()}
-      getPaginated={(limit, page) => getCities(limit, page)}
-      addItem={(body) => addCity(body)}
-      renderForm={(close, mutate, isLoading) => (
-        <HotelForm
-          title="Add City"
-          initialValues={{ name: "", description: "" }}
-          onSubmit={(values) => {
-            mutate(values);
-            close();
-          }}
-          isLoading={isLoading}
-        />
-      )}
+      getPaginated={(limit, page) => getHotelsPaginated(limit, page)}
+      addItem={(body) => {}}
+      renderForm={() => {
+        return <></>;
+      }}
+      // renderForm={(close, mutate, isLoading) => (
+      //   <HotelForm
+      //     title="Add Hotel"
+      //     initialValues={{
+      //       hotelName: "",
+      //       location: "",
+      //       description: "",
+      //       starRating: 0,
+      //       imageUrl: ""
+      //     }}
+      //     onSubmit={(values) => {
+      //       console.log(values);
+      //     }}
+      //   />
+      // )}
       renderTable={(
-        data,
+        rawData: IHotelDetailedResponse[] | { data: IHotelDetailedResponse[] },
         page,
         rowsPerPage,
         totalCount,
         isLoading,
         onPageChange,
         onRowsPerPageChange,
-      ) => (
-        <CitiesTable
-          rowData={data}
-          page={page}
-          rowsPerPage={rowsPerPage}
-          totalCount={totalCount}
-          isLoading={isLoading}
-          rowsPerPageOptions={PAGE_OPTIONS}
-          onPageChange={onPageChange}
-          onRowsPerPageChange={onRowsPerPageChange}
-        />
-      )}
+      ) => {
+        const actualData = Array.isArray(rawData)
+          ? rawData
+          : rawData?.data || [];
+
+        const tableRows = actualData.map((hotel) => ({
+          id: hotel.id,
+          hotelName: hotel.hotelName,
+          location: hotel.location,
+          description: hotel.description,
+          starRating: hotel.starRating,
+        }));
+
+        return (
+          <HotelsTable
+            rowData={tableRows as IHotelRow[]}
+            page={page}
+            rowsPerPage={rowsPerPage}
+            totalCount={totalCount}
+            isLoading={isLoading}
+            onPageChange={onPageChange}
+            onRowsPerPageChange={onRowsPerPageChange}
+          />
+        );
+      }}
     />
   );
 };

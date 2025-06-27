@@ -2,11 +2,17 @@ import { Box, Typography } from "@mui/material";
 import AppForm from "@travelia/components/Form";
 import AppButton from "@travelia/components/Button";
 import FormikTextField from "@travelia/components/Inputs/TextField/FormikTextField";
-import { citySchema } from "@travelia/schemas/city";
+import { hotelSchema } from "@travelia/schemas/hotel";
 
 interface HotelFormProps {
-  initialValues: { name: string; description: string };
-  onSubmit: (values: { name: string; description: string }) => void;
+  initialValues: {
+    hotelName: string;
+    location: string;
+    description: string;
+    starRating: number;
+    imageUrl: string;
+  };
+  onSubmit: (values: HotelFormProps["initialValues"]) => void;
   isLoading?: boolean;
   title: string;
 }
@@ -20,7 +26,7 @@ const HotelForm = ({
   return (
     <AppForm
       initialValues={initialValues}
-      validationSchema={citySchema}
+      validationSchema={hotelSchema}
       onSubmit={onSubmit}
       render={(formik) => (
         <form onSubmit={formik.handleSubmit}>
@@ -35,21 +41,46 @@ const HotelForm = ({
             </Typography>
 
             <FormikTextField
-              name="name"
-              label="Name"
-              placeholder="Enter Name"
-              value={formik.values.name}
+              name="hotelName"
+              label="Hotel Name"
+              placeholder="Enter Hotel Name"
+              value={formik.values.hotelName}
+              onChange={formik.handleChange}
+            />
+
+            <FormikTextField
+              name="location"
+              label="Location"
+              placeholder="Enter Location"
+              value={formik.values.location}
               onChange={formik.handleChange}
             />
 
             <FormikTextField
               name="description"
-              placeholder="Enter Description"
               label="Description"
+              placeholder="Enter Description"
               value={formik.values.description}
               multiline
               onChange={formik.handleChange}
-              minRows={5}
+              minRows={3}
+            />
+
+            <FormikTextField
+              name="starRating"
+              label="Star Rating"
+              placeholder="Enter Star Rating"
+              type="number"
+              value={formik.values.starRating}
+              onChange={formik.handleChange}
+            />
+
+            <FormikTextField
+              name="imageUrl"
+              label="Image URL"
+              placeholder="Enter Image URL"
+              value={formik.values.imageUrl}
+              onChange={formik.handleChange}
             />
 
             <AppButton
