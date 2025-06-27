@@ -1,4 +1,4 @@
-import { Box, IconButton, Tooltip, Typography } from "@mui/material";
+import { Box, IconButton, Tooltip, Typography, useTheme } from "@mui/material";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import useDebounce from "@travelia/hooks/useDebounce";
@@ -44,7 +44,7 @@ const AdminCrudPage = <T, FormPayload>({
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 500);
   const [openAddDrawer, setOpenAddDrawer] = useState(false);
-
+  const theme = useTheme();
   const { data } = useQuery({
     queryKey: [title.toLowerCase()],
     queryFn: getAll,
@@ -93,10 +93,11 @@ const AdminCrudPage = <T, FormPayload>({
         alignItems="center"
         mb={4}
       >
-        <Box width="300px">
+        <Box width={{ xs: "80%", md: "50%" }}>
           <AppTextField
             name="search"
             placeholder={searchPlaceholder ?? `Search ${title}`}
+            sx={{ boxShadow: theme.customShadows.light }}
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);

@@ -39,6 +39,7 @@ const Hotels = () => {
             mutate(values);
             close();
           }}
+          showImage={false}
         />
       )}
       renderTable={(

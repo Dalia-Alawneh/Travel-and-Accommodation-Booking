@@ -17,6 +17,7 @@ interface HotelFormProps {
   onSubmit: (values: HotelFormProps["initialValues"]) => void;
   isLoading?: boolean;
   title: string;
+  showImage?: boolean;
 }
 
 const HotelForm = ({
@@ -24,6 +25,7 @@ const HotelForm = ({
   onSubmit,
   isLoading,
   title,
+  showImage = true,
 }: HotelFormProps) => {
   const { src } = useValidateImage(initialValues.imageUrl);
   return (
@@ -43,13 +45,16 @@ const HotelForm = ({
               {title}
             </Typography>
 
-            <Box
-              component="img"
-              src={src}
-              width={350}
-              height={200}
-              sx={{ objectFit: "cover", borderRadius: 0.4 }}
-            />
+            {showImage && (
+              <Box
+                component="img"
+                src={src}
+                width={350}
+                height={200}
+                sx={{ objectFit: "cover", borderRadius: 0.4 }}
+              />
+            )}
+
             <FormikTextField
               name="imageUrl"
               label="Image URL"
