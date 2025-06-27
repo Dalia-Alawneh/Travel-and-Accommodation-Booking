@@ -1,18 +1,23 @@
 import { Box, IconButton, Tooltip, Typography } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
-import { getCities } from "@travelia/api/endpoints/cities";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { addCity, getCities } from "@travelia/api/endpoints/cities";
 import AppTextField from "@travelia/components/Inputs/TextField/TextField";
 import { useMemo, useState } from "react";
 import CitiesTable from "./components/CitiesTable";
 import { PAGE_OPTIONS, PAGE_SIZE } from "@travelia/fixtures";
 import useDebounce from "@travelia/hooks/useDebounce";
 import { AddCircle } from "@mui/icons-material";
+import AdminDrawer from "../../components/AdminDrawer/AdminDrawer";
+import CityForm from "./components/CityForm";
+import { CityRow } from "./components/CitiesTable/types";
+import toast from "react-hot-toast";
 
 const Cities = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(PAGE_SIZE);
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 500);
+  const [openAddDrawer, setOpenAddDrawer] = useState(false);
   const { data } = useQuery({
     queryKey: ["cities"],
     queryFn: () => getCities(),
@@ -23,6 +28,12 @@ const Cities = () => {
     queryFn: () => getCities(rowsPerPage, page + 1),
   });
 
+  const { mutate: mutateAdd, isPending: isAdding } = useMutation({
+    mutationFn: (body: Omit<CityRow, "id">) => addCity(body),
+    onSuccess: () => {
+      toast.success("City Added Successfully");
+    },
+  });
   const filteredData = useMemo(() => {
     if (!debouncedSearch) return data;
     return data?.filter(
@@ -31,6 +42,14 @@ const Cities = () => {
         city.description.toLowerCase().includes(debouncedSearch.toLowerCase()),
     );
   }, [data, debouncedSearch]);
+
+  const openAdd = () => {
+    setOpenAddDrawer(true);
+  };
+
+  const closeAdd = () => {
+    setOpenAddDrawer(false);
+  };
 
   return (
     <Box>
@@ -55,12 +74,30 @@ const Cities = () => {
             }}
           />
         </Box>
-        <Tooltip title="Add City">
+        <Tooltip title="Add City" onClick={openAdd}>
           <IconButton>
             <AddCircle fontSize="large" color="primary" />
           </IconButton>
         </Tooltip>
       </Box>
+      <AdminDrawer
+        open={openAddDrawer}
+        onClose={closeAdd}
+        render={(close) => (
+          <CityForm
+            title="Add City"
+            initialValues={{
+              name: "",
+              description: "",
+            }}
+            onSubmit={(values) => {
+              mutateAdd({ ...values });
+              close();
+            }}
+            isLoading={isAdding}
+          />
+        )}
+      />
       <CitiesTable
         rowData={search ? (filteredData ?? []) : (paginatedData ?? [])}
         page={search ? 0 : page}

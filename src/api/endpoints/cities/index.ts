@@ -33,3 +33,15 @@ export const updateCity = async (
     }, 300);
   });
 };
+
+export const addCity = async (body: ICityPayload): Promise<ICitiesResponse> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        id: Math.floor(Math.random() * 10000),
+        name: body.name,
+        description: body.description,
+      });
+    }, 300);
+  });
+};
