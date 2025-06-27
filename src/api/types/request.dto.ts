@@ -20,3 +20,8 @@ export interface IBookingPayload {
   totalCost: number;
   paymentMethod: string;
 }
+
+export interface ICityPayload {
+  name: string;
+  description: string;
+}

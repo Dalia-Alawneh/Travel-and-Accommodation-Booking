@@ -1,4 +1,5 @@
 import Axios from "@travelia/api/config";
+import { ICityPayload } from "@travelia/api/types/request.dto";
 import { ICitiesResponse } from "@travelia/api/types/response.dto";
 
 const endpoint = "/cities";
@@ -19,5 +20,13 @@ export const getCities = async (
 
 export const deleteCity = async (id: number): Promise<ICitiesResponse[]> => {
   const response = await Axios.delete(`${endpoint}/${id}`);
+  return response.data;
+};
+
+export const updateCity = async (
+  id: number,
+  body: ICityPayload,
+): Promise<ICitiesResponse[]> => {
+  const response = await Axios.put(`${endpoint}/${id}`, body);
   return response.data;
 };
