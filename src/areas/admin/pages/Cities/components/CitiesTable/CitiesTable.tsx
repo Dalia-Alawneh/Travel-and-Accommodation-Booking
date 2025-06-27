@@ -48,7 +48,8 @@ const CitiesTable = ({
   });
 
   const { mutate: mutateUpdate } = useMutation({
-    mutationFn: (data: CityRow) => updateCity(data.id, data),
+    mutationFn: (data: CityRow) =>
+      updateCity(data.id, { name: data.name, description: data.description }),
     onSuccess: () => {
       setOpenEditDrawer(false);
       toast.success("City Updated Successfully");
@@ -137,36 +138,48 @@ const CitiesTable = ({
               mutateUpdate({ ...cityToEdit, ...values });
             }}
             render={(formik) => (
-              <Box width={400} p={3} mt={10}>
-                <Typography variant="h4" mb={2}>
-                  Edit City
-                </Typography>
-
-                <FormikTextField
-                  name="name"
-                  label="Name"
-                  value={formik.values.name}
-                  onChange={formik.handleChange}
-                />
-
-                <FormikTextField
-                  name="description"
-                  label="Description"
-                  value={formik.values.description}
-                  multiline
-                  onChange={formik.handleChange}
-                  minRows={5}
-                />
-
-                <AppButton
-                  sx={{ bgcolor: "primary.main", color: "white", px: 4, mt: 2 }}
-                  fullWidth
-                  type="submit"
-                  disabled={formik.isSubmitting}
+              <form onSubmit={formik.handleSubmit}>
+                <Box
+                  width={400}
+                  p={3}
+                  mt={10}
+                  sx={{ display: "flex", flexDirection: "column", gap: 2 }}
                 >
-                  Save
-                </AppButton>
-              </Box>
+                  <Typography variant="h4" mb={2} fontWeight={600}>
+                    Edit City
+                  </Typography>
+
+                  <FormikTextField
+                    name="name"
+                    label="Name"
+                    value={formik.values.name}
+                    onChange={formik.handleChange}
+                  />
+
+                  <FormikTextField
+                    name="description"
+                    label="Description"
+                    value={formik.values.description}
+                    multiline
+                    onChange={formik.handleChange}
+                    minRows={5}
+                  />
+
+                  <AppButton
+                    sx={{
+                      bgcolor: "primary.main",
+                      color: "white",
+                      px: 4,
+                      mt: 6,
+                    }}
+                    fullWidth
+                    type="submit"
+                    loading={formik.isSubmitting}
+                  >
+                    Save
+                  </AppButton>
+                </Box>
+              </form>
             )}
           />
         )}

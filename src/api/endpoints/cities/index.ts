@@ -26,7 +26,10 @@ export const deleteCity = async (id: number): Promise<ICitiesResponse[]> => {
 export const updateCity = async (
   id: number,
   body: ICityPayload,
-): Promise<ICitiesResponse[]> => {
-  const response = await Axios.put(`${endpoint}/${id}`, body);
-  return response.data;
+): Promise<ICitiesResponse> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({ id, ...body });
+    }, 300);
+  });
 };
