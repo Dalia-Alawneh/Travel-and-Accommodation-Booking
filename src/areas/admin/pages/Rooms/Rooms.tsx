@@ -7,6 +7,7 @@ import {
   getRoomsPaginated,
 } from "@travelia/api/endpoints/rooms";
 import RoomsTable from "./RoomsTable";
+import RoomForm from "./RoomForm";
 
 const Rooms = () => {
   return (
@@ -15,7 +16,27 @@ const Rooms = () => {
       getAll={() => getRooms()}
       getPaginated={(limit, page) => getRoomsPaginated(limit, page)}
       addItem={(body) => addRoom(body)}
-      renderForm={(close, mutate, isLoading) => <></>}
+      renderForm={(close, mutate, isLoading) => (
+        <RoomForm
+          showImage={false}
+          title="Add Room"
+          initialValues={{
+            roomNumber: 0,
+            roomAmenities: [],
+            availability: false,
+            capacityOfAdults: 0,
+            capacityOfChildren: 0,
+            price: 0,
+            roomPhotoUrl: "",
+            roomType: "",
+          }}
+          onSubmit={(values) => {
+            mutate(values);
+            close();
+          }}
+          isLoading={isLoading}
+        />
+      )}
       renderTable={(
         rawData: IRoomRow[],
         page,

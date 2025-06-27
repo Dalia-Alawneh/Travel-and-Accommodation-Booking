@@ -124,6 +124,31 @@ const RoomsTable = ({
     },
     { id: "price", label: "Price", align: "left" },
     {
+      id: "roomAmenities",
+      label: "Amenities",
+      align: "left",
+      render: (_value: unknown, row: IRoomRow) => (
+        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+          {row.roomAmenities.map((amenity, index) => (
+            <Box
+              key={index}
+              sx={{
+                backgroundColor: "#eee",
+                color: "#333",
+                px: 1,
+                py: 0.3,
+                borderRadius: 1,
+                fontSize: "0.75rem",
+                maxWidth: "100%",
+              }}
+            >
+              {amenity.name}
+            </Box>
+          ))}
+        </Box>
+      ),
+    },
+    {
       id: "availability",
       label: "Availability",
       align: "left",

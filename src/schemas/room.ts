@@ -9,6 +9,6 @@ export const roomSchema = Yup.object().shape({
   roomPhotoUrl: Yup.string()
     .url("Must be a valid URL")
     .required("Photo is required"),
-  roomAmenities: Yup.mixed().required("Amenities are required"),
+  roomAmenities: Yup.number().required("Amenities are required"),
   availability: Yup.boolean().required("Availability is required"),
 });

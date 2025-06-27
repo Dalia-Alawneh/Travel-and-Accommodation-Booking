@@ -6,6 +6,7 @@ import { hotelSchema } from "@travelia/schemas/hotel";
 import useValidateImage from "@travelia/hooks/useValidateImage";
 import AppSwitch from "@travelia/components/Inputs/Switch";
 import { roomSchema } from "@travelia/schemas/room";
+import { IAmenity } from "@travelia/types";
 
 interface RoomFormProps {
   initialValues: {
@@ -15,7 +16,7 @@ interface RoomFormProps {
     capacityOfAdults: number;
     capacityOfChildren: number;
     roomPhotoUrl: string;
-    roomAmenities: any;
+    roomAmenities: Omit<IAmenity, "id">;
     availability: boolean;
   };
   onSubmit: (values: RoomFormProps["initialValues"]) => void;
@@ -79,6 +80,7 @@ const RoomForm = ({
             <FormikTextField
               name="capacityOfAdults"
               label="Capacity Of Adults"
+              type="number"
               placeholder="Enter Capacity Of Adults"
               value={formik.values.capacityOfAdults}
               onChange={formik.handleChange}
@@ -87,6 +89,7 @@ const RoomForm = ({
             <FormikTextField
               name="capacityOfChildren"
               label="Capacity Of Children"
+              type="number"
               placeholder="Enter Capacity Of Children"
               value={formik.values.capacityOfChildren}
               onChange={formik.handleChange}
