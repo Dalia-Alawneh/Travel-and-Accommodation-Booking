@@ -1,4 +1,4 @@
-import { styled } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -8,6 +8,7 @@ import { adminMenuItems } from "@travelia/fixtures";
 import AppDrawer from "@travelia/components/Drawer";
 import { ReactNode, useState } from "react";
 import { DRAWER_WIDTH } from "@travelia/constants";
+import { useMediaQuery } from "@mui/material";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -50,7 +51,8 @@ export default function AdminTopBarDrawer({
   children: ReactNode;
 }) {
   const [open, setOpen] = useState(false);
-
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const handleDrawerToggle = () => {
     setOpen((prev) => !prev);
   };
@@ -75,7 +77,7 @@ export default function AdminTopBarDrawer({
         </Toolbar>
       </AppBar>
       <AppDrawer
-        variant="persistent"
+        variant={isSmallScreen ? "temporary" : "persistent"}
         drawerWidth={DRAWER_WIDTH}
         isOpen={open}
         handleDrawerToggle={handleDrawerToggle}
