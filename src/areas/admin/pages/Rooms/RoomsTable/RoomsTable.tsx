@@ -38,8 +38,6 @@ const RoomsTable = ({
   const [openEditDrawer, setOpenEditDrawer] = useState(false);
   const [RoomToEdit, setRoomToEdit] = useState<IRoomRow | null>(null);
 
-  console.log({ rowData });
-
   const { mutate: mutateDelete } = useMutation({
     mutationFn: (id: number) => deleteRoom(id),
     onSuccess: () => {
@@ -179,7 +177,7 @@ const RoomsTable = ({
         onConfirmDelete={handleDeleteRoom}
       />
 
-      {/* {hotelToEdit && (
+      {RoomToEdit && (
         <AdminDrawer
           open={openEditDrawer}
           onClose={() => setOpenEditDrawer(false)}
@@ -187,17 +185,17 @@ const RoomsTable = ({
             <RoomForm
               title="Edit City"
               initialValues={{
-                ...hotelToEdit,
+                ...RoomToEdit,
               }}
               onSubmit={(values) => {
-                mutateUpdate({ ...hotelToEdit, ...values });
+                mutateUpdate({ ...RoomToEdit, ...values });
                 close();
               }}
               isLoading={isUpdating}
             />
           )}
         />
-      )} */}
+      )}
     </>
   );
 };
