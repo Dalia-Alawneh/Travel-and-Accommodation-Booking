@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import logo from "@travelia/assets/images/logo.svg";
-import { DRAWER_WIDTH, userMenuItems } from "@travelia/fixtures/index.tsx";
+import { DRAWER_WIDTH } from "@travelia/constants";
 import AppDrawer from "../Drawer/Drawer";
 import AppButton from "../Button/Button";
 import { Container } from "@mui/material";
@@ -13,6 +13,7 @@ import AppLink from "../Link/Link";
 import useLogout from "@travelia/hooks/useLogout";
 import { Logout } from "@mui/icons-material";
 import { ReactNode, useState } from "react";
+import { userMenuItems } from "@travelia/fixtures";
 interface ITopBarProps {
   menuLinks: Menu;
   renderMenu: (menuLinks: Menu) => ReactNode;
