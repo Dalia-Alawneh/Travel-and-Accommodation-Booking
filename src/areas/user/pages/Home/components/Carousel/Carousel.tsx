@@ -7,6 +7,7 @@ import { useRef, useState } from "react";
 import { ArrowLeftRounded, ArrowRightRounded } from "@mui/icons-material";
 import AppButton from "@travelia/components/Button";
 import CarouselThumbnails from "../CarouselThumbnails/CarouselThumbnails";
+import { Link } from "react-router";
 
 const arrowBtnStyle = {
   bgcolor: "#fff",
@@ -23,7 +24,6 @@ const arrowBtnStyle = {
 const ImageCarousel = () => {
   const sliderRef = useRef<Slider | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-
   const next = () => sliderRef.current?.slickNext();
   const previous = () => sliderRef.current?.slickPrev();
 
@@ -44,12 +44,14 @@ const ImageCarousel = () => {
       <Slider ref={sliderRef} {...settings}>
         {carouselItems.map((item, index) => (
           <Box key={index} sx={{ position: "relative", height: "100%" }}>
-            <CardMedia
-              component="img"
-              image={item.src}
-              alt={`image-${index}`}
-              sx={{ height: "100vh", width: "100%", objectFit: "cover" }}
-            />
+            <Link to="search">
+              <CardMedia
+                component="img"
+                image={item.src}
+                alt={`image-${index}`}
+                sx={{ height: "100vh", width: "100%", objectFit: "cover" }}
+              />
+            </Link>
             <Box
               sx={{
                 position: "absolute",
