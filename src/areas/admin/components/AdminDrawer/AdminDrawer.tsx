@@ -9,7 +9,13 @@ interface AppDrawerProps extends Omit<DrawerProps, "children"> {
 
 const AdminDrawer = ({ open, onClose, render, ...rest }: AppDrawerProps) => {
   return (
-    <Drawer anchor="right" open={open} onClose={onClose} {...rest}>
+    <Drawer
+      anchor="right"
+      sx={{ zIndex: 99999 }}
+      open={open}
+      onClose={onClose}
+      {...rest}
+    >
       {render(onClose)}
     </Drawer>
   );
