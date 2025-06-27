@@ -1,5 +1,4 @@
 import cookies from "react-cookies";
-
 type CookieOptions = {
   path?: string;
   maxAge?: number;
@@ -14,9 +13,12 @@ export const saveToCookies = <T extends string | number | object>(
   value: T,
   options?: CookieOptions,
 ) => {
-  cookies.save(key, value, {
+  const preparedValue =
+    typeof value === "object" ? JSON.stringify(value) : value;
+
+  cookies.save(key, preparedValue, {
     path: "/",
-    maxAge: 60 * 60 * 24 * 7,
+    maxAge: 60 * 60,
     secure: true,
     sameSite: "strict",
     ...options,

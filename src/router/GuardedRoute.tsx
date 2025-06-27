@@ -1,15 +1,18 @@
+import { USER } from "@travelia/constants";
+import { User } from "@travelia/types";
+import { getFromLocalStorage } from "@travelia/utils";
 import { Navigate, Outlet } from "react-router";
 interface GuardedRouteProps {
   allowedRoles: string[];
 }
 
 const GuardedRoute = ({ allowedRoles }: GuardedRouteProps) => {
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const user: User | null = getFromLocalStorage(USER);
   const isAuthenticated = !!user?.authentication;
   const role = user?.userType;
 
   if (!isAuthenticated) return <Navigate to="/login" />;
-  if (!allowedRoles.includes(role)) return <Navigate to="/401" />;
+  if (role && !allowedRoles.includes(role)) return <Navigate to="/401" />;
 
   return <Outlet />;
 };
