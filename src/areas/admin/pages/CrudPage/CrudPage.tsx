@@ -62,20 +62,23 @@ const AdminCrudPage = <T, FormPayload>({
     },
   });
 
+  const filterData = (
+    data: T[] | undefined,
+    search: string,
+  ): T[] | undefined => {
+    if (!search || !data?.length) return data;
+
+    return data.filter((item) =>
+      Object.values(item as unknown as Record<string, unknown>).some(
+        (val) =>
+          typeof val === "string" &&
+          val.toLowerCase().includes(search.toLowerCase()),
+      ),
+    );
+  };
+
   const filteredData = useMemo(() => {
-    if (!debouncedSearch || !data?.length) return data;
-    <T extends { [key: string]: unknown }>(
-      data: T[] | undefined,
-      debouncedSearch: string,
-    ) => {
-      return data?.filter((item) =>
-        Object.values(item).some(
-          (val) =>
-            typeof val === "string" &&
-            val.toLowerCase().includes(debouncedSearch.toLowerCase()),
-        ),
-      );
-    };
+    return filterData(data, debouncedSearch);
   }, [data, debouncedSearch]);
 
   return (
