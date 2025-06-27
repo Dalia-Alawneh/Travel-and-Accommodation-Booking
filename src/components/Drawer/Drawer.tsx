@@ -7,6 +7,8 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { Menu } from "@travelia/types";
 import logo from "@travelia/assets/images/logo.svg";
@@ -30,7 +32,10 @@ const AppDrawer = ({
   isOpen,
   variant = "temporary",
 }: IAppDrawerProps) => {
+  const theme = useTheme();
   const { handleLogout, loading } = useLogout();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
   const display =
     variant === "temporary"
       ? { xs: "block", sm: "none" }
@@ -42,7 +47,7 @@ const AppDrawer = ({
 
   return (
     <Drawer
-      variant={variant}
+      variant={!isSmallScreen ? variant : "temporary"}
       open={drawerOpen}
       onClose={drawerOnClose}
       ModalProps={{
