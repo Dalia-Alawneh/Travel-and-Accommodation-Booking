@@ -9,6 +9,7 @@ const DiscountBadge = ({ discount }: { discount: number }) => {
         color: "custom.orange",
         fontSize: 12,
         fontWeight: 700,
+        zIndex: 2,
       }}
     >
       {discount * 100} % Off

@@ -52,7 +52,7 @@ export default function RoomCard({
   };
 
   return (
-    <Card sx={{ position: "relative" }}>
+    <Card sx={{ position: "relative", overflow: "hidden" }}>
       <DiscountBadge discount={discount} />
       {isLoading ? (
         <AppSkeleton />
@@ -63,6 +63,12 @@ export default function RoomCard({
           loading="lazy"
           image={imageUrl}
           alt={title}
+          sx={{
+            transition: "transform 0.4s ease",
+            "&:hover": {
+              transform: "scale(1.2)",
+            },
+          }}
         />
       )}
       <CardContent sx={cardContentStyle}>
