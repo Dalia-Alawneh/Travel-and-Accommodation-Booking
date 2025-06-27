@@ -3,6 +3,7 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch, { SwitchProps } from "@mui/material/Switch";
 import { useField } from "formik";
+import { Typography } from "@mui/material";
 
 const IOSSwitch = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -82,7 +83,7 @@ export default function AppSwitch({ name, label }: IAppSwitchProps) {
             sx={{ m: 1 }}
           />
         }
-        label={label ?? name}
+        label={<Typography fontSize={14}>{label ?? name}</Typography>}
       />
     </FormGroup>
   );

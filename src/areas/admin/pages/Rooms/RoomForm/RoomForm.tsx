@@ -5,6 +5,7 @@ import FormikTextField from "@travelia/components/Inputs/TextField/FormikTextFie
 import { hotelSchema } from "@travelia/schemas/hotel";
 import useValidateImage from "@travelia/hooks/useValidateImage";
 import AppSwitch from "@travelia/components/Inputs/Switch";
+import { roomSchema } from "@travelia/schemas/room";
 
 interface RoomFormProps {
   initialValues: {
@@ -34,7 +35,7 @@ const RoomForm = ({
   return (
     <AppForm
       initialValues={initialValues}
-      validationSchema={hotelSchema}
+      validationSchema={roomSchema}
       onSubmit={onSubmit}
       render={(formik) => (
         <form onSubmit={formik.handleSubmit}>
