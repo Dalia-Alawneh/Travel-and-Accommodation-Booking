@@ -49,6 +49,7 @@ const Hotels = () => {
           location: hotel.location,
           description: hotel.description,
           starRating: hotel.starRating,
+          imageUrl: hotel.imageUrl,
         }));
 
         return (

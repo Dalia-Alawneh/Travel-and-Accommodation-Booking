@@ -10,6 +10,8 @@ import { IHotelRow } from "./types";
 import { deleteHotel, updateHotel } from "@travelia/api/endpoints/hotel";
 import AdminDrawer from "@travelia/areas/admin/components/AdminDrawer";
 import HotelForm from "../HotelForm";
+import useValidateImage from "@travelia/hooks/useValidateImage";
+import { fallbackImage } from "@travelia/assets";
 
 interface IHotelsTableProps {
   isLoading?: boolean;
@@ -74,9 +76,41 @@ const HotelsTable = ({
     setOpenEditDrawer(true);
   };
 
+  const validateImageUrl = (url: string | undefined) => {
+    if (!url || url.trim() === "") {
+      return fallbackImage;
+    }
+    return url;
+  };
+
   const columns = [
     { id: "id", label: "ID", align: "left", width: 50 },
     { id: "hotelName", label: "Hotel Name", align: "left", minWidth: 150 },
+    {
+      id: "imageUrl",
+      label: "Image",
+      align: "left",
+      minWidth: 150,
+      render: (_value: unknown, row: IHotelRow) => {
+        const img = validateImageUrl(row.imageUrl);
+        return (
+          <Box
+            component="img"
+            src={img}
+            alt={row.hotelName}
+            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+              e.currentTarget.src = fallbackImage;
+            }}
+            sx={{
+              width: 80,
+              height: 50,
+              objectFit: "cover",
+              borderRadius: 1,
+            }}
+          />
+        );
+      },
+    },
     { id: "location", label: "Location", align: "left", minWidth: 150 },
     { id: "starRating", label: "Rating", align: "left", width: 100 },
     {
