@@ -9,9 +9,9 @@ import ConfirmDeleteDialog from "@travelia/components/Dialogs/ConfirmDelete";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import AppButton from "@travelia/components/Button";
-import AppTextField from "@travelia/components/Inputs/TextField/TextField";
 import AppForm from "@travelia/components/Form";
 import * as Yup from "yup";
+import FormikTextField from "@travelia/components/Inputs/TextField/FormikTextField";
 
 interface ICitiesTableProps {
   isLoading?: boolean;
@@ -142,17 +142,19 @@ const CitiesTable = ({
                   Edit City
                 </Typography>
 
-                <AppTextField
+                <FormikTextField
                   name="name"
                   label="Name"
                   value={formik.values.name}
+                  onChange={formik.handleChange}
                 />
 
-                <AppTextField
+                <FormikTextField
                   name="description"
                   label="Description"
                   value={formik.values.description}
                   multiline
+                  onChange={formik.handleChange}
                   minRows={5}
                 />
 
