@@ -185,7 +185,6 @@ const RoomsTable = ({
       ),
     },
   ];
-  console.log(rowData);
 
   return (
     <>
