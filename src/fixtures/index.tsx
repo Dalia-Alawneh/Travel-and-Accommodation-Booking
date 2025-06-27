@@ -33,7 +33,23 @@ export const adminMenuItems: Menu = [
   },
 ];
 
-export const carouselItems = [hero1, hero2, hero3];
+export const carouselItems = [
+  {
+    src: hero1,
+    title: "Explore the World",
+    subtitle: "Let the waves carry your worries away.",
+  },
+  {
+    src: hero2,
+    title: "Luxury Hotels",
+    subtitle: "Where the ocean meets serenity.",
+  },
+  {
+    src: hero3,
+    title: "Adventure Awaits",
+    subtitle: "More than a trip—it's a story.",
+  },
+];
 
 export const thumbnails = [thumb1, thumb2, thumb3];
 

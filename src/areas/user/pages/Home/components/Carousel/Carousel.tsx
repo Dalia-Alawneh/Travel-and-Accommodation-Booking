@@ -1,7 +1,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Box, CardMedia } from "@mui/material";
+import { Box, CardMedia, Typography } from "@mui/material";
 import { carouselItems, thumbnails } from "@travelia/fixtures/index.tsx";
 import { useRef, useState } from "react";
 import { ArrowLeftRounded, ArrowRightRounded } from "@mui/icons-material";
@@ -42,14 +42,28 @@ const ImageCarousel = () => {
   return (
     <Box position="relative" sx={{ height: "100vh", overflow: "hidden" }}>
       <Slider ref={sliderRef} {...settings}>
-        {carouselItems.map((src, index) => (
+        {carouselItems.map((item, index) => (
           <Box key={index} sx={{ position: "relative", height: "100%" }}>
             <CardMedia
               component="img"
-              image={src}
+              image={item.src}
               alt={`image-${index}`}
               sx={{ height: "100vh", width: "100%", objectFit: "cover" }}
             />
+            <Box
+              sx={{
+                position: "absolute",
+                top: "35%",
+                left: "13%",
+                color: "#fff",
+                textShadow: "0 0 10px rgba(0,0,0,0.7)",
+              }}
+            >
+              <Typography variant="h1" sx={{ mb: 4 }}>
+                {item.title}
+              </Typography>
+              <Typography variant="h3">{item.subtitle}</Typography>
+            </Box>
           </Box>
         ))}
       </Slider>
