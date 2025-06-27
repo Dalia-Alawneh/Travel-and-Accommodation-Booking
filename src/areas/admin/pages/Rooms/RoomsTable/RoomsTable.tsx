@@ -58,7 +58,7 @@ const RoomsTable = ({
 
   const handleDeleteRoom = () => {
     if (selectedRoom) {
-      mutateDelete(selectedRoom.id);
+      mutateDelete(selectedRoom.roomId);
     }
   };
 
