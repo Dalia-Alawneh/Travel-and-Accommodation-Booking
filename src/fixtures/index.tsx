@@ -7,15 +7,11 @@ import { Menu, SelectItem, SortOptions } from "@travelia/types";
 export const userMenuItems: Menu = [
   {
     title: "Home",
-    path: "/",
+    path: "/user",
   },
   {
-    title: "About",
-    path: "about",
-  },
-  {
-    title: "Contact",
-    path: "contact",
+    title: "Search",
+    path: "search",
   },
 ];
 
