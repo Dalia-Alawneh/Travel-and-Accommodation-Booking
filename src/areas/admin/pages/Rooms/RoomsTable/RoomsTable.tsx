@@ -6,19 +6,19 @@ import { useMutation } from "@tanstack/react-query";
 import ConfirmDeleteDialog from "@travelia/components/Dialogs/ConfirmDelete";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { IHotelRow, IRoomRow } from "./types";
-import { deleteHotel, updateHotel } from "@travelia/api/endpoints/hotel";
+import { IRoomRow } from "./types";
 import AdminDrawer from "@travelia/areas/admin/components/AdminDrawer";
 import { fallbackImage } from "@travelia/assets";
 import { deleteRoom, updateRoom } from "@travelia/api/endpoints/rooms";
+import RoomForm from "../RoomForm";
 
-interface IHotelsTableProps {
+interface IRoomsTableProps {
   isLoading?: boolean;
   rowsPerPageOptions?: number[];
   rowsPerPage: number;
   page: number;
   totalCount: number;
-  rowData: IHotelRow[];
+  rowData: IRoomRow[];
   onPageChange: (event: unknown, newPage: number) => void;
   onRowsPerPageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -32,7 +32,7 @@ const RoomsTable = ({
   rowsPerPageOptions,
   onPageChange,
   onRowsPerPageChange,
-}: IHotelsTableProps) => {
+}: IRoomsTableProps) => {
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState<IRoomRow | null>(null);
   const [openEditDrawer, setOpenEditDrawer] = useState(false);
@@ -54,6 +54,11 @@ const RoomsTable = ({
     },
   });
 
+  const tableRows = rowData.map((room) => ({
+    id: room.roomId,
+    ...room,
+  }));
+
   const handleDeleteRoom = () => {
     if (selectedRoom) {
       mutateDelete(selectedRoom.roomId);
@@ -70,8 +75,8 @@ const RoomsTable = ({
     setSelectedRoom(null);
   };
 
-  const openEditCityDrawer = (city: IRoomRow) => {
-    setRoomToEdit(city);
+  const openEditRoomDrawer = (room: IRoomRow) => {
+    setRoomToEdit(room);
     setOpenEditDrawer(true);
   };
 
@@ -148,7 +153,7 @@ const RoomsTable = ({
           <IconButton onClick={() => openConfirmDeleteDialog(row)}>
             <DeleteTwoTone color="error" />
           </IconButton>
-          <IconButton onClick={() => openEditCityDrawer(row)}>
+          <IconButton onClick={() => openEditRoomDrawer(row)}>
             <Edit color="primary" />
           </IconButton>
         </Box>
@@ -160,7 +165,7 @@ const RoomsTable = ({
     <>
       <Table
         columns={columns as Column<IRoomRow>[]}
-        rows={rowData}
+        rows={tableRows}
         isLoading={isLoading}
         rowsPerPageOptions={rowsPerPageOptions}
         rowsPerPage={rowsPerPage}
@@ -183,7 +188,7 @@ const RoomsTable = ({
           onClose={() => setOpenEditDrawer(false)}
           render={(close) => (
             <RoomForm
-              title="Edit City"
+              title="Edit Room"
               initialValues={{
                 ...RoomToEdit,
               }}

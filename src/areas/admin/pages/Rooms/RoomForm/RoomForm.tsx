@@ -4,6 +4,7 @@ import AppButton from "@travelia/components/Button";
 import FormikTextField from "@travelia/components/Inputs/TextField/FormikTextField";
 import { hotelSchema } from "@travelia/schemas/hotel";
 import useValidateImage from "@travelia/hooks/useValidateImage";
+import AppSwitch from "@travelia/components/Inputs/Switch";
 
 interface RoomFormProps {
   initialValues: {
@@ -11,9 +12,10 @@ interface RoomFormProps {
     price: number;
     roomType: string;
     capacityOfAdults: number;
-    capacityOfChildren: string;
-    availableRooms: number;
+    capacityOfChildren: number;
     roomPhotoUrl: string;
+    roomAmenities: any;
+    availability: boolean;
   };
   onSubmit: (values: RoomFormProps["initialValues"]) => void;
   isLoading?: boolean;
@@ -74,15 +76,6 @@ const RoomForm = ({
             />
 
             <FormikTextField
-              name="availableRooms"
-              label="Available Rooms"
-              type="number"
-              placeholder="Enter Available Rooms"
-              value={formik.values.availableRooms}
-              onChange={formik.handleChange}
-            />
-
-            <FormikTextField
               name="capacityOfAdults"
               label="Capacity Of Adults"
               placeholder="Enter Capacity Of Adults"
@@ -98,6 +91,9 @@ const RoomForm = ({
               onChange={formik.handleChange}
             />
 
+            <Box>
+              <AppSwitch name="availability" label="Available" />
+            </Box>
             <AppButton
               sx={{ bgcolor: "primary.main", color: "white", px: 4, mt: 3 }}
               fullWidth

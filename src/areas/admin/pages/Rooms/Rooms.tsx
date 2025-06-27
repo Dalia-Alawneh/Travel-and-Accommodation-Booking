@@ -1,13 +1,5 @@
-import {
-  addHotel,
-  getHotels,
-  getHotelsPaginated,
-} from "@travelia/api/endpoints/hotel";
 import AdminCrudPage from "../CrudPage";
-import {
-  IHotelDetailedResponse,
-  IRoomResponse,
-} from "@travelia/api/types/response.dto";
+import { IRoomResponse } from "@travelia/api/types/response.dto";
 import { IRoomRow } from "./RoomsTable/types";
 import {
   addRoom,
