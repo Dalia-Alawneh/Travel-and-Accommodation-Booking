@@ -1,5 +1,6 @@
 import { IRoomResponse } from "@travelia/api/types/response.dto";
 import roomsData from "@travelia/api/data/rooms.json";
+import { IRoomPayload } from "@travelia/api/types/request.dto";
 
 export const getRooms = async (): Promise<IRoomResponse[]> => {
   return new Promise((resolve) => {
@@ -20,6 +21,32 @@ export const getRoomsPaginated = async (
       const paginatedData = roomsData.slice(start, end);
 
       resolve(paginatedData);
+    }, 300);
+  });
+};
+
+export const addRoom = async (body: IRoomPayload): Promise<IRoomResponse> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        ...body,
+      });
+    }, 300);
+  });
+};
+
+export const updateRoom = async (body: IRoomPayload) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(body);
+    }, 300);
+  });
+};
+
+export const deleteRoom = async (id: number): Promise<void> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
     }, 300);
   });
 };

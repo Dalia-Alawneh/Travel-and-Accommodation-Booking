@@ -16,6 +16,7 @@ import UnAuthorize from "@travelia/pages/UnAuthorize";
 import Cities from "@travelia/areas/admin/pages/Cities";
 import AdminLayout from "@travelia/layouts/admin/AdminLayout";
 import Hotels from "@travelia/areas/admin/pages/Hotels";
+import Rooms from "@travelia/areas/admin/pages/Rooms";
 
 const AppRouter = () => {
   return (
@@ -47,7 +48,7 @@ const AppRouter = () => {
         <Route element={<AdminLayout />}>
           <Route path="cities" element={<Cities />} />
           <Route path="hotels" element={<Hotels />} />
-          <Route path="rooms" element={<Hotels />} />
+          <Route path="rooms" element={<Rooms />} />
         </Route>
       </Route>
     </Routes>
