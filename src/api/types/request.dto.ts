@@ -1,4 +1,4 @@
-import { IAvailableRoom, LoginFormValues } from "@travelia/types";
+import { IAmenity, IAvailableRoom, LoginFormValues } from "@travelia/types";
 
 export interface ILoginPayload extends LoginFormValues {}
 
@@ -33,4 +33,15 @@ export interface IHotelPayload {
   starRating: number;
   imageUrl: string;
   availableRooms: number;
+}
+
+export interface IRoomPayload {
+  roomNumber: number;
+  roomPhotoUrl: string;
+  roomType: string;
+  capacityOfAdults: number;
+  capacityOfChildren: number;
+  roomAmenities: Omit<IAmenity, "id">[];
+  price: number;
+  availability: boolean;
 }
