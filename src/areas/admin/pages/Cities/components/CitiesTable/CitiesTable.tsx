@@ -1,5 +1,5 @@
 import { DeleteTwoTone, Edit } from "@mui/icons-material";
-import { Box, Drawer, IconButton, Typography } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import Table from "@travelia/areas/admin/components/Table";
 import { CityRow } from "./types";
 import { Column } from "@travelia/areas/admin/components/Table/type";
@@ -8,10 +8,8 @@ import { deleteCity, updateCity } from "@travelia/api/endpoints/cities";
 import ConfirmDeleteDialog from "@travelia/components/Dialogs/ConfirmDelete";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import AppButton from "@travelia/components/Button";
-import AppForm from "@travelia/components/Form";
-import * as Yup from "yup";
-import FormikTextField from "@travelia/components/Inputs/TextField/FormikTextField";
+import AdminDrawer from "@travelia/areas/admin/components/AdminDrawer/AdminDrawer";
+import CityForm from "../CityForm";
 
 interface ICitiesTableProps {
   isLoading?: boolean;
@@ -47,7 +45,7 @@ const CitiesTable = ({
     },
   });
 
-  const { mutate: mutateUpdate } = useMutation({
+  const { mutate: mutateUpdate, isPending: isUpdating } = useMutation({
     mutationFn: (data: CityRow) =>
       updateCity(data.id, { name: data.name, description: data.description }),
     onSuccess: () => {
@@ -119,71 +117,26 @@ const CitiesTable = ({
         onConfirmDelete={handleDeleteCity}
       />
 
-      <Drawer
-        anchor="right"
-        open={openEditDrawer}
-        onClose={() => setOpenEditDrawer(false)}
-      >
-        {cityToEdit && (
-          <AppForm
-            initialValues={{
-              name: cityToEdit.name,
-              description: cityToEdit.description,
-            }}
-            validationSchema={Yup.object({
-              name: Yup.string().required("Name is required"),
-              description: Yup.string().required("Description is required"),
-            })}
-            onSubmit={(values) => {
-              mutateUpdate({ ...cityToEdit, ...values });
-            }}
-            render={(formik) => (
-              <form onSubmit={formik.handleSubmit}>
-                <Box
-                  width={400}
-                  p={3}
-                  mt={10}
-                  sx={{ display: "flex", flexDirection: "column", gap: 2 }}
-                >
-                  <Typography variant="h4" mb={2} fontWeight={600}>
-                    Edit City
-                  </Typography>
-
-                  <FormikTextField
-                    name="name"
-                    label="Name"
-                    value={formik.values.name}
-                    onChange={formik.handleChange}
-                  />
-
-                  <FormikTextField
-                    name="description"
-                    label="Description"
-                    value={formik.values.description}
-                    multiline
-                    onChange={formik.handleChange}
-                    minRows={5}
-                  />
-
-                  <AppButton
-                    sx={{
-                      bgcolor: "primary.main",
-                      color: "white",
-                      px: 4,
-                      mt: 6,
-                    }}
-                    fullWidth
-                    type="submit"
-                    loading={formik.isSubmitting}
-                  >
-                    Save
-                  </AppButton>
-                </Box>
-              </form>
-            )}
-          />
-        )}
-      </Drawer>
+      {cityToEdit && (
+        <AdminDrawer
+          open={openEditDrawer}
+          onClose={() => setOpenEditDrawer(false)}
+          render={(close) => (
+            <CityForm
+              title="Edit City"
+              initialValues={{
+                name: cityToEdit.name,
+                description: cityToEdit.description,
+              }}
+              onSubmit={(values) => {
+                mutateUpdate({ ...cityToEdit, ...values });
+                close();
+              }}
+              isLoading={isUpdating}
+            />
+          )}
+        />
+      )}
     </>
   );
 };
