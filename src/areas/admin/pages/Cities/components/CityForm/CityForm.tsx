@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import AppForm from "@travelia/components/Form";
 import AppButton from "@travelia/components/Button";
 import FormikTextField from "@travelia/components/Inputs/TextField/FormikTextField";
+import { citySchema } from "@travelia/schemas/city";
 
 interface CityFormProps {
   initialValues: { name: string; description: string };
@@ -20,10 +21,7 @@ const CityForm = ({
   return (
     <AppForm
       initialValues={initialValues}
-      validationSchema={Yup.object({
-        name: Yup.string().required("Name is required"),
-        description: Yup.string().required("Description is required"),
-      })}
+      validationSchema={citySchema}
       onSubmit={onSubmit}
       render={(formik) => (
         <form onSubmit={formik.handleSubmit}>
