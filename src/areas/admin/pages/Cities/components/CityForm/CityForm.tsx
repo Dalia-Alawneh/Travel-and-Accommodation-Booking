@@ -37,12 +37,14 @@ const CityForm = ({
             <FormikTextField
               name="name"
               label="Name"
+              placeholder="Enter Name"
               value={formik.values.name}
               onChange={formik.handleChange}
             />
 
             <FormikTextField
               name="description"
+              placeholder="Enter Description"
               label="Description"
               value={formik.values.description}
               multiline

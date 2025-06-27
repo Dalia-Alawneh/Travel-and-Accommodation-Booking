@@ -143,7 +143,7 @@ const theme = createTheme({
         },
         multiline: {
           borderRadius: "12px",
-          padding: "6px",
+          padding: "2px",
         },
       },
     },
