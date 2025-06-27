@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, IconButton, Tooltip, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { getCities } from "@travelia/api/endpoints/cities";
 import AppTextField from "@travelia/components/Inputs/TextField/TextField";
@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 import CitiesTable from "./components/CitiesTable";
 import { PAGE_OPTIONS, PAGE_SIZE } from "@travelia/fixtures";
 import useDebounce from "@travelia/hooks/useDebounce";
+import { AddCircle } from "@mui/icons-material";
 
 const Cities = () => {
   const [page, setPage] = useState(0);
@@ -37,16 +38,28 @@ const Cities = () => {
         Manage Cities
       </Typography>
 
-      <Box mb={4} width="300px">
-        <AppTextField
-          name="search"
-          placeholder="Search City"
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            setPage(0);
-          }}
-        />
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        mb={4}
+      >
+        <Box width="300px">
+          <AppTextField
+            name="search"
+            placeholder="Search City"
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setPage(0);
+            }}
+          />
+        </Box>
+        <Tooltip title="Add City">
+          <IconButton>
+            <AddCircle fontSize="large" color="primary" />
+          </IconButton>
+        </Tooltip>
       </Box>
       <CitiesTable
         rowData={search ? (filteredData ?? []) : (paginatedData ?? [])}

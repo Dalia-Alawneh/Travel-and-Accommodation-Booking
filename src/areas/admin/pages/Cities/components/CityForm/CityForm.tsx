@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import * as Yup from "yup";
 import AppForm from "@travelia/components/Form";
 import AppButton from "@travelia/components/Button";
 import FormikTextField from "@travelia/components/Inputs/TextField/FormikTextField";
