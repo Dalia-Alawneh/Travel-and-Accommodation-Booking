@@ -45,6 +45,7 @@ const AppRouter = () => {
       >
         <Route element={<AdminLayout />}>
           <Route path="cities" element={<Cities />} />
+          <Route path="hotels" element={<Cities />} />
         </Route>
       </Route>
     </Routes>

@@ -1,11 +1,14 @@
 import Axios from "@travelia/api/config";
-import { galleryMockData } from "@travelia/api/data";
+import { galleryMockData } from "@travelia/api/data/gallery";
 import {
   IGalleryResponse,
+  IHotelDetailedResponse,
   IHotelResponse,
   IReviewResponse,
   IRoomResponse,
 } from "@travelia/api/types/response.dto";
+import hotelsData from "@travelia/api/data/hotels.json";
+import { mapHotelData } from "@travelia/api/utils";
 
 const endpoint = "/hotels";
 
@@ -45,4 +48,34 @@ export const getHotelReviews = async (
 ): Promise<IReviewResponse[]> => {
   const response = await Axios.get(`${endpoint}/${id}/reviews`);
   return response.data;
+};
+
+export const getHotels = async (): Promise<IHotelDetailedResponse[]> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const filteredHotels = hotelsData.map(mapHotelData);
+      resolve(filteredHotels);
+    }, 300);
+  });
+};
+
+export const getHotelsPaginated = async (
+  limit: number,
+  page: number,
+): Promise<{
+  data: IHotelDetailedResponse[];
+  totalCount: number;
+}> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const start = (page - 1) * limit;
+      const end = start + limit;
+      const paginatedData = hotelsData.slice(start, end).map(mapHotelData);
+
+      resolve({
+        data: paginatedData,
+        totalCount: hotelsData.length,
+      });
+    }, 300);
+  });
 };
