@@ -3,6 +3,7 @@ import AppForm from "@travelia/components/Form";
 import AppButton from "@travelia/components/Button";
 import FormikTextField from "@travelia/components/Inputs/TextField/FormikTextField";
 import { hotelSchema } from "@travelia/schemas/hotel";
+import useValidateImage from "@travelia/hooks/useValidateImage";
 
 interface HotelFormProps {
   initialValues: {
@@ -24,6 +25,7 @@ const HotelForm = ({
   isLoading,
   title,
 }: HotelFormProps) => {
+  const { src } = useValidateImage(initialValues.imageUrl);
   return (
     <AppForm
       initialValues={initialValues}
@@ -40,6 +42,21 @@ const HotelForm = ({
             <Typography variant="h4" mb={2} fontWeight={600}>
               {title}
             </Typography>
+
+            <Box
+              component="img"
+              src={src}
+              width={350}
+              height={200}
+              sx={{ objectFit: "cover", borderRadius: 0.4 }}
+            />
+            <FormikTextField
+              name="imageUrl"
+              label="Image URL"
+              placeholder="Enter Image URL"
+              value={formik.values.imageUrl}
+              onChange={formik.handleChange}
+            />
 
             <FormikTextField
               name="hotelName"
@@ -76,16 +93,8 @@ const HotelForm = ({
               onChange={formik.handleChange}
             />
 
-            <FormikTextField
-              name="imageUrl"
-              label="Image URL"
-              placeholder="Enter Image URL"
-              value={formik.values.imageUrl}
-              onChange={formik.handleChange}
-            />
-
             <AppButton
-              sx={{ bgcolor: "primary.main", color: "white", px: 4, mt: 6 }}
+              sx={{ bgcolor: "primary.main", color: "white", px: 4, mt: 3 }}
               fullWidth
               type="submit"
               loading={formik.isSubmitting || isLoading}
