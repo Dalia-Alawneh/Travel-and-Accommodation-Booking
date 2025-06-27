@@ -1,3 +1,5 @@
 import { IAvailableRoom } from "@travelia/types";
 
-export interface IRoomRow extends IAvailableRoom {}
+export interface IRoomRow extends Omit<IAvailableRoom, "roomId"> {
+  roomId?: number;
+}

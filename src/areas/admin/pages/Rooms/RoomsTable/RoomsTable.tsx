@@ -61,7 +61,7 @@ const RoomsTable = ({
 
   const handleDeleteRoom = () => {
     if (selectedRoom) {
-      mutateDelete(selectedRoom.roomId);
+      mutateDelete(selectedRoom.roomId!);
     }
   };
 
@@ -185,6 +185,7 @@ const RoomsTable = ({
       ),
     },
   ];
+  console.log(rowData);
 
   return (
     <>
@@ -216,6 +217,7 @@ const RoomsTable = ({
               title="Edit Room"
               initialValues={{
                 ...RoomToEdit,
+                roomAmenities: RoomToEdit.roomAmenities,
               }}
               onSubmit={(values) => {
                 mutateUpdate({ ...RoomToEdit, ...values });

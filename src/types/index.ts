@@ -136,3 +136,5 @@ export interface IReview {
   rating: number;
   description: string;
 }
+
+export type AddRoomPayload = Omit<IAvailableRoom, "roomId">;

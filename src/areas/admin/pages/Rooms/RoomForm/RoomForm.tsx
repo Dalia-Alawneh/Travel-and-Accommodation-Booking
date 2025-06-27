@@ -2,7 +2,6 @@ import { Box, Typography } from "@mui/material";
 import AppForm from "@travelia/components/Form";
 import AppButton from "@travelia/components/Button";
 import FormikTextField from "@travelia/components/Inputs/TextField/FormikTextField";
-import { hotelSchema } from "@travelia/schemas/hotel";
 import useValidateImage from "@travelia/hooks/useValidateImage";
 import AppSwitch from "@travelia/components/Inputs/Switch";
 import { roomSchema } from "@travelia/schemas/room";
@@ -16,7 +15,7 @@ interface RoomFormProps {
     capacityOfAdults: number;
     capacityOfChildren: number;
     roomPhotoUrl: string;
-    roomAmenities: Omit<IAmenity, "id">;
+    roomAmenities: Omit<IAmenity, "id">[];
     availability: boolean;
   };
   onSubmit: (values: RoomFormProps["initialValues"]) => void;
@@ -33,6 +32,7 @@ const RoomForm = ({
   showImage = true,
 }: RoomFormProps) => {
   const { src } = useValidateImage(initialValues.roomPhotoUrl);
+
   return (
     <AppForm
       initialValues={initialValues}

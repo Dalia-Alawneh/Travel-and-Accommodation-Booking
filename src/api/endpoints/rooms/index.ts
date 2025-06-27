@@ -29,6 +29,7 @@ export const addRoom = async (body: IRoomPayload): Promise<IRoomResponse> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
+        roomId: Math.floor(Math.random() * 1000),
         ...body,
       });
     }, 300);

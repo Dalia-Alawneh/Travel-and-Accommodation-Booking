@@ -36,13 +36,12 @@ export interface IHotelPayload {
 }
 
 export interface IRoomPayload {
-  roomId: number;
   roomNumber: number;
   roomPhotoUrl: string;
   roomType: string;
   capacityOfAdults: number;
   capacityOfChildren: number;
-  roomAmenities: Omit<IAmenity[], "id">;
+  roomAmenities: Omit<IAmenity, "id">[];
   price: number;
   availability: boolean;
 }
