@@ -71,7 +71,7 @@ interface IAppSwitchProps {
 }
 
 export default function AppSwitch({ name, label }: IAppSwitchProps) {
-  const [field, meta, helpers] = useField(name);
+  const [field, , helpers] = useField(name);
   return (
     <FormGroup>
       <FormControlLabel
