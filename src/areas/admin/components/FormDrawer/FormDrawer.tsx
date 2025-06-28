@@ -1,13 +1,13 @@
 import { Drawer, DrawerProps } from "@mui/material";
 import { ReactNode } from "react";
 
-interface AppDrawerProps extends Omit<DrawerProps, "children"> {
+interface FormDrawerProps extends Omit<DrawerProps, "children"> {
   open: boolean;
   onClose: () => void;
   render: (closeDrawer: () => void) => ReactNode;
 }
 
-const AdminDrawer = ({ open, onClose, render, ...rest }: AppDrawerProps) => {
+const FormDrawer = ({ open, onClose, render, ...rest }: FormDrawerProps) => {
   return (
     <Drawer
       anchor="right"
@@ -21,4 +21,4 @@ const AdminDrawer = ({ open, onClose, render, ...rest }: AppDrawerProps) => {
   );
 };
 
-export default AdminDrawer;
+export default FormDrawer;

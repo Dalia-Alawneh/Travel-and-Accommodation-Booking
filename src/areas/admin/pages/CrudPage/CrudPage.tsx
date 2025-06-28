@@ -6,7 +6,7 @@ import { AddCircle } from "@mui/icons-material";
 import AppTextField from "@travelia/components/Inputs/TextField/TextField";
 import toast from "react-hot-toast";
 import { PAGE_SIZE } from "@travelia/constants";
-import AdminDrawer from "../../components/AdminDrawer";
+import FormDrawer from "../../components/FormDrawer";
 
 interface AdminPageProps<T, FormPayload> {
   title: string;
@@ -112,7 +112,7 @@ const AdminCrudPage = <T, FormPayload>({
         </Tooltip>
       </Box>
 
-      <AdminDrawer
+      <FormDrawer
         open={openAddDrawer}
         onClose={() => setOpenAddDrawer(false)}
         render={(close) => renderForm(close, mutate, isPending)}

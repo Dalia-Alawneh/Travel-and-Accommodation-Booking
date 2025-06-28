@@ -7,7 +7,7 @@ import ConfirmDeleteDialog from "@travelia/components/Dialogs/ConfirmDelete";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { IRoomRow } from "./types";
-import AdminDrawer from "@travelia/areas/admin/components/AdminDrawer";
+import FormDrawer from "@travelia/areas/admin/components/FormDrawer";
 import { fallbackImage } from "@travelia/assets";
 import { deleteRoom, updateRoom } from "@travelia/api/endpoints/rooms";
 import RoomForm from "../RoomForm";
@@ -208,7 +208,7 @@ const RoomsTable = ({
       />
 
       {RoomToEdit && (
-        <AdminDrawer
+        <FormDrawer
           open={openEditDrawer}
           onClose={() => setOpenEditDrawer(false)}
           render={(close) => (
