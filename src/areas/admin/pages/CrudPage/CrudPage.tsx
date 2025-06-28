@@ -124,7 +124,7 @@ const AdminCrudPage = <T, FormPayload>({
         rowsPerPage,
         data?.length ?? 0,
         isLoading,
-        (e, newPage) => !search && setPage(newPage),
+        (_e, newPage) => !search && setPage(newPage),
         (e) => {
           setRowsPerPage(parseInt(e.target.value, 10));
           setPage(0);
