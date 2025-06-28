@@ -6,6 +6,7 @@ import withContainer from "@travelia/HOC/withContainer";
 import PauseOnHoverCarousel from "../PauseOnHoverCarousel/PauseOnHoverCarousel";
 import RecentlyVisitedCard from "../RecentlyVisitedCard/RecentlyVisitedCard";
 import { getVisitedHotels } from "@travelia/api/endpoints/home";
+import { motion } from "framer-motion";
 
 const carouselResponsive = [
   {
@@ -40,7 +41,12 @@ const RecentlyVisited = () => {
   });
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0, scale: 0.5 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.4 }}
+    >
       <SectionTitle title="Recently Visited Hotels" subTitle="" />
       {isLoading ? (
         <Box
@@ -72,7 +78,7 @@ const RecentlyVisited = () => {
           }
         />
       )}
-    </>
+    </motion.div>
   );
 };
 

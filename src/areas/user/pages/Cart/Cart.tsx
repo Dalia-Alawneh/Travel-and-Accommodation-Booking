@@ -95,7 +95,7 @@ const CartPage = () => {
               boxShadow={theme.customShadows.light}
               p={2}
               borderRadius={1}
-              minWidth="300px"
+              minWidth={{ lg: "300px" }}
               height="fit-content"
             >
               <Typography variant="h6" mb={2}>

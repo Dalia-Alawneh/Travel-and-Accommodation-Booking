@@ -44,7 +44,8 @@ export const updateRoom = async (body: IRoomPayload) => {
   });
 };
 
-export const deleteRoom = async (id: number): Promise<void> => {
+export const deleteRoom = async (_id: number): Promise<void> => {
+  void _id;
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve();

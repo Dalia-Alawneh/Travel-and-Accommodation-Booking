@@ -1,8 +1,10 @@
-export const badgeStyle = {
+import { SxProps, Theme } from "@mui/material";
+
+export const badgeStyle: SxProps<Theme> = {
   px: "10px",
   py: "5px",
   fontSize: 12,
-  bgcolor: "#fff",
+  backgroundColor: "#fff",
   position: "absolute",
   top: 25,
   left: 25,

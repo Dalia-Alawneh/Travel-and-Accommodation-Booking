@@ -1,6 +1,12 @@
 import { EmailRounded, LocationOn, AccessTime } from "@mui/icons-material";
 import { Box, Container, Grid, Typography } from "@mui/material";
-import { footerBg, whiteLogo } from "@travelia/assets";
+import {
+  footerBg,
+  masterCardIcon,
+  paypalIcon,
+  visaIcon,
+  whiteLogo,
+} from "@travelia/assets";
 import AppLink from "@travelia/components/Link/Link";
 import { userMenuItems } from "@travelia/fixtures/index.tsx";
 
@@ -66,8 +72,13 @@ const Footer = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid size={{ sm: 12, md: 6 }}>
-              <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+            <Grid size={{ sm: 12, md: 3 }}>
+              <Typography
+                variant="subtitle1"
+                mb={3}
+                fontWeight="bold"
+                gutterBottom
+              >
                 Quick Links
               </Typography>
               {userMenuItems.map((item) => (
@@ -82,6 +93,24 @@ const Footer = () => {
                   </Typography>
                 </AppLink>
               ))}
+            </Grid>
+            <Grid size={{ sm: 12, md: 3 }}>
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                gap={2}
+                mt={2}
+                flexWrap="wrap"
+              >
+                <img
+                  src={masterCardIcon}
+                  alt="MasterCard"
+                  style={{ height: 30 }}
+                />
+                <img src={visaIcon} alt="Visa" style={{ height: 30 }} />
+                <img src={paypalIcon} alt="PayPal" style={{ height: 30 }} />
+              </Box>
             </Grid>
           </Grid>
           <Box

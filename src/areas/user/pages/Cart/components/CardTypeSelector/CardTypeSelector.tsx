@@ -13,7 +13,7 @@ interface CardTypeSelectorProps {
 }
 
 const CardTypeSelector = ({ value, onChange }: CardTypeSelectorProps) => {
-  const handleChange = (event: MouseEvent<HTMLElement>, newValue: string) => {
+  const handleChange = (_event: MouseEvent<HTMLElement>, newValue: string) => {
     if (newValue !== null) onChange(newValue);
   };
 

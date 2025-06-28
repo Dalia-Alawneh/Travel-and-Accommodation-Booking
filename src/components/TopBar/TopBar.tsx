@@ -3,17 +3,17 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import logo from "@travelia/assets/images/logo.svg";
 import { DRAWER_WIDTH } from "@travelia/constants";
 import AppDrawer from "../Drawer/Drawer";
 import AppButton from "../Button/Button";
 import { Container } from "@mui/material";
 import { Menu } from "@travelia/types";
-import AppLink from "../Link/Link";
 import useLogout from "@travelia/hooks/useLogout";
 import { Logout } from "@mui/icons-material";
 import { ReactNode, useState } from "react";
 import { userMenuItems } from "@travelia/fixtures";
+import { Link } from "react-router";
+import { logo } from "@travelia/assets";
 interface ITopBarProps {
   menuLinks: Menu;
   renderMenu: (menuLinks: Menu) => ReactNode;
@@ -58,9 +58,9 @@ export default function TopBar({
               </IconButton>
               {!hideLogo && (
                 <Box sx={{ my: 2 }}>
-                  <AppLink path="">
+                  <Link to="">
                     <img src={logo} alt="travilia" />
-                  </AppLink>
+                  </Link>
                 </Box>
               )}
               {renderMenu(menuLinks)}
