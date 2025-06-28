@@ -1,4 +1,4 @@
-import { useFormikContext } from "formik";
+import { useFormikContext, FormikValues } from "formik";
 import {
   Checkbox,
   FormControlLabel,
@@ -8,39 +8,49 @@ import {
   IconButton,
 } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import { IAmenity } from "@travelia/types";
 
-interface ICheckboxItem {
-  option: IAmenity;
+interface IOption {
+  name: string;
+  description?: string;
+}
+
+interface IAppCheckboxProps<T extends FormikValues> {
+  option: IOption;
+  fieldName: Extract<keyof T, string>;
   hasToolTip?: boolean;
 }
 
-const AppCheckbox = ({ option, hasToolTip }: ICheckboxItem) => {
-  const { setFieldValue, values } = useFormikContext<{ amenities: string[] }>();
+const AppCheckbox = <T extends FormikValues>({
+  option,
+  fieldName,
+  hasToolTip,
+}: IAppCheckboxProps<T>) => {
+  const { setFieldValue, values } = useFormikContext<T>();
+
+  const fieldValues = (values[fieldName] ?? []) as string[];
 
   const handleChange = () => {
-    const currentValues = values.amenities || [];
-    const alreadyChecked = currentValues.includes(option.name);
+    const alreadyChecked = fieldValues.includes(option.name);
 
     const updatedValues = alreadyChecked
-      ? currentValues.filter((val) => val !== option.name)
-      : [...currentValues, option.name];
+      ? fieldValues.filter((val) => val !== option.name)
+      : [...fieldValues, option.name];
 
-    setFieldValue("amenities", updatedValues);
+    setFieldValue(fieldName, updatedValues);
   };
 
   return (
     <FormControlLabel
       control={
         <Checkbox
-          checked={values.amenities.includes(option.name)}
+          checked={fieldValues.includes(option.name)}
           onChange={handleChange}
         />
       }
       label={
         <Box display="flex" alignItems="center">
           <Typography fontSize={14}>{option.name}</Typography>
-          {hasToolTip && (
+          {hasToolTip && option.description && (
             <Tooltip title={option.description} arrow placement="right">
               <IconButton size="small" color="primary" sx={{ ml: 1 }}>
                 <InfoOutlinedIcon fontSize="small" />
