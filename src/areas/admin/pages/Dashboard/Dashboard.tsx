@@ -2,8 +2,8 @@ import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import { Box, Container, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import { getHotels } from "@travelia/api/endpoints/hotel";
-import { Bar, Doughnut } from "react-chartjs-2";
+import { getHotelReviews, getHotels } from "@travelia/api/endpoints/hotel";
+import { Bar, Doughnut, Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -15,6 +15,7 @@ import {
   ArcElement,
 } from "chart.js";
 import ChartWrapper from "./components/ChartWrapper";
+import Review from "@travelia/areas/user/pages/Hotel/components/Review/Review";
 
 ChartJS.register(
   CategoryScale,
@@ -37,6 +38,10 @@ export default function Dashboard() {
   const { data, isLoading } = useQuery({
     queryKey: ["Hotel"],
     queryFn: () => getHotels(),
+  });
+  const { data: reviews, isReviewsLoading } = useQuery({
+    queryKey: ["reviews"],
+    queryFn: () => getHotelReviews(1),
   });
 
   const availableRoomsData = {
@@ -85,63 +90,57 @@ export default function Dashboard() {
           Dashboard! 😎
         </Typography>
         <Grid container spacing={2}>
-          <Grid size={{ xs: 12, lg: 6 }}>
-            <ChartWrapper title="Available Hotel Rooms">
-              <Bar data={availableRoomsData} />
-              {isLoading && <Skeleton height={400} />}
-            </ChartWrapper>
-          </Grid>
-          <Grid size={{ xs: 12, lg: 3 }}>
-            <ChartWrapper title="Hotel Amenities">
-              <Doughnut
-                data={doughnutData}
-                options={{
-                  plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                      callbacks: {
-                        label: function (context) {
-                          const label = context.label || "";
-                          const value = context.formattedValue || 0;
-                          return `${label}: ${value} Amenities`;
+          <Grid
+            size={{ xs: 12, lg: 9 }}
+            container
+            spacing={2}
+            direction="column"
+          >
+            <Grid container spacing={2}>
+              <Grid size={{ xs: 12, lg: 8 }}>
+                <ChartWrapper title="Available Hotel Rooms">
+                  <Bar data={availableRoomsData} />
+                  {isLoading && <Skeleton height={400} />}
+                </ChartWrapper>
+              </Grid>
+              <Grid size={{ xs: 12, lg: 4 }}>
+                <ChartWrapper title="Hotel Amenities">
+                  <Doughnut
+                    data={doughnutData}
+                    options={{
+                      plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                          callbacks: {
+                            label: function (context) {
+                              const label = context.label || "";
+                              const value = context.formattedValue || 0;
+                              return `${label}: ${value} Amenities`;
+                            },
+                          },
                         },
                       },
-                    },
-                  },
-                }}
-              />
+                    }}
+                  />
+                  {isLoading && <Skeleton height={400} />}
+                </ChartWrapper>
+              </Grid>
+            </Grid>
 
-              {isLoading && <Skeleton height={400} />}
+            <Grid size={{ xs: 12 }}>
+              <ChartWrapper title="New Chart Title">
+                {/* <Line data={lineChartData} options={lineChartOptions} /> */}
+                {isLoading && <Skeleton height={400} />}
+              </ChartWrapper>
+            </Grid>
+          </Grid>
+
+          <Grid size={{ xs: 12, lg: 3 }}>
+            <ChartWrapper title="Reviews">
+              {reviews?.slice(0, 5).map((review) => (
+                <Review key={review.reviewId} review={review} />
+              ))}
             </ChartWrapper>
-          </Grid>
-          <Grid size={12}>
-            <Skeleton height={14} />
-          </Grid>
-          <Grid size={4}>
-            <Skeleton height={100} />
-          </Grid>
-          <Grid size={8}>
-            <Skeleton height={100} />
-          </Grid>
-
-          <Grid size={12}>
-            <Skeleton height={150} />
-          </Grid>
-          <Grid size={12}>
-            <Skeleton height={14} />
-          </Grid>
-
-          <Grid size={3}>
-            <Skeleton height={100} />
-          </Grid>
-          <Grid size={3}>
-            <Skeleton height={100} />
-          </Grid>
-          <Grid size={3}>
-            <Skeleton height={100} />
-          </Grid>
-          <Grid size={3}>
-            <Skeleton height={100} />
           </Grid>
         </Grid>
       </Container>
