@@ -4,7 +4,7 @@ export const badgeStyle: SxProps<Theme> = {
   px: "10px",
   py: "5px",
   fontSize: 12,
-  bgColor: "#fff",
+  backgroundColor: "#fff",
   position: "absolute",
   top: 25,
   left: 25,
