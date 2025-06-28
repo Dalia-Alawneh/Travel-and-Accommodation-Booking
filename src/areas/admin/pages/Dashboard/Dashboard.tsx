@@ -174,7 +174,7 @@ export default function Dashboard() {
         </Grid>
 
         <Grid size={{ xs: 12, lg: 4, xl: 3 }}>
-          <ChartWrapper title="Reviews">
+          <ChartWrapper title="Top Reviews">
             {isReviewsLoading || !reviews
               ? Array.from({ length: 5 }).map((_, i) => (
                   <Skeleton
