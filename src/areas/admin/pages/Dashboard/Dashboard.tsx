@@ -56,6 +56,25 @@ export default function Dashboard() {
     ],
   };
 
+  const doughnutData = {
+    labels: data?.map((hotel) => hotel.hotelName),
+    datasets: [
+      {
+        label: "Number of Amenities",
+        data: data?.map((hotel) => hotel.amenities?.length || 0),
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.5)",
+          "rgba(54, 162, 235, 0.5)",
+          "rgba(255, 206, 86, 0.5)",
+          "rgba(75, 192, 192, 0.5)",
+          "rgba(153, 102, 255, 0.5)",
+          "rgba(255, 159, 64, 0.5)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
   return (
     <>
       <Container maxWidth="xl">
@@ -65,7 +84,7 @@ export default function Dashboard() {
           </Box>{" "}
           Dashboard! 😎
         </Typography>
-        <Grid container spacing={1}>
+        <Grid container spacing={2}>
           <Grid size={{ xs: 12, lg: 6 }}>
             <ChartWrapper title="Available Hotel Rooms">
               <Bar data={availableRoomsData} />
@@ -73,7 +92,27 @@ export default function Dashboard() {
             </ChartWrapper>
           </Grid>
           <Grid size={{ xs: 12, lg: 3 }}>
-            <Skeleton height={400} />
+            <ChartWrapper title="Hotel Amenities">
+              <Doughnut
+                data={doughnutData}
+                options={{
+                  plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                      callbacks: {
+                        label: function (context) {
+                          const label = context.label || "";
+                          const value = context.formattedValue || 0;
+                          return `${label}: ${value} Amenities`;
+                        },
+                      },
+                    },
+                  },
+                }}
+              />
+
+              {isLoading && <Skeleton height={400} />}
+            </ChartWrapper>
           </Grid>
           <Grid size={12}>
             <Skeleton height={14} />
