@@ -5,6 +5,7 @@ import TopBar from "@travelia/components/TopBar";
 import { selectCartCount } from "@travelia/Ducks/selectors/cart";
 import { userMenuItems } from "@travelia/fixtures/index.tsx";
 import { useSelector } from "react-redux";
+import { Link } from "react-router";
 
 const UserTopBar = () => {
   const cartCount = useSelector(selectCartCount);
@@ -30,13 +31,13 @@ const UserTopBar = () => {
               </AppLink>
             ))}
           </Box>
-          <AppLink path="cart">
+          <Link to="cart">
             <IconButton aria-label="cart">
               <Badge badgeContent={cartCount} color="secondary">
                 <ShoppingCart />
               </Badge>
             </IconButton>
-          </AppLink>
+          </Link>
         </>
       )}
     />
