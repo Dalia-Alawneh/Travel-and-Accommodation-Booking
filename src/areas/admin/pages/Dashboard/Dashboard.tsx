@@ -122,7 +122,12 @@ export default function Dashboard() {
       </Typography>
 
       <Grid container spacing={2}>
-        <Grid size={{ xs: 12, lg: 9 }} container spacing={2} direction="column">
+        <Grid
+          size={{ xs: 12, lg: 8, xl: 9 }}
+          container
+          spacing={2}
+          direction="column"
+        >
           <Grid container spacing={2}>
             <Grid size={{ xs: 12, lg: 8 }}>
               <ChartWrapper title="Available Hotel Rooms">
@@ -168,7 +173,7 @@ export default function Dashboard() {
           </Grid>
         </Grid>
 
-        <Grid size={{ xs: 12, lg: 3 }}>
+        <Grid size={{ xs: 12, lg: 4, xl: 3 }}>
           <ChartWrapper title="Reviews">
             {isReviewsLoading || !reviews
               ? Array.from({ length: 5 }).map((_, i) => (
