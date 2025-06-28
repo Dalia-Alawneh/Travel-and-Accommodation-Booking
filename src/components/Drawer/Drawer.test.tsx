@@ -16,7 +16,7 @@ const menuItems = [
 describe("AppDrawer", () => {
   const handleDrawerToggle = vi.fn();
 
-  it("renders menu items and logout button when open", () => {
+  it("should renders menu items and logout button when open", () => {
     render(
       <AppDrawer
         drawerWidth={240}
@@ -31,7 +31,7 @@ describe("AppDrawer", () => {
     expect(screen.getByText(/logout/i)).toBeInTheDocument();
   });
 
-  it("calls handleDrawerToggle when clicking a menu item", () => {
+  it("should calls handleDrawerToggle when clicking a menu item", () => {
     render(
       <AppDrawer
         drawerWidth={240}
@@ -47,7 +47,7 @@ describe("AppDrawer", () => {
     expect(handleDrawerToggle).toHaveBeenCalled();
   });
 
-  it("calls handleLogout when clicking logout button", () => {
+  it("should calls handleLogout when clicking logout button", () => {
     render(
       <AppDrawer
         drawerWidth={240}
