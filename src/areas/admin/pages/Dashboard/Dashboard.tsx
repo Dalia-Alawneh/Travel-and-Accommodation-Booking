@@ -162,17 +162,32 @@ export default function Dashboard() {
 
             <Grid size={{ xs: 12 }}>
               <ChartWrapper title="Room Prices & Amenities">
-                <Line data={lineChartData} />
-                {isLoading && <Skeleton height={400} />}
+                {isRoomsLoading ? (
+                  <Skeleton height={520} />
+                ) : (
+                  <Line data={lineChartData} />
+                )}
               </ChartWrapper>
             </Grid>
           </Grid>
 
           <Grid size={{ xs: 12, lg: 3 }}>
             <ChartWrapper title="Reviews">
-              {reviews?.slice(0, 6).map((review) => (
-                <Review key={review.reviewId} review={review} />
-              ))}
+              {isReviewsLoading || !reviews ? (
+                <>
+                  <Skeleton height={150} />
+                  <Skeleton height={150} sx={{ mt: 2 }} />
+                  <Skeleton height={150} sx={{ mt: 2 }} />
+                  <Skeleton height={150} sx={{ mt: 2 }} />
+                  <Skeleton height={150} sx={{ mt: 2 }} />
+                </>
+              ) : (
+                reviews
+                  .slice(0, 6)
+                  .map((review) => (
+                    <Review key={review.reviewId} review={review} />
+                  ))
+              )}
             </ChartWrapper>
           </Grid>
         </Grid>
