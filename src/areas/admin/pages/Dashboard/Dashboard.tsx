@@ -13,18 +13,24 @@ import {
   Tooltip,
   Legend,
   ArcElement,
+  PointElement,
+  LineElement,
+  Filler,
 } from "chart.js";
 import ChartWrapper from "./components/ChartWrapper";
 import Review from "@travelia/components/Review";
+import { getRooms } from "@travelia/api/endpoints/rooms";
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
+  PointElement,
+  LineElement,
   BarElement,
-  Title,
+  ArcElement,
   Tooltip,
   Legend,
-  ArcElement,
+  Filler,
 );
 
 const Skeleton = styled("div")<{ height: number }>(({ theme, height }) => ({
@@ -42,6 +48,10 @@ export default function Dashboard() {
   const { data: reviews, isReviewsLoading } = useQuery({
     queryKey: ["reviews"],
     queryFn: () => getHotelReviews(1),
+  });
+  const { data: rooms, isRoomsLoading } = useQuery({
+    queryKey: ["rooms"],
+    queryFn: () => getRooms(),
   });
 
   const availableRoomsData = {
@@ -80,6 +90,28 @@ export default function Dashboard() {
     ],
   };
 
+  const lineChartData = {
+    labels: rooms?.map((room) => `Room ${room.roomNumber}`),
+    datasets: [
+      {
+        label: "Room Price (USD)",
+        data: rooms?.map((room) => room.price),
+        borderColor: "rgba(75, 192, 192, 1)",
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        tension: 0.3,
+        fill: true,
+      },
+      {
+        label: "Number of Amenities",
+        data: rooms?.map((room) => room.roomAmenities.length),
+        borderColor: "rgba(255, 99, 132, 1)",
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        tension: 0.3,
+        fill: true,
+      },
+    ],
+  };
+
   return (
     <>
       <Container maxWidth="xl">
@@ -106,6 +138,7 @@ export default function Dashboard() {
               <Grid size={{ xs: 12, lg: 4 }}>
                 <ChartWrapper title="Hotel Amenities">
                   <Doughnut
+                    width={300}
                     data={doughnutData}
                     options={{
                       plugins: {
@@ -128,8 +161,8 @@ export default function Dashboard() {
             </Grid>
 
             <Grid size={{ xs: 12 }}>
-              <ChartWrapper title="New Chart Title">
-                {/* <Line data={lineChartData} options={lineChartOptions} /> */}
+              <ChartWrapper title="Room Prices & Amenities">
+                <Line data={lineChartData} />
                 {isLoading && <Skeleton height={400} />}
               </ChartWrapper>
             </Grid>
@@ -137,7 +170,7 @@ export default function Dashboard() {
 
           <Grid size={{ xs: 12, lg: 3 }}>
             <ChartWrapper title="Reviews">
-              {reviews?.slice(0, 5).map((review) => (
+              {reviews?.slice(0, 6).map((review) => (
                 <Review key={review.reviewId} review={review} />
               ))}
             </ChartWrapper>
