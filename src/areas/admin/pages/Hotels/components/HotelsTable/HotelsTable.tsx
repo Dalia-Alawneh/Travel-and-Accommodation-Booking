@@ -82,6 +82,8 @@ const HotelsTable = ({
     return url;
   };
 
+  console.log(rowData);
+
   const columns = [
     { id: "id", label: "ID", align: "left", width: 50 },
     { id: "hotelName", label: "Hotel Name", align: "left", minWidth: 150 },

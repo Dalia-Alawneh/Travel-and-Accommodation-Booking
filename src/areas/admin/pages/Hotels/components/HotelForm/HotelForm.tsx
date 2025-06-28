@@ -27,6 +27,8 @@ const HotelForm = ({
   title,
   showImage = true,
 }: HotelFormProps) => {
+  console.log(initialValues);
+
   const { src } = useValidateImage(initialValues.imageUrl);
   return (
     <AppForm
@@ -87,6 +89,15 @@ const HotelForm = ({
               multiline
               onChange={formik.handleChange}
               minRows={3}
+            />
+
+            <FormikTextField
+              name="availableRooms"
+              label="Available Rooms"
+              type="number"
+              placeholder="Enter Available Rooms"
+              value={formik.values.availableRooms}
+              onChange={formik.handleChange}
             />
 
             <FormikTextField

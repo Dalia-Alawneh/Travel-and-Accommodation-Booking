@@ -19,8 +19,9 @@ export const getHotel = async (id: number): Promise<IHotelResponse> => {
 };
 
 export const getHotelGallery = async (
-  id: number,
+  _id: number,
 ): Promise<IGalleryResponse[]> => {
+  void _id;
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(galleryMockData);
@@ -75,7 +76,7 @@ export const getHotelsPaginated = async (
   });
 };
 
-export const updateHotel = async (id: number, body: IHotelPayload) => {
+export const updateHotel = async (_id: number, body: IHotelPayload) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(body);
@@ -83,7 +84,8 @@ export const updateHotel = async (id: number, body: IHotelPayload) => {
   });
 };
 
-export const deleteHotel = async (id: number): Promise<void> => {
+export const deleteHotel = async (_id: number): Promise<void> => {
+  void _id;
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve();
