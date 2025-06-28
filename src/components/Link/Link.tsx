@@ -19,7 +19,6 @@ const AppLink = ({ path, children }: IAppLinkProps) => {
           fontWeight: "bold",
           color: "primary.main",
           borderBottom: "2px solid",
-          borderColor: "primary.main",
         },
       }}
     >

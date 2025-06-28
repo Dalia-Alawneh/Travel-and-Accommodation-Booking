@@ -14,6 +14,7 @@ import useLogout from "@travelia/hooks/useLogout";
 import { Logout } from "@mui/icons-material";
 import { ReactNode, useState } from "react";
 import { userMenuItems } from "@travelia/fixtures";
+import { Link } from "react-router";
 interface ITopBarProps {
   menuLinks: Menu;
   renderMenu: (menuLinks: Menu) => ReactNode;
@@ -58,9 +59,9 @@ export default function TopBar({
               </IconButton>
               {!hideLogo && (
                 <Box sx={{ my: 2 }}>
-                  <AppLink path="">
+                  <Link to="">
                     <img src={logo} alt="travilia" />
-                  </AppLink>
+                  </Link>
                 </Box>
               )}
               {renderMenu(menuLinks)}
