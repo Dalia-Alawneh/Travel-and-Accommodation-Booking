@@ -15,7 +15,7 @@ import {
   ArcElement,
 } from "chart.js";
 import ChartWrapper from "./components/ChartWrapper";
-import Review from "@travelia/areas/user/pages/Hotel/components/Review/Review";
+import Review from "@travelia/components/Review";
 
 ChartJS.register(
   CategoryScale,
