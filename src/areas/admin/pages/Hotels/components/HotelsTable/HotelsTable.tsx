@@ -8,7 +8,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { IHotelRow } from "./types";
 import { deleteHotel, updateHotel } from "@travelia/api/endpoints/hotel";
-import AdminDrawer from "@travelia/areas/admin/components/AdminDrawer";
+import FormDrawer from "@travelia/areas/admin/components/FormDrawer";
 import HotelForm from "../HotelForm";
 import { fallbackImage } from "@travelia/assets";
 
@@ -158,7 +158,7 @@ const HotelsTable = ({
       />
 
       {hotelToEdit && (
-        <AdminDrawer
+        <FormDrawer
           open={openEditDrawer}
           onClose={() => setOpenEditDrawer(false)}
           render={(close) => (

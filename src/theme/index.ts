@@ -181,6 +181,13 @@ const theme = createTheme({
         }),
       },
     },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          color: theme.palette.primary.main,
+        }),
+      },
+    },
   },
 });
 

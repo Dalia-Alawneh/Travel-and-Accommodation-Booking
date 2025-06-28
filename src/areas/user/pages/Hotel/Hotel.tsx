@@ -22,7 +22,7 @@ import Amenities from "../../components/Amenities";
 import Gallery from "./components/Gallery";
 import { hotelBoxSx } from "@travelia/styles";
 import AvailableRoomCard from "./components/AvailableRoomCard";
-import Review from "./components/Review/Review";
+import Review from "@travelia/components/Review";
 import { useState } from "react";
 import AppMap from "../../components/Map/Map";
 

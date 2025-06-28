@@ -44,7 +44,7 @@ const Table = <T extends { id?: string | number }>({
     <Box
       sx={{
         width: "100%",
-        overflow: "hidden",
+        overflow: "auto",
         boxShadow: theme.customShadows.light,
         borderRadius: 1,
       }}

@@ -8,7 +8,7 @@ import { deleteCity, updateCity } from "@travelia/api/endpoints/cities";
 import ConfirmDeleteDialog from "@travelia/components/Dialogs/ConfirmDelete";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import AdminDrawer from "@travelia/areas/admin/components/AdminDrawer/AdminDrawer";
+import FormDrawer from "@travelia/areas/admin/components/FormDrawer/FormDrawer";
 import CityForm from "../CityForm";
 
 interface ICitiesTableProps {
@@ -118,7 +118,7 @@ const CitiesTable = ({
       />
 
       {cityToEdit && (
-        <AdminDrawer
+        <FormDrawer
           open={openEditDrawer}
           onClose={() => setOpenEditDrawer(false)}
           render={(close) => (

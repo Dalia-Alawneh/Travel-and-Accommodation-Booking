@@ -3,6 +3,7 @@ import LocationCityIcon from "@mui/icons-material/LocationCity";
 import HotelIcon from "@mui/icons-material/Hotel";
 import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
 import { Menu, SelectItem, SortOptions } from "@travelia/types";
+import { Dashboard } from "@mui/icons-material";
 
 export const userMenuItems: Menu = [
   {
@@ -16,6 +17,11 @@ export const userMenuItems: Menu = [
 ];
 
 export const adminMenuItems: Menu = [
+  {
+    title: "Dashboard",
+    path: "/admin",
+    icon: <Dashboard />,
+  },
   {
     title: "Cities",
     path: "cities",

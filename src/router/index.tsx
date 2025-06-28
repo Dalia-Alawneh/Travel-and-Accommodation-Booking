@@ -17,6 +17,7 @@ import Cities from "@travelia/areas/admin/pages/Cities";
 import AdminLayout from "@travelia/layouts/admin/AdminLayout";
 import Hotels from "@travelia/areas/admin/pages/Hotels";
 import Rooms from "@travelia/areas/admin/pages/Rooms";
+import Dashboard from "@travelia/areas/admin/pages/Dashboard";
 
 const AppRouter = () => {
   return (
@@ -46,6 +47,7 @@ const AppRouter = () => {
         element={<GuardedRoute allowedRoles={[UserType.Admin]} />}
       >
         <Route element={<AdminLayout />}>
+          <Route index element={<Dashboard />} />
           <Route path="cities" element={<Cities />} />
           <Route path="hotels" element={<Hotels />} />
           <Route path="rooms" element={<Rooms />} />
