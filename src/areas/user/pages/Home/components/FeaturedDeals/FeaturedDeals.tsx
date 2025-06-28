@@ -6,6 +6,7 @@ import PauseOnHoverCarousel from "../PauseOnHoverCarousel/PauseOnHoverCarousel";
 import RoomCardSkeleton from "@travelia/areas/user/pages/Home/components/RoomCard/RoomCardSkeleton";
 import SectionTitle from "@travelia/areas/user/components/SectionTitle/SectionTitle";
 import withContainer from "@travelia/HOC/withContainer";
+import { motion } from "framer-motion";
 
 const carouselResponsive = [
   {
@@ -40,42 +41,49 @@ const FeaturedDeals = () => {
   });
 
   return (
-    <Box pt={{ xs: 1, md: 5 }}>
-      <SectionTitle
-        title="Featured Deals"
-        subTitle="Deals you don’t want to miss"
-      />
-      {isLoading ? (
-        <Box
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: 2,
-            px: { xs: 1, sm: 2 },
-          }}
-        >
-          {Array.from({ length: 3 }, (_, index) => (
-            <RoomCardSkeleton key={index} />
-          ))}
-        </Box>
-      ) : featureDeals?.length === 0 ? (
-        <Box textAlign="center" color="text.secondary">
-          No data found
-        </Box>
-      ) : (
-        <PauseOnHoverCarousel
-          slidesToShow={3}
-          responsiveBreakpoints={carouselResponsive}
-          render={() =>
-            featureDeals?.map((item) => (
-              <Box key={item.hotelId} px={{ xs: 1, sm: 2 }}>
-                <RoomCard {...item} />
-              </Box>
-            ))
-          }
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, type: "spring", bounce: 0.7 }}
+      viewport={{ once: true, amount: 0.5 }}
+    >
+      <Box pt={{ xs: 1, md: 5 }}>
+        <SectionTitle
+          title="Featured Deals"
+          subTitle="Deals you don’t want to miss"
         />
-      )}
-    </Box>
+        {isLoading ? (
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 2,
+              px: { xs: 1, sm: 2 },
+            }}
+          >
+            {Array.from({ length: 3 }, (_, index) => (
+              <RoomCardSkeleton key={index} />
+            ))}
+          </Box>
+        ) : featureDeals?.length === 0 ? (
+          <Box textAlign="center" color="text.secondary">
+            No data found
+          </Box>
+        ) : (
+          <PauseOnHoverCarousel
+            slidesToShow={3}
+            responsiveBreakpoints={carouselResponsive}
+            render={() =>
+              featureDeals?.map((item) => (
+                <Box key={item.hotelId} px={{ xs: 1, sm: 2 }}>
+                  <RoomCard {...item} />
+                </Box>
+              ))
+            }
+          />
+        )}
+      </Box>
+    </motion.div>
   );
 };
 
