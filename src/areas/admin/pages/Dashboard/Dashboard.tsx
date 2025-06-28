@@ -45,11 +45,11 @@ export default function Dashboard() {
     queryKey: ["Hotel"],
     queryFn: () => getHotels(),
   });
-  const { data: reviews, isReviewsLoading } = useQuery({
+  const { data: reviews, isLoading: isReviewsLoading } = useQuery({
     queryKey: ["reviews"],
     queryFn: () => getHotelReviews(1),
   });
-  const { data: rooms, isRoomsLoading } = useQuery({
+  const { data: rooms, isLoading: isRoomsLoading } = useQuery({
     queryKey: ["rooms"],
     queryFn: () => getRooms(),
   });
