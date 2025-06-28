@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import ConfirmDeleteDialog from "./ConfirmDelete";
 
 describe("ConfirmDeleteDialog", () => {
-  it("renders dialog content when open is true", () => {
+  it("should renders dialog content when open is true", () => {
     render(
       <ConfirmDeleteDialog
         open={true}
@@ -19,7 +19,7 @@ describe("ConfirmDeleteDialog", () => {
     expect(screen.getByRole("button", { name: /delete/i })).toBeInTheDocument();
   });
 
-  it("calls onConfirmDelete when Delete button is clicked", () => {
+  it("should calls onConfirmDelete when Delete button is clicked", () => {
     const onConfirmDelete = vi.fn();
 
     render(
@@ -34,7 +34,7 @@ describe("ConfirmDeleteDialog", () => {
     expect(onConfirmDelete).toHaveBeenCalled();
   });
 
-  it("calls handleClose when Cancel button is clicked", () => {
+  it("should calls handleClose when Cancel button is clicked", () => {
     const handleClose = vi.fn();
 
     render(
