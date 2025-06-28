@@ -36,33 +36,34 @@ const Skeleton = styled("div")<{ height: number }>(({ theme, height }) => ({
   backgroundColor: theme.palette.action.hover,
   borderRadius: theme.shape.borderRadius,
   height,
-  content: '" "',
+  width: "100%",
 }));
 
 export default function Dashboard() {
-  const { data, isLoading } = useQuery({
+  const { data: hotels, isLoading: isHotelsLoading } = useQuery({
     queryKey: ["Hotel"],
-    queryFn: () => getHotels(),
+    queryFn: getHotels,
   });
+
   const { data: reviews, isLoading: isReviewsLoading } = useQuery({
     queryKey: ["reviews"],
     queryFn: () => getHotelReviews(1),
   });
+
   const { data: rooms, isLoading: isRoomsLoading } = useQuery({
     queryKey: ["rooms"],
-    queryFn: () => getRooms(),
+    queryFn: getRooms,
   });
 
   const availableRoomsData = {
-    labels: data
-      ?.filter((hotel) => !!hotel.hotelName)
-      .map((hotel) => hotel.hotelName),
+    labels: hotels?.filter((h) => h.hotelName).map((h) => h.hotelName) || [],
     datasets: [
       {
         label: "Available Rooms",
-        data: data
-          ?.filter((hotel) => !!hotel.hotelName)
-          .map((hotel) => hotel.availableRooms || 0),
+        data:
+          hotels
+            ?.filter((h) => h.hotelName)
+            .map((h) => h.availableRooms || 0) || [],
         backgroundColor: "rgba(75, 192, 192, 0.5)",
         borderColor: "rgba(75, 192, 192, 1)",
         borderWidth: 1,
@@ -71,11 +72,11 @@ export default function Dashboard() {
   };
 
   const doughnutData = {
-    labels: data?.map((hotel) => hotel.hotelName),
+    labels: hotels?.map((h) => h.hotelName) || [],
     datasets: [
       {
         label: "Number of Amenities",
-        data: data?.map((hotel) => hotel.amenities?.length || 0),
+        data: hotels?.map((h) => h.amenities?.length || 0) || [],
         backgroundColor: [
           "rgba(255, 99, 132, 0.5)",
           "rgba(54, 162, 235, 0.5)",
@@ -90,11 +91,11 @@ export default function Dashboard() {
   };
 
   const lineChartData = {
-    labels: rooms?.map((room) => `Room ${room.roomNumber}`),
+    labels: rooms?.map((r) => `Room ${r.roomNumber}`) || [],
     datasets: [
       {
         label: "Room Price (USD)",
-        data: rooms?.map((room) => room.price),
+        data: rooms?.map((r) => r.price) || [],
         borderColor: "rgba(75, 192, 192, 1)",
         backgroundColor: "rgba(75, 192, 192, 0.2)",
         tension: 0.3,
@@ -102,7 +103,7 @@ export default function Dashboard() {
       },
       {
         label: "Number of Amenities",
-        data: rooms?.map((room) => room.roomAmenities.length),
+        data: rooms?.map((r) => r.roomAmenities.length) || [],
         borderColor: "rgba(255, 99, 132, 1)",
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         tension: 0.3,
@@ -112,85 +113,79 @@ export default function Dashboard() {
   };
 
   return (
-    <>
-      <Container maxWidth="xl">
-        <Typography variant="h3" mb={3}>
-          <Box component="span" sx={{ color: "custom.orange" }}>
-            Travila
-          </Box>{" "}
-          Dashboard! 😎
-        </Typography>
-        <Grid container spacing={2}>
-          <Grid
-            size={{ xs: 12, lg: 9 }}
-            container
-            spacing={2}
-            direction="column"
-          >
-            <Grid container spacing={2}>
-              <Grid size={{ xs: 12, lg: 8 }}>
-                <ChartWrapper title="Available Hotel Rooms">
+    <Container maxWidth="xl">
+      <Typography variant="h3" mb={3}>
+        <Box component="span" sx={{ color: "custom.orange" }}>
+          Travila
+        </Box>{" "}
+        Dashboard! 😎
+      </Typography>
+
+      <Grid container spacing={2}>
+        <Grid size={{ xs: 12, lg: 9 }} container spacing={2} direction="column">
+          <Grid container spacing={2}>
+            <Grid size={{ xs: 12, lg: 8 }}>
+              <ChartWrapper title="Available Hotel Rooms">
+                {isHotelsLoading ? (
+                  <Skeleton height={400} />
+                ) : (
                   <Bar data={availableRoomsData} />
-                  {isLoading && <Skeleton height={400} />}
-                </ChartWrapper>
-              </Grid>
-              <Grid size={{ xs: 12, lg: 4 }}>
-                <ChartWrapper title="Hotel Amenities">
+                )}
+              </ChartWrapper>
+            </Grid>
+            <Grid size={{ xs: 12, lg: 4 }}>
+              <ChartWrapper title="Hotel Amenities">
+                {isHotelsLoading ? (
+                  <Skeleton height={400} />
+                ) : (
                   <Doughnut
-                    width={300}
                     data={doughnutData}
                     options={{
                       plugins: {
                         legend: { display: false },
                         tooltip: {
                           callbacks: {
-                            label: function (context) {
-                              const label = context.label || "";
-                              const value = context.formattedValue || 0;
-                              return `${label}: ${value} Amenities`;
-                            },
+                            label: (context) =>
+                              `${context.label || ""}: ${context.formattedValue || 0} Amenities`,
                           },
                         },
                       },
                     }}
                   />
-                  {isLoading && <Skeleton height={400} />}
-                </ChartWrapper>
-              </Grid>
-            </Grid>
-
-            <Grid size={{ xs: 12 }}>
-              <ChartWrapper title="Room Prices & Amenities">
-                {isRoomsLoading ? (
-                  <Skeleton height={520} />
-                ) : (
-                  <Line data={lineChartData} />
                 )}
               </ChartWrapper>
             </Grid>
           </Grid>
 
-          <Grid size={{ xs: 12, lg: 3 }}>
-            <ChartWrapper title="Reviews">
-              {isReviewsLoading || !reviews ? (
-                <>
-                  <Skeleton height={150} />
-                  <Skeleton height={150} sx={{ mt: 2 }} />
-                  <Skeleton height={150} sx={{ mt: 2 }} />
-                  <Skeleton height={150} sx={{ mt: 2 }} />
-                  <Skeleton height={150} sx={{ mt: 2 }} />
-                </>
+          <Grid size={{ xs: 12 }}>
+            <ChartWrapper title="Room Prices & Amenities">
+              {isRoomsLoading ? (
+                <Skeleton height={520} />
               ) : (
-                reviews
-                  .slice(0, 6)
-                  .map((review) => (
-                    <Review key={review.reviewId} review={review} />
-                  ))
+                <Line data={lineChartData} />
               )}
             </ChartWrapper>
           </Grid>
         </Grid>
-      </Container>
-    </>
+
+        <Grid size={{ xs: 12, lg: 3 }}>
+          <ChartWrapper title="Reviews">
+            {isReviewsLoading || !reviews
+              ? Array.from({ length: 5 }).map((_, i) => (
+                  <Skeleton
+                    key={i}
+                    height={150}
+                    style={{ marginTop: i ? 16 : 0 }}
+                  />
+                ))
+              : reviews
+                  .slice(0, 6)
+                  .map((review) => (
+                    <Review key={review.reviewId} review={review} />
+                  ))}
+          </ChartWrapper>
+        </Grid>
+      </Grid>
+    </Container>
   );
 }
