@@ -16,7 +16,7 @@ const RatingBadge = ({ starRating, sx }: IRatingBadgeProps) => {
         px: 2,
         right: 20,
         top: -20,
-        ...sx,
+        ...(sx || {}),
       }}
       display="flex"
       alignItems="center"
