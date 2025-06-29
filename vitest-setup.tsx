@@ -1,5 +1,10 @@
 import "@testing-library/jest-dom/vitest";
-import { vi } from "vitest";
+import { beforeAll, afterEach, afterAll, vi } from "vitest";
+import { server } from "./src/mocks/server";
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
 vi.mock("@mui/icons-material", async () => {
   return {
