@@ -4,14 +4,13 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ThemeProvider, CssBaseline, useTheme } from "@mui/material";
+import { ThemeProvider, CssBaseline } from "@mui/material";
 import { persistor, store } from "@travelia/app/store";
 import { UserProvider } from "@travelia/context/user";
-
+import theme from "@travelia/theme";
 const queryClient = new QueryClient();
 
 const AllProviders = ({ children }: { children: ReactNode }) => {
-  const theme = useTheme();
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={null}>
