@@ -15,3 +15,11 @@ vi.mock("@mui/icons-material", async () => {
     Edit: () => <div data-testid="mock-icon" />,
   };
 });
+
+vi.mock("react-hot-toast", () => ({
+  __esModule: true,
+  default: {
+    success: vi.fn(),
+  },
+  success: vi.fn(),
+}));
