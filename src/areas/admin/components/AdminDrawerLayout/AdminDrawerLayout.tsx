@@ -40,7 +40,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-export default function AdminTopBarDrawer({
+export default function AdminDrawerLayout({
   children,
 }: {
   children: ReactNode;

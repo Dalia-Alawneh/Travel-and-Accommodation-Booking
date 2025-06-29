@@ -1,4 +1,4 @@
-import AdminTopBarDrawer from "@travelia/areas/admin/components/AdminTopBar/AdminTopBar";
+import AdminDrawerLayout from "@travelia/areas/admin/components/AdminDrawerLayout/AdminDrawerLayout";
 import withContainer from "@travelia/HOC/withContainer";
 import { ReactNode } from "react";
 import { Outlet } from "react-router";
@@ -14,11 +14,11 @@ const Main = withContainer(
 const AdminLayout = () => {
   return (
     <>
-      <AdminTopBarDrawer>
+      <AdminDrawerLayout>
         <Main>
           <Outlet />
         </Main>
-      </AdminTopBarDrawer>
+      </AdminDrawerLayout>
     </>
   );
 };
