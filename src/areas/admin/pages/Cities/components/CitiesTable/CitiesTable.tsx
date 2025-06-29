@@ -85,10 +85,13 @@ const CitiesTable = ({
       align: "left",
       render: (_value: unknown, row: CityRow) => (
         <Box display="flex">
-          <IconButton onClick={() => openConfirmDeleteDialog(row)}>
+          <IconButton
+            onClick={() => openConfirmDeleteDialog(row)}
+            aria-label="delete"
+          >
             <DeleteTwoTone color="error" />
           </IconButton>
-          <IconButton onClick={() => openEditCityDrawer(row)}>
+          <IconButton onClick={() => openEditCityDrawer(row)} aria-label="edit">
             <Edit color="primary" />
           </IconButton>
         </Box>

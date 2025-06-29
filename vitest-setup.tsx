@@ -11,5 +11,7 @@ vi.mock("@mui/icons-material", async () => {
     Warning: () => <div data-testid="mock-icon" />,
     Dashboard: () => <div data-testid="mock-icon" />,
     Logout: () => <div data-testid="mock-icon" />,
+    DeleteTwoTone: () => <div data-testid="mock-icon" />,
+    Edit: () => <div data-testid="mock-icon" />,
   };
 });
