@@ -100,9 +100,9 @@ describe("Table Component - Cities Example", () => {
       <Table
         columns={columns}
         rows={rows}
-        rowsPerPage={1}
+        rowsPerPage={5}
         page={0}
-        totalCount={2}
+        totalCount={20}
         onPageChange={onPageChange}
         onRowsPerPageChange={() => {}}
       />,
