@@ -11,7 +11,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { ReactNode } from "react";
-import { Column } from "./type";
+import type { Column } from "./type";
 
 interface TableProps<T> {
   columns: Column<T>[];

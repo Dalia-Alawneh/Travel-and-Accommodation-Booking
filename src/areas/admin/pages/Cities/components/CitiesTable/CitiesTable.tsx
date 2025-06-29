@@ -1,8 +1,8 @@
 import { DeleteTwoTone, Edit } from "@mui/icons-material";
 import { Box, IconButton } from "@mui/material";
 import Table from "@travelia/areas/admin/components/Table";
-import { CityRow } from "./types";
-import { Column } from "@travelia/areas/admin/components/Table/type";
+import type { CityRow } from "./types";
+import type { Column } from "@travelia/areas/admin/components/Table/type";
 import { useMutation } from "@tanstack/react-query";
 import { deleteCity, updateCity } from "@travelia/api/endpoints/cities";
 import ConfirmDeleteDialog from "@travelia/components/Dialogs/ConfirmDelete";
