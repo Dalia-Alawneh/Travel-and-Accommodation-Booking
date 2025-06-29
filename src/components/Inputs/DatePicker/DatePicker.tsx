@@ -1,12 +1,14 @@
 import { Box, FormControl, InputLabel } from "@mui/material";
 import { ReactNode } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-
 interface AppDateInputProps {
   label: string;
   value: string;
   onChange: (value: string) => void;
   icon?: ReactNode;
+  minDate?: string;
+  maxDate?: string;
+  disabled?: boolean;
 }
 
 const dateInputStyle = {
@@ -27,7 +29,15 @@ const dateInputStyle = {
   },
 };
 
-const AppDateInput = ({ label, value, onChange, icon }: AppDateInputProps) => {
+const AppDateInput = ({
+  label,
+  value,
+  onChange,
+  icon,
+  disabled,
+  maxDate,
+  minDate,
+}: AppDateInputProps) => {
   return (
     <FormControl
       variant="standard"
@@ -65,7 +75,9 @@ const AppDateInput = ({ label, value, onChange, icon }: AppDateInputProps) => {
         <Box
           component="input"
           type="date"
-          min={new Date().toISOString().split("T")[0]}
+          min={minDate ?? new Date().toISOString().split("T")[0]}
+          max={maxDate}
+          disabled={disabled}
           value={value}
           onChange={(e) => onChange(e.target.value)}
           sx={dateInputStyle}
