@@ -1,7 +1,7 @@
 import { LocationOn } from "@mui/icons-material";
 import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
+import AppSkeleton from "@travelia/areas/user/components/Skeleton";
 import useValidateImage from "@travelia/hooks/useValidateImage";
-import AppSkeleton from "../Skeleton/Skeleton";
 
 interface IDestinationCardProps {
   cityName: string;
