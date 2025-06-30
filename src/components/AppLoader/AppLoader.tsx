@@ -1,19 +1,18 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 
+const loaderSx = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  width: "100%",
+  height: "100vh",
+  flexDirection: "column",
+};
+
 const AppLoader = () => {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        height: "100vh",
-        flexDirection: "column",
-        backgroundColor: "#f9f9f9",
-      }}
-    >
+    <Box sx={loaderSx}>
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
