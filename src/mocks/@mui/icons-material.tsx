@@ -1,7 +1,7 @@
 export default new Proxy(
   {},
   {
-    get: (target, prop) => () => (
+    get: (_target, prop) => () => (
       <div data-testid={`mock-icon-${String(prop)}`} />
     ),
   },
