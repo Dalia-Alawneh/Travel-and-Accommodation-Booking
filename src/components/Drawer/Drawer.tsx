@@ -101,6 +101,7 @@ const AppDrawer = ({
         <AppButton
           onClick={handleLogout}
           loading={loading}
+          appVariant="logout"
           sx={{ px: "3.6rem", my: 4, ml: 3 }}
         >
           <Box

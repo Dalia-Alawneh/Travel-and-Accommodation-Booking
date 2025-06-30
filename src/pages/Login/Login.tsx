@@ -128,6 +128,7 @@ const Login = () => {
                       />
                       <AppButton
                         type="submit"
+                        appVariant="primary"
                         sx={{
                           bgcolor: "custom.skyBlue",
                           color: "white",
