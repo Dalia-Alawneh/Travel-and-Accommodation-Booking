@@ -33,10 +33,17 @@ const textFieldStyle = {
   },
 };
 
-const AppTextField = ({ slotProps, ...rest }: AppTextFieldProps) => {
+const AppTextField = ({
+  slotProps,
+  id,
+  ...rest
+}: AppTextFieldProps & { id?: string }) => {
+  const inputId = id || "app-textfield";
+
   return (
     <>
       <InputLabel
+        htmlFor={inputId}
         sx={{
           fontSize: 13,
           color: "custom.darkSalver",
@@ -47,6 +54,7 @@ const AppTextField = ({ slotProps, ...rest }: AppTextFieldProps) => {
       </InputLabel>
       <TextField
         {...rest}
+        id={inputId}
         variant="outlined"
         fullWidth
         label={undefined}
