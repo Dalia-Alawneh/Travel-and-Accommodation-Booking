@@ -7,6 +7,7 @@ import { UserProvider } from "./context/user";
 import { ErrorBoundary } from "react-error-boundary";
 import ServerError from "./pages/ServerError";
 import { Suspense } from "react";
+import AppLoader from "./components/AppLoader";
 
 const queryClient = new QueryClient();
 
@@ -17,7 +18,9 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <ErrorBoundary fallback={<ServerError />}>
-            <AppRouter />
+            <Suspense fallback={<AppLoader />}>
+              <AppRouter />
+            </Suspense>
           </ErrorBoundary>
           <ToasterContainer />
         </ThemeProvider>
