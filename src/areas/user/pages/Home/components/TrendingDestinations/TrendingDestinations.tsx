@@ -4,8 +4,8 @@ import withContainer from "@travelia/HOC/withContainer";
 import PauseOnHoverCarousel from "../PauseOnHoverCarousel/PauseOnHoverCarousel";
 import { useQuery } from "@tanstack/react-query";
 import { getTrendingDestinations } from "@travelia/api/endpoints/home";
-import DestinationCard from "@travelia/areas/user/components/DestinationCard/DestinationCard";
-import DestinationCardSkeleton from "@travelia/areas/user/components/DestinationCard/DestinationCardSkeleton";
+import DestinationCard from "../DestinationCard";
+import DestinationCardSkeleton from "../DestinationCard/DestinationCardSkeleton";
 
 const carouselResponsive = [
   {
