@@ -40,6 +40,8 @@ const variantStyles = {
   },
 };
 
+type StyleType = Record<string, unknown>;
+
 const AppButton = ({
   children,
   loading = false,
@@ -48,8 +50,7 @@ const AppButton = ({
   sx,
   ...rest
 }: IAppButtonProps) => {
-  const style = appVariant ? variantStyles[appVariant] : {};
-
+  const style: StyleType = appVariant ? variantStyles[appVariant] : {};
   return (
     <Button
       disabled={disabled || loading}
