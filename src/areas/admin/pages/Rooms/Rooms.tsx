@@ -1,6 +1,6 @@
 import AdminCrudPage from "../CrudPage";
-import { IRoomResponse } from "@travelia/api/types/response.dto";
-import { IRoomRow } from "./components/RoomsTable/types";
+import type { IRoomResponse } from "@travelia/api/types/response.dto";
+import type { IRoomRow } from "./components/RoomsTable/types";
 import {
   addRoom,
   getRooms,

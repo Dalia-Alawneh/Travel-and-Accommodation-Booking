@@ -1,12 +1,12 @@
 import { DeleteTwoTone, Edit } from "@mui/icons-material";
 import { Box, IconButton } from "@mui/material";
 import Table from "@travelia/areas/admin/components/Table";
-import { Column } from "@travelia/areas/admin/components/Table/type";
+import type { Column } from "@travelia/areas/admin/components/Table/type";
 import { useMutation } from "@tanstack/react-query";
 import ConfirmDeleteDialog from "@travelia/components/Dialogs/ConfirmDelete";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { IHotelRow } from "./types";
+import type { IHotelRow } from "./types";
 import { deleteHotel, updateHotel } from "@travelia/api/endpoints/hotel";
 import FormDrawer from "@travelia/areas/admin/components/FormDrawer";
 import HotelForm from "../HotelForm";
