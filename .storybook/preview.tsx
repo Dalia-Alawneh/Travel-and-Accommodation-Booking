@@ -1,12 +1,17 @@
 import type { Preview } from "@storybook/react-vite";
-import React from "react";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import theme from "../src/theme";
+import { UserProvider } from "../src/context/user";
+import { BrowserRouter } from "react-router-dom";
 
 const withMuiTheme = (Story) => (
   <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <Story />
+    <BrowserRouter>
+      <UserProvider>
+        <CssBaseline />
+        <Story />
+      </UserProvider>
+    </BrowserRouter>
   </ThemeProvider>
 );
 

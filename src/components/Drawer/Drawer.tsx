@@ -23,6 +23,7 @@ interface IAppDrawerProps {
   isOpen: boolean;
   handleDrawerToggle: () => void;
   variant?: "permanent" | "persistent" | "temporary";
+  sx?: Record<string, unknown>;
 }
 
 const AppDrawer = ({
@@ -31,6 +32,7 @@ const AppDrawer = ({
   handleDrawerToggle,
   isOpen,
   variant = "temporary",
+  sx,
 }: IAppDrawerProps) => {
   const theme = useTheme();
   const { handleLogout, loading } = useLogout();
@@ -56,6 +58,7 @@ const AppDrawer = ({
       sx={{
         bgcolor: "white",
         display,
+        ...sx,
         "& .MuiDrawer-paper": {
           boxSizing: "border-box",
           width: drawerWidth,
