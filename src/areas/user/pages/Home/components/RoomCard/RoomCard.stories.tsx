@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import RoomCard from "./RoomCard";
+import RoomCardSkeleton from "./RoomCardSkeleton";
+import { Box } from "@mui/material";
 
 const meta: Meta<typeof RoomCard> = {
   title: "Components/RoomCard",
@@ -23,4 +25,12 @@ export const Default: Story = {
     hotelStarRating: 4,
     hotelId: 1,
   },
+};
+
+export const Loading: Story = {
+  render: () => (
+    <Box width={350}>
+      <RoomCardSkeleton />
+    </Box>
+  ),
 };
