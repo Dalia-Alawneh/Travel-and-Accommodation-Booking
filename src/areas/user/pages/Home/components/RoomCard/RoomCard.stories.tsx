@@ -4,7 +4,7 @@ import RoomCardSkeleton from "./RoomCardSkeleton";
 import { Box } from "@mui/material";
 
 const meta: Meta<typeof RoomCard> = {
-  title: "Components/RoomCard",
+  title: "User/Components/Cards/RoomCard",
   component: RoomCard,
   tags: ["autodocs"],
 };
