@@ -4,7 +4,7 @@ import SortMenu from "./Sort";
 import { SelectItem } from "@travelia/types";
 
 const meta: Meta<typeof SortMenu> = {
-  title: "Components/inputs/Sort",
+  title: "Components/inputs/SortMenu",
   component: SortMenu,
   tags: ["autodocs"],
   parameters: {
