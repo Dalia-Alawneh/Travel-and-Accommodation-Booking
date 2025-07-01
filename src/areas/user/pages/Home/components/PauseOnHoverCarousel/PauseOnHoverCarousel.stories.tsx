@@ -18,10 +18,10 @@ const slides = Array.from({ length: 5 }).map((_, i) => (
   <Card
     key={i}
     sx={{
-      width: "95%",
+      width: "80%",
       borderRadius: 2,
       overflow: "hidden",
-      boxShadow: 3,
+      boxShadow: 1,
       mx: "auto",
     }}
   >
@@ -39,16 +39,14 @@ const slides = Array.from({ length: 5 }).map((_, i) => (
     </CardContent>
   </Card>
 ));
+
 export const Default: Story = {
   args: {
-    slidesToShow: 2,
-    responsiveBreakpoints: [
-      { breakpoint: 1024, settings: { slidesToShow: 1 } },
-    ],
+    slidesToShow: 1,
     render: () => slides,
   },
   render: (args) => (
-    <Box sx={{ width: "100%", maxWidth: 900, mx: "auto", mt: 5 }}>
+    <Box sx={{ width: "100%", maxWidth: 300, mx: "auto", mt: 5 }}>
       <PauseOnHoverCarousel {...args} />
     </Box>
   ),
