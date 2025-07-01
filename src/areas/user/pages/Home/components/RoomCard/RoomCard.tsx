@@ -7,7 +7,7 @@ import { Hotel, LocationOn } from "@mui/icons-material";
 import AppButton from "@travelia/components/Button";
 import DiscountBadge from "../../../../components/Badges/DiscountBadge";
 import RatingBadge from "../../../../components/Badges/RatingBadge";
-import RoomPriceWithDiscount from "../../../../components/RoomPriceWithDiscount";
+import RoomPriceWithDiscount from "../RoomPriceWithDiscount";
 import useValidateImage from "@travelia/hooks/useValidateImage";
 import AppSkeleton from "../../../../components/Skeleton/Skeleton";
 import { useNavigate } from "react-router";
