@@ -78,10 +78,10 @@ const ImageCarousel = () => {
         left="13%"
       >
         <AppButton sx={arrowBtnStyle} onClick={previous}>
-          <ArrowLeftRounded fontSize="large" />
+          <ArrowLeftRounded fontSize="large" color="action" />
         </AppButton>
         <AppButton sx={arrowBtnStyle} onClick={next}>
-          <ArrowRightRounded fontSize="large" />
+          <ArrowRightRounded fontSize="large" color="action" />
         </AppButton>
       </Box>
       <CarouselThumbnails

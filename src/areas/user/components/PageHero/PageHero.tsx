@@ -4,11 +4,11 @@ import { overlaySx } from "@travelia/styles";
 
 interface IPageHeroProps {
   title: string;
+  img?: string;
 }
 
 const headerSx = {
   height: "40vh",
-  backgroundImage: `url(${pageHeader})`,
   backgroundPosition: "center center",
   backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
@@ -16,12 +16,20 @@ const headerSx = {
   mt: 7,
 };
 
-const PageHero = ({ title }: IPageHeroProps) => {
+const PageHero = ({ title, img }: IPageHeroProps) => {
   return (
     <header>
-      <Box sx={headerSx}>
+      <Box
+        sx={{
+          ...headerSx,
+          backgroundImage: `url(${img ?? pageHeader})`,
+        }}
+      >
         <Box
-          sx={{ ...overlaySx, backdropFilter: "blur(1px)" }}
+          sx={{
+            ...overlaySx,
+            backdropFilter: "blur(1px)",
+          }}
           display="flex"
           alignItems="center"
           justifyContent="center"

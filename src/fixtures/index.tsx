@@ -68,3 +68,6 @@ export const sortOptions: SelectItem[] = [
   { text: "Name: A to Z", value: SortOptions.NameAsc },
   { text: "Name: Z to A", value: SortOptions.NameDesc },
 ];
+
+export const exampleImage =
+  "https://cf.bstatic.com/xdata/images/hotel/max1280x900/33143786.jpg?k=4d0bca9d9795b80beb2cd9786946e043b23d1372eb633d5855d3aba6343d68d4&o=&hp=1";

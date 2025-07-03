@@ -68,6 +68,7 @@ export default function TopBar({
                 sx={{ display: { xs: "none", sm: "flex" }, py: 1, ml: 2 }}
                 onClick={handleLogout}
                 loading={loading}
+                appVariant="logout"
               >
                 <Box
                   sx={{

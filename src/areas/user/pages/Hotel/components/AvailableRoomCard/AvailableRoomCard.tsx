@@ -174,6 +174,7 @@ const AvailableRoomCard = ({ room }: IAvailableRoomCardProps) => {
           </Collapse>
 
           <AppButton
+            appVariant="secondary"
             onClick={handleAddToCart}
             sx={{
               ...bookButtonStyle,

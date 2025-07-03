@@ -119,6 +119,7 @@ const HotelCard = ({ hotel }: IHotelCard) => {
                 )}
               </Box>
               <AppButton
+                appVariant="secondary"
                 sx={{
                   ...bookButtonStyle,
                   bgcolor: "custom.beige",
