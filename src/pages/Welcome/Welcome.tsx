@@ -45,7 +45,13 @@ const Welcome = () => {
         </Typography>
         <AppButton
           variant="contained"
-          sx={{ mt: 5, px: 5, py: 1.5, bgcolor: "secondary.main" }}
+          sx={{
+            mt: 5,
+            px: 5,
+            py: 1.5,
+            bgcolor: "secondary.main",
+            color: "ActiveCaption",
+          }}
           onClick={() => navigate("/login")}
         >
           Start Now
