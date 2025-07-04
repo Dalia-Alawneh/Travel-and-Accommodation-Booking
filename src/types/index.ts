@@ -75,7 +75,7 @@ export interface SearchValues {
   numberOfRooms: number;
   starRate: number;
   sort: string;
-  budget: number;
+  budget: [number, number];
   amenities: string[];
 }
 
@@ -99,7 +99,7 @@ export interface ISearchedHotel {
 }
 
 export type HotelFilterValues = {
-  budget: number;
+  budget: [number, number];
   starRate: number;
   amenities: string[];
 };

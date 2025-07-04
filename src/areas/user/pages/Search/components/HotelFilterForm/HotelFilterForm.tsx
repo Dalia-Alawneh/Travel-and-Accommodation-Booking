@@ -28,33 +28,33 @@ const HotelFilterForm = ({
       render={(formik) => (
         <form onSubmit={formik.handleSubmit}>
           <Box display="flex" flexDirection="column" gap={3}>
-            <Box>
-              <Box
-                display={"flex"}
-                justifyContent="space-between"
-                alignItems="center"
+            <Box
+              display={"flex"}
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <InputLabel sx={{ fontWeight: 600, fontSize: 14 }}>
+                Budget per night
+              </InputLabel>
+              <Typography
+                variant="body2"
+                mt={1}
+                fontWeight={700}
+                color="custom.orange"
               >
-                <InputLabel sx={{ fontWeight: 600, fontSize: 14 }}>
-                  Budget per night
-                </InputLabel>
-                <Typography
-                  variant="body2"
-                  mt={1}
-                  fontWeight={700}
-                  color="custom.orange"
-                >
-                  {formik.values.budget}$
-                </Typography>
-              </Box>
-              <Slider
-                getAriaLabel={() => "Budget"}
-                value={formik.values.budget}
-                onChange={(_, value) => formik.setFieldValue("budget", value)}
-                valueLabelDisplay="auto"
-                min={0}
-                max={500}
-              />
+                {formik.values.budget[0]}$ - {formik.values.budget[1]}$
+              </Typography>
             </Box>
+
+            <Slider
+              getAriaLabel={() => "Budget Range"}
+              value={formik.values.budget}
+              onChange={(_, value) => formik.setFieldValue("budget", value)}
+              valueLabelDisplay="auto"
+              min={0}
+              max={600}
+            />
+
             <Box>
               <InputLabel sx={{ fontWeight: 600, fontSize: 14, mb: 1 }}>
                 Amenities
@@ -62,7 +62,7 @@ const HotelFilterForm = ({
               <FormGroup>
                 {amenities.map((amenity) => (
                   <AppCheckbox
-                    fieldName="Amenities"
+                    fieldName="amenities"
                     key={amenity.name}
                     hasToolTip={true}
                     option={amenity}
