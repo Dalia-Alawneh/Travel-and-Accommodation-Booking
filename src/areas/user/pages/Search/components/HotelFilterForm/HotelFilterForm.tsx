@@ -62,7 +62,7 @@ const HotelFilterForm = ({
               <FormGroup>
                 {amenities.map((amenity) => (
                   <AppCheckbox
-                    fieldName="Amenities"
+                    fieldName="amenities"
                     key={amenity.name}
                     hasToolTip={true}
                     option={amenity}
