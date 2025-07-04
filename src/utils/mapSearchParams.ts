@@ -7,7 +7,7 @@ const mapSearchRoomParams = (params: URLSearchParams): SearchValues => ({
   adults: Number(params.get("adults") ?? "1"),
   children: Number(params.get("children") ?? "0"),
   numberOfRooms: Number(params.get("numberOfRooms") ?? "1"),
-  budget: 100,
+  budget: [50, 400],
   starRate: 2,
   amenities: [],
   sort: "",
