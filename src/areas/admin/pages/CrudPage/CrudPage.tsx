@@ -1,5 +1,5 @@
 import { Box, IconButton, Tooltip, Typography, useTheme } from "@mui/material";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import useDebounce from "@travelia/hooks/useDebounce";
 import { AddCircle } from "@mui/icons-material";
@@ -45,6 +45,7 @@ const AdminCrudPage = <T, FormPayload>({
   const debouncedSearch = useDebounce(search, 500);
   const [openAddDrawer, setOpenAddDrawer] = useState(false);
   const theme = useTheme();
+  const queryClient = useQueryClient();
   const { data } = useQuery({
     queryKey: [title.toLowerCase()],
     queryFn: getAll,
@@ -57,8 +58,19 @@ const AdminCrudPage = <T, FormPayload>({
 
   const { mutate, isPending } = useMutation({
     mutationFn: addItem,
-    onSuccess: () => {
+    onSuccess: (newItem: T) => {
+      queryClient.setQueryData(
+        [title.toLowerCase()],
+        (oldData: T[] | undefined) => {
+          if (!oldData) return [newItem];
+          return [...oldData, newItem];
+        },
+      );
       toast.success(`${title} Added Successfully`);
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          query.queryKey[0] === `paginated-${title.toLowerCase()}`,
+      });
     },
   });
 
