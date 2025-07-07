@@ -79,7 +79,7 @@ export default function AppSwitch({ name, label }: IAppSwitchProps) {
           <IOSSwitch
             checked={field.value}
             onChange={(e) => helpers.setValue(e.target.checked)}
-            onBlur={field.onBlur}
+            onBlur={(e) => field.onBlur(e)}
             sx={{ m: 1 }}
           />
         }

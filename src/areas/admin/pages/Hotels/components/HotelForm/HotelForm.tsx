@@ -27,8 +27,6 @@ const HotelForm = ({
   title,
   showImage = true,
 }: HotelFormProps) => {
-  console.log(initialValues);
-
   const { src } = useValidateImage(initialValues.imageUrl);
   return (
     <AppForm

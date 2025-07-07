@@ -8,8 +8,6 @@ export const getFilteredHotels = async (
     amenities?: string[];
   },
 ): Promise<ISearchHotelsResponse[]> => {
-  console.log({ params });
-
   const filtered = hotelsSearchResults.filter((hotel) => {
     if (
       params.city &&

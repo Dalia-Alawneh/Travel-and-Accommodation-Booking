@@ -74,7 +74,7 @@ const ImageCarousel = () => {
         sx={{ display: { xs: "none", lg: "flex" } }}
         gap={1}
         position="absolute"
-        bottom="18%"
+        bottom="20%"
         left="13%"
       >
         <AppButton sx={arrowBtnStyle} onClick={previous}>
