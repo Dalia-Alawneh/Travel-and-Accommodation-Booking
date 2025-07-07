@@ -31,8 +31,13 @@ const clearCredentials = () => {
   removeFromLocalStorage(USER);
 };
 
-export const getRequestKey = (config: AxiosRequestConfig) =>
-  config.url + JSON.stringify(config.params) + JSON.stringify(config.data);
+export const getRequestKey = (config: AxiosRequestConfig) => {
+  const url = config.url ?? "";
+  const params = JSON.stringify(config.params ?? {});
+  const data = JSON.stringify(config.data ?? {});
+
+  return url + params + data;
+};
 
 export const attachAbortSignal = (
   config: InternalAxiosRequestConfig,
