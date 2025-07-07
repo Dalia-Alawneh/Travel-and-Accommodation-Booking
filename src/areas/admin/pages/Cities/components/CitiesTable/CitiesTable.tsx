@@ -3,7 +3,7 @@ import { Box, IconButton } from "@mui/material";
 import Table from "@travelia/areas/admin/components/Table";
 import type { CityRow } from "./types";
 import type { Column } from "@travelia/areas/admin/components/Table/type";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteCity, updateCity } from "@travelia/api/endpoints/cities";
 import ConfirmDeleteDialog from "@travelia/components/Dialogs/ConfirmDelete";
 import { useState } from "react";
@@ -36,6 +36,7 @@ const CitiesTable = ({
   const [selectedCity, setSelectedCity] = useState<CityRow | null>(null);
   const [openEditDrawer, setOpenEditDrawer] = useState(false);
   const [cityToEdit, setCityToEdit] = useState<CityRow | null>(null);
+  const queryClient = useQueryClient();
 
   const { mutate: mutateDelete } = useMutation({
     mutationFn: (id: number) => deleteCity(id),
@@ -48,9 +49,30 @@ const CitiesTable = ({
   const { mutate: mutateUpdate, isPending: isUpdating } = useMutation({
     mutationFn: (data: CityRow) =>
       updateCity(data.id, { name: data.name, description: data.description }),
-    onSuccess: () => {
-      setOpenEditDrawer(false);
+    onSuccess: (_, updatedData) => {
       toast.success("City Updated Successfully");
+      queryClient.setQueryData(
+        [`paginated-city`, page, rowsPerPage],
+        (oldData: CityRow[] | undefined) => {
+          if (!oldData) return [];
+          return oldData.map((item) =>
+            item.id === Number(updatedData.id)
+              ? {
+                  ...item,
+                  name: updatedData.name,
+                  description: updatedData.description,
+                }
+              : item,
+          );
+        },
+      );
+
+      queryClient.setQueryData(["city"], (oldData: CityRow[] | undefined) => {
+        if (!oldData) return [];
+        return oldData.map((item) =>
+          item.id === updatedData.id ? updatedData : item,
+        );
+      });
     },
   });
 
