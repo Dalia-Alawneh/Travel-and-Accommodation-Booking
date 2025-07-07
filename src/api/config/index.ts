@@ -1,8 +1,10 @@
 import axios from "axios";
 import {
+  attachAbortSignal,
   attachTokenToRequest,
   handleResponseError,
   onRequestError,
+  removeRequestSignal,
 } from "./interceptors";
 
 const Axios = axios.create({
@@ -16,37 +18,19 @@ const Axios = axios.create({
 const controllers = new Map<string, AbortController>();
 
 Axios.interceptors.request.use((config) => {
-  const key =
-    config.url + JSON.stringify(config.params) + JSON.stringify(config.data);
-  const prevController = controllers.get(key);
-  if (prevController) {
-    prevController.abort();
-  }
-
-  const controller = new AbortController();
-  controllers.set(key, controller);
-
-  config.signal = controller.signal;
+  config = attachAbortSignal(config, controllers);
 
   return attachTokenToRequest(config);
 }, onRequestError);
 
 Axios.interceptors.response.use(
   (response) => {
-    const key =
-      response.config.url +
-      JSON.stringify(response.config.params) +
-      JSON.stringify(response.config.data);
-    controllers.delete(key);
+    removeRequestSignal(response.config, controllers);
     return response;
   },
   (error) => {
     if (error.config) {
-      const key =
-        error.config.url +
-        JSON.stringify(error.config.params) +
-        JSON.stringify(error.config.data);
-      controllers.delete(key);
+      removeRequestSignal(error.config, controllers);
     }
     return handleResponseError(error);
   },

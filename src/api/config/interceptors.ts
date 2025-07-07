@@ -1,5 +1,10 @@
 import toast from "react-hot-toast";
-import { AxiosError, InternalAxiosRequestConfig } from "axios";
+import {
+  AxiosError,
+  AxiosRequestConfig,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from "axios";
 import {
   getFromLocalStorage,
   removeFromLocalStorage,
@@ -24,6 +29,36 @@ export const onRequestError = (error: AxiosError) => Promise.reject(error);
 const clearCredentials = () => {
   removeFromLocalStorage(TOKEN_KEY);
   removeFromLocalStorage(USER);
+};
+
+export const getRequestKey = (config: AxiosRequestConfig) =>
+  config.url + JSON.stringify(config.params) + JSON.stringify(config.data);
+
+export const attachAbortSignal = (
+  config: InternalAxiosRequestConfig,
+  controllers: Map<string, AbortController>,
+) => {
+  const key = getRequestKey(config);
+
+  const prevController = controllers.get(key);
+  if (prevController) {
+    prevController.abort();
+  }
+
+  const controller = new AbortController();
+  controllers.set(key, controller);
+
+  config.signal = controller.signal;
+
+  return config;
+};
+
+export const removeRequestSignal = (
+  config: AxiosRequestConfig,
+  controllers: Map<string, AbortController>,
+) => {
+  const key = getRequestKey(config);
+  controllers.delete(key);
 };
 
 const handleUnAuthResponse = () => {
@@ -80,4 +115,16 @@ export const handleResponseError = (error: AxiosError) => {
   }
 
   return Promise.reject(error);
+};
+
+export const onResponseRemoveSignal = (
+  response: AxiosResponse,
+  controllers: Map<string, AbortController>,
+) => {
+  const key =
+    response.config.url +
+    JSON.stringify(response.config.params) +
+    JSON.stringify(response.config.data);
+  controllers.delete(key);
+  return response;
 };
