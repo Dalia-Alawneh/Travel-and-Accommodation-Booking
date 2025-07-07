@@ -13,8 +13,43 @@ const Axios = axios.create({
   },
 });
 
-Axios.interceptors.request.use(attachTokenToRequest, onRequestError);
+const controllers = new Map<string, AbortController>();
 
-Axios.interceptors.response.use((response) => response, handleResponseError);
+Axios.interceptors.request.use((config) => {
+  const key =
+    config.url + JSON.stringify(config.params) + JSON.stringify(config.data);
+  const prevController = controllers.get(key);
+  if (prevController) {
+    prevController.abort();
+  }
+
+  const controller = new AbortController();
+  controllers.set(key, controller);
+
+  config.signal = controller.signal;
+
+  return attachTokenToRequest(config);
+}, onRequestError);
+
+Axios.interceptors.response.use(
+  (response) => {
+    const key =
+      response.config.url +
+      JSON.stringify(response.config.params) +
+      JSON.stringify(response.config.data);
+    controllers.delete(key);
+    return response;
+  },
+  (error) => {
+    if (error.config) {
+      const key =
+        error.config.url +
+        JSON.stringify(error.config.params) +
+        JSON.stringify(error.config.data);
+      controllers.delete(key);
+    }
+    return handleResponseError(error);
+  },
+);
 
 export default Axios;
