@@ -63,7 +63,31 @@ const HotelsTable = ({
 
   const { mutate: mutateUpdate, isPending: isUpdating } = useMutation({
     mutationFn: (data: IHotelRow) => updateHotel(data.id, { ...data }),
-    onSuccess: () => {
+    onSuccess: (_, updatedData) => {
+      queryClient.setQueryData(
+        [`paginated-hotels`, page, rowsPerPage],
+        (oldData: IHotelRow[] | undefined) => {
+          if (!oldData) return [];
+          return oldData.map((item) =>
+            item.id === Number(updatedData.id)
+              ? {
+                  ...item,
+                  ...updatedData,
+                }
+              : item,
+          );
+        },
+      );
+
+      queryClient.setQueryData(
+        ["hotels"],
+        (oldData: IHotelRow[] | undefined) => {
+          if (!oldData) return [];
+          return oldData.map((item) =>
+            item.id === updatedData.id ? updatedData : item,
+          );
+        },
+      );
       setOpenEditDrawer(false);
       toast.success("Hotel Updated Successfully");
     },
