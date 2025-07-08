@@ -61,7 +61,28 @@ const RoomsTable = ({
 
   const { mutate: mutateUpdate, isPending: isUpdating } = useMutation({
     mutationFn: (data: IRoomRow) => updateRoom(data),
-    onSuccess: () => {
+    onSuccess: (_, updatedData) => {
+      queryClient.setQueryData(
+        [`paginated-rooms`, page, rowsPerPage],
+        (oldData: IRoomRow[] | undefined) => {
+          if (!oldData) return [];
+          return oldData.map((item) =>
+            item.roomId === Number(updatedData.roomId)
+              ? {
+                  ...item,
+                  ...updatedData,
+                }
+              : item,
+          );
+        },
+      );
+
+      queryClient.setQueryData(["rooms"], (oldData: IRoomRow[] | undefined) => {
+        if (!oldData) return [];
+        return oldData.map((item) =>
+          item.roomId === updatedData.roomId ? updatedData : item,
+        );
+      });
       setOpenEditDrawer(false);
       toast.success("Room Updated Successfully");
     },
