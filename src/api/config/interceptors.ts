@@ -5,17 +5,14 @@ import {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
-import {
-  getFromLocalStorage,
-  removeFromLocalStorage,
-} from "@travelia/utils/localStorage";
+import { getFromStorage, removeFromStorage } from "@travelia/utils/storage";
 import { TOKEN_KEY, USER } from "@travelia/constants";
 import { ErrorResponse } from "./types";
 
 export const attachTokenToRequest = (
   config: InternalAxiosRequestConfig,
 ): InternalAxiosRequestConfig => {
-  const token = getFromLocalStorage<string>(TOKEN_KEY);
+  const token = getFromStorage<string>(TOKEN_KEY, "session");
 
   if (token) {
     config.headers?.set("Authorization", `Bearer ${token}`);
@@ -27,8 +24,8 @@ export const attachTokenToRequest = (
 export const onRequestError = (error: AxiosError) => Promise.reject(error);
 
 const clearCredentials = () => {
-  removeFromLocalStorage(TOKEN_KEY);
-  removeFromLocalStorage(USER);
+  removeFromStorage(TOKEN_KEY, "session");
+  removeFromStorage(USER, "session");
 };
 
 export const getRequestKey = (config: AxiosRequestConfig) => {

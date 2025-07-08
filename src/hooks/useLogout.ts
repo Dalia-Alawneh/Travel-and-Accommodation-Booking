@@ -1,7 +1,7 @@
 import useUser from "@travelia/context/user/useContext";
 import { USER, TOKEN_KEY } from "@travelia/constants";
 import { UserActions } from "@travelia/types";
-import { removeFromLocalStorage } from "@travelia/utils";
+import { removeFromStorage } from "@travelia/utils";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
@@ -20,8 +20,8 @@ const useLogout = (): ILogout => {
       setLoading(true);
 
       dispatch({ type: UserActions.CLEAR_USER });
-      removeFromLocalStorage(USER);
-      removeFromLocalStorage(TOKEN_KEY);
+      removeFromStorage(USER);
+      removeFromStorage(TOKEN_KEY);
 
       await new Promise((resolve) => setTimeout(resolve, 1000));
       toast.success("Logged out successfully");
