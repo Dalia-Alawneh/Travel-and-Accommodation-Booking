@@ -1,4 +1,4 @@
-export * from "./localstorage";
+export * from "./localStorage";
 export * from "./formatDateTime";
 export * from "./getContrastTextColor";
 export * from "./mapSearchParams";

@@ -8,7 +8,7 @@ import {
 import {
   getFromLocalStorage,
   removeFromLocalStorage,
-} from "@travelia/utils/localstorage";
+} from "@travelia/utils/localStorage";
 import { TOKEN_KEY, USER } from "@travelia/constants";
 import { ErrorResponse } from "./types";
 
