@@ -2,7 +2,7 @@ import { DeleteTwoTone, Edit } from "@mui/icons-material";
 import { Box, IconButton } from "@mui/material";
 import Table from "@travelia/areas/admin/components/Table";
 import type { Column } from "@travelia/areas/admin/components/Table/type";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import ConfirmDeleteDialog from "@travelia/components/Dialogs/ConfirmDelete";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -37,10 +37,25 @@ const HotelsTable = ({
   const [selectedHotel, setSelectedHotel] = useState<IHotelRow | null>(null);
   const [openEditDrawer, setOpenEditDrawer] = useState(false);
   const [hotelToEdit, setHotelToEdit] = useState<IHotelRow | null>(null);
-
+  const queryClient = useQueryClient();
   const { mutate: mutateDelete } = useMutation({
     mutationFn: (id: number) => deleteHotel(id),
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
+      queryClient.setQueryData(
+        [`paginated-hotels`, page, rowsPerPage],
+        (oldData: IHotelRow[] | undefined) => {
+          if (!oldData) return [];
+          return oldData.filter((item) => item.id !== variables);
+        },
+      );
+
+      queryClient.setQueryData(
+        ["hotels"],
+        (oldData: IHotelRow[] | undefined) => {
+          if (!oldData) return [];
+          return oldData.filter((item) => item.id !== variables);
+        },
+      );
       closeConfirmDeleteDialog();
       toast.success("Hotel Deleted Successfully");
     },
