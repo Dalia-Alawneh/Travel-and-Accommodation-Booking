@@ -40,7 +40,19 @@ const CitiesTable = ({
 
   const { mutate: mutateDelete } = useMutation({
     mutationFn: (id: number) => deleteCity(id),
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
+      queryClient.setQueryData(
+        [`paginated-city`, page, rowsPerPage],
+        (oldData: CityRow[] | undefined) => {
+          if (!oldData) return [];
+          return oldData.filter((item) => item.id !== variables);
+        },
+      );
+
+      queryClient.setQueryData(["city"], (oldData: CityRow[] | undefined) => {
+        if (!oldData) return [];
+        return oldData.filter((item) => item.id === variables);
+      });
       closeConfirmDeleteDialog();
       toast.success("City Deleted Successfully");
     },
