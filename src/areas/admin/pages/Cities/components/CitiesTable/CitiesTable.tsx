@@ -62,7 +62,6 @@ const CitiesTable = ({
     mutationFn: (data: CityRow) =>
       updateCity(data.id, { name: data.name, description: data.description }),
     onSuccess: (_, updatedData) => {
-      toast.success("City Updated Successfully");
       queryClient.setQueryData(
         [`paginated-city`, page, rowsPerPage],
         (oldData: CityRow[] | undefined) => {
@@ -85,6 +84,7 @@ const CitiesTable = ({
           item.id === updatedData.id ? updatedData : item,
         );
       });
+      toast.success("City Updated Successfully");
     },
   });
 
