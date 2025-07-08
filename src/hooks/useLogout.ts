@@ -20,8 +20,8 @@ const useLogout = (): ILogout => {
       setLoading(true);
 
       dispatch({ type: UserActions.CLEAR_USER });
-      removeFromStorage(USER);
-      removeFromStorage(TOKEN_KEY);
+      removeFromStorage(USER, "session");
+      removeFromStorage(TOKEN_KEY, "session");
 
       await new Promise((resolve) => setTimeout(resolve, 1000));
       toast.success("Logged out successfully");

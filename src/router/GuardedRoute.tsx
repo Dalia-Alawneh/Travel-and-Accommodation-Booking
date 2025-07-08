@@ -7,7 +7,7 @@ interface GuardedRouteProps {
 }
 
 const GuardedRoute = ({ allowedRoles }: GuardedRouteProps) => {
-  const user: User | null = getFromStorage(USER);
+  const user: User | null = getFromStorage(USER, "session");
   const isAuthenticated = !!user?.authentication;
   const role = user?.userType;
 

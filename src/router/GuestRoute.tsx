@@ -4,7 +4,7 @@ import { USER } from "@travelia/constants";
 import { getFromStorage } from "@travelia/utils";
 
 const GuestRoute = () => {
-  const user: User | null = getFromStorage(USER);
+  const user: User | null = getFromStorage(USER, "session");
   const isAuthenticated = !!user?.authentication;
   const role = user?.userType;
   if (isAuthenticated) {

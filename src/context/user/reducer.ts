@@ -2,7 +2,8 @@ import { USER } from "@travelia/constants";
 import { User, UserAction, UserActions } from "@travelia/types";
 import { getFromStorage } from "@travelia/utils";
 
-export const initialUserState: User | null = getFromStorage<User>(USER) || null;
+export const initialUserState: User | null =
+  getFromStorage<User>(USER, "session") || null;
 
 export const userReducer = (
   state: User | null,

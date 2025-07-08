@@ -38,8 +38,8 @@ const Login = () => {
         userType: res.userType,
       };
       dispatch({ type: UserActions.SET_USER, payload: user });
-      saveToStorage(TOKEN_KEY, res.authentication);
-      saveToStorage(USER, user);
+      saveToStorage(TOKEN_KEY, res.authentication, "session");
+      saveToStorage(USER, user, "session");
       setTimeout(() => {
         if (user.userType === UserType.User) navigate("/user");
         else if (user.userType === UserType.Admin) navigate("/admin");

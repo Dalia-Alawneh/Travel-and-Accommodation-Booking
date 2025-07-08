@@ -9,7 +9,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, dispatch] = useReducer(userReducer, initialUserState);
 
   useEffect(() => {
-    const storedUser = getFromStorage<User>(USER);
+    const storedUser = getFromStorage<User>(USER, "session");
     if (storedUser)
       dispatch({ type: UserActions.SET_USER, payload: storedUser });
   }, []);
