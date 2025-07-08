@@ -8,7 +8,10 @@ import { adminMenuItems } from "@travelia/fixtures";
 import AppDrawer from "@travelia/components/Drawer";
 import { ReactNode, useState } from "react";
 import { DRAWER_WIDTH } from "@travelia/constants";
-import { useMediaQuery } from "@mui/material";
+import { Avatar, Menu, MenuItem, useMediaQuery } from "@mui/material";
+import useUser from "@travelia/context/user/useContext";
+import { Logout } from "@mui/icons-material";
+import useLogout from "@travelia/hooks/useLogout";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -48,10 +51,53 @@ export default function AdminDrawerLayout({
   const [open, setOpen] = useState(true);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const { handleLogout } = useLogout();
+  const isMenuOpen = Boolean(anchorEl);
+  const { user } = useUser();
+  console.log(user);
   const handleDrawerToggle = () => {
     setOpen((prev) => !prev);
   };
 
+  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id="primary-search-account-menu"
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem sx={{ bgColor: "primary.main", cursor: "default" }}>
+        {user?.userType ?? "Admin"}
+      </MenuItem>
+      <MenuItem onClick={handleLogout}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+          }}
+        >
+          <span>Logout</span> <Logout color="error" sx={{ fontSize: 20 }} />
+        </Box>
+      </MenuItem>
+    </Menu>
+  );
   return (
     <Box
       sx={{
@@ -62,7 +108,9 @@ export default function AdminDrawerLayout({
       }}
     >
       <AppBar position="fixed" open={open} sx={{ bgcolor: "primary" }}>
-        <Toolbar>
+        <Toolbar
+          sx={{ display: "flex", justifyContent: "space-between", mx: 3 }}
+        >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -76,7 +124,18 @@ export default function AdminDrawerLayout({
           >
             <MenuIcon />
           </IconButton>
+          <IconButton
+            edge="end"
+            color="inherit"
+            onClick={handleProfileMenuOpen}
+            sx={{ p: 0 }}
+          >
+            <Avatar sx={{ bgcolor: "custom.orange", color: "white" }}>
+              {user?.userType?.charAt(0).toUpperCase()}
+            </Avatar>
+          </IconButton>
         </Toolbar>
+        {renderMenu}
       </AppBar>
       <AppDrawer
         variant={isSmallScreen ? "temporary" : "persistent"}
