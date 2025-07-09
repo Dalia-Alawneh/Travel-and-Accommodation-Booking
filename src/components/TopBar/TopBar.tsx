@@ -65,6 +65,7 @@ export default function TopBar({
               >
                 <MenuIcon />
               </IconButton>
+
               {!hideLogo && (
                 <Box sx={{ my: 2 }}>
                   <Link to="">
@@ -72,22 +73,26 @@ export default function TopBar({
                   </Link>
                 </Box>
               )}
+
               {renderMenu(menuLinks)}
-              <IconButton
-                edge="end"
-                color="inherit"
-                onClick={handleProfileMenuOpen}
-                sx={{ p: 0 }}
-              >
-                <Avatar sx={{ bgcolor: "custom.orange", color: "white" }}>
-                  {user?.userType?.charAt(0).toUpperCase()}
-                </Avatar>
-              </IconButton>
-              <AppBarAvatarMenu
-                anchorEl={anchorEl}
-                handleMenuClose={handleMenuClose}
-                open={isMenuOpen}
-              />
+              <Box display={{ xs: "none", sm: "flex" }} alignItems="center">
+                <IconButton
+                  edge="end"
+                  color="inherit"
+                  onClick={handleProfileMenuOpen}
+                  sx={{ p: 0, ml: 3 }}
+                >
+                  <Avatar sx={{ bgcolor: "primary.main", color: "white" }}>
+                    {user?.userType?.charAt(0).toUpperCase()}
+                  </Avatar>
+                </IconButton>
+
+                <AppBarAvatarMenu
+                  anchorEl={anchorEl}
+                  handleMenuClose={handleMenuClose}
+                  open={isMenuOpen}
+                />
+              </Box>
             </Box>
           </Container>
         </Toolbar>
