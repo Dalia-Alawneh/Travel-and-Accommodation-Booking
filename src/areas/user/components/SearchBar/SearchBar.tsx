@@ -29,7 +29,7 @@ const SearchBar = ({
 }: ISearchBarProps) => {
   const [checkIn, setCheckIn] = useState(initialValues?.checkInDate ?? "");
   const [checkOut, setCheckOut] = useState(initialValues?.checkOutDate ?? "");
-  const [city, setCity] = useState<SelectItem>();
+  const [city, setCity] = useState<SelectItem>({ text: "All", value: "All" });
   const [adults, setAdults] = useState(initialValues?.adults ?? 1);
   const [children, setChildren] = useState(initialValues?.children ?? 0);
   const [rooms, setRooms] = useState(initialValues?.numberOfRooms ?? 1);
@@ -40,12 +40,13 @@ const SearchBar = ({
   });
 
   const mappedCities: SelectItem[] = useMemo(() => {
-    return (
+    const cityOptions =
       citiesData?.map((city: City) => ({
         text: city.name,
         value: city.id,
-      })) || []
-    );
+      })) || [];
+
+    return [{ text: "All", value: "All" }, ...cityOptions];
   }, [citiesData]);
 
   useEffect(() => {
