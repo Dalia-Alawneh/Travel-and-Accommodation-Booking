@@ -107,14 +107,9 @@ const AppDrawer = ({
           appVariant="logout"
           sx={{ px: "3.6rem", my: 4, ml: 3 }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
-            <span>Logout</span> <Logout color="error" sx={{ fontSize: 20 }} />
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <span>Logout</span>
+            <Logout color="error" sx={{ fontSize: 20 }} />
           </Box>
         </AppButton>
       </Box>

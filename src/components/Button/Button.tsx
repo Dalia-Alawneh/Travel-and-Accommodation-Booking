@@ -35,7 +35,6 @@ const variantStyles = {
     color: "primary.dark",
     py: 1,
     ml: 2,
-    display: { xs: "none", sm: "flex" },
     textTransform: "none",
   },
 };
