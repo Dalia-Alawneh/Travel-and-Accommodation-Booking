@@ -8,10 +8,9 @@ import { adminMenuItems } from "@travelia/fixtures";
 import AppDrawer from "@travelia/components/Drawer";
 import { ReactNode, useState } from "react";
 import { DRAWER_WIDTH } from "@travelia/constants";
-import { Avatar, Menu, MenuItem, useMediaQuery } from "@mui/material";
+import { Avatar, useMediaQuery } from "@mui/material";
 import useUser from "@travelia/context/user/useContext";
-import { Logout } from "@mui/icons-material";
-import useLogout from "@travelia/hooks/useLogout";
+import AppBarAvatarMenu from "@travelia/components/AppBarAvatar";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -52,7 +51,6 @@ export default function AdminDrawerLayout({
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { handleLogout } = useLogout();
   const isMenuOpen = Boolean(anchorEl);
   const { user } = useUser();
   console.log(user);
@@ -66,38 +64,7 @@ export default function AdminDrawerLayout({
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id="primary-search-account-menu"
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem sx={{ bgColor: "primary.main", cursor: "default" }}>
-        {user?.userType ?? "Admin"}
-      </MenuItem>
-      <MenuItem onClick={handleLogout}>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-          }}
-        >
-          <span>Logout</span> <Logout color="error" sx={{ fontSize: 20 }} />
-        </Box>
-      </MenuItem>
-    </Menu>
-  );
+
   return (
     <Box
       sx={{
@@ -135,7 +102,11 @@ export default function AdminDrawerLayout({
             </Avatar>
           </IconButton>
         </Toolbar>
-        {renderMenu}
+        <AppBarAvatarMenu
+          anchorEl={anchorEl}
+          handleMenuClose={handleMenuClose}
+          open={isMenuOpen}
+        />
       </AppBar>
       <AppDrawer
         variant={isSmallScreen ? "temporary" : "persistent"}
