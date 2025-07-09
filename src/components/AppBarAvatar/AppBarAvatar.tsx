@@ -1,10 +1,5 @@
-import {
-  AccountCircle,
-  Logout,
-  VerifiedUserRounded,
-} from "@mui/icons-material";
-import { Menu, MenuItem, Box } from "@mui/material";
-import useUser from "@travelia/context/user/useContext";
+import { AccountCircle, Logout } from "@mui/icons-material";
+import { Menu, MenuItem } from "@mui/material";
 import useLogout from "@travelia/hooks/useLogout";
 import MenuItemContent from "./MenuItem/MenuItem";
 
@@ -20,13 +15,12 @@ const AppBarAvatarMenu = ({
   handleMenuClose,
 }: IAppBarAvatarMenuProps) => {
   const { handleLogout } = useLogout();
-  const { user } = useUser();
 
   return (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: "top",
+        vertical: "bottom",
         horizontal: "right",
       }}
       id="primary-search-account-menu"
@@ -38,7 +32,7 @@ const AppBarAvatarMenu = ({
       open={open}
       onClose={handleMenuClose}
     >
-      <MenuItem sx={{ bgColor: "primary.main", cursor: "default" }}>
+      <MenuItem sx={{ cursor: "default" }}>
         <MenuItemContent
           text="User"
           icon={<AccountCircle color="disabled" />}
