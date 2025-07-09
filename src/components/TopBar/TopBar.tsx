@@ -5,15 +5,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import { DRAWER_WIDTH } from "@travelia/constants";
 import AppDrawer from "../Drawer/Drawer";
-import AppButton from "../Button/Button";
-import { Container } from "@mui/material";
+import { Avatar, Container } from "@mui/material";
 import { Menu } from "@travelia/types";
-import useLogout from "@travelia/hooks/useLogout";
-import { Logout } from "@mui/icons-material";
 import { ReactNode, useState } from "react";
 import { userMenuItems } from "@travelia/fixtures";
 import { Link } from "react-router";
 import { logo } from "@travelia/assets";
+import useUser from "@travelia/context/user/useContext";
+import AppBarAvatarMenu from "../AppBarAvatar";
 interface ITopBarProps {
   menuLinks: Menu;
   renderMenu: (menuLinks: Menu) => ReactNode;
@@ -26,7 +25,17 @@ export default function TopBar({
   hideLogo = false,
 }: ITopBarProps) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const { handleLogout, loading } = useLogout();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const isMenuOpen = Boolean(anchorEl);
+  const { user } = useUser();
+  console.log(user);
+
+  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
   const handleDrawerToggle = () => {
     setIsDrawerOpen((prevState) => !prevState);
   };
@@ -64,23 +73,21 @@ export default function TopBar({
                 </Box>
               )}
               {renderMenu(menuLinks)}
-              <AppButton
-                sx={{ display: { xs: "none", sm: "flex" }, py: 1, ml: 2 }}
-                onClick={handleLogout}
-                loading={loading}
-                appVariant="logout"
+              <IconButton
+                edge="end"
+                color="inherit"
+                onClick={handleProfileMenuOpen}
+                sx={{ p: 0 }}
               >
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 1,
-                  }}
-                >
-                  <span>Logout</span>{" "}
-                  <Logout color="error" sx={{ fontSize: 20 }} />
-                </Box>
-              </AppButton>
+                <Avatar sx={{ bgcolor: "custom.orange", color: "white" }}>
+                  {user?.userType?.charAt(0).toUpperCase()}
+                </Avatar>
+              </IconButton>
+              <AppBarAvatarMenu
+                anchorEl={anchorEl}
+                handleMenuClose={handleMenuClose}
+                open={isMenuOpen}
+              />
             </Box>
           </Container>
         </Toolbar>

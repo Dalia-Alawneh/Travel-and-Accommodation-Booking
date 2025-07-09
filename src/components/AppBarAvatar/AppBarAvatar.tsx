@@ -1,7 +1,12 @@
-import { Logout } from "@mui/icons-material";
+import {
+  AccountCircle,
+  Logout,
+  VerifiedUserRounded,
+} from "@mui/icons-material";
 import { Menu, MenuItem, Box } from "@mui/material";
 import useUser from "@travelia/context/user/useContext";
 import useLogout from "@travelia/hooks/useLogout";
+import MenuItemContent from "./MenuItem/MenuItem";
 
 interface IAppBarAvatarMenuProps {
   anchorEl: HTMLElement | null;
@@ -34,18 +39,16 @@ const AppBarAvatarMenu = ({
       onClose={handleMenuClose}
     >
       <MenuItem sx={{ bgColor: "primary.main", cursor: "default" }}>
-        {user?.userType ?? "Admin"}
+        <MenuItemContent
+          text="User"
+          icon={<AccountCircle color="disabled" />}
+        />
       </MenuItem>
       <MenuItem onClick={handleLogout}>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-          }}
-        >
-          <span>Logout</span> <Logout color="error" sx={{ fontSize: 20 }} />
-        </Box>
+        <MenuItemContent
+          text="Logout"
+          icon={<Logout color="error" sx={{ fontSize: 20 }} />}
+        />
       </MenuItem>
     </Menu>
   );
