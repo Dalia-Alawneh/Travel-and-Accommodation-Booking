@@ -53,7 +53,6 @@ export default function AdminDrawerLayout({
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);
   const { user } = useUser();
-  console.log(user);
   const handleDrawerToggle = () => {
     setOpen((prev) => !prev);
   };
