@@ -40,12 +40,13 @@ const SearchBar = ({
   });
 
   const mappedCities: SelectItem[] = useMemo(() => {
-    return (
+    const cityOptions =
       citiesData?.map((city: City) => ({
         text: city.name,
         value: city.id,
-      })) || []
-    );
+      })) || [];
+
+    return [{ text: "All", value: "All" }, ...cityOptions];
   }, [citiesData]);
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { USER } from "@travelia/constants";
 import { User, UserActions } from "@travelia/types";
-import { getFromLocalStorage } from "@travelia/utils";
+import { getFromStorage } from "@travelia/utils";
 import { useReducer, useEffect, useMemo } from "react";
 import { userReducer, initialUserState } from "./reducer";
 import { UserContext } from "./context";
@@ -9,7 +9,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, dispatch] = useReducer(userReducer, initialUserState);
 
   useEffect(() => {
-    const storedUser = getFromLocalStorage<User>(USER);
+    const storedUser = getFromStorage<User>(USER, "session");
     if (storedUser)
       dispatch({ type: UserActions.SET_USER, payload: storedUser });
   }, []);

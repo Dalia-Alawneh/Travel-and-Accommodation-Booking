@@ -15,7 +15,7 @@ import { useState } from "react";
 import { loginBg, logo } from "@travelia/assets";
 import { login } from "@travelia/api/endpoints/auth";
 import { useMutation } from "@tanstack/react-query";
-import { saveToLocalStorage } from "@travelia/utils/localstorage";
+import { saveToStorage } from "@travelia/utils/storage";
 import { TOKEN_KEY, USER } from "@travelia/constants";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
@@ -38,8 +38,8 @@ const Login = () => {
         userType: res.userType,
       };
       dispatch({ type: UserActions.SET_USER, payload: user });
-      saveToLocalStorage(TOKEN_KEY, res.authentication);
-      saveToLocalStorage(USER, user);
+      saveToStorage(TOKEN_KEY, res.authentication, "session");
+      saveToStorage(USER, user, "session");
       setTimeout(() => {
         if (user.userType === UserType.User) navigate("/user");
         else if (user.userType === UserType.Admin) navigate("/admin");

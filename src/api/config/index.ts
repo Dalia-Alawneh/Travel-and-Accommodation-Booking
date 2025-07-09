@@ -1,8 +1,10 @@
 import axios from "axios";
 import {
+  attachAbortSignal,
   attachTokenToRequest,
   handleResponseError,
   onRequestError,
+  removeRequestSignal,
 } from "./interceptors";
 
 const Axios = axios.create({
@@ -13,8 +15,25 @@ const Axios = axios.create({
   },
 });
 
-Axios.interceptors.request.use(attachTokenToRequest, onRequestError);
+const controllers = new Map<string, AbortController>();
 
-Axios.interceptors.response.use((response) => response, handleResponseError);
+Axios.interceptors.request.use((config) => {
+  config = attachAbortSignal(config, controllers);
+
+  return attachTokenToRequest(config);
+}, onRequestError);
+
+Axios.interceptors.response.use(
+  (response) => {
+    removeRequestSignal(response.config, controllers);
+    return response;
+  },
+  (error) => {
+    if (error.config) {
+      removeRequestSignal(error.config, controllers);
+    }
+    return handleResponseError(error);
+  },
+);
 
 export default Axios;

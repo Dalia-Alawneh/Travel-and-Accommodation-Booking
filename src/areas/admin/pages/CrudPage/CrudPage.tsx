@@ -66,11 +66,14 @@ const AdminCrudPage = <T, FormPayload>({
           return [...oldData, newItem];
         },
       );
+      queryClient.setQueryData(
+        [`paginated-${title.toLowerCase()}`],
+        (oldData: T[] | undefined) => {
+          if (!oldData) return [newItem];
+          return [...oldData, newItem];
+        },
+      );
       toast.success(`${title} Added Successfully`);
-      queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey[0] === `paginated-${title.toLowerCase()}`,
-      });
     },
   });
 

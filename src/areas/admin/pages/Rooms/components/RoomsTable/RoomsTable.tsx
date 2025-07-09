@@ -2,7 +2,7 @@ import { DeleteTwoTone, Edit } from "@mui/icons-material";
 import { Box, IconButton } from "@mui/material";
 import Table from "@travelia/areas/admin/components/Table";
 import { Column } from "@travelia/areas/admin/components/Table/type";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import ConfirmDeleteDialog from "@travelia/components/Dialogs/ConfirmDelete";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -37,10 +37,23 @@ const RoomsTable = ({
   const [selectedRoom, setSelectedRoom] = useState<IRoomRow | null>(null);
   const [openEditDrawer, setOpenEditDrawer] = useState(false);
   const [RoomToEdit, setRoomToEdit] = useState<IRoomRow | null>(null);
+  const queryClient = useQueryClient();
 
   const { mutate: mutateDelete } = useMutation({
     mutationFn: (id: number) => deleteRoom(id),
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
+      queryClient.setQueryData(
+        [`paginated-rooms`, page, rowsPerPage],
+        (oldData: IRoomRow[] | undefined) => {
+          if (!oldData) return [];
+          return oldData.filter((item) => item.roomId !== variables);
+        },
+      );
+
+      queryClient.setQueryData(["rooms"], (oldData: IRoomRow[] | undefined) => {
+        if (!oldData) return [];
+        return oldData.filter((item) => item.roomId !== variables);
+      });
       closeConfirmDeleteDialog();
       toast.success("Room Deleted Successfully");
     },
@@ -48,7 +61,28 @@ const RoomsTable = ({
 
   const { mutate: mutateUpdate, isPending: isUpdating } = useMutation({
     mutationFn: (data: IRoomRow) => updateRoom(data),
-    onSuccess: () => {
+    onSuccess: (_, updatedData) => {
+      queryClient.setQueryData(
+        [`paginated-rooms`, page, rowsPerPage],
+        (oldData: IRoomRow[] | undefined) => {
+          if (!oldData) return [];
+          return oldData.map((item) =>
+            item.roomId === Number(updatedData.roomId)
+              ? {
+                  ...item,
+                  ...updatedData,
+                }
+              : item,
+          );
+        },
+      );
+
+      queryClient.setQueryData(["rooms"], (oldData: IRoomRow[] | undefined) => {
+        if (!oldData) return [];
+        return oldData.map((item) =>
+          item.roomId === updatedData.roomId ? updatedData : item,
+        );
+      });
       setOpenEditDrawer(false);
       toast.success("Room Updated Successfully");
     },

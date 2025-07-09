@@ -15,6 +15,7 @@ import { useState } from "react";
 import AppButton from "@travelia/components/Button";
 import CheckoutForm from "./components/CheckoutForm";
 import AppDivider from "@travelia/components/Divider/Divider";
+import toast from "react-hot-toast";
 
 const CartPage = () => {
   const cart = useSelector(selectCartItems);
@@ -37,11 +38,13 @@ const CartPage = () => {
       dispatch(removeFromCart(selectedRoomId));
     }
     setOpenConfirmDeleteRoom(false);
+    toast.success("Deleted Successfully!");
   };
 
   const confirmDeleteCart = () => {
     dispatch(clearCart());
     setOpenConfirmDeleteCart(false);
+    toast.success("Cart Deleted Successfully!");
   };
 
   return (

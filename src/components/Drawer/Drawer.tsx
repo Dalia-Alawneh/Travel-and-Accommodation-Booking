@@ -65,7 +65,7 @@ const AppDrawer = ({
         },
       }}
     >
-      <Box onClick={handleDrawerToggle}>
+      <Box>
         <Box sx={{ my: 1.3, ml: 3 }}>
           <img src={logo} alt="travilia" />
         </Box>
@@ -75,6 +75,9 @@ const AppDrawer = ({
             <AppLink path={item.path} key={item.title}>
               <ListItem disablePadding>
                 <ListItemButton
+                  onClick={
+                    variant === "temporary" ? handleDrawerToggle : undefined
+                  }
                   sx={{
                     display: "flex",
                     justifyContent: "center",
@@ -107,14 +110,9 @@ const AppDrawer = ({
           appVariant="logout"
           sx={{ px: "3.6rem", my: 4, ml: 3 }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
-            <span>Logout</span> <Logout color="error" sx={{ fontSize: 20 }} />
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <span>Logout</span>
+            <Logout color="error" sx={{ fontSize: 20 }} />
           </Box>
         </AppButton>
       </Box>

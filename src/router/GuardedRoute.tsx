@@ -1,13 +1,13 @@
 import { USER } from "@travelia/constants";
 import { User } from "@travelia/types";
-import { getFromLocalStorage } from "@travelia/utils";
+import { getFromStorage } from "@travelia/utils";
 import { Navigate, Outlet } from "react-router";
 interface GuardedRouteProps {
   allowedRoles: string[];
 }
 
 const GuardedRoute = ({ allowedRoles }: GuardedRouteProps) => {
-  const user: User | null = getFromLocalStorage(USER);
+  const user: User | null = getFromStorage(USER, "session");
   const isAuthenticated = !!user?.authentication;
   const role = user?.userType;
 
