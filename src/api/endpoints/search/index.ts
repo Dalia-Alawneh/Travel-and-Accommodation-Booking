@@ -11,6 +11,7 @@ export const getFilteredHotels = async (
   const filtered = hotelsSearchResults.filter((hotel) => {
     if (
       params.city &&
+      params.city.toLowerCase() !== "All" &&
       hotel.cityName.toLowerCase() !== params.city.toLowerCase()
     ) {
       return false;
