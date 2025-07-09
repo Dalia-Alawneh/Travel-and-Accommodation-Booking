@@ -65,7 +65,7 @@ const AppDrawer = ({
         },
       }}
     >
-      <Box onClick={handleDrawerToggle}>
+      <Box>
         <Box sx={{ my: 1.3, ml: 3 }}>
           <img src={logo} alt="travilia" />
         </Box>
@@ -75,6 +75,9 @@ const AppDrawer = ({
             <AppLink path={item.path} key={item.title}>
               <ListItem disablePadding>
                 <ListItemButton
+                  onClick={
+                    variant === "temporary" ? handleDrawerToggle : undefined
+                  }
                   sx={{
                     display: "flex",
                     justifyContent: "center",
