@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { whiteLogo, welcome } from "@travelia/assets";
 import AppButton from "@travelia/components/Button";
@@ -30,9 +30,40 @@ const contentSx = {
   px: 3,
 };
 
-const Welcome = () => {
-  const navigate = useNavigate();
+const cardContainerSx = {
+  position: "relative",
+  overflow: "hidden",
+  cursor: "pointer",
+  "&:hover .content": {
+    opacity: 1,
+  },
+};
 
+const cardOverlayContentSx = {
+  position: "absolute",
+  inset: 0,
+  backdropFilter: "blur(10px)",
+  opacity: 0,
+  transition: "all 0.4s ease",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  textAlign: "center",
+};
+
+const welcomeBtnSx = {
+  mt: 5,
+  px: 5,
+  py: 1.5,
+  bgcolor: "secondary.main",
+  color: "ActiveCaption",
+};
+
+const Welcome = () => {
+  const theme = useTheme();
+  const navigate = useNavigate();
+  const overlayColor = theme.palette.custom.overlay;
   const { data: featuredDeals } = useQuery({
     queryKey: ["featuredDeals"],
     queryFn: getFeaturedDeals,
@@ -41,6 +72,7 @@ const Welcome = () => {
   const settings = {
     dots: false,
     infinite: true,
+    arrows: false,
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
@@ -66,13 +98,7 @@ const Welcome = () => {
           </Typography>
           <AppButton
             variant="contained"
-            sx={{
-              mt: 5,
-              px: 5,
-              py: 1.5,
-              bgcolor: "secondary.main",
-              color: "ActiveCaption",
-            }}
+            sx={welcomeBtnSx}
             onClick={() => navigate("/login")}
           >
             Start Now
@@ -100,17 +126,49 @@ const Welcome = () => {
             ]}
             render={() =>
               featuredDeals?.map((deal) => (
-                <Box key={deal.hotelId} sx={{ px: 1 }}>
+                <Box
+                  key={deal.hotelId}
+                  sx={{
+                    ...cardContainerSx,
+                    px: 1,
+                    height: 250,
+                  }}
+                >
                   <img
                     src={deal.roomPhotoUrl}
                     alt={deal.title}
                     style={{
                       width: "100%",
-                      height: 200,
-                      objectFit: "cover",
+                      height: "100%",
                       borderRadius: 8,
+                      objectFit: "cover",
                     }}
                   />
+                  <Box
+                    className="content"
+                    sx={{
+                      ...cardOverlayContentSx,
+                      borderRadius: 1,
+                      bgColor: overlayColor,
+                      mx: 1,
+                    }}
+                  >
+                    <Typography
+                      variant="h3"
+                      fontWeight={900}
+                      mb={2}
+                      color="white"
+                    >
+                      {deal.hotelName}
+                    </Typography>
+                    <AppButton
+                      variant="contained"
+                      sx={welcomeBtnSx}
+                      onClick={() => navigate("/login")}
+                    >
+                      See More
+                    </AppButton>
+                  </Box>
                 </Box>
               ))
             }
