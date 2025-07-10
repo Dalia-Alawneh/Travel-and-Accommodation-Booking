@@ -5,6 +5,7 @@ import AppButton from "@travelia/components/Button";
 import { overlaySx } from "@travelia/styles";
 import { useQuery } from "@tanstack/react-query";
 import { getFeaturedDeals } from "@travelia/api/endpoints/home";
+import { motion } from "framer-motion";
 
 import PauseOnHoverCarousel from "@travelia/areas/user/pages/Home/components/PauseOnHoverCarousel";
 import ParallaxText from "./ParallaxText";
@@ -126,50 +127,57 @@ const Welcome = () => {
             ]}
             render={() =>
               featuredDeals?.map((deal) => (
-                <Box
-                  key={deal.hotelId}
-                  sx={{
-                    ...cardContainerSx,
-                    px: 1,
-                    height: 250,
-                  }}
+                <motion.div
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, type: "spring", bounce: 0.7 }}
+                  viewport={{ once: true, amount: 0.5 }}
                 >
-                  <img
-                    src={deal.roomPhotoUrl}
-                    alt={deal.title}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      borderRadius: 8,
-                      objectFit: "cover",
-                    }}
-                  />
                   <Box
-                    className="content"
+                    key={deal.hotelId}
                     sx={{
-                      ...cardOverlayContentSx,
-                      borderRadius: 1,
-                      bgColor: overlayColor,
-                      mx: 1,
+                      ...cardContainerSx,
+                      px: 1,
+                      height: 250,
                     }}
                   >
-                    <Typography
-                      variant="h3"
-                      fontWeight={900}
-                      mb={2}
-                      color="white"
+                    <img
+                      src={deal.roomPhotoUrl}
+                      alt={deal.title}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: 8,
+                        objectFit: "cover",
+                      }}
+                    />
+                    <Box
+                      className="content"
+                      sx={{
+                        ...cardOverlayContentSx,
+                        borderRadius: 1,
+                        bgColor: overlayColor,
+                        mx: 1,
+                      }}
                     >
-                      {deal.hotelName}
-                    </Typography>
-                    <AppButton
-                      variant="contained"
-                      sx={welcomeBtnSx}
-                      onClick={() => navigate("/login")}
-                    >
-                      See More
-                    </AppButton>
+                      <Typography
+                        variant="h3"
+                        fontWeight={900}
+                        mb={2}
+                        color="white"
+                      >
+                        {deal.hotelName}
+                      </Typography>
+                      <AppButton
+                        variant="contained"
+                        sx={welcomeBtnSx}
+                        onClick={() => navigate("/login")}
+                      >
+                        See More
+                      </AppButton>
+                    </Box>
                   </Box>
-                </Box>
+                </motion.div>
               ))
             }
           />
