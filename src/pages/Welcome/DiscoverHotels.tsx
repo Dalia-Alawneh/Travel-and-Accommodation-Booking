@@ -5,10 +5,58 @@ import withContainer from "@travelia/HOC/withContainer";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
 
+const AnimatedImageBox = ({
+  src,
+  alt,
+  height,
+  top = 0,
+  left = 0,
+  mb = 0,
+  isStatic = false,
+}: {
+  src: string;
+  alt: string;
+  height: number;
+  top?: number;
+  left?: number;
+  mb?: number;
+  isStatic: boolean;
+}) => (
+  <motion.div
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1, type: "tween", bounce: 0.7 }}
+    viewport={{ once: true, amount: 0.5 }}
+  >
+    <Box
+      component="img"
+      src={src}
+      alt={alt}
+      sx={{
+        width: "100%",
+        height,
+        objectFit: "cover",
+        borderRadius: 2,
+        position: isStatic ? "static" : "relative",
+        top: isStatic ? 0 : top,
+        left: isStatic ? 0 : left,
+        mb,
+      }}
+    />
+  </motion.div>
+);
+
 const DiscoverHotels = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
+
+  const images = [
+    { src: about1, alt: "about1", height: 250, top: -10, left: -10, size: 6 },
+    { src: about2, alt: "about2", height: 250, top: 10, size: 6 },
+    { src: about4, alt: "about4", height: 180, top: 5, size: 5 },
+    { src: about3, alt: "about3", height: 200, top: 30, mb: 3, size: 7 },
+  ];
 
   return (
     <Grid container spacing={4} alignItems="center">
@@ -37,96 +85,19 @@ const DiscoverHotels = () => {
           }}
         >
           <Grid container spacing={2} px={3}>
-            <Grid size={{ xs: 6 }}>
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, type: "tween", bounce: 0.7 }}
-                viewport={{ once: true, amount: 0.5 }}
-              >
-                <Box
-                  component="img"
-                  src={about1}
-                  alt="about1"
-                  sx={{
-                    width: "100%",
-                    height: 250,
-                    objectFit: "cover",
-                    borderRadius: 2,
-                    position: isSmallScreen ? "static" : "relative",
-                    top: isSmallScreen ? 0 : -10,
-                    left: isSmallScreen ? 0 : -10,
-                  }}
+            {images.map((img, index) => (
+              <Grid key={index} size={{ xs: img.size }}>
+                <AnimatedImageBox
+                  src={img.src}
+                  alt={img.alt}
+                  height={img.height}
+                  top={img.top}
+                  left={img.left}
+                  mb={img.mb}
+                  isStatic={isSmallScreen}
                 />
-              </motion.div>
-            </Grid>
-            <Grid size={{ xs: 6 }}>
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, type: "tween", bounce: 0.7 }}
-                viewport={{ once: true, amount: 0.5 }}
-              >
-                <Box
-                  component="img"
-                  src={about2}
-                  alt="about2"
-                  sx={{
-                    width: "100%",
-                    height: 250,
-                    objectFit: "cover",
-                    borderRadius: 2,
-                    position: isSmallScreen ? "static" : "relative",
-                    top: isSmallScreen ? 0 : 10,
-                  }}
-                />
-              </motion.div>
-            </Grid>
-            <Grid size={{ xs: 5 }}>
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, type: "tween", bounce: 0.7 }}
-                viewport={{ once: true, amount: 0.5 }}
-              >
-                <Box
-                  component="img"
-                  src={about4}
-                  alt="about4"
-                  sx={{
-                    width: "100%",
-                    height: 180,
-                    objectFit: "cover",
-                    borderRadius: 2,
-                    position: isSmallScreen ? "static" : "relative",
-                    top: isSmallScreen ? 0 : 5,
-                  }}
-                />
-              </motion.div>
-            </Grid>
-            <Grid size={{ xs: 7 }}>
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, type: "tween", bounce: 0.7 }}
-                viewport={{ once: true, amount: 0.5 }}
-              >
-                <Box
-                  component="img"
-                  src={about3}
-                  alt="about3"
-                  sx={{
-                    width: "100%",
-                    height: 200,
-                    objectFit: "cover",
-                    borderRadius: 2,
-                    position: isSmallScreen ? "static" : "relative",
-                    top: isSmallScreen ? 0 : 30,
-                    mb: 3,
-                  }}
-                />
-              </motion.div>
-            </Grid>
+              </Grid>
+            ))}
           </Grid>
         </Box>
       </Grid>
