@@ -137,4 +137,13 @@ export interface IReview {
   description: string;
 }
 
+export interface ITestimonialsReview {
+  reviewId: number;
+  customerName: string;
+  rating: number;
+  description: string;
+  hotelName: string;
+  hotelId: string;
+}
+
 export type AddRoomPayload = Omit<IAvailableRoom, "roomId">;

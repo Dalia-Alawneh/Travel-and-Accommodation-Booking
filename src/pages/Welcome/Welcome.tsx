@@ -10,6 +10,8 @@ import { motion } from "framer-motion";
 import PauseOnHoverCarousel from "@travelia/areas/user/pages/Home/components/PauseOnHoverCarousel";
 import ParallaxText from "./ParallaxText";
 import DiscoverHotels from "./DiscoverHotels";
+import { getTestimonialsReviews } from "@travelia/api/endpoints/hotel";
+import Testimonials from "./Testimonials";
 
 const heroSx = {
   height: "100vh",
@@ -69,6 +71,10 @@ const Welcome = () => {
   const { data: featuredDeals } = useQuery({
     queryKey: ["featuredDeals"],
     queryFn: getFeaturedDeals,
+  });
+  const { data: testimonials } = useQuery({
+    queryKey: ["testimonials"],
+    queryFn: getTestimonialsReviews,
   });
 
   const settings = {
@@ -191,6 +197,12 @@ const Welcome = () => {
           Make your best memories with Travila
         </ParallaxText>
       </section>
+      <Box component="section" my={10}>
+        <Typography variant="h2" textAlign="center">
+          Testimonials
+        </Typography>
+        <Testimonials testimonials={testimonials} />
+      </Box>
     </Box>
   );
 };

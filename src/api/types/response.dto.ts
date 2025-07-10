@@ -104,6 +104,10 @@ export interface IReviewResponse {
   rating: number;
   description: string;
 }
+export interface IReviewTestimonialsResponse extends IReviewResponse {
+  hotelName: string;
+  hotelId: number;
+}
 
 export interface IBookingResponse {
   customerName: string;
