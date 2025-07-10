@@ -45,4 +45,6 @@ a:hover {
 .parallax span {
   display: block;
   margin-right: 30px;
+  color: #82ccfa;
+  font-weight: bolder;
 }
