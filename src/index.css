@@ -47,4 +47,5 @@ a:hover {
   margin-right: 30px;
   color: #82ccfa;
   font-weight: bolder;
+  text-shadow: 1px 1px 5px 10px #333;
 }
