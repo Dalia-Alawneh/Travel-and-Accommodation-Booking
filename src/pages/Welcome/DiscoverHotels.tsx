@@ -3,10 +3,12 @@ import { about1, about2, about3, about4 } from "@travelia/assets";
 import AppButton from "@travelia/components/Button";
 import withContainer from "@travelia/HOC/withContainer";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router";
 
 const DiscoverHotels = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const navigate = useNavigate();
 
   return (
     <Grid container spacing={4} alignItems="center">
@@ -20,7 +22,9 @@ const DiscoverHotels = () => {
           our hand-picked accommodations, enjoy exclusive deals, and make every
           trip unforgettable.
         </Typography>
-        <AppButton sx={{ px: 6 }}>Discover Hotels</AppButton>
+        <AppButton sx={{ px: 6 }} onClick={() => navigate("/login")}>
+          Discover Hotels
+        </AppButton>
       </Grid>
 
       <Grid size={{ xs: 12, md: 6 }}>
