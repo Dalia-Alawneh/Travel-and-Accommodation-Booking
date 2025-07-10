@@ -61,18 +61,32 @@ const DiscoverHotels = () => {
   return (
     <Grid container spacing={4} alignItems="center">
       <Grid size={{ xs: 12, md: 6 }}>
-        <Typography variant="h2" mb={5}>
-          Perfect Stay for Every Journey
-        </Typography>
-        <Typography variant="body2" mb={6}>
-          Whether you're planning a relaxing getaway, a family vacation, or a
-          business trip — we've got the perfect hotel waiting for you. Browse
-          our hand-picked accommodations, enjoy exclusive deals, and make every
-          trip unforgettable.
-        </Typography>
-        <AppButton sx={{ px: 6 }} onClick={() => navigate("/login")}>
-          Discover Hotels
-        </AppButton>
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, type: "keyframes", bounce: 0.7 }}
+          viewport={{ once: true, amount: 0.5 }}
+        >
+          <Typography variant="h2" mb={5}>
+            Perfect Stay for Every Journey
+          </Typography>
+          <Typography variant="body2" mb={6}>
+            Whether you're planning a relaxing getaway, a family vacation, or a
+            business trip — we've got the perfect hotel waiting for you. Browse
+            our hand-picked accommodations, enjoy exclusive deals, and make
+            every trip unforgettable.
+          </Typography>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 2, type: "spring", bounce: 0.9 }}
+          viewport={{ once: true, amount: 0.5 }}
+        >
+          <AppButton sx={{ px: 6 }} onClick={() => navigate("/login")}>
+            Discover Hotels
+          </AppButton>
+        </motion.div>
       </Grid>
 
       <Grid size={{ xs: 12, md: 6 }}>
