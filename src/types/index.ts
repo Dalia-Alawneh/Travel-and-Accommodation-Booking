@@ -143,7 +143,7 @@ export interface ITestimonialsReview {
   rating: number;
   description: string;
   hotelName: string;
-  hotelId: string;
+  hotelId: number;
 }
 
 export type AddRoomPayload = Omit<IAvailableRoom, "roomId">;

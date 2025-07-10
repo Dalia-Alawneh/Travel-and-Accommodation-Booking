@@ -29,6 +29,7 @@ const Testimonials = ({ testimonials }: ITestimonialsProps) => {
             },
           ]}
           render={() =>
+            testimonials?.length !== 0 &&
             testimonials?.map((testimonial) => (
               <motion.div
                 initial={{ opacity: 0, y: 50 }}

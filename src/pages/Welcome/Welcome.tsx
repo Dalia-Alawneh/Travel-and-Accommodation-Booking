@@ -201,7 +201,7 @@ const Welcome = () => {
         <Typography variant="h2" textAlign="center">
           Testimonials
         </Typography>
-        <Testimonials testimonials={testimonials} />
+        {testimonials && <Testimonials testimonials={testimonials} />}
       </Box>
     </Box>
   );
