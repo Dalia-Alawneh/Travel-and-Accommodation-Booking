@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 
 import PauseOnHoverCarousel from "@travelia/areas/user/pages/Home/components/PauseOnHoverCarousel";
 import ParallaxText from "./ParallaxText";
+import DiscoverHotels from "./DiscoverHotels";
 
 const heroSx = {
   height: "100vh",
@@ -183,6 +184,7 @@ const Welcome = () => {
           />
         </div>
       </Box>
+      <DiscoverHotels />
       <section className="scrollText">
         <ParallaxText baseVelocity={-5}>Explore the World</ParallaxText>
         <ParallaxText baseVelocity={5}>
