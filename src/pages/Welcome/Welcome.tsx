@@ -12,6 +12,7 @@ import ParallaxText from "./ParallaxText";
 import DiscoverHotels from "./DiscoverHotels";
 import { getTestimonialsReviews } from "@travelia/api/endpoints/hotel";
 import Testimonials from "./Testimonials";
+import Footer from "@travelia/components/Footer";
 
 const heroSx = {
   height: "100vh",
@@ -197,12 +198,13 @@ const Welcome = () => {
           Make your best memories with Travila
         </ParallaxText>
       </section>
-      <Box component="section" my={10}>
+      <Box component="section" mt={10} mb={15}>
         <Typography variant="h2" textAlign="center">
           Testimonials
         </Typography>
         {testimonials && <Testimonials testimonials={testimonials} />}
       </Box>
+      <Footer />
     </Box>
   );
 };
