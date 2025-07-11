@@ -14,11 +14,21 @@ export const hotelsSearchResults = [
       "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     discount: 0.2,
     amenities: [
-      { id: 0, name: "wifi", description: "Very fast wifi in the room." },
+      { id: 0, name: "Free Wi-Fi", description: "Very fast wifi in the room." },
       {
         id: 0,
-        name: "Room Service",
+        name: "Air Conditioning",
         description: "Very Fast room service available.",
+      },
+      {
+        id: 0,
+        name: "Private Balcony",
+        description: "Luxury infinity pool available.",
+      },
+      {
+        id: 0,
+        name: "Flat-screen TV",
+        description: "Stunning mountain views from your balcony.",
       },
     ],
   },
@@ -66,12 +76,12 @@ export const hotelsSearchResults = [
     amenities: [
       {
         id: 0,
-        name: "City View",
+        name: "Private Balcony",
         description: "Enjoy a stunning city view from your room.",
       },
       {
         id: 0,
-        name: "Free Breakfast",
+        name: "Flat-screen TV",
         description: "Complimentary breakfast included.",
       },
     ],
@@ -93,12 +103,12 @@ export const hotelsSearchResults = [
     amenities: [
       {
         id: 0,
-        name: "Fireplace",
+        name: "Flat-screen TV",
         description: "Cozy up with a fireplace in your cabin.",
       },
       {
         id: 0,
-        name: "Hiking Trails",
+        name: "Private Balcony",
         description: "Access to scenic hiking trails.",
       },
     ],
@@ -120,12 +130,12 @@ export const hotelsSearchResults = [
     amenities: [
       {
         id: 0,
-        name: "Ocean View Balcony",
+        name: "Private Balcony",
         description: "Enjoy the sound of the waves from your balcony.",
       },
       {
         id: 0,
-        name: "Spa Services",
+        name: "Mini Bar",
         description: "Relax with in-room spa services.",
       },
     ],
@@ -147,12 +157,12 @@ export const hotelsSearchResults = [
     amenities: [
       {
         id: 0,
-        name: "Desert View",
+        name: "Free Wi-Fi",
         description: "Panoramic view of the desert dunes.",
       },
       {
         id: 0,
-        name: "Infinity Pool",
+        name: "Private Balcony",
         description: "Luxury infinity pool available.",
       },
     ],
@@ -174,12 +184,12 @@ export const hotelsSearchResults = [
     amenities: [
       {
         id: 0,
-        name: "City View",
+        name: "Free Wi-Fi",
         description: "Unobstructed views of the London skyline.",
       },
       {
         id: 0,
-        name: "Rooftop Bar",
+        name: "Flat-screen TV",
         description: "Enjoy cocktails with a city view.",
       },
     ],
@@ -201,13 +211,18 @@ export const hotelsSearchResults = [
     amenities: [
       {
         id: 0,
-        name: "Lake Access",
+        name: "Air Conditioning",
         description: "Private access to the lake.",
       },
       {
         id: 0,
         name: "Fishing Equipment",
         description: "Fishing gear provided.",
+      },
+      {
+        id: 0,
+        name: "Flat-screen TV",
+        description: "Stunning mountain views from your balcony.",
       },
     ],
   },
@@ -228,12 +243,12 @@ export const hotelsSearchResults = [
     amenities: [
       {
         id: 0,
-        name: "Breakfast Included",
+        name: "Flat-screen TV",
         description: "Daily breakfast served in-room.",
       },
       {
         id: 0,
-        name: "Pet Friendly",
+        name: "Private Balcony",
         description: "Pets allowed upon request.",
       },
     ],
@@ -255,12 +270,17 @@ export const hotelsSearchResults = [
     amenities: [
       {
         id: 0,
-        name: "Mountain View",
+        name: "Mini Bar",
         description: "Stunning mountain views from your balcony.",
       },
       {
         id: 0,
-        name: "Ski Access",
+        name: "Flat-screen TV",
+        description: "Stunning mountain views from your balcony.",
+      },
+      {
+        id: 0,
+        name: "Air Conditioning",
         description: "Direct access to ski slopes.",
       },
     ],
