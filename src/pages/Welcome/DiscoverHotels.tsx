@@ -100,7 +100,7 @@ const DiscoverHotels = () => {
         >
           <Grid container spacing={2} px={3}>
             {images.map((img, index) => (
-              <Grid key={index} size={{ xs: img.size }}>
+              <Grid key={index} size={{ xs: 12, sm: img.size }}>
                 <AnimatedImageBox
                   src={img.src}
                   alt={img.alt}
