@@ -18,7 +18,7 @@ import AdminLayout from "@travelia/layouts/admin/AdminLayout";
 import Hotels from "@travelia/areas/admin/pages/Hotels";
 import Rooms from "@travelia/areas/admin/pages/Rooms";
 import Dashboard from "@travelia/areas/admin/pages/Dashboard";
-import Contact from "@travelia/areas/user/pages/Contact";
+import ContactPage from "@travelia/areas/user/pages/Contact";
 
 const AppRouter = () => {
   return (
@@ -41,7 +41,7 @@ const AppRouter = () => {
           <Route path="hotel/:id" element={<HotelPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="order" element={<OrderPage />} />
-          <Route path="contact" element={<Contact />} />
+          <Route path="contact" element={<ContactPage />} />
         </Route>
       </Route>
       <Route

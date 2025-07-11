@@ -19,7 +19,7 @@ const initialValues: ContactFormValues = {
   message: "",
 };
 
-const Contact = () => {
+const ContactPage = () => {
   const handleSubmit = async (
     values: ContactFormValues,
     { resetForm }: FormikHelpers<ContactFormValues>,
@@ -87,4 +87,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default ContactPage;
