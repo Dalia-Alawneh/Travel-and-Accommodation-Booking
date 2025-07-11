@@ -131,6 +131,12 @@ This project uses **Vitest** and **React Testing Library**.
 npm run test
 ```
 
+## 🧰 Management Tools Used
+
+- [Trello](https://trello.com/) for task management and project planning  
+- [Clockify](https://clockify.me/) for time tracking and productivity monitoring
+
+
 ## 📜 License
 
 MIT © 2025 Dalia Alawneh
