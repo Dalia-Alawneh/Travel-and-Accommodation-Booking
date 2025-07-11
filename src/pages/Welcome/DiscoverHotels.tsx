@@ -60,7 +60,7 @@ const DiscoverHotels = () => {
 
   return (
     <Grid container spacing={4} alignItems="center">
-      <Grid size={{ xs: 12, md: 6 }}>
+      <Grid size={{ xs: 12, md: 6 }} py={{ xs: 10, md: 0 }}>
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
