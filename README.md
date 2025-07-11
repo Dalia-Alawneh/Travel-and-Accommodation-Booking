@@ -1,6 +1,8 @@
 # 🌐 Travelia - Travel & Accommodation Booking Platform
 
-A responsive travel booking platform built with **React**, **TypeScript**, and **Material UI**. Users can explore destinations, book hotels, and get in touch through a dynamic **Contact** page.
+A responsive travel booking platform built with **React**, **TypeScript**, and **Material UI**.  
+Users can explore destinations, book hotels, and get in touch through a dynamic **Contact** page.  
+Admins have full control over cities, hotels, rooms, and platform statistics through a powerful dashboard.
 
 ## 🔗 Live Links
 
