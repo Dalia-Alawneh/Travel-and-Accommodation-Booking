@@ -52,7 +52,12 @@ const HotelCard = ({ hotel }: IHotelCard) => {
         <Grid container>
           <Grid
             size={{ xs: 12, lg: 7 }}
-            borderRight={1}
+            sx={{
+              borderRight: {
+                xs: "none",
+                lg: "1px solid #e0e0e0",
+              },
+            }}
             borderColor="custom.salver"
             position="relative"
             overflow="hidden"
