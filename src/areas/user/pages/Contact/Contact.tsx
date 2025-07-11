@@ -6,7 +6,7 @@ import PageHero from "../../components/PageHero";
 import AppForm from "@travelia/components/Form";
 import FormikTextField from "@travelia/components/Inputs/TextField/FormikTextField";
 import toast from "react-hot-toast";
-import { contactSchema } from "@travelia/schemas/conact";
+import { contactSchema } from "@travelia/schemas/contact";
 import { emailPublicKey, emailServiceId, emailTemplateId } from "./config";
 
 type ContactFormValues = {
