@@ -14,6 +14,10 @@ export const userMenuItems: Menu = [
     title: "Search",
     path: "search",
   },
+  {
+    title: "Contact",
+    path: "contact",
+  },
 ];
 
 export const adminMenuItems: Menu = [

@@ -1,4 +1,4 @@
-import Footer from "@travelia/areas/user/components/Footer";
+import Footer from "@travelia/components/Footer";
 import UserTopBar from "@travelia/areas/user/components/UserTopBar";
 import { Outlet } from "react-router";
 

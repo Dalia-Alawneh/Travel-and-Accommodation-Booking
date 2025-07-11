@@ -6,12 +6,14 @@ interface IPauseOnHoverCarouselProps {
   render: () => ReactNode;
   responsiveBreakpoints: Settings["responsive"];
   slidesToShow: number;
+  customSettings?: Settings;
 }
 
 function PauseOnHoverCarousel({
   render,
   responsiveBreakpoints,
   slidesToShow,
+  customSettings,
 }: IPauseOnHoverCarouselProps) {
   const settings = {
     dots: true,
@@ -22,6 +24,7 @@ function PauseOnHoverCarousel({
     autoplaySpeed: 2000,
     pauseOnHover: true,
     responsive: responsiveBreakpoints,
+    ...customSettings,
   };
   return (
     <Box

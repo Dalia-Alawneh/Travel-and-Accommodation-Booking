@@ -5,11 +5,13 @@ import {
   IHotelDetailedResponse,
   IHotelResponse,
   IReviewResponse,
+  IReviewTestimonialsResponse,
   IRoomResponse,
 } from "@travelia/api/types/response.dto";
 import hotelsData from "@travelia/api/data/hotels.json";
 import { mapHotelData } from "@travelia/api/utils";
 import { IHotelPayload } from "@travelia/api/types/request.dto";
+import { testimonials } from "@travelia/api/data/testimonials";
 
 const endpoint = "/hotels";
 
@@ -50,6 +52,16 @@ export const getHotelReviews = async (
 ): Promise<IReviewResponse[]> => {
   const response = await Axios.get(`${endpoint}/${id}/reviews`);
   return response.data;
+};
+
+export const getTestimonialsReviews = async (): Promise<
+  IReviewTestimonialsResponse[]
+> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(testimonials);
+    }, 300);
+  });
 };
 
 export const getHotels = async (): Promise<IHotelDetailedResponse[]> => {
