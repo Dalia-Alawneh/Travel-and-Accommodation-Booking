@@ -16,7 +16,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import IconWithText from "../../components/IconWithText";
+import TitleWithIcon from "./components/TitleWithIcon";
 import { LocationOn, Reviews, Stars } from "@mui/icons-material";
 import Amenities from "../../components/Amenities";
 import Gallery from "./components/Gallery";
@@ -102,7 +102,7 @@ const HotelPage = () => {
                   </Box>
 
                   {hotelInfo?.location && (
-                    <IconWithText
+                    <TitleWithIcon
                       text={hotelInfo.location}
                       icon={
                         <LocationOn
@@ -117,7 +117,7 @@ const HotelPage = () => {
 
                   {hotelInfo?.amenities && (
                     <>
-                      <IconWithText
+                      <TitleWithIcon
                         text="Amenities"
                         icon={
                           <Stars
@@ -158,7 +158,7 @@ const HotelPage = () => {
                     </>
                   ) : reviews?.length ? (
                     <>
-                      <IconWithText
+                      <TitleWithIcon
                         text="Reviews"
                         icon={
                           <Reviews
