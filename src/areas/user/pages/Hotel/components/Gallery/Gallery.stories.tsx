@@ -3,7 +3,7 @@ import Gallery from "./Gallery";
 import { galleryMockData } from "@travelia/api/data/gallery";
 
 const meta: Meta<typeof Gallery> = {
-  title: "Components/Gallery",
+  title: "User/Components/Gallery",
   component: Gallery,
   tags: ["autodocs"],
   parameters: {
