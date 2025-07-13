@@ -25,6 +25,9 @@ export const Loading: Story = {
 };
 
 export const WithImages: Story = {
+  parameters: {
+    layout: "centered",
+  },
   args: {
     isGalleryLoading: false,
     gallery: galleryMockData,
