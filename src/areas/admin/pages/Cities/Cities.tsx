@@ -2,7 +2,7 @@ import { addCity, getCities } from "@travelia/api/endpoints/cities";
 import CitiesTable from "./components/CitiesTable";
 import CityForm from "./components/CityForm";
 import type { CityRow } from "./components/CitiesTable/types";
-import AdminCrudPage from "../CrudPage";
+import AdminCrudPage from "../../components/EntityManager";
 import { PAGE_OPTIONS } from "@travelia/constants";
 
 const Cities = () => {

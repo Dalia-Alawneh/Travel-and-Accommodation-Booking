@@ -6,9 +6,9 @@ import { AddCircle } from "@mui/icons-material";
 import AppTextField from "@travelia/components/Inputs/TextField/TextField";
 import toast from "react-hot-toast";
 import { PAGE_SIZE } from "@travelia/constants";
-import FormDrawer from "../../components/FormDrawer";
+import FormDrawer from "../FormDrawer";
 
-interface AdminPageProps<T, FormPayload> {
+interface IEntityManagerProps<T, FormPayload> {
   title: string;
   searchPlaceholder?: string;
   getAll: () => Promise<T[]>;
@@ -30,7 +30,7 @@ interface AdminPageProps<T, FormPayload> {
   ) => React.ReactNode;
 }
 
-const AdminCrudPage = <T, FormPayload>({
+const EntityManager = <T, FormPayload>({
   title,
   searchPlaceholder,
   getAll,
@@ -38,7 +38,7 @@ const AdminCrudPage = <T, FormPayload>({
   addItem,
   renderForm,
   renderTable,
-}: AdminPageProps<T, FormPayload>) => {
+}: IEntityManagerProps<T, FormPayload>) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(PAGE_SIZE);
   const [search, setSearch] = useState("");
@@ -149,4 +149,4 @@ const AdminCrudPage = <T, FormPayload>({
   );
 };
 
-export default AdminCrudPage;
+export default EntityManager;

@@ -13,6 +13,8 @@ vi.mock("@mui/icons-material", async () => {
     Logout: () => <div data-testid="mock-icon" />,
     DeleteTwoTone: () => <div data-testid="mock-icon" />,
     Edit: () => <div data-testid="mock-icon" />,
+    AddCircle: () => <div data-testid="mock-icon" />,
+    AccountCircle: () => <div data-testid="mock-icon" />,
   };
 });
 
