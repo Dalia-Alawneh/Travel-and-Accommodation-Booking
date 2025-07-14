@@ -1,4 +1,4 @@
-import { waitFor } from "@testing-library/dom";
+import { fireEvent, waitFor } from "@testing-library/dom";
 import { render, screen } from "@travelia/tests/testRender";
 import EntityManager from "./EntityManager";
 import { City } from "@travelia/types";
@@ -29,8 +29,8 @@ const renderTable = (data: City[]) => (
   </table>
 );
 
-describe("AdminCrudPage", () => {
-  it("renders the title and search input", async () => {
+describe("EntityManager", () => {
+  it("should renders the title and search input", async () => {
     render(
       <EntityManager
         title="Test Items"
@@ -50,7 +50,8 @@ describe("AdminCrudPage", () => {
       screen.getByPlaceholderText("Search Test Items"),
     ).toBeInTheDocument();
   });
-  it("renders data from getAll", async () => {
+
+  it("should renders data from getAll", async () => {
     render(
       <EntityManager
         title="Test Items"
@@ -63,5 +64,23 @@ describe("AdminCrudPage", () => {
     );
 
     expect(await screen.findByText("Item Two")).toBeInTheDocument();
+  });
+
+  it("should opens form drawer when add button is clicked", async () => {
+    render(
+      <EntityManager
+        title="Test Items"
+        getAll={getAll}
+        getPaginated={getPaginated}
+        addItem={addItem}
+        renderForm={renderForm}
+        renderTable={renderTable}
+      />,
+    );
+
+    const addButton = screen.getByRole("button", { name: /add test items/i });
+    fireEvent.click(addButton);
+
+    expect(screen.getByText("Submit")).toBeInTheDocument();
   });
 });
