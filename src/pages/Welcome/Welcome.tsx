@@ -13,6 +13,7 @@ import DiscoverHotels from "./DiscoverHotels";
 import { getTestimonialsReviews } from "@travelia/api/endpoints/hotel";
 import Testimonials from "./Testimonials";
 import Footer from "@travelia/components/Footer";
+import AppLoader from "@travelia/components/AppLoader";
 
 const heroSx = {
   height: "100vh",
@@ -69,11 +70,11 @@ const Welcome = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const overlayColor = theme.palette.custom.overlay;
-  const { data: featuredDeals } = useQuery({
+  const { isLoading: isFeaturedLoading, data: featuredDeals } = useQuery({
     queryKey: ["featuredDeals"],
     queryFn: getFeaturedDeals,
   });
-  const { data: testimonials } = useQuery({
+  const { isLoading: isTestimonialsLoading, data: testimonials } = useQuery({
     queryKey: ["testimonials"],
     queryFn: getTestimonialsReviews,
   });
@@ -90,6 +91,11 @@ const Welcome = () => {
     autoplaySpeed: 2000,
     cssEase: "linear",
   };
+
+  if (isFeaturedLoading || isTestimonialsLoading) {
+    return <AppLoader />;
+  }
+
   return (
     <Box>
       <Box sx={heroSx}>
