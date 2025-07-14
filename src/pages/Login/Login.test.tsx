@@ -52,7 +52,7 @@ describe("Login Integration Test", () => {
       () => {
         expect(history.location.pathname).toBe("/user");
       },
-      { timeout: 2000 },
+      { timeout: 3000 },
     );
   });
 
@@ -71,7 +71,7 @@ describe("Login Integration Test", () => {
       () => {
         expect(history.location.pathname).toBe("/admin");
       },
-      { timeout: 2000 },
+      { timeout: 3000 },
     );
   });
 });

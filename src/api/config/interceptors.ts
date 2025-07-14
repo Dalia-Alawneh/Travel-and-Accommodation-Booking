@@ -67,7 +67,7 @@ const handleUnAuthResponse = () => {
   clearCredentials();
   toast.error("Unauthorized - redirect to login...", { duration: 5000 });
   setTimeout(() => {
-    window.location.href = "/login";
+    window.location.href = "/401";
   }, 1500);
 };
 

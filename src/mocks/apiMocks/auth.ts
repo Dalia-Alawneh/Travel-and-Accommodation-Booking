@@ -1,7 +1,8 @@
 import { http, HttpResponse } from "msw";
 import { ILoginPayload } from "@travelia/api/types/request.dto";
-import { BASE_URL } from "../server";
 import { UserType } from "@travelia/types";
+
+const BASE_URL = "https://hotel.foothilltech.net/api";
 
 export const authHandlers = [
   http.post(`${BASE_URL}/auth/authenticate`, async ({ request }) => {
