@@ -11,12 +11,13 @@ import { UserProvider } from "@travelia/context/user";
 import theme from "@travelia/theme";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-describe("Login Integration Test", () => {
-  it("should login successfully with valid user credentials", async () => {
-    const history = createMemoryHistory();
-    const queryClient = new QueryClient();
 
-    render(
+const renderLoginWithProviders = (history = createMemoryHistory()) => {
+  const queryClient = new QueryClient();
+
+  return {
+    history,
+    ...render(
       <Provider store={store}>
         <PersistGate persistor={persistor} loading={null}>
           <Router location={history.location} navigator={history}>
@@ -31,7 +32,13 @@ describe("Login Integration Test", () => {
           </Router>
         </PersistGate>
       </Provider>,
-    );
+    ),
+  };
+};
+
+describe("Login Integration Test", () => {
+  it("should login successfully with User type then navigate to /user", async () => {
+    const { history } = renderLoginWithProviders();
 
     fireEvent.change(screen.getByPlaceholderText(/Enter Username/i), {
       target: { value: "user" },
@@ -44,6 +51,25 @@ describe("Login Integration Test", () => {
     await waitFor(
       () => {
         expect(history.location.pathname).toBe("/user");
+      },
+      { timeout: 2000 },
+    );
+  });
+
+  it("should login successfully with Admin type then navigate to /admin", async () => {
+    const { history } = renderLoginWithProviders();
+
+    fireEvent.change(screen.getByPlaceholderText(/Enter Username/i), {
+      target: { value: "admin" },
+    });
+    fireEvent.change(screen.getByPlaceholderText(/Enter Password/i), {
+      target: { value: "admin" },
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: /Login/i }));
+    await waitFor(
+      () => {
+        expect(history.location.pathname).toBe("/admin");
       },
       { timeout: 2000 },
     );
