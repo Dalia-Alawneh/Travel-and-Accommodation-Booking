@@ -76,8 +76,8 @@ const Login = () => {
             sx={{
               p: 5,
               backgroundColor: "rgba(255,255,255,1)",
-              borderTopLeftRadius: 32,
-              borderBottomLeftRadius: 32,
+              borderTopLeftRadius: { xs: 0, md: 32 },
+              borderBottomLeftRadius: { xs: 0, md: 32 },
               height: "100%",
             }}
           >
