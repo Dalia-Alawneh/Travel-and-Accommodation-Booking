@@ -1,0 +1,51 @@
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+
+import Login from "./Login";
+import { createMemoryHistory } from "history";
+import { Router } from "react-router-dom";
+import { ThemeProvider } from "@emotion/react";
+import { CssBaseline } from "@mui/material";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { store, persistor } from "@travelia/app/store";
+import { UserProvider } from "@travelia/context/user";
+import theme from "@travelia/theme";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+describe("Login Integration Test", () => {
+  it("should login successfully with valid user credentials", async () => {
+    const history = createMemoryHistory();
+    const queryClient = new QueryClient();
+
+    render(
+      <Provider store={store}>
+        <PersistGate persistor={persistor} loading={null}>
+          <Router location={history.location} navigator={history}>
+            <UserProvider>
+              <QueryClientProvider client={queryClient}>
+                <ThemeProvider theme={theme}>
+                  <CssBaseline />
+                  <Login />
+                </ThemeProvider>
+              </QueryClientProvider>
+            </UserProvider>
+          </Router>
+        </PersistGate>
+      </Provider>,
+    );
+
+    fireEvent.change(screen.getByPlaceholderText(/Enter Username/i), {
+      target: { value: "user" },
+    });
+    fireEvent.change(screen.getByPlaceholderText(/Enter Password/i), {
+      target: { value: "user" },
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: /Login/i }));
+    await waitFor(
+      () => {
+        expect(history.location.pathname).toBe("/user");
+      },
+      { timeout: 2000 },
+    );
+  });
+});

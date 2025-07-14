@@ -1,4 +1,6 @@
 import { setupServer } from "msw/node";
-import { handlers } from "./apiMocks";
+import { authHandlers, citiesHandlers } from "./apiMocks";
 
-export const server = setupServer(...handlers);
+export const BASE_URL = "https://hotel.foothilltech.net/api";
+
+export const server = setupServer(...citiesHandlers, ...authHandlers);

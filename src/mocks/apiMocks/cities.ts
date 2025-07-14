@@ -1,10 +1,11 @@
 import { http, HttpResponse } from "msw";
 import { citiesMockedResponse } from "./../data";
 import { ICityPayload } from "@travelia/api/types/request.dto";
+import { BASE_URL } from "../server";
 
-export const BASE_URL = "https://hotel.foothilltech.net";
-export const handlers = [
-  http.get(`${BASE_URL}/cities`, () => {
+export const citiesHandlers = [
+  http.get(`${BASE_URL}/cities??pageNumber=1&pageSize=5`, () => {
+    console.log("Mock for GET /cities was called");
     return HttpResponse.json({
       cities: citiesMockedResponse,
     });
@@ -15,9 +16,9 @@ export const handlers = [
     return HttpResponse.json(
       {
         message: "City added successfully",
-        note: {
+        city: {
           ...body,
-          _id: "2",
+          id: 3,
         },
       },
       { status: 201 },
