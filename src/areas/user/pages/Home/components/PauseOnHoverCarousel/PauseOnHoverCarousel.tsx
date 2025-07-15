@@ -23,6 +23,7 @@ function PauseOnHoverCarousel({
     autoplay: true,
     autoplaySpeed: 2000,
     pauseOnHover: true,
+    arrows: false,
     responsive: responsiveBreakpoints,
     ...customSettings,
   };
