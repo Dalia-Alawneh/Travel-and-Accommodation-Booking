@@ -87,6 +87,7 @@ export default function TopBar({
                 </IconButton>
 
                 <AppBarAvatarMenu
+                  username="User"
                   anchorEl={anchorEl}
                   handleMenuClose={handleMenuClose}
                   open={isMenuOpen}

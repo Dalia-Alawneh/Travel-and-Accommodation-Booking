@@ -1,5 +1,11 @@
 import { Box, Grid, Typography, useTheme, Rating } from "@mui/material";
-import { LocationOn, Bed } from "@mui/icons-material";
+import {
+  LocationOn,
+  Bed,
+  CalendarMonthRounded,
+  People,
+  HotelOutlined,
+} from "@mui/icons-material";
 import AppButton from "@travelia/components/Button";
 import { ISearchedHotel } from "@travelia/types";
 import { bookButtonStyle } from "@travelia/styles";
@@ -31,6 +37,21 @@ const cardSx = {
   p: 4,
 };
 
+const HotelDetail = ({
+  icon,
+  text,
+}: {
+  icon: React.ReactNode;
+  text: string;
+}) => (
+  <Box sx={{ display: "flex", alignItems: "center", gap: 1, my: 2 }}>
+    {icon}
+    <Typography variant="caption" color="text.secondary" fontWeight={700}>
+      {text}
+    </Typography>
+  </Box>
+);
+
 const HotelCard = ({ hotel }: IHotelCard) => {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -51,6 +72,7 @@ const HotelCard = ({ hotel }: IHotelCard) => {
       >
         <Grid container>
           <Grid
+            alignItems="center"
             size={{ xs: 12, lg: 7 }}
             sx={{
               borderRight: {
@@ -67,7 +89,7 @@ const HotelCard = ({ hotel }: IHotelCard) => {
               src={hotel.roomPhotoUrl}
               alt={hotel.hotelName}
               sx={{
-                height: 380,
+                height: 480,
                 width: { xs: "100%", md: 380 },
                 objectFit: "cover",
                 borderRadius: 0.3,
@@ -119,6 +141,20 @@ const HotelCard = ({ hotel }: IHotelCard) => {
                   ${hotel.roomPrice.toFixed(2)} / Night
                 </Typography>
 
+                <HotelDetail
+                  icon={<People color="primary" fontSize="small" />}
+                  text={`${hotel.adults} adults , ${hotel.children} children`}
+                />
+                <HotelDetail
+                  icon={<HotelOutlined color="primary" fontSize="small" />}
+                  text={`#Rooms: ${hotel.numberOfRooms}`}
+                />
+                <HotelDetail
+                  icon={
+                    <CalendarMonthRounded color="primary" fontSize="small" />
+                  }
+                  text={`${hotel.availableFrom} - ${hotel.availableTo}`}
+                />
                 {hotel.amenities.length > 0 && (
                   <Amenities amenities={hotel.amenities} />
                 )}

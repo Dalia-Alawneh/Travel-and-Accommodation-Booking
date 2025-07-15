@@ -7,12 +7,14 @@ interface IAppBarAvatarMenuProps {
   anchorEl: HTMLElement | null;
   open: boolean;
   handleMenuClose: () => void;
+  username: string;
 }
 
 const AppBarAvatarMenu = ({
   anchorEl,
   open,
   handleMenuClose,
+  username,
 }: IAppBarAvatarMenuProps) => {
   const { handleLogout } = useLogout();
 
@@ -34,7 +36,7 @@ const AppBarAvatarMenu = ({
     >
       <MenuItem sx={{ cursor: "default" }}>
         <MenuItemContent
-          text="User"
+          text={username}
           icon={<AccountCircle color="disabled" />}
         />
       </MenuItem>

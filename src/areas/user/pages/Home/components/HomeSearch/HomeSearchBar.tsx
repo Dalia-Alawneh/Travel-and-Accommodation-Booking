@@ -6,7 +6,7 @@ const paperStyle = {
   bgcolor: "#fff",
   position: "absolute",
   left: "50%",
-  bottom: { xs: -20, sm: -50, md: -20, xl: -60 },
+  bottom: { xs: -30, sm: -50, md: -20, lg: -50, xl: -60 },
   transform: "translateX(-50%)",
   width: { xs: "95%", sm: "90%", md: "80%", lg: "78%" },
   borderRadius: "12px",

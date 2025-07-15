@@ -46,7 +46,7 @@ const AppTextField = ({
         htmlFor={inputId}
         sx={{
           fontSize: 13,
-          color: "custom.darkSalver",
+          color: "custom.grey",
           textTransform: "capitalize",
         }}
       >

@@ -39,6 +39,8 @@ vi.mock("@mui/icons-material", async () => {
     LocationOn: () => <div data-testid="mock-icon" />,
     HotelClass: () => <div data-testid="mock-icon" />,
     CalendarMonthRounded: () => <div data-testid="mock-icon" />,
+    HotelOutlined: () => <div data-testid="mock-icon" />,
+    People: () => <div data-testid="mock-icon" />,
   };
 });
 

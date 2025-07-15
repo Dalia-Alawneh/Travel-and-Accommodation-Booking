@@ -8,6 +8,7 @@ declare module "@mui/material/styles" {
       salver: string;
       beige: string;
       darkSalver: string;
+      grey: string;
       skyBlue: string;
       overlay: string;
       lightBlue: string;
@@ -21,6 +22,7 @@ declare module "@mui/material/styles" {
       salver: string;
       beige: string;
       darkSalver: string;
+      grey: string;
       skyBlue: string;
       overlay: string;
       lightBlue: string;

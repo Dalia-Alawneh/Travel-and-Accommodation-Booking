@@ -25,6 +25,7 @@ const theme = createTheme({
       salver: "#F2F4F6",
       beige: "#FFECD0",
       darkSalver: "#b6b6b6",
+      grey: "#aaa",
       skyBlue: "#4196d7",
       overlay: "#ffffff1a",
       lightBlue: "#a6dbfc4a",
@@ -41,7 +42,7 @@ const theme = createTheme({
     fontFamily: '"Manrope", sans-serif',
     h1: {
       fontWeight: 900,
-      fontSize: "clamp(3rem, 5vw, 4.5rem)",
+      fontSize: "clamp(2rem, 5vw, 4.5rem)",
     },
     h2: {
       fontWeight: 900,

@@ -44,7 +44,7 @@ const FormikTextField = ({ name, slotProps, ...rest }: AppTextFieldProps) => {
       <InputLabel
         sx={{
           fontSize: 13,
-          color: "custom.darkSalver",
+          color: "custom.grey",
           ml: 2,
           textTransform: "capitalize",
         }}

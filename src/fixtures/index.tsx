@@ -20,6 +20,17 @@ export const userMenuItems: Menu = [
   },
 ];
 
+export const footerMenuItems: Menu = [
+  {
+    title: "Home",
+    path: "/",
+  },
+  {
+    title: "Login",
+    path: "login",
+  },
+];
+
 export const adminMenuItems: Menu = [
   {
     title: "Dashboard",
