@@ -8,7 +8,7 @@ import {
   whiteLogo,
 } from "@travelia/assets";
 import AppLink from "@travelia/components/Link/Link";
-import { userMenuItems } from "@travelia/fixtures/index.tsx";
+import { footerMenuItems } from "@travelia/fixtures/index.tsx";
 
 const Footer = () => {
   return (
@@ -81,7 +81,7 @@ const Footer = () => {
               >
                 Quick Links
               </Typography>
-              {userMenuItems.map((item) => (
+              {footerMenuItems.map((item) => (
                 <AppLink key={item.title} path={item.path}>
                   <Typography
                     key={item.title}
