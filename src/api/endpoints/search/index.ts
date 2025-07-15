@@ -26,6 +26,23 @@ export const getFilteredHotels = async (
     const checkInDate = new Date(params.checkInDate);
     const checkOutDate = new Date(params.checkOutDate);
 
+    if (typeof params.adults === "number" && hotel.adults < params.adults) {
+      return false;
+    }
+
+    if (
+      typeof params.children === "number" &&
+      hotel.children < params.children
+    ) {
+      return false;
+    }
+
+    if (
+      typeof params.numberOfRooms === "number" &&
+      hotel.numberOfRooms < params.numberOfRooms
+    ) {
+      return false;
+    }
     if (checkInDate < availableFrom || checkOutDate > availableTo) {
       return false;
     }
