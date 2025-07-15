@@ -37,6 +37,21 @@ const cardSx = {
   p: 4,
 };
 
+const HotelDetail = ({
+  icon,
+  text,
+}: {
+  icon: React.ReactNode;
+  text: string;
+}) => (
+  <Box sx={{ display: "flex", alignItems: "center", gap: 1, my: 2 }}>
+    {icon}
+    <Typography variant="caption" color="text.secondary" fontWeight={700}>
+      {text}
+    </Typography>
+  </Box>
+);
+
 const HotelCard = ({ hotel }: IHotelCard) => {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -126,42 +141,20 @@ const HotelCard = ({ hotel }: IHotelCard) => {
                   ${hotel.roomPrice.toFixed(2)} / Night
                 </Typography>
 
-                <Box
-                  sx={{ display: "flex", alignItems: "center", gap: 1, my: 2 }}
-                >
-                  <People color="primary" fontSize="small" />
-                  <Typography
-                    variant="caption"
-                    color="text.secondary"
-                    fontWeight={700}
-                  >
-                    {hotel.adults} adults , {hotel.children} children
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{ display: "flex", alignItems: "center", gap: 1, my: 2 }}
-                >
-                  <HotelOutlined color="primary" fontSize="small" />
-                  <Typography
-                    variant="caption"
-                    color="text.secondary"
-                    fontWeight={700}
-                  >
-                    #Rooms: {hotel.numberOfRooms}
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{ display: "flex", alignItems: "center", gap: 1, my: 2 }}
-                >
-                  <CalendarMonthRounded color="primary" fontSize="small" />
-                  <Typography
-                    variant="caption"
-                    color="text.secondary"
-                    fontWeight={700}
-                  >
-                    {hotel.availableFrom} - {hotel.availableTo}
-                  </Typography>
-                </Box>
+                <HotelDetail
+                  icon={<People color="primary" fontSize="small" />}
+                  text={`${hotel.adults} adults , ${hotel.children} children`}
+                />
+                <HotelDetail
+                  icon={<HotelOutlined color="primary" fontSize="small" />}
+                  text={`#Rooms: ${hotel.numberOfRooms}`}
+                />
+                <HotelDetail
+                  icon={
+                    <CalendarMonthRounded color="primary" fontSize="small" />
+                  }
+                  text={`${hotel.availableFrom} - ${hotel.availableTo}`}
+                />
                 {hotel.amenities.length > 0 && (
                   <Amenities amenities={hotel.amenities} />
                 )}
