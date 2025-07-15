@@ -67,7 +67,7 @@ const SearchBar = ({
       checkOutDate: checkOut,
       adults,
       children,
-      city: city?.text || "",
+      city: city?.text || "All",
       numberOfRooms: rooms,
     });
   };
