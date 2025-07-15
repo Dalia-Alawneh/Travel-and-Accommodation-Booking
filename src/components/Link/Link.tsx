@@ -15,6 +15,9 @@ const AppLink = ({ path, children }: IAppLinkProps) => {
       sx={{
         textDecoration: "none",
         color: "text.primary",
+        "&:hover": {
+          borderBottom: "2px solid",
+        },
         "&.active": {
           fontWeight: "bold",
           color: "primary.main",

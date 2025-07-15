@@ -82,16 +82,18 @@ const Footer = () => {
                 Quick Links
               </Typography>
               {footerMenuItems.map((item) => (
-                <AppLink key={item.title} path={item.path}>
-                  <Typography
-                    key={item.title}
-                    variant="body2"
-                    color="custom.salver"
-                    sx={{ mb: 0.5 }}
-                  >
-                    {item.title}
-                  </Typography>
-                </AppLink>
+                <Typography
+                  key={item.title}
+                  sx={{
+                    mb: 0.5,
+                  }}
+                >
+                  <AppLink key={item.title} path={item.path}>
+                    <span style={{ fontSize: 16, color: "white" }}>
+                      {item.title}
+                    </span>
+                  </AppLink>
+                </Typography>
               ))}
             </Grid>
             <Grid size={{ sm: 12, md: 3 }}>
