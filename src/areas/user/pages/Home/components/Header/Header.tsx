@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import ImageCarousel from "../Carousel";
+import ImageCarousel from "../ImageCarousel";
 import HomeSearchBar from "../HomeSearch/HomeSearchBar";
 
 const Header = () => {
