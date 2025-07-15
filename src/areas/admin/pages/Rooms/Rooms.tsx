@@ -22,7 +22,12 @@ const Rooms = () => {
           title="Add Room"
           initialValues={{
             roomNumber: 0,
-            roomAmenities: [],
+            roomAmenities: [
+              {
+                name: "",
+                description: "",
+              },
+            ],
             availability: false,
             capacityOfAdults: 0,
             capacityOfChildren: 0,

@@ -6,6 +6,8 @@ import useValidateImage from "@travelia/hooks/useValidateImage";
 import AppSwitch from "@travelia/components/Inputs/Switch";
 import { roomSchema } from "@travelia/schemas/room";
 import { IAmenity } from "@travelia/types";
+import { FieldArray } from "formik";
+import { Add } from "@mui/icons-material";
 
 interface RoomFormProps {
   initialValues: {
@@ -67,7 +69,58 @@ const RoomForm = ({
               value={formik.values.roomPhotoUrl}
               onChange={formik.handleChange}
             />
+            <FormikTextField
+              name="roomType"
+              label="Room Type"
+              placeholder="Enter Room Type"
+              value={formik.values.roomType}
+              onChange={formik.handleChange}
+            />
+            <FieldArray name="roomAmenities">
+              {(arrayHelpers) => (
+                <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                  <Typography variant="subtitle2" fontWeight={600}>
+                    Room Amenities
+                  </Typography>
 
+                  {formik.values.roomAmenities.map((_, index) => (
+                    <Box
+                      key={index}
+                      display="flex"
+                      flexDirection="column"
+                      gap={1}
+                    >
+                      <FormikTextField
+                        name={`roomAmenities.${index}.name`}
+                        label="Amenity Name"
+                        placeholder="Enter Amenity Name"
+                        value={formik.values.roomAmenities[index].name}
+                        onChange={formik.handleChange}
+                      />
+                      <FormikTextField
+                        name={`roomAmenities.${index}.description`}
+                        label="Amenity Description"
+                        placeholder="Enter Amenity Description"
+                        value={formik.values.roomAmenities[index].description}
+                        onChange={formik.handleChange}
+                      />
+                    </Box>
+                  ))}
+
+                  <AppButton
+                    type="button"
+                    appVariant="secondary"
+                    sx={{ mt: 1, width: "50%", ml: "auto" }}
+                    onClick={() =>
+                      arrayHelpers.push({ name: "", description: "" })
+                    }
+                  >
+                    <Add />
+                    Add Amenity
+                  </AppButton>
+                </Box>
+              )}
+            </FieldArray>
             <FormikTextField
               name="roomNumber"
               label="Room Number"

@@ -51,7 +51,7 @@ const CitiesTable = ({
 
       queryClient.setQueryData(["city"], (oldData: CityRow[] | undefined) => {
         if (!oldData) return [];
-        return oldData.filter((item) => item.id === variables);
+        return oldData.filter((item) => item.id !== variables);
       });
       closeConfirmDeleteDialog();
       toast.success("City Deleted Successfully");
