@@ -36,7 +36,7 @@ export const homeHandlers = [
   http.get(`${BASE_URL}/home/users/${1}/recent-hotels`, () => {
     return HttpResponse.json([
       {
-        hotelId: 2,
+        hotelId: 3,
         hotelName: "Sunset Resort",
         starRating: 4,
         visitDate: "2022-10-15T00:00:00",
