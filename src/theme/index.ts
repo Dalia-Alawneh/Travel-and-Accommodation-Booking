@@ -42,7 +42,7 @@ const theme = createTheme({
     fontFamily: '"Manrope", sans-serif',
     h1: {
       fontWeight: 900,
-      fontSize: "clamp(3rem, 5vw, 4.5rem)",
+      fontSize: "clamp(2rem, 5vw, 4.5rem)",
     },
     h2: {
       fontWeight: 900,
