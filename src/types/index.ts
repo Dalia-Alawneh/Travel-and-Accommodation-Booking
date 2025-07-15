@@ -96,6 +96,8 @@ export interface ISearchedHotel {
   roomPhotoUrl: string;
   discount: number;
   amenities: IAmenity[];
+  availableFrom: string;
+  availableTo: string;
 }
 
 export type HotelFilterValues = {

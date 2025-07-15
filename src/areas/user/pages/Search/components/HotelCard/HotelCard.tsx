@@ -1,5 +1,5 @@
 import { Box, Grid, Typography, useTheme, Rating } from "@mui/material";
-import { LocationOn, Bed } from "@mui/icons-material";
+import { LocationOn, Bed, CalendarMonthRounded } from "@mui/icons-material";
 import AppButton from "@travelia/components/Button";
 import { ISearchedHotel } from "@travelia/types";
 import { bookButtonStyle } from "@travelia/styles";
@@ -119,6 +119,30 @@ const HotelCard = ({ hotel }: IHotelCard) => {
                   ${hotel.roomPrice.toFixed(2)} / Night
                 </Typography>
 
+                <Box
+                  sx={{ display: "flex", alignItems: "center", gap: 1, my: 2 }}
+                >
+                  <CalendarMonthRounded color="primary" fontSize="small" />
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                    fontWeight={700}
+                  >
+                    {hotel.availableFrom} - {hotel.availableTo}
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{ display: "flex", alignItems: "center", gap: 1, my: 2 }}
+                >
+                  <CalendarMonthRounded color="primary" fontSize="small" />
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                    fontWeight={700}
+                  >
+                    {hotel.availableFrom} - {hotel.availableTo}
+                  </Typography>
+                </Box>
                 {hotel.amenities.length > 0 && (
                   <Amenities amenities={hotel.amenities} />
                 )}

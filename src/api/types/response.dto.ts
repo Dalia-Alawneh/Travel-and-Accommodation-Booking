@@ -67,6 +67,8 @@ export interface ISearchHotelsResponse {
   roomPhotoUrl: string;
   discount: number;
   amenities: IAmenitySearchResponse[];
+  availableFrom: string;
+  availableTo: string;
 }
 export interface IHotelResponse {
   hotelName: string;

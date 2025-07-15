@@ -13,6 +13,9 @@ export const hotelsSearchResults = [
     roomPhotoUrl:
       "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     discount: 0.2,
+    adults: 2,
+    children: 1,
+    numberOfRooms: 1,
     amenities: [
       { id: 0, name: "Free Wi-Fi", description: "Very fast wifi in the room." },
       {
@@ -46,6 +49,9 @@ export const hotelsSearchResults = [
     roomPhotoUrl:
       "https://images.pexels.com/photos/271619/pexels-photo-271619.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     discount: 0.15,
+    adults: 2,
+    children: 2,
+    numberOfRooms: 2,
     amenities: [
       {
         id: 0,
@@ -73,6 +79,9 @@ export const hotelsSearchResults = [
     roomPhotoUrl:
       "https://images.pexels.com/photos/2467285/pexels-photo-2467285.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     discount: 0.1,
+    adults: 2,
+    children: 0,
+    numberOfRooms: 1,
     amenities: [
       {
         id: 0,
@@ -100,6 +109,9 @@ export const hotelsSearchResults = [
     roomPhotoUrl:
       "https://images.pexels.com/photos/97083/pexels-photo-97083.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     discount: 0.25,
+    adults: 3,
+    children: 1,
+    numberOfRooms: 2,
     amenities: [
       {
         id: 0,
@@ -127,6 +139,9 @@ export const hotelsSearchResults = [
     roomPhotoUrl:
       "https://images.pexels.com/photos/271643/pexels-photo-271643.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     discount: 0.12,
+    adults: 2,
+    children: 2,
+    numberOfRooms: 1,
     amenities: [
       {
         id: 0,
@@ -154,6 +169,9 @@ export const hotelsSearchResults = [
     roomPhotoUrl:
       "https://cf.bstatic.com/xdata/images/hotel/max1280x900/45106790.jpg?k=f0021ec3dc42c14ae81c916f64cd68ca14c9e120082c504313fb18d408238073&o=&hp=1",
     discount: 0.18,
+    adults: 2,
+    children: 1,
+    numberOfRooms: 2,
     amenities: [
       {
         id: 0,
@@ -181,6 +199,9 @@ export const hotelsSearchResults = [
     roomPhotoUrl:
       "https://cf.bstatic.com/xdata/images/hotel/max1280x900/412095777.jpg?k=68473228b4e879d90f15aa52f13da15629b9cf1b42ff840ad1db3487e18aad5f&o=&hp=1",
     discount: 0.22,
+    adults: 2,
+    children: 1,
+    numberOfRooms: 1,
     amenities: [
       {
         id: 0,
@@ -208,6 +229,9 @@ export const hotelsSearchResults = [
     roomPhotoUrl:
       "https://cf.bstatic.com/xdata/images/hotel/max1280x900/457523852.jpg?k=70ba14f38dab416eaa9d46bf95ee3d46bde9051d701a951edfbc3b109ac7eb5a&o=&hp=1",
     discount: 0.1,
+    adults: 2,
+    children: 0,
+    numberOfRooms: 1,
     amenities: [
       {
         id: 0,
@@ -240,6 +264,9 @@ export const hotelsSearchResults = [
     roomPhotoUrl:
       "https://cf.bstatic.com/xdata/images/hotel/max1280x900/486144361.jpg?k=8c25e93bdc21997d0c129b913f23010dc50b5f22ada1cf003225d1cc6af8d619&o=&hp=1",
     discount: 0.14,
+    adults: 2,
+    children: 0,
+    numberOfRooms: 1,
     amenities: [
       {
         id: 0,
@@ -267,6 +294,9 @@ export const hotelsSearchResults = [
     roomPhotoUrl:
       "https://cf.bstatic.com/xdata/images/hotel/max1280x900/486149235.jpg?k=153fa679bd0189ca578b8f3cb42a0a009dc77697a126b95ba9239ce45bdceb37&o=&hp=1",
     discount: 0.2,
+    adults: 4,
+    children: 2,
+    numberOfRooms: 2,
     amenities: [
       {
         id: 0,
