@@ -1,5 +1,11 @@
 import { Box, Grid, Typography, useTheme, Rating } from "@mui/material";
-import { LocationOn, Bed, CalendarMonthRounded } from "@mui/icons-material";
+import {
+  LocationOn,
+  Bed,
+  CalendarMonthRounded,
+  People,
+  HotelOutlined,
+} from "@mui/icons-material";
 import AppButton from "@travelia/components/Button";
 import { ISearchedHotel } from "@travelia/types";
 import { bookButtonStyle } from "@travelia/styles";
@@ -51,6 +57,7 @@ const HotelCard = ({ hotel }: IHotelCard) => {
       >
         <Grid container>
           <Grid
+            alignItems="center"
             size={{ xs: 12, lg: 7 }}
             sx={{
               borderRight: {
@@ -67,7 +74,7 @@ const HotelCard = ({ hotel }: IHotelCard) => {
               src={hotel.roomPhotoUrl}
               alt={hotel.hotelName}
               sx={{
-                height: 380,
+                height: 480,
                 width: { xs: "100%", md: 380 },
                 objectFit: "cover",
                 borderRadius: 0.3,
@@ -122,13 +129,25 @@ const HotelCard = ({ hotel }: IHotelCard) => {
                 <Box
                   sx={{ display: "flex", alignItems: "center", gap: 1, my: 2 }}
                 >
-                  <CalendarMonthRounded color="primary" fontSize="small" />
+                  <People color="primary" fontSize="small" />
                   <Typography
                     variant="caption"
                     color="text.secondary"
                     fontWeight={700}
                   >
-                    {hotel.availableFrom} - {hotel.availableTo}
+                    {hotel.adults} adults , {hotel.children} children
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{ display: "flex", alignItems: "center", gap: 1, my: 2 }}
+                >
+                  <HotelOutlined color="primary" fontSize="small" />
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                    fontWeight={700}
+                  >
+                    #Rooms: {hotel.numberOfRooms}
                   </Typography>
                 </Box>
                 <Box

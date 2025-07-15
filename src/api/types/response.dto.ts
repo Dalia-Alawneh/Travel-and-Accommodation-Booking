@@ -69,6 +69,9 @@ export interface ISearchHotelsResponse {
   amenities: IAmenitySearchResponse[];
   availableFrom: string;
   availableTo: string;
+  adults: number;
+  children: number;
+  numberOfRooms: number;
 }
 export interface IHotelResponse {
   hotelName: string;
