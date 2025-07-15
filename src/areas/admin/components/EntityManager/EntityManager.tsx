@@ -73,6 +73,13 @@ const EntityManager = <T, FormPayload>({
           return [...oldData, newItem];
         },
       );
+      queryClient.setQueryData(
+        [`paginated-${title.toLowerCase()}`, page, rowsPerPage],
+        (oldData: T[] | undefined) => {
+          if (!oldData) return [newItem];
+          return [...oldData, newItem];
+        },
+      );
       toast.success(`${title} Added Successfully`);
     },
   });
