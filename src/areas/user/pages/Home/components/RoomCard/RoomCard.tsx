@@ -76,7 +76,11 @@ export default function RoomCard({
         <Box mt={2}>
           <Box display="flex" alignItems="center" gap={1}>
             <Hotel sx={{ color: "text.disabled", fontSize: 18 }} />
-            <Typography variant="body2" color="text.secondary">
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              data-testid={`hotel-${hotelId}`}
+            >
               {hotelName}
             </Typography>
           </Box>

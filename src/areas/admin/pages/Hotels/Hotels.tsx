@@ -3,7 +3,7 @@ import {
   getHotels,
   getHotelsPaginated,
 } from "@travelia/api/endpoints/hotel";
-import AdminCrudPage from "../CrudPage";
+import AdminCrudPage from "../../components/EntityManager";
 import type { IHotelDetailedResponse } from "@travelia/api/types/response.dto";
 import HotelsTable from "./components/HotelsTable";
 import type { IHotelRow } from "./components/HotelsTable/types";

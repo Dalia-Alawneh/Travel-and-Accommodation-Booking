@@ -26,6 +26,7 @@ const DestinationCard = ({
         height: "100%",
         alignItems: "stretch",
       }}
+      data-testid={`${cityName}`}
     >
       <Box sx={{ width: "100%" }}>
         {isLoading ? (

@@ -1,4 +1,4 @@
-import AdminCrudPage from "../CrudPage";
+import AdminCrudPage from "../../components/EntityManager";
 import type { IRoomResponse } from "@travelia/api/types/response.dto";
 import type { IRoomRow } from "./components/RoomsTable/types";
 import {

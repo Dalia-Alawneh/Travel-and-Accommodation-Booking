@@ -87,7 +87,12 @@ const RecentlyVisitedCard = ({
           bgcolor: overlayColor,
         }}
       >
-        <Typography variant="h6" fontWeight={700} mb={2}>
+        <Typography
+          variant="h6"
+          fontWeight={700}
+          mb={2}
+          data-testid={`hotel-${hotelId}`}
+        >
           {hotelName}
         </Typography>
 

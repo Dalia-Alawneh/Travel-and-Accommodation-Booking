@@ -75,8 +75,9 @@ const Login = () => {
           <Box
             sx={{
               p: 5,
-              backgroundColor: "rgba(255,255,255.1)",
-              backdropFilter: "blur(10px)",
+              backgroundColor: "rgba(255,255,255,1)",
+              borderTopLeftRadius: { xs: 0, md: 32 },
+              borderBottomLeftRadius: { xs: 0, md: 32 },
               height: "100%",
             }}
           >
@@ -89,7 +90,7 @@ const Login = () => {
               onSubmit={handleLoginSubmit}
               validationSchema={loginSchema}
               render={(formik) => (
-                <Box mt={4} height={"100&"}>
+                <Box mt={4}>
                   <form onSubmit={formik.handleSubmit} autoComplete="off">
                     <Box
                       sx={{
