@@ -1,24 +1,25 @@
+import { lazy } from "react";
+import Welcome from "@travelia/pages/Welcome";
 import Home from "@travelia/areas/user/pages/Home";
 import Login from "@travelia/pages/Login";
 import { Route, Routes } from "react-router";
 import GuardedRoute from "./GuardedRoute";
-import Welcome from "@travelia/pages/Welcome";
 import { UserType } from "@travelia/types";
 import GuestRoute from "./GuestRoute";
-import SearchPage from "@travelia/areas/user/pages/Search";
-import NotFound from "@travelia/pages/NotFound/NotFound";
-import ServerError from "@travelia/pages/ServerError";
-import UserLayout from "@travelia/layouts/user/UserLayout";
-import HotelPage from "@travelia/areas/user/pages/Hotel";
-import CartPage from "@travelia/areas/user/pages/Cart";
-import OrderPage from "@travelia/areas/user/pages/Order";
-import UnAuthorize from "@travelia/pages/UnAuthorize";
-import Cities from "@travelia/areas/admin/pages/Cities";
+import UserLayout from "@travelia/layouts/user";
 import AdminLayout from "@travelia/layouts/admin/AdminLayout";
-import Hotels from "@travelia/areas/admin/pages/Hotels";
-import Rooms from "@travelia/areas/admin/pages/Rooms";
-import Dashboard from "@travelia/areas/admin/pages/Dashboard";
-import ContactPage from "@travelia/areas/user/pages/Contact";
+const HotelPage = lazy(() => import("@travelia/areas/user/pages/Hotel"));
+const Dashboard = lazy(() => import("@travelia/areas/admin/pages/Dashboard"));
+const CartPage = lazy(() => import("@travelia/areas/user/pages/Cart"));
+const OrderPage = lazy(() => import("@travelia/areas/user/pages/Order"));
+const SearchPage = lazy(() => import("@travelia/areas/user/pages/Search"));
+const ContactPage = lazy(() => import("@travelia/areas/user/pages/Contact"));
+const Cities = lazy(() => import("@travelia/areas/admin/pages/Cities"));
+const Hotels = lazy(() => import("@travelia/areas/admin/pages/Hotels"));
+const Rooms = lazy(() => import("@travelia/areas/admin/pages/Rooms"));
+const NotFound = lazy(() => import("@travelia/pages/NotFound/NotFound"));
+const ServerError = lazy(() => import("@travelia/pages/ServerError"));
+const UnAuthorize = lazy(() => import("@travelia/pages/UnAuthorize"));
 
 const AppRouter = () => {
   return (
