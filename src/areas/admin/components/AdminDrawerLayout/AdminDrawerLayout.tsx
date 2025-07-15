@@ -102,6 +102,7 @@ export default function AdminDrawerLayout({
           </IconButton>
         </Toolbar>
         <AppBarAvatarMenu
+          username="Admin"
           anchorEl={anchorEl}
           handleMenuClose={handleMenuClose}
           open={isMenuOpen}
